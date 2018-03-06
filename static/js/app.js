@@ -171,8 +171,10 @@ function regenerateArtifacts() {
 		if(1 == v.active && undefined != v.efficiency) {
 			value = v.efficiency.toExponential(12);
 		}
-		$('#' + k + 'eff').empty().append(value);
-		value = v.rating.toFixed(2).replace(/\.?0+$/, '');
+		value = '';
+		if(undefined != v.rating) {
+			value = v.rating.toFixed(2).replace(/\.?0+$/, '');
+		}
 		$('#' + k + 'expo').empty().append(value).removeClass().addClass('badge').addClass('badge-' + v.color);
 	});
 	storeData();
