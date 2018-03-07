@@ -50,7 +50,7 @@ function generateArtifacts() {
 			row += '</td>';
 			row += '<td>';
 				row += '<label for="' + k + 'active" id="basic-addon' + k + '">';
-					row += '<span class="d-block d-sm-none">' + v.nickname + '</span>';
+					row += '<span class="d-block d-sm-none">' + v.name + '</span>';
 					row += '<span class="d-none d-sm-block">' + v.name + '</span>';
 				row += '</label>';
 			row += '</td>';
@@ -67,23 +67,23 @@ function generateArtifacts() {
 		row += '<tr class="collapse" id="' + k + 'info">';
 			row += '<td colspan="5">';
 				row += '<dl class="row">';
-					row += '<dt class="col-3 col-sm-6 text-right">Name</dt>';
+					row += '<dt class="col-3 col-sm-6 text-right">名称</dt>';
 					row += '<dd class="col-9 col-sm-6">' + v.name + '</dd>';
-					row += '<dt class="col-3 col-sm-6 text-right">Effect</dt>';
+					row += '<dt class="col-3 col-sm-6 text-right">效果</dt>';
 					row += '<dd class="col-9 col-sm-6" id="' + k + 'effect"></dd>';
 					row += '<dt class="col-3 col-sm-6 text-right">';
 						row += '<span class="d-block d-sm-none">AD</span>';
-						row += '<span class="d-none d-sm-block">Artifact Damage</span>';
+						row += '<span class="d-none d-sm-block">神器伤害</span>';
 					row += '</dt>';
 					row += '<dd class="col-9 col-sm-6" id="' + k + 'ad"></dd>';
 					row += '<dt class="col-3 col-sm-6 text-right">';
 						row += '<span class="d-block d-sm-none">Cost</span>';
-						row += '<span class="d-none d-sm-block">Cost to Upgrade</span>';
+						row += '<span class="d-none d-sm-block">升级费用</span>';
 					row += '</dt>';
 					row += '<dd class="col-9 col-sm-6" id="' + k + 'cost"></dd>';
 					row += '<dt class="col-3 col-sm-6 text-right">';
 						row += '<span class="d-block d-sm-none">Effc.</span>';
-						row += '<span class="d-none d-sm-block">Efficiency</span>';
+						row += '<span class="d-none d-sm-block">效率</span>';
 					row += '</dt>';
 					row += '<dd class="col-9 col-sm-6" id="' + k + 'eff"></dd>';
 				row += '</dl>';
@@ -91,7 +91,7 @@ function generateArtifacts() {
 		row += '</tr>';
 		$('#artifacts').append(row);
     var div = '<div class="col-3 col-sm-2 col-lg-1 border text-center">';
-    div += '<strong>' + v.nickname + '</strong><br><span id="' + k + 'dalt">' + displayTruncated(v.level) + '</span>';
+    div += '<strong>' + v.name + '</strong><br><span id="' + k + 'dalt">' + displayTruncated(v.level) + '</span>';
     div += '</div>'
 		$('#daltifacts').append(div);
 	});
@@ -392,9 +392,9 @@ function renderSuggestions() {
 	});
 	var alice = new Date();
 	var curiouser = alice.getTime() - white_rabbit.getTime();
-	$('#pudding').empty().append('Total Calculations Performed: ' + obfuscate + ' in ' + (curiouser / 1000).toFixed(3) + 's (' + ((obfuscate/curiouser) * 1000).toFixed(3) + '/s)');
+	$('#pudding').empty().append('共执行计算 ' + obfuscate + '次 在 ' + (curiouser / 1000).toFixed(3) + '秒内 (' + ((obfuscate/curiouser) * 1000).toFixed(3) + '次/秒)');
 	$('#suggestions').empty().append(suggestions);
-	$('#accept').empty().append('<button type="button" class="btn btn-primary" onclick="acceptSuggestions();">Complete</button>');
+	$('#accept').empty().append('<button type="button" class="btn btn-primary" onclick="acceptSuggestions();">完成升级</button>');
 }
 
 function acceptSuggestions() {
