@@ -748,7 +748,7 @@ function importData() {
 	$('#export_wrap').hide();
 	$('#import_wrap').hide();
 	storeData();
-//	adjustWeights();
+	adjustWeights();
 }
 
 $('#export_wrap').hide();
