@@ -171,6 +171,7 @@ function regenerateArtifacts() {
 		if(1 == v.active && undefined != v.efficiency) {
 			value = v.efficiency.toExponential(12);
 		}
+		$('#' + k + 'eff').empty().append(value);
 		value = '';
 		if(undefined != v.rating) {
 			value = v.rating.toFixed(2).replace(/\.?0+$/, '');
