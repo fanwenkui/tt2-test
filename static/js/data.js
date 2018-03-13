@@ -196,6 +196,8 @@ var artifacts = {
 				'gold' : [
 					'coc',
 					'fairy',
+					'splash'
+					'inactive'
 					'all'
 				]
 			}
