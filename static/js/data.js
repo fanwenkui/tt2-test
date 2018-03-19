@@ -1166,7 +1166,7 @@ var artifacts = {
 		'ae' : {
 			'active' : 1,
 			'sort' : 54,
-			'name' : '众神灵药',
+			'name' : '仙馔密酒',
 			'nickname' : 'AE',
 			'bonus' : ' 法力池上限',
 			'ad' : .8,
