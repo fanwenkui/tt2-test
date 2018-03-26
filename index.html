@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="css/bootstrap.min.css" />
@@ -14,7 +14,7 @@
 			<div class="sticky-top border-bottom border-secondary">
 				<ul class="nav nav-pills" id="navTab" role="tablist">
 				  <li class="nav-item">
-				    <a class="nav-link" id="style-tab" data-toggle="tab" href="#style" role="tab" aria-controls="style" aria-selected="false">Build</a>
+				    <a class="nav-link" id="style-tab" data-toggle="tab" href="#style" role="tab" aria-controls="style" aria-selected="false">Options</a>
 				  </li>
 				  <li class="nav-item">
 				    <a class="nav-link" id="artifacts-tab" data-toggle="tab" href="#artifactab" role="tab" aria-controls="artifactab" aria-selected="false">Artifacts</a>
@@ -26,7 +26,7 @@
 				    <a class="nav-link" id="sugg-tab" data-toggle="tab" href="#sugg" role="tab" aria-controls="sugg" aria-selected="true">Result</a>
 				  </li>
 					<li class="nav-item d-none">
-				    <a class="nav-link" id="dal-tab" data-toggle="tab" href="#dal" role="tab" aria-controls="dal" aria-selected="true">DAL Mode</a>
+				    <a class="nav-link" id="dal-tab" data-toggle="tab" href="#dal" role="tab" aria-controls="dal" aria-selected="true">Selfie</a>
 				  </li>
 				</ul>
 				<h1 class="h4">TT2 Artifact Optimizer <span class="badge badge-secondary">2.6.x</span></h1>
@@ -36,6 +36,7 @@
 					<p>This tool is intended to help you determine how to best spend your relics to upgrade your artifacts based on your playstyle. It should help prioritize your best damage increasing artifacts while not completely ignoring your remaining artifacts for small AD boosts. If you find any errors or have any suggestions, feel free to reach out to me on reddit, /u/tsukinoooo</p>
 					<p>During your first visit just work your way across the tabs to fill in information about your Playstyle, and then your current artifact levels. Lastly, on the Relics tab you'll put in your available relics and be taken to the Result tab to get your recommendations.</p>
 					<p>Uncheck any artifacts you want to ignore, but leave any artifacts you don't have yet checked with a level of 0. I'll do my best to recommend when you should get a new artifact instead of upgrading your existing ones.</p>
+					<p>I would also be remiss not to use this as an opportunity to plug the Fairy Tail clan. I'm an admin there (in game name is Juvia) and if you're interested in joining us <a href="https://discord.gg/GvKA3Wu">stop by our discord</a>. Our current requirements are 6K MS to join, and 35 CQ/wk to stay. Our CQs last about 3-4 minutes on average.</p>
 					<p>OK! Now, you're ready to answer the following questions to improve the optimization of different artifacts to best suit your play style.</p>
 					<form>
 						<div class="form-row mb-4">
@@ -138,7 +139,7 @@
 					<p>Fill out the current level of your artifacts. If you want to ignore an artifact uncheck it. If you don't have it yet, set it to 0 and I'll attempt to prompt you when you should save up and roll the dice on a new artifact.</p>
 					<p>AD Sanity Check: <span id="adsanity">0%</span></p>
 					<button type="button" class="btn btn-primary mb-3" onclick="checkAll();">Check All Artifacts</button>
-					<button type="button" class="btn btn-secondary mb-3" onclick="dalView(1);">DAL Mode (a.k.a. Take a Selfie)</button>
+					<button type="button" class="btn btn-secondary mb-3" onclick="dalView(1);">Take a Selfie of your Artifacts</button>
 					<div class="col-12 col-md-8 col-lg-6">
 						<div class="row mb-2 ml-2">
 							Legend:
@@ -166,7 +167,7 @@
 			  <div class="tab-pane fade" id="dal" role="tabpanel" aria-labelledby="dal-tab">
           <div class="row mb-4" id="daltifacts">
           </div>
-					<button type="button" class="btn btn-secondary mb-3" onclick="dalView(0);">Exit DAL Mode</button>
+					<button type="button" class="btn btn-secondary mb-3" onclick="dalView(0);">Exit Selfie Mode</button>
 				</div>
 			  <div class="tab-pane fade show active" id="reccs" role="tabpanel" aria-labelledby="reccs-tab">
 					<p>Enter the total number of relics you're willing to spend.</p>
