@@ -179,6 +179,7 @@ var artifacts = {
 			'expo' : {
 				'gold' : [
 					'sov',
+					'phom',
 					'all',
 					'splash',
 					'inactive'
@@ -204,6 +205,7 @@ var artifacts = {
 				'gold' : [
 					'coc',
 					'fairy',
+					'phom',
 					'all',
 					'splash',
 					'inactive'
@@ -1229,7 +1231,6 @@ var artifacts = {
 					'coc',
 					'all',
 					'splash',
-					'inactive',
 					'active'
 				]
 			}
@@ -1251,6 +1252,7 @@ var artifacts = {
 			'type' : 'pct',
 			'expo' : {
 				'gold' : [
+					'phom',
 					'all',
 					'active'
 				]
