@@ -1937,14 +1937,12 @@ var skills = {
 				'20' : { 'cost' : 25, 'bonus' : 10100000000, 'bonus2' : .2, 'bonus3' : 0 }
 			},
 			'expo' : {
-				'expo' : {
-					'gold' : [
-						'coc',
-						'fairy',
-						'splash',
-						'inactive'
-					]
-				}
+				'gold' : [
+					'coc',
+					'fairy',
+					'splash',
+					'inactive'
+				]
 			}
 		},
 		'hm' : {
