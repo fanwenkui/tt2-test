@@ -1,3 +1,8 @@
+var hero_type = '';
+var build = '';
+var gold = '';
+var active = '';
+
 function adjustWeights() {
 	gtag('event', 'Dark Mode', {
 		'event_category': 'Dark Mode',
@@ -32,10 +37,9 @@ function adjustWeights() {
 			'event_label': $('#active').val()
 		});
 	}
-	var build = $('#build').val();
-	var hero_type = '';
-	var active = ("online" == $('#active').val() ? true : false);
-	var gold = $('#gold').val();
+	build = $('#build').val();
+	active = ("online" == $('#active').val() ? true : false);
+	gold = $('#gold').val();
 
 	switch($('#hero').val()) {
 		case 'maya':
@@ -94,75 +98,107 @@ function adjustWeights() {
 			break;
 	}
 	$.each(artifacts.data, function(k,v) {
-		v.rating = 0;
-		if('bos' == k) {
-			v.color = 'info';
-		} else if(undefined != v.expo.sum) {
-			switch(v.expo.sum) {
-				case 'pet_dmg':
-					v.rating += pets_dmg.all;
-					v.rating += pets_dmg.tap * reducts.tap[build];
-					v.rating += pets_dmg.hero * reducts.hero[build];
-					v.rating += pets_dmg.splash * reducts.splash[build];
+		v = calculateWeight(k,v);
+		artifacts.data[k].rating = v.rating;
+		artifacts.data[k].color = v.color;
+	});
+	adjustBoS();
+	artifacts = calculateAll(artifacts, true);
+	$.each(skills.data, function(k,v) {
+		v = calculateWeight(k,v);
+		skills.data[k].rating = v.rating;
+		skills.data[k].color = v.color;
+	});
+	calculateAllSkills();
+	storeData();
+}
+
+function calculateWeight(k,v) {
+	v.rating = 0;
+	v.color = 'danger';
+	if('bos' == k) {
+		v.color = 'info';
+	} else if(undefined != v.expo.sum) {
+		switch(v.expo.sum) {
+			case 'pet_dmg':
+				v.rating += pets_dmg.all;
+				v.rating += pets_dmg.tap * reducts.tap[build];
+				v.rating += pets_dmg.hero * reducts.hero[build];
+				v.rating += pets_dmg.splash * reducts.splash[build];
+				v.color = 'info';
+				break;
+
+			case 'pet_gold':
+				v.rating += pets_gold * reducts.gold;
+				v.color = 'warning';
+				break;
+
+			case 'skill':
+				v.rating += reducts.hs[build];
+				v.rating += reducts.ds[build];
+				v.rating += reducts.gold;
+				v.rating += reducts.fs[build];
+				v.rating += reducts.wc[build];
+				v.rating += reducts.sc[build];
+				v.color = 'info';
+				break;
+
+			case 'equip':
+				v.rating += 1;
+				v.rating += reducts.hero[build];
+				v.rating += reducts.gold;
+				v.rating += reducts.companion[build];
+				v.color = 'info';
+				break;
+		}
+	} else if(undefined != v.expo.flat) {
+		switch(v.expo.flat) {
+			case 'gold':
+				v.rating = reducts.gold;
+				v.color = 'warning';
+				break;
+
+			case 'dmg':
+				v.rating = 1;
+				v.color = 'info';
+				break;
+
+			case 'hsk':
+				if(0 < artifacts.data.hs2.level) {
+					v.rating = 1;
 					v.color = 'info';
-					break;
+				} else {
+					v.rating = 0.5;
+					v.color = 'secondary';
+				}
+				break;
 
-				case 'pet_gold':
-					v.rating += pets_gold * reducts.gold;
-					v.color = 'warning';
-					break;
-
-				case 'skill':
+			case 'ed':
+				if(0 < skills.data.ds.level) {
 					v.rating += reducts.hs[build];
 					v.rating += reducts.ds[build];
 					v.rating += reducts.gold;
 					v.rating += reducts.fs[build];
 					v.rating += reducts.wc[build];
 					v.rating += reducts.sc[build];
-					v.color = 'info';
-					break;
+					v.color = 'success';
+				} else {
+					v.rating = reducts.sc[build];
+					v.color = determineColor(v.rating);
+				}
+				break;
 
-				case 'equip':
-					v.rating += 1;
-					v.rating += reducts.hero[build];
-					v.rating += reducts.gold;
-					v.rating += reducts.companion[build];
-					v.color = 'info';
-					break;
-			}
-		} else if(undefined != v.expo.flat) {
-			switch(v.expo.flat) {
-				case 'gold':
-					v.rating = reducts.gold;
-					v.color = 'warning';
-					break;
-
-				case 'dmg':
+			case 'active':
+				if(1 == active) {
 					v.rating = 1;
 					v.color = 'info';
-					break;
+				} else {
+					v.rating = 0;
+					v.color = 'danger';
+				}
+				break;
 
-				case 'hsk':
-					if(1 == artifacts.data.hs2.active) {
-						v.rating = 1;
-						v.color = 'info';
-					} else {
-						v.rating = 0.5;
-						v.color = 'secondary';
-					}
-					break;
-
-				case 'active':
-					if(1 == active) {
-						v.rating = 1;
-						v.color = 'info';
-					} else {
-						v.rating = 0;
-						v.color = 'danger';
-					}
-					break;
-
-				case 'inactive':
+			case 'inactive':
 				if(0 == active) {
 					v.rating = 1;
 					v.color = 'success';
@@ -170,50 +206,80 @@ function adjustWeights() {
 					v.rating = 0;
 					v.color = 'danger';
 				}
-			}
-		} else if(undefined != v.expo.reduct) {
-			if('splash' == v.expo.reduct && $('#dry').prop('checked') == true) {
-				v.rating = 0;
-			} else {
-				v.rating = reducts[v.expo.reduct][build];
-			}
-			v.color = determineColor(v.rating);
-		} else if(undefined != v.expo.hero_type) {
-			if(-1 == hero_type.indexOf(v.expo.hero_type)) {
-				v.rating = 0;
-			} else {
-				v.rating = reducts.hero[build];
-			}
-			v.color = determineColor(v.rating);
-		} else if(undefined != v.expo.gold) {
-			$.each(v.expo.gold, function(k2,v2) {
-				if(gold == v2) {
-					v.rating = reducts.gold;
-					return false;
-				} else if('splash' == v2) {
-					if('sc' == build) {
-						v.rating = 0;
-					} else {
-						v.rating = reducts.splash[build] * reducts.gold;
-						return false;
-					}
-				} else if('inactive' == v2) {
-					if(!active) {
-						v.rating = reducts.gold;
-					}
-					return false;
-				} else if('active' == v2) {
-					if(active) {
-						v.rating = reducts.gold;
-					}
+				break;
+
+			case 'inactive_pet':
+				if(0 == active) {
+					v.rating = reducts.pet[build] + ('pet' == build ? reducts.ds[build] : 0);
+					v.color = determineColor(v.rating);
+				} else {
+					v.rating = ('pet' == build ? reducts.ds[build] : 0);
+					v.color = determineColor(v.rating);
+				}
+				break;
+
+
+			case 'inactive_ship':
+				if(0 == active) {
+					v.rating = reducts.cs[build] + ('cs' == build ? reducts.ds[build] : 0);
+					v.color = determineColor(v.rating);
+				} else {
+					v.rating = ('cs' == build ? reducts.ds[build] : 0);
+					v.color = determineColor(v.rating);
+				}
+				break;
+
+			case 'inactive_clone':
+				if(0 == active) {
+					v.rating = reducts.sc[build] + ('sc' == build ? reducts.ds[build] : 0);
+					v.color = determineColor(v.rating);
+				} else {
+					v.rating = ('sc' == build ? reducts.ds[build] : 0);
+					v.color = determineColor(v.rating);
+				}
+				break;
+		}
+	} else if(undefined != v.expo.reduct) {
+		if('splash' == v.expo.reduct && $('#dry').prop('checked') == true) {
+			v.rating = 0;
+		} else {
+			v.rating = reducts[v.expo.reduct][build];
+		}
+		v.color = determineColor(v.rating);
+	} else if(undefined != v.expo.hero_type) {
+		if(-1 == hero_type.indexOf(v.expo.hero_type)) {
+			v.rating = 0;
+		} else {
+			v.rating = reducts.hero[build];
+		}
+		v.color = determineColor(v.rating);
+	} else if(undefined != v.expo.gold) {
+		$.each(v.expo.gold, function(k2,v2) {
+			if(gold == v2) {
+				v.rating = reducts.gold;
+				return false;
+			} else if('splash' == v2) {
+				if('sc' == build) {
+					v.rating = 0;
+				} else {
+					v.rating = reducts.splash[build] * reducts.gold;
 					return false;
 				}
-			});
-			v.color = determineColor(v.rating);
-		}
-	});
-	adjustBoS();
-	artifacts = calculateAll(artifacts, true);
+			} else if('inactive' == v2) {
+				if(!active) {
+					v.rating = reducts.gold;
+				}
+				return false;
+			} else if('active' == v2) {
+				if(active) {
+					v.rating = reducts.gold;
+				}
+				return false;
+			}
+		});
+		v.color = determineColor(v.rating);
+	}
+	return v;
 }
 
 function determineColor(value) {

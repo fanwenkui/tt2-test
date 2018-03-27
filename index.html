@@ -14,30 +14,33 @@
 			<div class="sticky-top border-bottom border-secondary">
 				<ul class="nav nav-pills" id="navTab" role="tablist">
 				  <li class="nav-item">
-				    <a class="nav-link" id="style-tab" data-toggle="tab" href="#style" role="tab" aria-controls="style" aria-selected="false">Options</a>
+				    <a class="nav-link active" id="style-tab" data-toggle="tab" href="#style" role="tab" aria-controls="style" aria-selected="true">Options</a>
 				  </li>
 				  <li class="nav-item">
-				    <a class="nav-link" id="artifacts-tab" data-toggle="tab" href="#artifactab" role="tab" aria-controls="artifactab" aria-selected="false">Artifacts</a>
+				    <a class="nav-link" id="artifacts-tab" data-toggle="tab" href="#artifactab" role="tab" aria-controls="artifactab" aria-selected="false">Input</a>
 				  </li>
 				  <li class="nav-item">
-				    <a class="nav-link active" id="reccs-tab" data-toggle="tab" href="#reccs" role="tab" aria-controls="reccs" aria-selected="true">Relics</a>
+				    <a class="nav-link" id="reccs-tab" data-toggle="tab" href="#reccs" role="tab" aria-controls="reccs" aria-selected="false">Relics</a>
 				  </li>
 					<li class="nav-item">
-				    <a class="nav-link" id="sugg-tab" data-toggle="tab" href="#sugg" role="tab" aria-controls="sugg" aria-selected="true">Result</a>
+				    <a class="nav-link" id="sp-tab" data-toggle="tab" href="#sp" role="tab" aria-controls="sp" aria-selected="false">SP</a>
 				  </li>
 					<li class="nav-item d-none">
-				    <a class="nav-link" id="dal-tab" data-toggle="tab" href="#dal" role="tab" aria-controls="dal" aria-selected="true">Selfie</a>
+				    <a class="nav-link" id="dal-tab" data-toggle="tab" href="#dal" role="tab" aria-controls="dal" aria-selected="false">Selfie</a>
+				  </li>
+					<li class="nav-item d-none">
+				    <a class="nav-link" id="dalsp-tab" data-toggle="tab" href="#dalsp" role="tab" aria-controls="dalsp" aria-selected="false">Selfie</a>
 				  </li>
 				</ul>
-				<h1 class="h4">TT2 Artifact Optimizer <span class="badge badge-secondary">2.6.x</span></h1>
+				<h1 class="h4">TT2 Optimizer <span class="badge badge-secondary">2.6.x</span></h1>
 			</div>
 			<div class="tab-content" id="tabContent">
-			  <div class="tab-pane fade" id="style" role="tabpanel" aria-labelledby="style-tab">
-					<p>This tool is intended to help you determine how to best spend your relics to upgrade your artifacts based on your playstyle. It should help prioritize your best damage increasing artifacts while not completely ignoring your remaining artifacts for small AD boosts. If you find any errors or have any suggestions, feel free to reach out to me on reddit, /u/tsukinoooo</p>
-					<p>During your first visit just work your way across the tabs to fill in information about your Playstyle, and then your current artifact levels. Lastly, on the Relics tab you'll put in your available relics and be taken to the Result tab to get your recommendations.</p>
+			  <div class="tab-pane fade show active" id="style" role="tabpanel" aria-labelledby="style-tab">
+					<p>This tool is intended to help you determine how to best spend your relics and SP to maximize your potential based on your playstyle. On the Artifact side, it should help prioritize your best damage increasing artifacts while not completely ignoring your remaining artifacts for small AD boosts. On the SP side it should help identify the skills with the biggest boost for your build. If you find any errors or have any suggestions, feel free to reach out to me on reddit, /u/tsukinoooo</p>
+					<p>During your first visit, fill out information about your build in the Options tab and then work your way across the tabs to fill in information about your current artifact and skill levels. Lastly, on the Relics tab you'll put in your available relics and receive recommendations and similarly on the SP tab you'll be able to receive recommendations on how to best spend your SP.</p>
 					<p>Uncheck any artifacts you want to ignore, but leave any artifacts you don't have yet checked with a level of 0. I'll do my best to recommend when you should get a new artifact instead of upgrading your existing ones.</p>
 					<p>I would also be remiss not to use this as an opportunity to plug the Fairy Tail clan. I'm an admin there (in game name is Juvia) and if you're interested in joining us <a href="https://discord.gg/GvKA3Wu">stop by our discord</a>. Our current requirements are 6K MS to join, and 35 CQ/wk to stay. Our CQs last about 3-4 minutes on average.</p>
-					<p>OK! Now, you're ready to answer the following questions to improve the optimization of different artifacts to best suit your play style.</p>
+					<p>OK! Now, you're ready to answer the following questions to improve the optimization recommendations to best suit your play style.</p>
 					<form>
 						<div class="form-row mb-4">
 							<div class="form-group col-12 col-md-6 col-lg-4">
@@ -134,12 +137,27 @@
 							</div>
 						</div>
 					</form>
+					<button type="button" class="btn btn-secondary mb-4" onclick="exportData()">Export Data</button>
+          <button type="button" class="btn btn-secondary mb-4" onclick="startImport()">Import Data</button>
+          <div id="export_wrap">
+            <div class="mb-2">Copy and paste the following exported data into another instance of the optimizer. (NOTE: THIS CURRENTLY IGNORES SKILLS)</div>
+            <code id="export"></code>
+          </div>
+          <div id="import_wrap">
+            <div class="mb-2">Paste in the exported data you got from another instance of the optimizer. NOTE: THERE IS NO UNDOING THIS. (NOTE: THIS CURRENTLY IGNORES SKILLS)</div>
+            <div class="form-group col-12">
+                <textarea class="form-control mb-2" id="import" rows="10"></textarea>
+                <button type="button" class="btn btn-info mb-4" onclick="importData()">Start Import</button>
+            </div>
+          </div>
 				</div>
 			  <div class="tab-pane fade" id="artifactab" role="tabpanel" aria-labelledby="artifacts-tab">
-					<p>Fill out the current level of your artifacts. If you want to ignore an artifact uncheck it. If you don't have it yet, set it to 0 and I'll attempt to prompt you when you should save up and roll the dice on a new artifact.</p>
+					<p>Enter your artifact & skill data below to receive recommendations on the Relics & SP tabs.</p>
+					<h5>Artifacts</h5>
+					<p>Fill out the current level of your artifacts. If you want to ignore an artifact uncheck it. If you don't have it yet, set it to 0 and it will let you know when you should save up and roll the dice on a new artifact.</p>
 					<p>AD Sanity Check: <span id="adsanity">0%</span></p>
-					<button type="button" class="btn btn-primary mb-3" onclick="checkAll();">Check All Artifacts</button>
-					<button type="button" class="btn btn-secondary mb-3" onclick="dalView(1);">Take a Selfie of your Artifacts</button>
+					<button type="button" class="btn btn-primary mb-3" onclick="checkAllArtifacts();">Check All Artifacts</button>
+					<button type="button" class="btn btn-secondary mb-3" onclick="dalViewArtifact(1);">Take a Selfie of your Artifacts</button>
 					<div class="col-12 col-md-8 col-lg-6">
 						<div class="row mb-2 ml-2">
 							Legend:
@@ -163,86 +181,111 @@
 							</tbody>
 						</table>
 					</div>
+					<h5>Skills (SUPER BETA WIP)</h5>
+					<p>Fill out the current level of your skills. If you want to ignore a skill uncheck it. If you don't have any points in it yet, set it to 0.</p>
+					<button type="button" class="btn btn-primary mb-3" onclick="checkAllSkills();">Check All Skills</button>
+					<button type="button" class="btn btn-secondary mb-3" onclick="dalViewSkill(1);">Take a Selfie of your Skills</button>
+					<div class="col-12 col-md-8 col-lg-6">
+						<div class="row mb-2 ml-2">
+							Legend:
+							<span class="badge badge-pill badge-success ml-2">Build</span>
+							<span class="badge badge-pill badge-secondary ml-2">Partial</span>
+							<span class="badge badge-pill badge-warning ml-2">Gold</span>
+							<span class="badge badge-pill badge-danger ml-2">Prereq</span>
+						</div>
+						<table class="table table-striped table-sm">
+							<thead>
+								<tr>
+									<th scope="col"></th>
+									<th scope="col">Skill</th>
+									<th scope="col">Level</th>
+									<th scope="col">Expo</th>
+									<th scope="col">Info</th>
+								</tr>
+							</thead>
+							<tbody id="skills">
+							</tbody>
+						</table>
+					</div>
 				</div>
 			  <div class="tab-pane fade" id="dal" role="tabpanel" aria-labelledby="dal-tab">
           <div class="row mb-4" id="daltifacts">
           </div>
-					<button type="button" class="btn btn-secondary mb-3" onclick="dalView(0);">Exit Selfie Mode</button>
+					<button type="button" class="btn btn-secondary mb-3" onclick="dalViewArtifact(0);">Exit Selfie Mode</button>
 				</div>
-			  <div class="tab-pane fade show active" id="reccs" role="tabpanel" aria-labelledby="reccs-tab">
-					<p>Enter the total number of relics you're willing to spend.</p>
-					<form class="mb-4">
-						<div class="input-group col-12 col-md-6 col-xl-4">
-							<input type="tel" id="relics" class="form-control" placeholder="0" aria-label="whole numbers for relics">
-							<span class="input-group-text px-1 rounded-0">.</span>
-							<input type="tel" id="relics_decimal" class="form-control" placeholder="00" aria-label="decimals for relics">
-							<select id="relic_factor">
-								<option value="_"> </option>
-								<option value="K">K</option>
-								<option value="M">M</option>
-								<option value="B">B</option>
-								<option value="T">T</option>
-								<option value="e13">e13</option>
-								<option value="e14">e14</option>
-								<option value="e15">e15/aa</option>
-								<option value="e16">e16</option>
-								<option value="e17">e17</option>
-								<option value="e18">e18/ab</option>
-								<option value="e19">e19</option>
-								<option value="e20">e20</option>
-								<option value="e21">e21/ac</option>
-							</select>
-						</div>
-            <label class="ml-4"><small>(Whole numbers on the left, decimals on the right.)</small></label>
-					</form>
-					<form class="mb-4">
-						<div class="input-group col-12 col-md-6 col-xl-4">
-							<span class="input-group-text">Round to the Nearest</span>
-							<select id="ocd">
-								<option value="1">N/A</option>
-								<option value="10">10</option>
-								<option value="100">100</option>
-								<option value="1000">1000</option>
-								<option value="10000">10000</option>
-							</select>
-						</div>
-			  	</form>
-          <p><small><em>Note: if this is your first visit, you'll want to head to the first tab and work your way over entering your data first.</em></small></p>
-					<button type="button" class="btn btn-primary mb-4" onclick="generateUpgrades()">Generate Upgrades</button>
-          <button type="button" class="btn btn-secondary mb-4" onclick="exportData()">Export</button>
-          <button type="button" class="btn btn-secondary mb-4" onclick="startImport()">Import</button>
-          <div id="export_wrap">
-            <div class="mb-2">Copy and paste the following exported data into another instance of the optimizer.</div>
-            <code id="export"></code>
-          </div>
-          <div id="import_wrap">
-            <div class="mb-2">Paste in the exported data you got from another instance of the optimizer. NOTE: THERE IS NO UNDOING THIS.</div>
-            <div class="form-group col-12">
-                <textarea class="form-control mb-2" id="import" rows="10"></textarea>
-                <button type="button" class="btn btn-info mb-4" onclick="importData()">Start Import</button>
-            </div>
-          </div>
-        </div>
-			  <div class="tab-pane fade" id="sugg" role="tabpanel" aria-labelledby="sugg-tab">
-					<p>If you purchase all these upgrades, hit the Complete button to update the Artifact Status table and clear the results.</p>
-					<p><small><em>Note: the first time you make a big jump in factor (e.g., e13 => e15) it can run a little slowly, but with each subsequent run at a given factor it will run faster and faster because the gap in your artifact levels will be greatly reduced. I'm continuing to look into ways to optimize this further.</em></small></p>
-					<div class="row mb-2 ml-2">
-						Legend:
-						<span class="badge badge-pill badge-info ml-2">All</span>
-						<span class="badge badge-pill badge-success ml-2">Build</span>
-						<span class="badge badge-pill badge-secondary ml-2">Partial</span>
-						<span class="badge badge-pill badge-warning ml-2">Gold</span>
-						<span class="badge badge-pill badge-danger ml-2">AD</span>
+			  <div class="tab-pane fade" id="reccs" role="tabpanel" aria-labelledby="reccs-tab">
+					<div id="relicreccs">
+						<p>Enter the total number of relics you're willing to spend.</p>
+						<form class="mb-4">
+							<div class="input-group col-12 col-md-6 col-xl-4">
+								<input type="tel" id="relics" class="form-control" placeholder="0" aria-label="whole numbers for relics">
+								<span class="input-group-text px-1 rounded-0">.</span>
+								<input type="tel" id="relics_decimal" class="form-control" placeholder="00" aria-label="decimals for relics">
+								<select id="relic_factor">
+									<option value="_"> </option>
+									<option value="K">K</option>
+									<option value="M">M</option>
+									<option value="B">B</option>
+									<option value="T">T</option>
+									<option value="e13">e13</option>
+									<option value="e14">e14</option>
+									<option value="e15">e15/aa</option>
+									<option value="e16">e16</option>
+									<option value="e17">e17</option>
+									<option value="e18">e18/ab</option>
+									<option value="e19">e19</option>
+									<option value="e20">e20</option>
+									<option value="e21">e21/ac</option>
+								</select>
+							</div>
+	            <label class="ml-4"><small>(Whole numbers on the left, decimals on the right.)</small></label>
+						</form>
+						<form class="mb-4">
+							<div class="input-group col-12 col-md-6 col-xl-4">
+								<span class="input-group-text">Round to the Nearest</span>
+								<select id="ocd">
+									<option value="1">N/A</option>
+									<option value="10">10</option>
+									<option value="100">100</option>
+									<option value="1000">1000</option>
+									<option value="10000">10000</option>
+								</select>
+							</div>
+				  	</form>
+						<button id="generateRelicUpdates" type="button" class="btn btn-primary mb-4" onclick="generateUpgrades()">Generate Upgrades</button>
 					</div>
-					<p id="new_artifact" class="ml-2"></p>
-					<div class="col-12 col-md-8 col-lg-6 mb-4">
-						<div class="progress mb-3" id="progressBar">
-							<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%" id="progress"></div>
+					<div id="relicsuggs">
+						<div class="row mb-2 ml-2">
+							Legend:
+							<span class="badge badge-pill badge-info ml-2">All</span>
+							<span class="badge badge-pill badge-success ml-2">Build</span>
+							<span class="badge badge-pill badge-secondary ml-2">Partial</span>
+							<span class="badge badge-pill badge-warning ml-2">Gold</span>
+							<span class="badge badge-pill badge-danger ml-2">AD</span>
 						</div>
-						<div id="pudding" class="mb-4"></div>
-						<div id="suggestions"></div>
-						<div id="accept"></div>
+						<p id="new_artifact" class="ml-2"></p>
+						<div class="col-12 col-md-8 col-lg-6 mb-4">
+							<div class="progress mb-3" id="progressBar">
+								<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%" id="progress"></div>
+							</div>
+							<div id="pudding" class="mb-4"></div>
+							<div id="suggestions"></div>
+							<p>If you purchase all these upgrades, hit the Complete button to update the Artifact Status table and clear the results.</p>
+							<div id="accept"></div>
+						</div>
 					</div>
+				</div>
+				<div class="tab-pane fade" id="dalsp" role="tabpanel" aria-labelledby="dalsp-tab">
+					<div class="row mb-4" id="dalskills">
+					</div>
+					<button type="button" class="btn btn-secondary mb-3" onclick="dalViewSkill(0);">Exit Selfie Mode</button>
+				</div>
+				<div class="tab-pane fade" id="sp" role="tabpanel" aria-labelledby="sp-tab">
+					<p><a href="https://www.youtube.com/watch?v=IvlWP4lQ6m8">SUUUUUUUUUUUUPER</a> BETA WIP</p>
+					<p><small>If something seems extremely out of whack, feel free to reach out to me on reddit, /u/tsukinoooo</small></p>
+					<p>The next best thing for you to spend your SP on is:</p>
+					<p><span id="nextskill"></span> [<span id="nextskilllvl"></span> => <span id="nextskilllvlpl"></span>] (costs <span id="nextskillcost"></span> SP) <span id="nextskillbadge" class="badge badge-pill ml-2"></span></p>
+					<button id="acceptSkillSugg" type="button" class="btn btn-primary mb-4" onclick="acceptSkill()">Accept Skill Suggestion</button>
 				</div>
 			</div>
 		</div>
