@@ -2715,16 +2715,16 @@ var skills = {
 			'type2' : 'multiply',
 			'type3' : -1,
 			'levels' : {
-				'1' : { 'cost' : 3, 'bonus' : .01, 'bonus2' : 1, 'bonus3' : 0 },
-				'2' : { 'cost' : 4, 'bonus' : .025, 'bonus2' : 1.4, 'bonus3' : 0 },
-				'3' : { 'cost' : 5, 'bonus' : .084, 'bonus2' : 2.2, 'bonus3' : 0	},
-				'4' : { 'cost' : 7, 'bonus' : .28, 'bonus2' : 3.4, 'bonus3' : 0 },
-				'5' : { 'cost' : 9, 'bonus' : .95, 'bonus2' : 5.2, 'bonus3' : 0 },
-				'6' : { 'cost' : 12, 'bonus' : 4.2, 'bonus2' : 8.5, 'bonus3' : 0 },
-				'7' : { 'cost' : 16, 'bonus' : 23.4, 'bonus2' : 15,	'bonus3' : 0 },
-				'8' : { 'cost' : 21, 'bonus' : 131,	'bonus2' : 26.5, 'bonus3' : 0 },
-				'9' : {	'cost' : 27, 'bonus' : 900, 'bonus2' : 49.9, 'bonus3' : 0 },
-				'10' : { 'cost' : 35, 'bonus' : 7500, 'bonus2' : 100, 'bonus3' : 0 }
+				'1' : { 'cost' : 2, 'bonus' : .01, 'bonus2' : 1, 'bonus3' : 0 },
+				'2' : { 'cost' : 2, 'bonus' : .025, 'bonus2' : 1.4, 'bonus3' : 0 },
+				'3' : { 'cost' : 3, 'bonus' : .084, 'bonus2' : 2.2, 'bonus3' : 0	},
+				'4' : { 'cost' : 3, 'bonus' : .28, 'bonus2' : 3.4, 'bonus3' : 0 },
+				'5' : { 'cost' : 3, 'bonus' : .95, 'bonus2' : 5.2, 'bonus3' : 0 },
+				'6' : { 'cost' : 4, 'bonus' : 4.2, 'bonus2' : 8.5, 'bonus3' : 0 },
+				'7' : { 'cost' : 5, 'bonus' : 23.4, 'bonus2' : 15,	'bonus3' : 0 },
+				'8' : { 'cost' : 5, 'bonus' : 131,	'bonus2' : 26.5, 'bonus3' : 0 },
+				'9' : {	'cost' : 6, 'bonus' : 900, 'bonus2' : 49.9, 'bonus3' : 0 },
+				'10' : { 'cost' : 7, 'bonus' : 7500, 'bonus2' : 100, 'bonus3' : 0 }
 			},
 			'expo' : {
 				'flat' : 'inactive_pet'
@@ -2746,16 +2746,16 @@ var skills = {
 			'type2' : 'multiply',
 			'type3' : -1,
 			'levels' : {
-				'1' : { 'cost' : 3, 'bonus' : .01, 'bonus2' : 1, 'bonus3' : 0 },
-				'2' : { 'cost' : 4, 'bonus' : .025, 'bonus2' : 1.4, 'bonus3' : 0 },
-				'3' : { 'cost' : 5, 'bonus' : .084, 'bonus2' : 2.2, 'bonus3' : 0	},
-				'4' : { 'cost' : 7, 'bonus' : .28, 'bonus2' : 3.4, 'bonus3' : 0 },
-				'5' : { 'cost' : 9, 'bonus' : .95, 'bonus2' : 5.2, 'bonus3' : 0 },
-				'6' : { 'cost' : 12, 'bonus' : 4.2, 'bonus2' : 8.5, 'bonus3' : 0 },
-				'7' : { 'cost' : 16, 'bonus' : 23.4, 'bonus2' : 15,	'bonus3' : 0 },
-				'8' : { 'cost' : 21, 'bonus' : 131,	'bonus2' : 26.5, 'bonus3' : 0 },
-				'9' : {	'cost' : 27, 'bonus' : 900, 'bonus2' : 49.9, 'bonus3' : 0 },
-				'10' : { 'cost' : 35, 'bonus' : 7500, 'bonus2' : 100, 'bonus3' : 0 }
+				'1' : { 'cost' : 2, 'bonus' : .01, 'bonus2' : 1, 'bonus3' : 0 },
+				'2' : { 'cost' : 2, 'bonus' : .025, 'bonus2' : 1.4, 'bonus3' : 0 },
+				'3' : { 'cost' : 3, 'bonus' : .084, 'bonus2' : 2.2, 'bonus3' : 0	},
+				'4' : { 'cost' : 3, 'bonus' : .28, 'bonus2' : 3.4, 'bonus3' : 0 },
+				'5' : { 'cost' : 3, 'bonus' : .95, 'bonus2' : 5.2, 'bonus3' : 0 },
+				'6' : { 'cost' : 4, 'bonus' : 4.2, 'bonus2' : 8.5, 'bonus3' : 0 },
+				'7' : { 'cost' : 5, 'bonus' : 23.4, 'bonus2' : 15,	'bonus3' : 0 },
+				'8' : { 'cost' : 5, 'bonus' : 131,	'bonus2' : 26.5, 'bonus3' : 0 },
+				'9' : {	'cost' : 6, 'bonus' : 900, 'bonus2' : 49.9, 'bonus3' : 0 },
+				'10' : { 'cost' : 7, 'bonus' : 7500, 'bonus2' : 100, 'bonus3' : 0 }
 			},
 			'expo' : {
 				'flat' : 'inactive_ship'
@@ -2777,16 +2777,16 @@ var skills = {
 			'type2' : 'multiply',
 			'type3' : -1,
 			'levels' : {
-				'1' : { 'cost' : 3, 'bonus' : .01, 'bonus2' : 1, 'bonus3' : 0 },
-				'2' : { 'cost' : 4, 'bonus' : .025, 'bonus2' : 1.4, 'bonus3' : 0 },
-				'3' : { 'cost' : 5, 'bonus' : .084, 'bonus2' : 2.2, 'bonus3' : 0	},
-				'4' : { 'cost' : 7, 'bonus' : .28, 'bonus2' : 3.4, 'bonus3' : 0 },
-				'5' : { 'cost' : 9, 'bonus' : .95, 'bonus2' : 5.2, 'bonus3' : 0 },
-				'6' : { 'cost' : 12, 'bonus' : 4.2, 'bonus2' : 8.5, 'bonus3' : 0 },
-				'7' : { 'cost' : 16, 'bonus' : 23.4, 'bonus2' : 15,	'bonus3' : 0 },
-				'8' : { 'cost' : 21, 'bonus' : 131,	'bonus2' : 26.5, 'bonus3' : 0 },
-				'9' : {	'cost' : 27, 'bonus' : 900, 'bonus2' : 49.9, 'bonus3' : 0 },
-				'10' : { 'cost' : 35, 'bonus' : 7500, 'bonus2' : 100, 'bonus3' : 0 }
+				'1' : { 'cost' : 2, 'bonus' : .01, 'bonus2' : 1, 'bonus3' : 0 },
+				'2' : { 'cost' : 2, 'bonus' : .025, 'bonus2' : 1.4, 'bonus3' : 0 },
+				'3' : { 'cost' : 3, 'bonus' : .084, 'bonus2' : 2.2, 'bonus3' : 0	},
+				'4' : { 'cost' : 3, 'bonus' : .28, 'bonus2' : 3.4, 'bonus3' : 0 },
+				'5' : { 'cost' : 3, 'bonus' : .95, 'bonus2' : 5.2, 'bonus3' : 0 },
+				'6' : { 'cost' : 4, 'bonus' : 4.2, 'bonus2' : 8.5, 'bonus3' : 0 },
+				'7' : { 'cost' : 5, 'bonus' : 23.4, 'bonus2' : 15,	'bonus3' : 0 },
+				'8' : { 'cost' : 5, 'bonus' : 131,	'bonus2' : 26.5, 'bonus3' : 0 },
+				'9' : {	'cost' : 6, 'bonus' : 900, 'bonus2' : 49.9, 'bonus3' : 0 },
+				'10' : { 'cost' : 7, 'bonus' : 7500, 'bonus2' : 100, 'bonus3' : 0 }
 			},
 			'expo' : {
 				'flat' : 'inactive_clone'
