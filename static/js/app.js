@@ -458,6 +458,78 @@ function generateUpgrades() {
 			relics = relics.mul(1000000000000000000000).toNumber();
 			buffer = 100000;
 			break;
+		case 'e22':
+			relics = relics.mul(10000000000000000000000).toNumber();
+			buffer = 125000;
+			break;
+		case 'e23':
+			relics = relics.mul(100000000000000000000000).toNumber();
+			buffer = 150000;
+			break;
+		case 'e24':
+			relics = relics.mul(1000000000000000000000000).toNumber();
+			buffer = 175000;
+			break;
+		case 'e25':
+			relics = relics.mul(10000000000000000000000000).toNumber();
+			buffer = 250000;
+			break;
+		case 'e26':
+			relics = relics.mul(100000000000000000000000000).toNumber();
+			buffer = 500000;
+			break;
+		case 'e27':
+			relics = relics.mul(1000000000000000000000000000).toNumber();
+			buffer = 750000;
+			break;
+		case 'e28':
+			relics = relics.mul(10000000000000000000000000000).toNumber();
+			buffer = 1000000;
+			break;
+		case 'e29':
+			relics = relics.mul(100000000000000000000000000000).toNumber();
+			buffer = 1250000;
+			break;
+		case 'e30':
+			relics = relics.mul(1000000000000000000000000000000).toNumber();
+			buffer = 1500000;
+			break;
+		case 'e31':
+			relics = relics.mul(10000000000000000000000000000000).toNumber();
+			buffer = 1750000;
+			break;
+		case 'e32':
+			relics = relics.mul(100000000000000000000000000000000).toNumber();
+			buffer = 2500000;
+			break;
+		case 'e33':
+			relics = relics.mul(1000000000000000000000000000000000).toNumber();
+			buffer = 5000000;
+			break;
+		case 'e34':
+			relics = relics.mul(10000000000000000000000000000000000).toNumber();
+			buffer = 7500000;
+			break;
+		case 'e35':
+			relics = relics.mul(100000000000000000000000000000000000).toNumber();
+			buffer = 10000000;
+			break;
+		case 'e36':
+			relics = relics.mul(1000000000000000000000000000000000000).toNumber();
+			buffer = 12500000;
+			break;
+		case 'e37':
+			relics = relics.mul(1000000000000000000000).toNumber();
+			buffer = 25000000;
+			break;
+		case 'e38':
+			relics = relics.mul(1000000000000000000000).toNumber();
+			buffer = 75000000;
+			break;
+		case 'e39':
+			relics = relics.mul(1000000000000000000000).toNumber();
+			buffer = 100000000;
+			break;
 	}
 	orelics = relics;
 	obuffer = buffer;
