@@ -213,6 +213,14 @@ function checkAllSkills() {
 	calculateAllSkills();
 }
 
+function resetSkills() {
+	$.each(skills.data, function(k,v) {
+		skills.data[k].level = 0;
+		$('#skill' + k).val(0);
+	});
+	calculateAllSkills();
+}
+
 function dalViewArtifact(litmus) {
   if(litmus) {
     $('#dal-tab').tab('show');
