@@ -173,21 +173,6 @@ function calculateWeight(k,v) {
 				}
 				break;
 
-			case 'ed':
-				if(0 < skills.data.ds.level) {
-					v.rating += reducts.hs[build];
-					v.rating += reducts.ds[build];
-					v.rating += reducts.gold;
-					v.rating += reducts.fs[build];
-					v.rating += reducts.wc[build];
-					v.rating += reducts.sc[build];
-					v.color = 'success';
-				} else {
-					v.rating = reducts.sc[build];
-					v.color = determineColor(v.rating);
-				}
-				break;
-
 			case 'active':
 				if(1 == active) {
 					v.rating = 1;

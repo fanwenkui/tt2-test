@@ -2454,7 +2454,7 @@ var skills = {
 				'20' : { 'cost' : 28, 'bonus' : 510, 'bonus2' : 40, 'bonus3' : 0 }
 			},
 			'expo' : {
-				'flat' : 'ed'
+				'reduct' : 'sc'
 			}
 		},
 		'mm' : {
