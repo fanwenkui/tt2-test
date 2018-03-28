@@ -810,7 +810,7 @@ function calculateAllSkills() {
 		}
 	});
 	$.each(skills.data, function(k,v) {
-		console.log(k,v.efficiency);
+		console.log(k,v.efficiency, v.prereq, skills.data[v.prereq], skills.data[v.prereq].prereq);
 		if(v.efficiency > winner_svalue &&
 			v.max > v.level
 		) {
