@@ -810,6 +810,7 @@ function calculateAllSkills() {
 		}
 	});
 	$.each(skills.data, function(k,v) {
+		console.log(k,v.efficiency);
 		if(v.efficiency > winner_svalue &&
 			v.max > v.level
 		) {
