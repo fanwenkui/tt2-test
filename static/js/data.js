@@ -33,14 +33,6 @@ var reducts = {
 		'hs' : 1,
 		'cs' : 0
 	},
-	'tap2' : {
-		'hero' : 0,
-		'tap' : 1,
-		'pet' : 1,
-		'sc' : 0,
-		'hs' : 1,
-		'cs' : 0
-	},
 	'hero' : {
 		'hero' : 1,
 		'tap' : .5,
@@ -2523,7 +2515,7 @@ var skills = {
 				'12' : { 'cost' : 60, 'bonus' : .5, 'bonus2' : .025, 'bonus3' : 0 }
 			},
 			'expo' : {
-				'reduct' : 'tap2'
+				'reduct' : 'tap'
 			}
 		},
 		'ds' : {
