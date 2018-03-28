@@ -216,8 +216,8 @@ function checkAllSkills() {
 function resetSkills() {
 	$.each(skills.data, function(k,v) {
 		skills.data[k].level = 0;
-		$('#skill' + k).val(0);
 	});
+	regenerateSkills();
 	calculateAllSkills();
 }
 
