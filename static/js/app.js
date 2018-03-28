@@ -217,8 +217,7 @@ function resetSkills() {
 	$.each(skills.data, function(k,v) {
 		skills.data[k].level = 0;
 	});
-	regenerateSkills();
-	calculateAllSkills();
+	generateSkills();
 }
 
 function dalViewArtifact(litmus) {
