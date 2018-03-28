@@ -1980,7 +1980,7 @@ var skills = {
 				'14' : { 'cost' : 11, 'bonus' : 2910, 'bonus2' : 14, 'bonus3' : 0 },
 				'15' : { 'cost' : 12, 'bonus' : 8690, 'bonus2' : 15, 'bonus3' : 0 },
 				'16' : { 'cost' : 14, 'bonus' : 29500, 'bonus2' : 16, 'bonus3' : 0 },
-				'17' : { 'cost' : 16, 'bonus' : 11300, 'bonus2' : 17, 'bonus3' : 0 },
+				'17' : { 'cost' : 16, 'bonus' : 113000, 'bonus2' : 17, 'bonus3' : 0 },
 				'18' : { 'cost' : 19, 'bonus' : 513000, 'bonus2' : 18, 'bonus3' : 0 },
 				'19' : { 'cost' : 22, 'bonus' : 2730000, 'bonus2' : 19, 'bonus3' : 0 },
 				'20' : { 'cost' : 25, 'bonus' : 16900000, 'bonus2' : 20, 'bonus3' : 0 }
@@ -2353,7 +2353,7 @@ var skills = {
 			'bonus3' : -1,
 			'tier' : 3,
 			'prereq' : 'mu',
-			'max' : 20,
+			'max' : 10,
 			'type' : 'pct_pos',
 			'type2' : 'add',
 			'type3' : -1,
