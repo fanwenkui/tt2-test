@@ -264,7 +264,6 @@ function regenerateSkills() {
 			v.level = 0;
 		}
 		$('#skill' + k).val(v.level);
-		console.log(v.nickname, v.level);
 		$('#' + v.nickname).text(v.level);
 		var value = '';
 		if(0 < v.level && undefined != v.current_effect) {
