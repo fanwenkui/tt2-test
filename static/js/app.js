@@ -680,6 +680,11 @@ function calculateSkillTotals() {
 			}
 		}
 	});
+	$('#totalSP').text(skills.totals.SP);
+	$('#totalSPred').text(skills.totals.red);
+	$('#totalSPyellow').text(skills.totals.yellow);
+	$('#totalSPblue').text(skills.totals.blue);
+	$('#totalSPgreen').text(skills.totals.green);
 }
 
 function calculate(data, k, regenerate, pinch) {
