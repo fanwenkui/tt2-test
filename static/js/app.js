@@ -850,6 +850,7 @@ function calculateAllSkills() {
 		}
 	});
 	regenerateSkills();
+	calculateSkillTotals();
 	$('#nextskill').text(skills.data[winner_s].name + ' ' + skills.data[winner_s].nickname);
 	$('#nextskillcost').text(skills.data[winner_s].cost);
 	$('#nextskilllvl').text(skills.data[winner_s].level);
