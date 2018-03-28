@@ -102,7 +102,6 @@ function generateArtifacts() {
 
 function generateSkills() {
 	$('#skills').empty();
-	$('#dalskills').empty();
 	$.each(skills.data, function(k,v) {
 		if(isNaN(v.level)) {
 			v.level = 0;
@@ -152,10 +151,6 @@ function generateSkills() {
 			row += '</td>';
 		row += '</tr>';
 		$('#skills').append(row);
-    var div = '<div class="col-3 col-sm-2 col-lg-1 border text-center">';
-    div += '<strong>' + v.nickname + '</strong><br><span id="skill' + k + 'dalsp">' + displayTruncated(v.level) + '</span>';
-    div += '</div>'
-		$('#dalskills').append(div);
 	});
 }
 
@@ -226,14 +221,6 @@ function dalViewArtifact(litmus) {
   }
 }
 
-function dalViewSkill(litmus) {
-  if(litmus) {
-    $('#dalsp-tab').tab('show');
-  } else {
-		$('#artifacts-tab').tab('show');
-  }
-}
-
 function regenerateArtifacts() {
 	$.each(artifacts.data, function(k,v) {
 		if(isNaN(v.level)) {
@@ -277,7 +264,8 @@ function regenerateSkills() {
 			v.level = 0;
 		}
 		$('#skill' + k).val(v.level);
-		$('#skill' + k + 'dalsp').text(displayTruncated(v.level));
+		console.log(v.nickname, v.level);
+		$('#' + v.nickname).text(v.level);
 		var value = '';
 		if(0 < v.level && undefined != v.current_effect) {
 			value = displayEffect(v.current_effect, v.type);
@@ -678,7 +666,7 @@ function skillEff(k, v) {
 			var effect_eff3 = Math.pow(effect_diff3, v.rating);
 			running_eff *= next_effect3;
 		}
-		var eff = (0 < v.rating ? Math.pow(running_eff, 1/totalCost) : -1);
+		var eff = Math.pow(running_eff, 1/totalCost);
 		skills.data[k].efficiency = eff;
 	}
 }
@@ -815,8 +803,7 @@ function calculateAllSkills() {
 		}
 	});
 	$.each(skills.data, function(k,v) {
-		if(-1 != v.efficiency &&
-			v.efficiency > winner_svalue &&
+		if(v.efficiency > winner_svalue &&
 			v.max > v.level
 		) {
 			if(skills.totals[v.branch] >= tiers[v.tier] && (-1 == v.prereq || 0 < skills.data[v.prereq].level)) {
@@ -849,8 +836,8 @@ function calculateAllSkills() {
 			}
 		}
 	});
-	regenerateSkills();
 	calculateSkillTotals();
+	regenerateSkills();
 	$('#nextskill').text(skills.data[winner_s].name + ' ' + skills.data[winner_s].nickname);
 	$('#nextskillcost').text(skills.data[winner_s].cost);
 	$('#nextskilllvl').text(skills.data[winner_s].level);

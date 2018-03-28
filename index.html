@@ -28,9 +28,6 @@
 					<li class="nav-item d-none">
 				    <a class="nav-link" id="dal-tab" data-toggle="tab" href="#dal" role="tab" aria-controls="dal" aria-selected="false">Selfie</a>
 				  </li>
-					<li class="nav-item d-none">
-				    <a class="nav-link" id="dalsp-tab" data-toggle="tab" href="#dalsp" role="tab" aria-controls="dalsp" aria-selected="false">Selfie</a>
-				  </li>
 				</ul>
 				<h1 class="h4">TT2 Optimizer <span class="badge badge-secondary">2.6.x</span></h1>
 			</div>
@@ -294,22 +291,72 @@
 						</div>
 					</div>
 				</div>
-				<div class="tab-pane fade" id="dalsp" role="tabpanel" aria-labelledby="dalsp-tab">
-					<div class="row mb-4" id="dalskills">
-					</div>
-					<button type="button" class="btn btn-secondary mb-3" onclick="dalViewSkill(0);">Exit Selfie Mode</button>
-				</div>
 				<div class="tab-pane fade" id="sp" role="tabpanel" aria-labelledby="sp-tab">
 					<p><a href="https://www.youtube.com/watch?v=IvlWP4lQ6m8">SUUUUUUUUUUUUPER</a> BETA WIP</p>
 					<p><small>If something seems extremely out of whack, feel free to reach out to me on reddit, /u/tsukinoooo</small></p>
 					<p>The next best thing for you to spend your SP on is:</p>
 					<p><span id="nextskill"></span> [<span id="nextskilllvl"></span> => <span id="nextskilllvlpl"></span>] (costs <span id="nextskillcost"></span> SP) <span id="nextskillbadge" class="badge badge-pill ml-2"></span></p>
 					<button id="acceptSkillSugg" type="button" class="btn btn-primary mb-4" onclick="acceptSkill()">Accept Skill Suggestion</button>
-					<p>Total SP Spent: <span id="totalSP"></span></p>
-					<p>Total SP Spent in Knight Tree: <span id="totalSPred"></span></p>
-					<p>Total SP Spent in Warlord Tree: <span id="totalSPyellow"></span></p>
-					<p>Total SP Spent in Sorcerer Tree: <span id="totalSPblue"></span></p>
-					<p>Total SP Spent in Rogue Tree: <span id="totalSPgreen"></span></p>
+					<div class="container">
+						<div class="row">
+							<div class="col-6 col-md-3 col-lg-2 skillselfie">
+								<div class="row">
+									<div class="col-4" id="totalSP"></div><div class="col-4 redskill text-light" id="R1"></div><div class="col-4" id="totalSPred"></div>
+								</div>
+								<div class="row">
+									<div class="col-4 redskill text-light" id="R2_1"></div><div class="col-4 redskill text-light" id="R2_2"></div><div class="col-4 redskill text-light" id="R2_3"></div>
+								</div>
+								<div class="row">
+									<div class="col-4 redskill text-light" id="R3_1"></div><div class="col-4 redskill text-light" id="R3_2"></div><div class="col-4 redskill text-light" id="R3_3"></div>
+								</div>
+								<div class="row">
+									<div class="col-4 redskill text-light" id="R4_1"></div><div class="col-4"></div><div class="col-4 redskill text-light" id="R4_3"></div>
+								</div>
+							</div>
+							<div class="col-6 col-md-3 col-lg-2 skillselfie">
+								<div class="row">
+									<div class="col-4"></div><div class="col-4 yellowskill text-dark" id="Y1"></div><div class="col-4" id="totalSPyellow"></div>
+								</div>
+								<div class="row">
+									<div class="col-4 yellowskill text-dark" id="Y2_1"></div><div class="col-4 yellowskill text-dark" id="Y2_2"></div><div class="col-4 yellowskill text-dark" id="Y2_3"></div>
+								</div>
+								<div class="row">
+									<div class="col-4 yellowskill text-dark" id="Y3_1"></div><div class="col-4"></div><div class="col-4 yellowskill text-dark" id="Y3_3"></div>
+								</div>
+								<div class="row">
+									<div class="col-4 yellowskill text-dark" id="Y4_1"></div><div class="col-4"></div><div class="col-4 yellowskill text-dark" id="Y4_3"></div>
+								</div>
+							</div>
+							<div class="col-6 col-md-3 col-lg-2 skillselfie">
+								<div class="row">
+									<div class="col-4"></div><div class="col-4 blueskill text-light" id="B1"></div><div class="col-4" id="totalSPblue"></div>
+								</div>
+								<div class="row">
+									<div class="col-4 blueskill text-light" id="B2_1"></div><div class="col-4 blueskill text-light" id="B2_2"></div><div class="col-4 blueskill text-light" id="B2_3"></div>
+								</div>
+								<div class="row">
+									<div class="col-4 blueskill text-light" id="B3_1"></div><div class="col-4 blueskill text-light" id="B3_2"></div><div class="col-4 blueskill text-light" id="B3_3"></div>
+								</div>
+								<div class="row">
+									<div class="col-4 blueskill text-light" id="B4_1"></div><div class="col-4 blueskill text-light" id="B4_2"></div><div class="col-4 blueskill text-light" id="B4_3"></div>
+								</div>
+							</div>
+							<div class="col-6 col-md-3 col-lg-2 skillselfie">
+								<div class="row">
+									<div class="col-4"></div><div class="col-4 greenskill text-dark" id="G1"></div><div class="col-4" id="totalSPgreen"></div>
+								</div>
+								<div class="row">
+									<div class="col-4 greenskill text-dark" id="G2_1"></div><div class="col-4 greenskill text-dark" id="G2_2"></div><div class="col-4 greenskill text-dark" id="G2_3"></div>
+								</div>
+								<div class="row">
+									<div class="col-4 greenskill text-dark" id="G3_1"></div><div class="col-4 greenskill text-dark" id="G3_2"></div><div class="col-4 greenskill text-dark" id="G3_3"></div>
+								</div>
+								<div class="row">
+									<div class="col-4"></div><div class="col-4"></div><div class="col-4"></div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
