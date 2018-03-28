@@ -1229,6 +1229,7 @@ var artifacts = {
 			'expo' : {
 				'gold' : [
 					'coc',
+					'phom',
 					'all',
 					'splash',
 					'active'
@@ -1667,6 +1668,7 @@ var skills = {
 			'expo' : {
 				'gold' : [
 					'phom',
+					'coc',
 					'sov',
 					'all',
 				]
@@ -1943,6 +1945,7 @@ var skills = {
 				'gold' : [
 					'coc',
 					'fairy',
+					'phom',
 					'splash',
 					'inactive'
 				]
