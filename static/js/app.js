@@ -218,6 +218,7 @@ function resetSkills() {
 		skills.data[k].level = 0;
 	});
 	generateSkills();
+	adjustWeights();
 }
 
 function dalViewArtifact(litmus) {
