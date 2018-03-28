@@ -228,6 +228,7 @@ function calculateWeight(k,v) {
 		if('splash' == v.expo.reduct && $('#dry').prop('checked') == true) {
 			v.rating = 0;
 		} else {
+			console.log(k,v.expo.reduct,build);
 			v.rating = reducts[v.expo.reduct][build];
 		}
 		v.color = determineColor(v.rating);
