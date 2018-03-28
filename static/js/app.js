@@ -217,8 +217,8 @@ function resetSkills() {
 	$.each(skills.data, function(k,v) {
 		skills.data[k].level = 0;
 	});
-	generateSkills();
-	adjustWeights();
+	calculateSkillTotals();
+	calculateAllSkills();
 }
 
 function dalViewArtifact(litmus) {
@@ -810,7 +810,6 @@ function calculateAllSkills() {
 		}
 	});
 	$.each(skills.data, function(k,v) {
-		console.log(k,v.efficiency, v.prereq);//, skills.data[v.prereq], skills.data[v.prereq].prereq);
 		if(v.efficiency > winner_svalue &&
 			v.max > v.level
 		) {
