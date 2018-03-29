@@ -608,7 +608,7 @@ function acceptSuggestions() {
 	gtag('event', 'Upgrades', {
 		'event_category': 'Upgrades',
 		'event_action': 'Accept',
-		'event_label': 'List',
+		'event_label': 'Artifacts',
 	});
 	$.each(upgrades, function(k,v) {
 		artifacts.data[k].level += v;
@@ -622,6 +622,16 @@ function acceptSuggestions() {
 	$('#relicsuggs').hide();
 	$('#relicreccs').show();
 	adjustWeights();
+}
+
+function rejectSuggestions() {
+	$('#new_artifact').empty();
+	$('#accept').empty();
+	$('#suggestions').empty();
+	$('#relics').val('');
+	$('#relics_decimal').val('');
+	$('#relicsuggs').hide();
+	$('#relicreccs').show();
 }
 
 function skillEff(k, v) {
@@ -870,6 +880,11 @@ function calculateAllSkills() {
 }
 
 function acceptSkill() {
+	gtag('event', 'Upgrades', {
+		'event_category': 'Upgrades',
+		'event_action': 'Accept',
+		'event_label': 'SP',
+	});
 	skills.data[winner_s].level++;
 	calculateSkillTotals();
 	adjustWeights();
