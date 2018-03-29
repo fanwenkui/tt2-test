@@ -565,6 +565,7 @@ function renderSuggestions() {
 	});
 	if(false == litmus) {
 		$('#suggestions').empty().append('<p>You cannot afford to make the next best upgrade(s). Please try again when you have more relics or try lowering your rounding to see results.</p>');
+		$('#accept').empty().append('<button type="button" class="btn btn-danger" onclick="rejectSuggestions();">Cancel</button>');
 		relics = 0;
 		return;
 	}
