@@ -41,6 +41,7 @@ function toggleSplash(reweight) {
 }
 
 function generateArtifacts() {
+	$('#accept2').hide();
 	$('#artifacts').empty();
 	$('#daltifacts').empty();
 	$.each(artifacts.data, function(k,v) {
@@ -602,6 +603,7 @@ function renderSuggestions() {
 	var curiouser = alice.getTime() - white_rabbit.getTime();
 	$('#pudding').empty().append('Total Calculations Performed: ' + obfuscate + ' in ' + (curiouser / 1000).toFixed(3) + 's (' + ((obfuscate/curiouser) * 1000).toFixed(3) + '/s)');
 	$('#suggestions').empty().append(suggestions);
+	$('#accept2').show();
 	$('#accept').empty().append('<button type="button" class="btn btn-primary" onclick="acceptSuggestions();">Complete</button><button type="button" class="btn btn-danger" onclick="rejectSuggestions();">Cancel</button>');
 }
 
@@ -617,6 +619,7 @@ function acceptSuggestions() {
 	artifacts.totalAD = calculateTotalAD(artifacts.data, true);
 	$('#new_artifact').empty();
 	$('#accept').empty();
+	$('#accept2').hide();
 	$('#suggestions').empty();
 	$('#relics').val('');
 	$('#relics_decimal').val('');
@@ -628,6 +631,7 @@ function acceptSuggestions() {
 function rejectSuggestions() {
 	$('#new_artifact').empty();
 	$('#accept').empty();
+	$('#accept2').hide();
 	$('#suggestions').empty();
 	$('#relics').val('');
 	$('#relics_decimal').val('');
