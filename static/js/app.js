@@ -1,6 +1,8 @@
 var winner_e = '';
 var winner_n = '';
+var winner_s = '';
 var winner_value = 0;
+var winner_svalue = -999999999;
 var obfuscate = 0;
 var white_rabbit = 0;
 
@@ -25,7 +27,7 @@ function toggleDark() {
 	storeData();
 }
 
-function toggleSplash() {
+function toggleSplash(reweight) {
 	if($('#wet').prop('checked') == true) {
 		$('#btnwet').removeClass('btn-dark text-secondary').addClass('btn-info');
 		$('#btndry').removeClass('btn-info').addClass('btn-dark text-secondary');
@@ -33,8 +35,9 @@ function toggleSplash() {
 		$('#btndry').removeClass('btn-dark text-secondary').addClass('btn-info');
 		$('#btnwet').removeClass('btn-info').addClass('btn-dark text-secondary');
 	}
-	storeData();
-	adjustWeights();
+	if(false != reweight) {
+		adjustWeights();
+	}
 }
 
 function generateArtifacts() {
@@ -95,8 +98,60 @@ function generateArtifacts() {
     div += '</div>'
 		$('#daltifacts').append(div);
 	});
-	storeData();
-	adjustWeights();
+}
+
+function generateSkills() {
+	$('#skills').empty();
+	$.each(skills.data, function(k,v) {
+		if(isNaN(v.level)) {
+			v.level = 0;
+		}
+		var row = '<tr class="' + (1 == v.active ? '' : 'text-dark bg-secondary') + '" id="skill'+ k + 'row">';
+			row += '<td>';
+				row += '<input type="checkbox" aria-label="Checkbox to designate active status for ' + v.name + '" id="skill' + k + 'active"' + (v.active == 1 ? ' checked="checked"' : '') + ' onchange="updateActiveSkill(\'' + k + '\');" tabindex="-1">';
+			row += '</td>';
+			row += '<td>';
+				row += '<label for="skill' + k + 'active" id="basic-addonskill' + k + '">';
+					row += '<span class="d-block d-sm-none">' + v.nickname + '</span>';
+					row += '<span class="d-none d-sm-block">' + v.name + '</span>';
+				row += '</label>';
+			row += '</td>';
+			row += '<td>';
+				row += '<input' + (1 == v.active ? '' : ' readonly="readonly"') + ' id="skill' + k + '" value="' + v.level + '" type="tel" class="form-control artlvl" placeholder="0" aria-label="Level of ' + v.name + '" aria-describedby="basic-addonskill' + k + '"onchange="updateSkill(\'' + k + '\')">';
+			row += '</td>';
+			row += '<td>';
+				row += '<span class="badge" id="skill' + k + 'expo"></span>';
+			row += '</td>';
+			row += '<td>';
+				row += '<button class="badge badge-secondary" type="button" data-toggle="collapse" data-target="#skill' + k + 'info" aria-expanded="false" aria-controls="skill' + k + 'info" tabindex="-1">&#x00A0;i&#x00A0;</button>';
+			row += '</td>';
+		row += '</tr>';
+		row += '<tr class="collapse" id="skill' + k + 'info">';
+			row += '<td colspan="5">';
+				row += '<dl class="row">';
+					row += '<dt class="col-3 col-sm-6 text-right">Name</dt>';
+					row += '<dd class="col-9 col-sm-6">' + v.name + '</dd>';
+					row += '<dt class="col-3 col-sm-6 text-right">Effect</dt>';
+					row += '<dd class="col-9 col-sm-6" id="skill' + k + 'effect"></dd>';
+					row += '<dt class="col-3 col-sm-6 text-right">Effect2</dt>';
+					row += '<dd class="col-9 col-sm-6" id="skill' + k + 'effect2"></dd>';
+					row += '<dt class="col-3 col-sm-6 text-right">Effect3</dt>';
+					row += '<dd class="col-9 col-sm-6" id="skill' + k + 'effect3"></dd>';
+					row += '<dt class="col-3 col-sm-6 text-right">';
+						row += '<span class="d-block d-sm-none">Cost</span>';
+						row += '<span class="d-none d-sm-block">Cost to Upgrade</span>';
+					row += '</dt>';
+					row += '<dd class="col-9 col-sm-6" id="skill' + k + 'cost"></dd>';
+					row += '<dt class="col-3 col-sm-6 text-right">';
+						row += '<span class="d-block d-sm-none">Effc.</span>';
+						row += '<span class="d-none d-sm-block">Efficiency</span>';
+					row += '</dt>';
+					row += '<dd class="col-9 col-sm-6" id="skill' + k + 'eff"></dd>';
+				row += '</dl>';
+			row += '</td>';
+		row += '</tr>';
+		$('#skills').append(row);
+	});
 }
 
 function adjustBoS() {
@@ -110,7 +165,6 @@ function adjustBoS() {
 	artifacts.data.bos.rating = expo;
 	artifacts = calculate(artifacts, 'bos', true, true);
 }
-
 
 function updateActive(k) {
 	if($('#' + k + 'active').is(':checked')) {
@@ -126,7 +180,20 @@ function updateActive(k) {
 	artifacts = calculate(artifacts, k, true, true);
 }
 
-function checkAll() {
+function updateActiveSkill(k) {
+	if($('#skill' + k + 'active').is(':checked')) {
+		skills.data[k].active = 1;
+		$('#skill' + k + 'row').removeClass('text-dark bg-secondary');
+		$('#skill' + k).prop('readonly', false);
+	} else {
+		skills.data[k].active = 0;
+		$('#skill' + k + 'row').addClass('text-dark bg-secondary');
+		$('#skill' + k).prop('readonly', true);
+	}
+	calculateAllSkills();
+}
+
+function checkAllArtifacts() {
 	$.each(artifacts.data, function(k,v) {
 		$('#' + k + 'active').prop('checked', true);
 		artifacts.data[k].active = 1;
@@ -136,11 +203,29 @@ function checkAll() {
 	artifacts = calculateAll(artifacts, true);
 }
 
-function dalView(litmus) {
+function checkAllSkills() {
+	$.each(skills.data, function(k,v) {
+		$('#skill' + k + 'active').prop('checked', true);
+		skills.data[k].active = 1;
+		$('#skill' + k + 'row').removeClass('text-dark bg-secondary');
+		$('#skill' + k).prop('readonly', false);
+	});
+	calculateAllSkills();
+}
+
+function resetSkills() {
+	$.each(skills.data, function(k,v) {
+		skills.data[k].level = 0;
+	});
+	calculateSkillTotals();
+	calculateAllSkills();
+}
+
+function dalViewArtifact(litmus) {
   if(litmus) {
     $('#dal-tab').tab('show');
   } else {
-    $('#reccs-tab').tab('show');
+    $('#artifacts-tab').tab('show');
   }
 }
 
@@ -152,16 +237,16 @@ function regenerateArtifacts() {
 		$('#' + k).val(v.level);
 		$('#' + k + 'dalt').text(displayTruncated(v.level));
 		var value = '';
-		if(1 == v.active && undefined != v.current_effect) {
+		if(0 < v.level && undefined != v.current_effect) {
 			value = displayEffect(v.current_effect, v.type);
 		}
-		value += v.bonus
+		value += v.bonus;
 		$('#' + k + 'effect').empty().append(value);
 		value = '';
-		if(1 == v.active && undefined != v.current_ad) {
+		if(0 < v.level && undefined != v.current_ad) {
 			value = displayPct(v.current_ad);
 		}
-		$(1 == '#' + k + 'ad').empty().append(value);
+		$('#' + k + 'ad').empty().append(value);
 		value = '';
 		if(1 == v.active && undefined != v.displayCost) {
 			value = v.displayCost + ' Relics';
@@ -181,12 +266,60 @@ function regenerateArtifacts() {
 	storeData();
 }
 
+function regenerateSkills() {
+	$.each(skills.data, function(k,v) {
+		if(isNaN(v.level)) {
+			v.level = 0;
+		}
+		$('#skill' + k).val(v.level);
+		$('#' + v.nickname).text(v.level);
+		var value = '';
+		if(0 < v.level && undefined != v.current_effect) {
+			value = displayEffect(v.current_effect, v.type);
+		}
+		value += v.bonus;
+		$('#skill' + k + 'effect').empty().append(value);
+		var value = '';
+		if(0 < v.level && undefined != v.current_effect2 && false != v.current_effect2 && -1 != v.current_effect2) {
+			value = displayEffect(v.current_effect2, v.type2);
+		}
+		value += (-1 != v.bonus2 ? v.bonus2 : '');
+		$('#skill' + k + 'effect2').empty().append(value);
+		var value = '';
+		if(0 < v.level && undefined != v.current_effect3 && false != v.current_effect3 && -1 != v.current_effect3) {
+			value = displayEffect(v.current_effect3, v.type3);
+		}
+		value += (-1 != v.bonus3 ? v.bonus3 : '');
+		$('#skill' + k + 'effect3').empty().append(value);
+		value = '';
+		if(1 == v.active && undefined != v.cost) {
+			value = v.cost + ' SP';
+		}
+		$('#skill' + k + 'cost').empty().append(value);
+		value = '';
+		if(1 == v.active && undefined != v.efficiency) {
+			value = v.efficiency.toExponential(12);
+		}
+		$('#skill' + k + 'eff').empty().append(value);
+		value = '';
+		if(undefined != v.rating) {
+			value = v.rating.toFixed(2).replace(/\.?0+$/, '');
+		}
+		$('#skill' + k + 'expo').empty().append(value).removeClass().addClass('badge').addClass('badge-' + ('info' == v.color ? 'success' : v.color));
+	});
+	storeData();
+}
+
 function updateArtifact(k) {
 	artifacts.data[k].level = parseInt($('#' + k).val());
 	artifacts.totalAD = calculateTotalAD(artifacts.data, true);
 	artifacts = calculate(artifacts, k, true, true);
 }
 
+function updateSkill(k) {
+	skills.data[k].level = parseInt($('#skill' + k).val());
+	adjustWeights();
+}
 function countArtifacts(data) {
 	var i = 0;
 	$.each(data, function(k,v) {
@@ -254,7 +387,8 @@ function generateUpgrades() {
 	$('#progress').prop('aria-valuenow', 0);
 	$('#progress').addClass('progress-bar-striped progress-bar-animated');
 	$('#progressBar').show();
-	$('#sugg-tab').tab('show');
+	$('#relicsuggs').show();
+	$('#relicreccs').hide();
 	storeData();
 	if(winner_n != '' || 1 > artifacts.data.bos.level) {
 		$('#new_artifact').empty().append('<em>NOTE: You would be better off saving up for a new artifact.</em>');
@@ -318,6 +452,78 @@ function generateUpgrades() {
 		case 'e21':
 			relics = relics.mul(1000000000000000000000).toNumber();
 			buffer = 100000;
+			break;
+		case 'e22':
+			relics = relics.mul(10000000000000000000000).toNumber();
+			buffer = 125000;
+			break;
+		case 'e23':
+			relics = relics.mul(100000000000000000000000).toNumber();
+			buffer = 150000;
+			break;
+		case 'e24':
+			relics = relics.mul(1000000000000000000000000).toNumber();
+			buffer = 175000;
+			break;
+		case 'e25':
+			relics = relics.mul(10000000000000000000000000).toNumber();
+			buffer = 250000;
+			break;
+		case 'e26':
+			relics = relics.mul(100000000000000000000000000).toNumber();
+			buffer = 500000;
+			break;
+		case 'e27':
+			relics = relics.mul(1000000000000000000000000000).toNumber();
+			buffer = 750000;
+			break;
+		case 'e28':
+			relics = relics.mul(10000000000000000000000000000).toNumber();
+			buffer = 1000000;
+			break;
+		case 'e29':
+			relics = relics.mul(100000000000000000000000000000).toNumber();
+			buffer = 1250000;
+			break;
+		case 'e30':
+			relics = relics.mul(1000000000000000000000000000000).toNumber();
+			buffer = 1500000;
+			break;
+		case 'e31':
+			relics = relics.mul(10000000000000000000000000000000).toNumber();
+			buffer = 1750000;
+			break;
+		case 'e32':
+			relics = relics.mul(100000000000000000000000000000000).toNumber();
+			buffer = 2500000;
+			break;
+		case 'e33':
+			relics = relics.mul(1000000000000000000000000000000000).toNumber();
+			buffer = 5000000;
+			break;
+		case 'e34':
+			relics = relics.mul(10000000000000000000000000000000000).toNumber();
+			buffer = 7500000;
+			break;
+		case 'e35':
+			relics = relics.mul(100000000000000000000000000000000000).toNumber();
+			buffer = 10000000;
+			break;
+		case 'e36':
+			relics = relics.mul(1000000000000000000000000000000000000).toNumber();
+			buffer = 12500000;
+			break;
+		case 'e37':
+			relics = relics.mul(1000000000000000000000).toNumber();
+			buffer = 25000000;
+			break;
+		case 'e38':
+			relics = relics.mul(1000000000000000000000).toNumber();
+			buffer = 75000000;
+			break;
+		case 'e39':
+			relics = relics.mul(1000000000000000000000).toNumber();
+			buffer = 100000000;
 			break;
 	}
 	orelics = relics;
@@ -413,21 +619,76 @@ function acceptSuggestions() {
 	$('#suggestions').empty();
 	$('#relics').val('');
 	$('#relics_decimal').val('');
-	artifacts = calculateAll(artifacts, true);
-	$('#reccs-tab').tab('show');
+	$('#relicsuggs').hide();
+	$('#relicreccs').show();
+	adjustWeights();
+}
+
+function skillEff(k, v) {
+	var current_effect = false;
+	var current_effect2 = false;
+	var current_effect3 = false;
+	if(0 < v.level) {
+		current_effect = v.levels[v.level].bonus;
+	}
+	if(-1 != v.bonus2) {
+		current_effect2 = v.level > 0 ? v.levels[v.level].bonus2 : 1;
+	}
+	if(-1 != v.bonus3) {
+		current_effect3 = v.level > 0 ? v.levels[v.level].bonus3 : 1;
+	}
+	skills.data[k].current_effect = current_effect;
+	skills.data[k].current_effect2 = current_effect2;
+	skills.data[k].current_effect3 = current_effect3;
+	var running_eff = 1;
+	if(v.max > v.level) {
+		if(false == current_effect) {
+			current_effect = 0;
+			current_effect2 = 0;
+			current_effect3 = 0;
+		}
+		skills.data[k].cost = v.levels[v.level + 1].cost;;
+		var lvl = v.level + 1;
+		var totalCost = 0;
+		while(lvl > 0) {
+			totalCost += v.levels[lvl--].cost;
+		}
+		var next_effect = v.levels[v.level + 1].bonus;
+		var effect_diff = Math.abs(next_effect)/(0 != current_effect ? Math.abs(current_effect) : Math.abs(next_effect/2));
+		var effect_eff = Math.pow(effect_diff, v.rating);
+		running_eff *= effect_eff;
+		if(false != current_effect2) {
+			var next_effect2 = v.levels[v.level + 1].bonus2;
+			var effect_diff2 = Math.abs(next_effect2)/(0 != current_effect2 ? Math.abs(current_effect2) : Math.abs(next_effect2/2));
+			var effect_eff2 = Math.pow(effect_diff2, v.rating);
+			if('cs' == k) {
+				running_eff /= effect_eff2;
+			} else {
+				running_eff *= effect_eff2;
+			}
+		}
+		if(false != current_effect3) {
+			var next_effect3 = v.levels[v.level + 1].bonus3;
+			var effect_diff3 = Math.abs(next_effect3)/(0 != current_effect3 ? Math.abs(current_effect3) : Math.abs(next_effect3/2));
+			var effect_eff3 = Math.pow(effect_diff3, v.rating);
+			running_eff *= next_effect3;
+		}
+		var eff = Math.pow(running_eff, 1/totalCost);
+		skills.data[k].efficiency = eff;
+	}
 }
 
 function oldEff(data, k, v) {
 	var current_ad = v.level * v.ad;
 	var current_effect = 1 + v.effect * Math.pow(v.level, Math.pow((1 + (v.cexpo - 1) * Math.min(v.grate * v.level, v.gmax)), v.gexpo));
 	data.data[k].current_ad = current_ad;
-	data.data[k].current_effect = current_effect
+	data.data[k].current_effect = current_effect;
 	if(v.max == -1 || v.max > v.level) {
 		var cost = Math.pow(v.level + 1, v.cexpo) * v.ccoef;
-		data.data[k].cost= cost;
+		data.data[k].cost = cost;
 		data.data[k].displayCost = displayTruncated(cost);
 		var next_effect = 1 + v.effect * Math.pow(v.level + 1, Math.pow((1 + (v.cexpo - 1) * Math.min(v.grate * (v.level + 1), v.gmax)), v.gexpo));
-		var effect_diff = next_effect/current_effect;
+		var effect_diff = Math.abs(next_effect)/Math.abs(current_effect);
 		var effect_eff = Math.pow(effect_diff, v.rating);
 		var ad_change = (((v.level + 1) * v.ad) - current_ad);
 		var ad_eff = 1 + (ad_change/data.totalAD);
@@ -450,7 +711,7 @@ function newEff(data, k, v, avglvl, cost, remainingArtifacts) {
 	} else  {
 		var next_effect = 1 + v.effect * Math.pow(v.max, Math.pow((1 + (v.cexpo - 1) * Math.min(v.grate * v.max, v.gmax)), v.gexpo));
 	}
-	var effect_eff = Math.pow(next_effect, v.rating);
+	var effect_eff = Math.pow(Math.abs(next_effect), v.rating);
 	var ad_eff = 1 + ((avglvl * v.ad)/data.totalAD);
 	var eff = Math.abs(((effect_eff * ad_eff) - 1)/cost/remainingArtifacts);
 	data.data[k].efficiency = eff;
@@ -464,9 +725,33 @@ function calculateTotalAD(data, update) {
 		total += v.level * v.ad;
 	});
 	if(true == update) {
-		$('#adsanity').text(displayPct(total * artifacts.data.hsw.current_effect));
+		$('#adsanity').text(displayPct(total * ("" != artifacts.data.hsw.current_effect ? artifacts.data.hsw.current_effect : 1)));
 	}
 	return(total);
+}
+
+function calculateSkillTotals() {
+	skills.totals.SP = 0;
+	skills.totals.red = 0;
+	skills.totals.yellow = 0;
+	skills.totals.blue = 0;
+	skills.totals.green = 0;
+	$.each(skills.data, function(k,v) {
+		if(v.level > 0) {
+			var lvl = 1;
+			while(lvl <= v.level) {
+				var stats = v.levels[lvl];
+				skills.totals.SP += stats.cost;
+				skills.totals[v.branch] += stats.cost;
+				lvl++;
+			}
+		}
+	});
+	$('#totalSP').text(skills.totals.SP);
+	$('#totalSPred').text(skills.totals.red);
+	$('#totalSPyellow').text(skills.totals.yellow);
+	$('#totalSPblue').text(skills.totals.blue);
+	$('#totalSPgreen').text(skills.totals.green);
 }
 
 function calculate(data, k, regenerate, pinch) {
@@ -510,9 +795,89 @@ function calculate(data, k, regenerate, pinch) {
 	return(data);
 }
 
+function calculateAllSkills() {
+	winner_s = '';
+	winner_svalue = -999999999;
+	$.each(skills.data, function(k,v) {
+		skills.data[k].efficiency = -1;
+		skills.data[k].cost = '';
+		if(v.active == 1) {
+			skillEff(k, v);
+		} else {
+			skills.data[k].current_effect = '';
+			skills.data[k].current_effect2 = '';
+			skills.data[k].current_effect3 = '';
+		}
+	});
+	$.each(skills.data, function(k,v) {
+		if(v.efficiency > winner_svalue &&
+			v.max > v.level
+		) {
+			if(skills.totals[v.branch] >= tiers[v.tier] && (-1 == v.prereq || 0 < skills.data[v.prereq].level)) {
+				winner_s = k;
+				winner_svalue = v.efficiency;
+			} else if(skills.totals[v.branch] < tiers[v.tier] && -1 == skills.data[v.prereq].prereq) {
+				winner_s = v.prereq;
+				winner_svalue = v.efficiency;
+			} else if(skills.totals[v.branch] >= tiers[v.tier] && -1 == skills.data[skills.data[v.prereq].prereq].prereq) {
+				if(0 < skills.data[skills.data[v.prereq].prereq].level) {
+					winner_s = v.prereq;
+					winner_svalue = v.efficiency;
+				} else {
+					winner_s = skills.data[v.prereq].prereq;
+					winner_svalue = v.efficiency;
+				}
+			} else if(skills.totals[v.branch] >= tiers[v.tier] && -1 == skills.data[skills.data[skills.data[v.prereq].prereq].prereq].prereq) {
+				if(0 < skills.data[skills.data[skills.data[v.prereq].prereq].prereq].level) {
+					if(0 < skills.data[skills.data[v.prereq].prereq].level) {
+						winner_s = v.prereq;
+						winner_svalue = v.efficiency;
+					} else {
+						winner_s = skills.data[v.prereq].prereq;
+						winner_svalue = v.efficiency;
+					}
+				} else {
+					winner_s = skills.data[skills.data[v.prereq].prereq].prereq;
+					winner_svalue = v.efficiency;
+				}
+			}
+		}
+	});
+	calculateSkillTotals();
+	regenerateSkills();
+	$('#nextskill').text(skills.data[winner_s].name + ' ' + skills.data[winner_s].nickname);
+	$('#nextskillcost').text(skills.data[winner_s].cost);
+	$('#nextskilllvl').text(skills.data[winner_s].level);
+	$('#nextskilllvlpl').text(skills.data[winner_s].level + 1);
+	$('#nextskillbadge').removeClass('badge-success badge-secondary badge-warning badge-danger').addClass('badge-' + ('info' == skills.data[winner_s].color ? 'success' : skills.data[winner_s].color));
+	switch(skills.data[winner_s].color) {
+		case 'info':
+			$('#nextskillbadge').text('Build');
+			break;
+		case 'success':
+			$('#nextskillbadge').text('Build');
+			break;
+		case 'secondary':
+			$('#nextskillbadge').text('Partial');
+			break;
+		case 'warning':
+			$('#nextskillbadge').text('Gold');
+			break;
+		case 'danger':
+			$('#nextskillbadge').text('Prereq');
+			break;
+	}
+}
+
+function acceptSkill() {
+	skills.data[winner_s].level++;
+	calculateSkillTotals();
+	adjustWeights();
+}
+
 function calculateAll(data, regenerate) {
-	winner_e = ''
-	var temp_winner_n = ''
+	winner_e = '';
+	var temp_winner_n = '';
 	winner_value = 0;
 	var next_artifact = countArtifacts(artifacts.data) + 1;
 	var next_artifact_cost = artifact_costs[next_artifact];
@@ -601,17 +966,22 @@ function displayEffect(value, type) {
 	switch(type) {
 		case 'multiply':
 			return 'x' + displayTruncated(value);
+			break;
 
 		case 'add':
-			value = value -1
+			if(false != value) {
+				value = value -1
+			}
 			if(value > 0) {
 				return '+' + displayTruncated(value);
 			} else {
 				return displayTruncated(value);
 			}
+			break;
 
 		case 'multiply_pct':
 			return 'x' + displayPct(value);
+			break;
 
 		case 'pct':
 			value = value -1
@@ -620,6 +990,16 @@ function displayEffect(value, type) {
 			} else {
 				return displayPct(value);
 			}
+			break;
+
+		case 'pct_pos':
+			if(value > 0) {
+				return '+' + displayPct(value);
+			} else {
+				return displayPct(value);
+			}
+			break;
+
 	}
 }
 
@@ -660,7 +1040,20 @@ if (storageAvailable('localStorage')) {
 			}
 		});
 	}
-	artifacts.totalAD = calculateTotalAD(artifacts.data);
+	artifacts.totalAD = calculateTotalAD(artifacts.data, true);
+	var localSkills = JSON.parse(window.localStorage.getItem('skills'));
+	if(null != localSkills && 'undefined' == typeof localSkills.data) {
+		localSkills.data = jQuery.extend(true, {}, localSkills);
+	}
+	if(null != localSkills && 'undefined' != typeof localSkills.data) {
+		$.each(localSkills.data, function(k, v) {
+			if(undefined != skills.data[k]) {
+				skills.data[k].level = v.level;
+				skills.data[k].active = v.active;
+			}
+		});
+	}
+	calculateSkillTotals();
 	$('#build').val(window.localStorage.getItem('build'));
 	$('#hero').val(window.localStorage.getItem('hero'));
 	$('#gold').val(window.localStorage.getItem('gold'));
@@ -682,11 +1075,12 @@ if (storageAvailable('localStorage')) {
 		$('#dry').prop('checked', true);
 	}
 	toggleDark();
-	toggleSplash();
+	toggleSplash(false);
 }
 
 function storeData() {
 	window.localStorage.setItem('artifacts', JSON.stringify(artifacts));
+	window.localStorage.setItem('skills', JSON.stringify(skills));
 	window.localStorage.setItem('build', $('#build').val());
 	window.localStorage.setItem('hero', $('#hero').val());
 	window.localStorage.setItem('gold', $('#gold').val());
@@ -748,11 +1142,12 @@ function importData() {
 	});
 	$('#export_wrap').hide();
 	$('#import_wrap').hide();
-	storeData();
 	adjustWeights();
 }
 
 $('#export_wrap').hide();
 $('#import_wrap').hide();
-var origWeights = jQuery.extend(true, {}, artifacts.data);
+$('#relicsuggs').hide();
 generateArtifacts();
+generateSkills();
+adjustWeights();
