@@ -1191,6 +1191,8 @@ function importData() {
 	});
 	$('#export_wrap').hide();
 	$('#import_wrap').hide();
+	regenerateArtifacts();
+	regenerateSkills();
 	adjustWeights();
 }
 
