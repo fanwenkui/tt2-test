@@ -1125,10 +1125,19 @@ function exportData() {
 	ex += $('#hero').val() + '=';
 	ex += $('#gold').val() + '=';
 	ex += $('#active').val() + '=';
+	ex += ($('#wolf').prop('checked') == true ? 1 : 0) + '=';
+	ex += ($('#wet').prop('checked') == true ? 1 : 0) + '=';
 	ex += $('#relic_factor').val() + '=';
 	ex += $('#ocd').val() + '=';
 	ex += window.localStorage.getItem('dark') + '=';
 	$.each(artifacts.data,function(k,v) {
+		ex += k + '_';
+		ex += v.active + '_';
+		ex += v.level + '|';
+	});
+	ex = ex.slice(0, -1);
+	ex += '=';
+	$.each(skills.data,function(k,v) {
 		ex += k + '_';
 		ex += v.active + '_';
 		ex += v.level + '|';
@@ -1151,14 +1160,35 @@ function importData() {
 	$('#hero').val(im[1]);
 	$('#gold').val(im[2]);
 	$('#active').val(im[3]);
-	$('#relic_factor').val(im[4]);
-	$('#ocd').val(im[5]);
-	$('#dark').val(im[6]);
-	var ima = im[7].split('|');
+	if(im[4] == "1") {
+		$('#wolf').prop('checked', true);
+		$('#lamb').prop('checked', false);
+	} else {
+		$('#wolf').prop('checked', false);
+		$('#lamb').prop('checked', true);
+	}
+	toggleDark();
+	if(im[5] == "1") {
+		$('#wet').prop('checked', true);
+		$('#dry').prop('checked', false);
+	} else {
+		$('#wet').prop('checked', false);
+		$('#dry').prop('checked', true);
+	}
+	toggleSplash(false);
+	$('#relic_factor').val(im[6]);
+	$('#ocd').val(im[7]);
+	var ima = im[8].split('|');
 	$.each(ima, function(k,v) {
 		var imaa = v.split('_');
 		artifacts.data[imaa[0]].active = parseInt(imaa[1]);
 		artifacts.data[imaa[0]].level = parseInt(imaa[2]);
+	});
+	var ims = im[9].split('|');
+	$.each(ims, function(k,v) {
+		var imss = v.split('_');
+		skills.data[imss[0]].active = parseInt(imss[1]);
+		skills.data[imss[0]].level = parseInt(imss[2]);
 	});
 	$('#export_wrap').hide();
 	$('#import_wrap').hide();
