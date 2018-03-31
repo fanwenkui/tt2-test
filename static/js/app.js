@@ -1129,7 +1129,6 @@ function exportData() {
 	ex += ($('#wet').prop('checked') == true ? 1 : 0) + '=';
 	ex += $('#relic_factor').val() + '=';
 	ex += $('#ocd').val() + '=';
-	ex += window.localStorage.getItem('dark') + '=';
 	$.each(artifacts.data,function(k,v) {
 		ex += k + '_';
 		ex += v.active + '_';
