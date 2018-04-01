@@ -707,7 +707,7 @@ function oldEff(data, k, v) {
 		var effect_eff = Math.pow(effect_diff, v.rating);
 		var ad_change = (((v.level + 1) * v.ad) - current_ad);
 		var ad_eff = 1 + (ad_change/data.totalAD);
-		var eff = Math.pow(effect_eff * ad_eff, cost) - 1;
+		var eff = Math.pow(effect_eff * ad_eff, 1/cost) - 1;
 		data.data[k].efficiency = eff;
 	}
 	return(data);
