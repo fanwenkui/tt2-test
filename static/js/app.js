@@ -677,7 +677,7 @@ function skillEff(k, v) {
 			var effect_diff2 = Math.abs(next_effect2)/(0 != current_effect2 ? Math.abs(current_effect2) : Math.abs(next_effect2/2));
 			var effect_eff2 = Math.pow(effect_diff2, v.rating);
 			if('cs' == k) {
-				running_eff /= effect_eff2;
+//				running_eff /= effect_eff2;
 			} else {
 				running_eff *= effect_eff2;
 			}
@@ -688,7 +688,7 @@ function skillEff(k, v) {
 			var effect_eff3 = Math.pow(effect_diff3, v.rating);
 			running_eff *= next_effect3;
 		}
-		var eff = Math.pow(running_eff, 1/totalCost);
+		var eff = Math.pow(running_eff, 1/totalCost) - 1;
 		skills.data[k].efficiency = eff;
 	}
 }
@@ -707,7 +707,7 @@ function oldEff(data, k, v) {
 		var effect_eff = Math.pow(effect_diff, v.rating);
 		var ad_change = (((v.level + 1) * v.ad) - current_ad);
 		var ad_eff = 1 + (ad_change/data.totalAD);
-		var eff = Math.abs(((effect_eff * ad_eff) - 1)/cost);
+		var eff = Math.pow(effect_eff * ad_eff, cost) - 1;
 		data.data[k].efficiency = eff;
 	}
 	return(data);
@@ -728,7 +728,7 @@ function newEff(data, k, v, avglvl, cost, remainingArtifacts) {
 	}
 	var effect_eff = Math.pow(Math.abs(next_effect), v.rating);
 	var ad_eff = 1 + ((avglvl * v.ad)/data.totalAD);
-	var eff = Math.abs(((effect_eff * ad_eff) - 1)/cost/remainingArtifacts);
+	var eff = Math.pow(effect_eff * ad_eff, 1/cost/remainingArtifacts) - 1;
 	data.data[k].efficiency = eff;
 	return(data)
 }
