@@ -244,12 +244,8 @@ function calculateWeight(k,v) {
 				v.rating = reducts.gold;
 				return false;
 			} else if('splash' == v2) {
-				if('sc' == build) {
-					v.rating = 0;
-				} else {
-					v.rating = reducts.splash[build] * reducts.gold;
-					return false;
-				}
+				v.rating = reducts.splash[build] * reducts.gold;
+				return false;
 			} else if('inactive' == v2) {
 				if(!active) {
 					v.rating = reducts.gold;
