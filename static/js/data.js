@@ -86,7 +86,7 @@ var reducts = {
 		'tap' : 0,
 		'pet' : 1,
 		'sc' : 1,
-		'hs' : 1,
+		'hs' : 0,
 		'cs' : 1
 	},
 	'pet' : {
