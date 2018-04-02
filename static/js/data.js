@@ -85,7 +85,7 @@ var reducts = {
 		'hero' : 0,
 		'tap' : 0,
 		'pet' : 1,
-		'sc' : 1,
+		'sc' : 0,
 		'hs' : 1,
 		'cs' : 1
 	},

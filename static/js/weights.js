@@ -228,7 +228,6 @@ function calculateWeight(k,v) {
 		if('splash' == v.expo.reduct && $('#dry').prop('checked') == true) {
 			v.rating = 0;
 		} else {
-			console.log(k,v.expo.reduct,build);
 			v.rating = reducts[v.expo.reduct][build];
 		}
 		v.color = determineColor(v.rating);
@@ -245,12 +244,8 @@ function calculateWeight(k,v) {
 				v.rating = reducts.gold;
 				return false;
 			} else if('splash' == v2) {
-				if('sc' == build) {
-					v.rating = 0;
-				} else {
-					v.rating = reducts.splash[build] * reducts.gold;
-					return false;
-				}
+				v.rating = reducts.splash[build] * reducts.gold;
+				return false;
 			} else if('inactive' == v2) {
 				if(!active) {
 					v.rating = reducts.gold;

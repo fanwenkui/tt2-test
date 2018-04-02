@@ -41,6 +41,7 @@ function toggleSplash(reweight) {
 }
 
 function generateArtifacts() {
+	$('#accept2').hide();
 	$('#artifacts').empty();
 	$('#daltifacts').empty();
 	$.each(artifacts.data, function(k,v) {
@@ -514,15 +515,15 @@ function generateUpgrades() {
 			buffer = 12500000;
 			break;
 		case 'e37':
-			relics = relics.mul(1000000000000000000000).toNumber();
+			relics = relics.mul(10000000000000000000000000000000000000).toNumber();
 			buffer = 25000000;
 			break;
 		case 'e38':
-			relics = relics.mul(1000000000000000000000).toNumber();
+			relics = relics.mul(100000000000000000000000000000000000000).toNumber();
 			buffer = 75000000;
 			break;
 		case 'e39':
-			relics = relics.mul(1000000000000000000000).toNumber();
+			relics = relics.mul(1000000000000000000000000000000000000000).toNumber();
 			buffer = 100000000;
 			break;
 	}
@@ -565,6 +566,7 @@ function renderSuggestions() {
 	});
 	if(false == litmus) {
 		$('#suggestions').empty().append('<p>You cannot afford to make the next best upgrade(s). Please try again when you have more relics or try lowering your rounding to see results.</p>');
+		$('#accept').empty().append('<button type="button" class="btn btn-danger" onclick="rejectSuggestions();">Cancel</button>');
 		relics = 0;
 		return;
 	}
@@ -601,14 +603,15 @@ function renderSuggestions() {
 	var curiouser = alice.getTime() - white_rabbit.getTime();
 	$('#pudding').empty().append('Total Calculations Performed: ' + obfuscate + ' in ' + (curiouser / 1000).toFixed(3) + 's (' + ((obfuscate/curiouser) * 1000).toFixed(3) + '/s)');
 	$('#suggestions').empty().append(suggestions);
-	$('#accept').empty().append('<button type="button" class="btn btn-primary" onclick="acceptSuggestions();">Complete</button>');
+	$('#accept2').show();
+	$('#accept').empty().append('<button type="button" class="btn btn-primary" onclick="acceptSuggestions();">Complete</button><button type="button" class="btn btn-danger" onclick="rejectSuggestions();">Cancel</button>');
 }
 
 function acceptSuggestions() {
 	gtag('event', 'Upgrades', {
 		'event_category': 'Upgrades',
 		'event_action': 'Accept',
-		'event_label': 'List',
+		'event_label': 'Artifacts',
 	});
 	$.each(upgrades, function(k,v) {
 		artifacts.data[k].level += v;
@@ -616,12 +619,24 @@ function acceptSuggestions() {
 	artifacts.totalAD = calculateTotalAD(artifacts.data, true);
 	$('#new_artifact').empty();
 	$('#accept').empty();
+	$('#accept2').hide();
 	$('#suggestions').empty();
 	$('#relics').val('');
 	$('#relics_decimal').val('');
 	$('#relicsuggs').hide();
 	$('#relicreccs').show();
 	adjustWeights();
+}
+
+function rejectSuggestions() {
+	$('#new_artifact').empty();
+	$('#accept').empty();
+	$('#accept2').hide();
+	$('#suggestions').empty();
+	$('#relics').val('');
+	$('#relics_decimal').val('');
+	$('#relicsuggs').hide();
+	$('#relicreccs').show();
 }
 
 function skillEff(k, v) {
@@ -662,7 +677,7 @@ function skillEff(k, v) {
 			var effect_diff2 = Math.abs(next_effect2)/(0 != current_effect2 ? Math.abs(current_effect2) : Math.abs(next_effect2/2));
 			var effect_eff2 = Math.pow(effect_diff2, v.rating);
 			if('cs' == k) {
-				running_eff /= effect_eff2;
+//				running_eff /= effect_eff2;
 			} else {
 				running_eff *= effect_eff2;
 			}
@@ -673,7 +688,8 @@ function skillEff(k, v) {
 			var effect_eff3 = Math.pow(effect_diff3, v.rating);
 			running_eff *= next_effect3;
 		}
-		var eff = Math.pow(running_eff, 1/totalCost);
+		var effDec = Decimal(running_eff);
+		var eff = effDec.pow(1/totalCost).sub(1).toNumber();
 		skills.data[k].efficiency = eff;
 	}
 }
@@ -692,7 +708,8 @@ function oldEff(data, k, v) {
 		var effect_eff = Math.pow(effect_diff, v.rating);
 		var ad_change = (((v.level + 1) * v.ad) - current_ad);
 		var ad_eff = 1 + (ad_change/data.totalAD);
-		var eff = Math.abs(((effect_eff * ad_eff) - 1)/cost);
+		var effDec = Decimal(effect_eff * ad_eff);
+		var eff = effDec.pow(1/cost).sub(1).toNumber();
 		data.data[k].efficiency = eff;
 	}
 	return(data);
@@ -713,7 +730,8 @@ function newEff(data, k, v, avglvl, cost, remainingArtifacts) {
 	}
 	var effect_eff = Math.pow(Math.abs(next_effect), v.rating);
 	var ad_eff = 1 + ((avglvl * v.ad)/data.totalAD);
-	var eff = Math.abs(((effect_eff * ad_eff) - 1)/cost/remainingArtifacts);
+	var effDec = Decimal(effect_eff * ad_eff);
+	var eff = effDec.pow(1/cost/remainingArtifacts).sub(1).toNumber();
 	data.data[k].efficiency = eff;
 	return(data)
 }
@@ -760,7 +778,7 @@ function calculate(data, k, regenerate, pinch) {
 	var next_artifact_cost = artifact_costs[next_artifact];
 	var average_level = determineAverage(artifacts.data);
 	var v = data.data[k];
-	data.data[k].efficiency = -1;
+	data.data[k].efficiency = '';
 	data.data[k].cost = '';
 	data.data[k].displayCost = '';
 	if(v.level > 0 && v.active == 1) {
@@ -778,7 +796,7 @@ function calculate(data, k, regenerate, pinch) {
 	winner_value = 0;
 	$.each(data.data, function(k,v) {
 		obfuscate++;
-		if(-1 != v.efficiency && v.efficiency > winner_value) {
+		if(v.efficiency > winner_value) {
 			if(v.level > 0 && v.active == 1) {
 				winner_e = k;
 				winner_value = v.efficiency;
@@ -870,6 +888,11 @@ function calculateAllSkills() {
 }
 
 function acceptSkill() {
+	gtag('event', 'Upgrades', {
+		'event_category': 'Upgrades',
+		'event_action': 'Accept',
+		'event_label': 'SP',
+	});
 	skills.data[winner_s].level++;
 	calculateSkillTotals();
 	adjustWeights();
@@ -895,7 +918,7 @@ function calculateAll(data, regenerate) {
 			}
 		} else if(v.level == 0 && next_artifact_cost != -1 && v.active == 1) {
 			data = newEff(data, k, v, average_level, next_artifact_cost, Object.keys(artifact_costs).length - 3 - next_artifact);
-			if(-1 != data.data[k].efficiency && data.data[k].efficiency > winner_value) {
+			if(data.data[k].efficiency > winner_value) {
 				temp_winner_n = k;
 			}
 		} else {
@@ -1105,10 +1128,18 @@ function exportData() {
 	ex += $('#hero').val() + '=';
 	ex += $('#gold').val() + '=';
 	ex += $('#active').val() + '=';
+	ex += ($('#wolf').prop('checked') == true ? 1 : 0) + '=';
+	ex += ($('#wet').prop('checked') == true ? 1 : 0) + '=';
 	ex += $('#relic_factor').val() + '=';
 	ex += $('#ocd').val() + '=';
-	ex += window.localStorage.getItem('dark') + '=';
 	$.each(artifacts.data,function(k,v) {
+		ex += k + '_';
+		ex += v.active + '_';
+		ex += v.level + '|';
+	});
+	ex = ex.slice(0, -1);
+	ex += '=';
+	$.each(skills.data,function(k,v) {
 		ex += k + '_';
 		ex += v.active + '_';
 		ex += v.level + '|';
@@ -1131,17 +1162,40 @@ function importData() {
 	$('#hero').val(im[1]);
 	$('#gold').val(im[2]);
 	$('#active').val(im[3]);
-	$('#relic_factor').val(im[4]);
-	$('#ocd').val(im[5]);
-	$('#dark').val(im[6]);
-	var ima = im[7].split('|');
+	if(im[4] == "1") {
+		$('#wolf').prop('checked', true);
+		$('#lamb').prop('checked', false);
+	} else {
+		$('#wolf').prop('checked', false);
+		$('#lamb').prop('checked', true);
+	}
+	toggleDark();
+	if(im[5] == "1") {
+		$('#wet').prop('checked', true);
+		$('#dry').prop('checked', false);
+	} else {
+		$('#wet').prop('checked', false);
+		$('#dry').prop('checked', true);
+	}
+	toggleSplash(false);
+	$('#relic_factor').val(im[6]);
+	$('#ocd').val(im[7]);
+	var ima = im[8].split('|');
 	$.each(ima, function(k,v) {
 		var imaa = v.split('_');
 		artifacts.data[imaa[0]].active = parseInt(imaa[1]);
 		artifacts.data[imaa[0]].level = parseInt(imaa[2]);
 	});
+	var ims = im[9].split('|');
+	$.each(ims, function(k,v) {
+		var imss = v.split('_');
+		skills.data[imss[0]].active = parseInt(imss[1]);
+		skills.data[imss[0]].level = parseInt(imss[2]);
+	});
 	$('#export_wrap').hide();
 	$('#import_wrap').hide();
+	generateArtifacts();
+	generateSkills();
 	adjustWeights();
 }
 
