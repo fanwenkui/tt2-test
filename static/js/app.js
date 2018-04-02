@@ -95,7 +95,7 @@ function generateArtifacts() {
 		row += '</tr>';
 		$('#artifacts').append(row);
     var div = '<div class="col-3 col-sm-2 col-lg-1 border text-center">';
-    div += '<strong>' + v.nickname + '</strong><br><span id="' + k + 'dalt">' + displayTruncated(v.level) + '</span>';
+    div += '<strong>' + v.name + '</strong><br><span id="' + k + 'dalt">' + displayTruncated(v.level) + '</span>';
     div += '</div>'
 		$('#daltifacts').append(div);
 	});
@@ -274,9 +274,9 @@ function regenerateSkills() {
 		}
 		$('#skill' + k).val(v.level);
 		$('#' + v.nickname).text(v.level);
-		var value = '';
+		var value = (v.bonus_font ? v.bonus_font : '');
 		if(0 < v.level && undefined != v.current_effect) {
-			value = displayEffect(v.current_effect, v.type);
+			value += displayEffect(v.current_effect, v.type);
 		}
 		value += v.bonus;
 		$('#skill' + k + 'effect').empty().append(value);
