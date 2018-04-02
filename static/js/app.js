@@ -515,15 +515,15 @@ function generateUpgrades() {
 			buffer = 12500000;
 			break;
 		case 'e37':
-			relics = relics.mul(1000000000000000000000).toNumber();
+			relics = relics.mul(10000000000000000000000000000000000000).toNumber();
 			buffer = 25000000;
 			break;
 		case 'e38':
-			relics = relics.mul(1000000000000000000000).toNumber();
+			relics = relics.mul(100000000000000000000000000000000000000).toNumber();
 			buffer = 75000000;
 			break;
 		case 'e39':
-			relics = relics.mul(1000000000000000000000).toNumber();
+			relics = relics.mul(1000000000000000000000000000000000000000).toNumber();
 			buffer = 100000000;
 			break;
 	}
@@ -688,7 +688,8 @@ function skillEff(k, v) {
 			var effect_eff3 = Math.pow(effect_diff3, v.rating);
 			running_eff *= next_effect3;
 		}
-		var eff = Math.pow(running_eff, 1/totalCost) - 1;
+		var effDec = Decimal(running_eff);
+		var eff = effDec.pow(1/totalCost).sub(1).toNumber();
 		skills.data[k].efficiency = eff;
 	}
 }
@@ -707,7 +708,8 @@ function oldEff(data, k, v) {
 		var effect_eff = Math.pow(effect_diff, v.rating);
 		var ad_change = (((v.level + 1) * v.ad) - current_ad);
 		var ad_eff = 1 + (ad_change/data.totalAD);
-		var eff = Math.pow(effect_eff * ad_eff, 1/cost) - 1;
+		var effDec = Decimal(effect_eff * ad_eff);
+		var eff = effDec.pow(1/cost).sub(1).toNumber();
 		data.data[k].efficiency = eff;
 	}
 	return(data);
@@ -728,7 +730,8 @@ function newEff(data, k, v, avglvl, cost, remainingArtifacts) {
 	}
 	var effect_eff = Math.pow(Math.abs(next_effect), v.rating);
 	var ad_eff = 1 + ((avglvl * v.ad)/data.totalAD);
-	var eff = Math.pow(effect_eff * ad_eff, 1/cost/remainingArtifacts) - 1;
+	var effDec = Decimal(effect_eff * ad_eff);
+	var eff = effDec.pow(1/cost/remainingArtifacts).sub(1).toNumber();
 	data.data[k].efficiency = eff;
 	return(data)
 }
@@ -775,7 +778,7 @@ function calculate(data, k, regenerate, pinch) {
 	var next_artifact_cost = artifact_costs[next_artifact];
 	var average_level = determineAverage(artifacts.data);
 	var v = data.data[k];
-	data.data[k].efficiency = -1;
+	data.data[k].efficiency = '';
 	data.data[k].cost = '';
 	data.data[k].displayCost = '';
 	if(v.level > 0 && v.active == 1) {
@@ -793,7 +796,7 @@ function calculate(data, k, regenerate, pinch) {
 	winner_value = 0;
 	$.each(data.data, function(k,v) {
 		obfuscate++;
-		if(-1 != v.efficiency && v.efficiency > winner_value) {
+		if(v.efficiency > winner_value) {
 			if(v.level > 0 && v.active == 1) {
 				winner_e = k;
 				winner_value = v.efficiency;
@@ -802,6 +805,9 @@ function calculate(data, k, regenerate, pinch) {
 			}
 		}
 	});
+	if('' == winner_e) {
+		console.log(k, oldEff(data,k,v));
+	}
 	if(true === regenerate) {
 		regenerateArtifacts();
 		winner_n = temp_winner_n;
@@ -915,7 +921,7 @@ function calculateAll(data, regenerate) {
 			}
 		} else if(v.level == 0 && next_artifact_cost != -1 && v.active == 1) {
 			data = newEff(data, k, v, average_level, next_artifact_cost, Object.keys(artifact_costs).length - 3 - next_artifact);
-			if(-1 != data.data[k].efficiency && data.data[k].efficiency > winner_value) {
+			if(data.data[k].efficiency > winner_value) {
 				temp_winner_n = k;
 			}
 		} else {
