@@ -565,7 +565,7 @@ function renderSuggestions() {
 		litmus = true;
 	});
 	if(false == litmus) {
-		$('#suggestions').empty().append('<p>You cannot afford to make the next best upgrade(s). Please try again when you have more relics or try lowering your rounding to see results.</p>');
+		$('#suggestions').empty().append('<p>没有任何对于您的升级建议，请您在有更多的圣物时重试，或降低购买倍数以查看结果</p>');
 		$('#accept').empty().append('<button type="button" class="btn btn-danger" onclick="rejectSuggestions();">Cancel</button>');
 		relics = 0;
 		return;
@@ -575,7 +575,7 @@ function renderSuggestions() {
 			suggestions += '<div class="card border border-secondary ' + ($('#wolf').prop('checked') == true ? 'bg-dark' : '') + '">';
 				suggestions += '<div class="card-header d-flex justify-content-between align-items-center" id="' + k + 'deetsh">';
 					suggestions += '<span>';
-						suggestions += '<span class="d-inline d-sm-none">' + v.nickname + '</span>';
+						suggestions += '<span class="d-inline d-sm-none">' + v.name + '</span>';
 						suggestions += '<span class="d-none d-sm-inline">' + v.name + '</span>';
 						suggestions += ' <small>' + displayTruncated(v.level) + '&#x00A0;=>&#x00A0;' + displayTruncated(temp_artifacts.data[k].level) + '</small>';
 						suggestions += '<span class="badge badge-' + v.color + ' ml-3">+' + upgrades[k] + '</span>';
@@ -601,10 +601,10 @@ function renderSuggestions() {
 	});
 	var alice = new Date();
 	var curiouser = alice.getTime() - white_rabbit.getTime();
-	$('#pudding').empty().append('Total Calculations Performed: ' + obfuscate + ' in ' + (curiouser / 1000).toFixed(3) + 's (' + ((obfuscate/curiouser) * 1000).toFixed(3) + '/s)');
+	$('#pudding').empty().append('共执行计算 ' + obfuscate + '次 在 ' + (curiouser / 1000).toFixed(3) + '秒内 (' + ((obfuscate/curiouser) * 1000).toFixed(3) + '/s)');
 	$('#suggestions').empty().append(suggestions);
 	$('#accept2').show();
-	$('#accept').empty().append('<button type="button" class="btn btn-primary" onclick="acceptSuggestions();">Complete</button><button type="button" class="btn btn-danger" onclick="rejectSuggestions();">Cancel</button>');
+	$('#accept').empty().append('<button type="button" class="btn btn-primary" onclick="acceptSuggestions();">完成</button><button type="button" class="btn btn-danger" onclick="rejectSuggestions();">取消</button>');
 }
 
 function acceptSuggestions() {
@@ -870,19 +870,19 @@ function calculateAllSkills() {
 	$('#nextskillbadge').removeClass('badge-success badge-secondary badge-warning badge-danger').addClass('badge-' + ('info' == skills.data[winner_s].color ? 'success' : skills.data[winner_s].color));
 	switch(skills.data[winner_s].color) {
 		case 'info':
-			$('#nextskillbadge').text('Build');
+			$('#nextskillbadge').text('主要伤害提升');
 			break;
 		case 'success':
-			$('#nextskillbadge').text('Build');
+			$('#nextskillbadge').text('主要伤害提升');
 			break;
 		case 'secondary':
-			$('#nextskillbadge').text('Partial');
+			$('#nextskillbadge').text('次要伤害提升');
 			break;
 		case 'warning':
-			$('#nextskillbadge').text('Gold');
+			$('#nextskillbadge').text('金币提升');
 			break;
 		case 'danger':
-			$('#nextskillbadge').text('Prereq');
+			$('#nextskillbadge').text('前置技能');
 			break;
 	}
 }

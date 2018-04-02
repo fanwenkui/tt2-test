@@ -1500,7 +1500,7 @@ var skills = {
 	  'kv' : {
 		  'active' : 1,
 			'sort' : 1,
-			'name' : 'Knight\'s Valor',
+			'name' : '骑士之勇',
 			'nickname' : 'R1',
 			'branch' : 'red',
 			'bonus' : ' Tap Damage',
@@ -1541,7 +1541,7 @@ var skills = {
 		'cho' : {
 		  'active' : 1,
 			'sort' : 2,
-			'name' : 'Chivalric Order',
+			'name' : '骑士勋章',
 			'nickname' : 'R2_1',
 			'branch' : 'red',
 			'bonus' : ' Tap Damage from Heroes',
@@ -1582,7 +1582,7 @@ var skills = {
 		'pe' : {
 		  'active' : 1,
 			'sort' : 3,
-			'name' : 'Pet Evolution',
+			'name' : '宠物进化',
 			'nickname' : 'R2_2',
 			'branch' : 'red',
 			'bonus' : ' Pet Damage',
@@ -1623,7 +1623,7 @@ var skills = {
 		'phom' : {
 		  'active' : 1,
 			'sort' : 4,
-			'name' : 'Heart of Midas',
+			'name' : '米达斯之心',
 			'branch' : 'red',
 			'nickname' : 'R2_3',
 			'bonus' : ' Heart of Midas Gold',
@@ -1669,7 +1669,7 @@ var skills = {
 		'cs' : {
 		  'active' : 1,
 			'sort' : 5,
-			'name' : 'Cleaving Strike',
+			'name' : '劈砍',
 			'nickname' : 'R3_1',
 			'branch' : 'red',
 			'bonus' : ' Maximum Critical Damage',
@@ -1710,7 +1710,7 @@ var skills = {
 		'si' : {
 		  'active' : 1,
 			'sort' : 6,
-			'name' : 'Summon Inferno',
+			'name' : '召唤地狱火',
 			'nickname' : 'R3_2',
 			'branch' : 'red',
 			'bonus' : ' Fire Sword Damage',
@@ -1751,7 +1751,7 @@ var skills = {
 		'lbu' : {
 		  'active' : 1,
 			'sort' : 7,
-			'name' : 'Lightning Burst',
+			'name' : '闪电爆发',
 			'nickname' : 'R3_3',
 			'branch' : 'red',
 			'bonus' : ' Pet Damage Burst',
@@ -1792,7 +1792,7 @@ var skills = {
 		'bf' : {
 		  'active' : 1,
 			'sort' : 8,
-			'name' : 'Barbaric Fury',
+			'name' : '野蛮之怒',
 			'nickname' : 'R4_1',
 			'branch' : 'red',
 			'bonus' : ' Active Tap Damage',
@@ -1825,7 +1825,7 @@ var skills = {
 		'fz' : {
 		  'active' : 1,
 			'sort' : 9,
-			'name' : 'Flash Zip',
+			'name' : '闪电穿梭',
 			'nickname' : 'R4_3',
 			'branch' : 'red',
 			'bonus' : ' Pet Damage per Zip Sequence',
@@ -1858,7 +1858,7 @@ var skills = {
 		'mc' : {
 		  'active' : 1,
 			'sort' : 10,
-			'name' : 'Master Commander',
+			'name' : '指挥官',
 			'nickname' : 'Y1',
 			'branch' : 'yellow',
 			'bonus' : ' All Hero Damage',
@@ -1899,7 +1899,7 @@ var skills = {
 		'sow' : {
 		  'active' : 1,
 			'sort' : 11,
-			'name' : 'Spoils of War',
+			'name' : '战利品',
 			'nickname' : 'Y2_1',
 			'branch' : 'yellow',
 			'bonus' : ' Chesterson Gold',
@@ -1946,7 +1946,7 @@ var skills = {
 		'hm' : {
 		  'active' : 1,
 			'sort' : 12,
-			'name' : 'Heroic Might',
+			'name' : '英雄王者',
 			'nickname' : 'Y2_2',
 			'branch' : 'yellow',
 			'bonus' : ' War Cry Damage',
@@ -1987,7 +1987,7 @@ var skills = {
 		'aas' : {
 		  'active' : 1,
 			'sort' : 13,
-			'name' : 'Aerial Assault',
+			'name' : '空袭',
 			'nickname' : 'Y2_3',
 			'branch' : 'yellow',
 			'bonus' : ' Clan Based Damage',
@@ -2028,7 +2028,7 @@ var skills = {
 		'ti' : {
 		  'active' : 1,
 			'sort' : 14,
-			'name' : 'Tactical Insight',
+			'name' : '战略洞悉',
 			'nickname' : 'Y3_1',
 			'branch' : 'yellow',
 			'bonus' : ' Hero Skills: Multiplicative',
@@ -2069,7 +2069,7 @@ var skills = {
 		'coo' : {
 		  'active' : 1,
 			'sort' : 15,
-			'name' : 'Coordinated Offensive',
+			'name' : '协同进攻',
 			'nickname' : 'Y3_3',
 			'branch' : 'yellow',
 			'bonus' : ' Active All Hero Damage',
@@ -2110,7 +2110,7 @@ var skills = {
 		'aaw' : {
 		  'active' : 1,
 			'sort' : 16,
-			'name' : 'Astral Awakening',
+			'name' : '灵魂觉醒',
 			'nickname' : 'Y4_1',
 			'branch' : 'yellow',
 			'bonus' : ' All Hero Damage per Tap',
@@ -2143,7 +2143,7 @@ var skills = {
 		'as' : {
 		  'active' : 1,
 			'sort' : 16,
-			'name' : 'Anchoring Shot',
+			'name' : '锚定射击',
 			'nickname' : 'Y4_3',
 			'branch' : 'yellow',
 			'bonus' : ' Stun Damage',
@@ -2176,7 +2176,7 @@ var skills = {
 		'lbr' : {
 			'active' : 1,
 			'sort' : 17,
-			'name' : 'Limit Break',
+			'name' : '极限突破',
 			'nickname' : 'B1',
 			'branch' : 'blue',
 			'bonus' : ' Mana Capacity',
@@ -2217,7 +2217,7 @@ var skills = {
 		'mu' : {
 			'active' : 1,
 			'sort' : 18,
-			'name' : 'Midas Ultimate',
+			'name' : '终极米达斯',
 			'nickname' : 'B2_1',
 			'branch' : 'blue',
 			'bonus' : ' Hand of Midas Gold',
@@ -2258,7 +2258,7 @@ var skills = {
 		'ar' : {
 			'active' : 1,
 			'sort' : 19,
-			'name' : 'Angelic Radiance',
+			'name' : '天使光辉',
 			'nickname' : 'B2_2',
 			'branch' : 'blue',
 			'bonus' : ' Heavenly Strike Damage',
@@ -2299,7 +2299,7 @@ var skills = {
 		'pv' : {
 			'active' : 1,
 			'sort' : 20,
-			'name' : 'Phantom Vengeance',
+			'name' : '幽魂复仇',
 			'nickname' : 'B2_3',
 			'branch' : 'blue',
 			'bonus' : ' Shadow Clone Damage',
@@ -2340,7 +2340,7 @@ var skills = {
 		'fc' : {
 		  'active' : 1,
 			'sort' : 21,
-			'name' : 'Fairy Charm',
+			'name' : '仙女魔力',
 			'nickname' : 'B3_1',
 			'branch' : 'blue',
 			'bonus' : ' Multiple Fairy Chance',
@@ -2373,7 +2373,7 @@ var skills = {
 		'ms' : {
 		  'active' : 1,
 			'sort' : 22,
-			'name' : 'Mana Siphon',
+			'name' : '法力虹吸',
 			'nickname' : 'B3_2',
 			'branch' : 'blue',
 			'bonus' : ' of Mana Capacity Recovered',
@@ -2414,7 +2414,7 @@ var skills = {
 		'ed' : {
 		  'active' : 1,
 			'sort' : 23,
-			'name' : 'Eternal Darkness',
+			'name' : '永恒黑暗',
 			'nickname' : 'B3_3',
 			'branch' : 'blue',
 			'bonus' : 's Shadow Clone Duration',
@@ -2455,7 +2455,7 @@ var skills = {
 		'mm' : {
 		  'active' : 1,
 			'sort' : 24,
-			'name' : 'Manni Mana',
+			'name' : '曼尼马纳',
 			'nickname' : 'B4_1',
 			'branch' : 'blue',
 			'bonus' : ' Mana Replenished',
@@ -2488,7 +2488,7 @@ var skills = {
 		'ls' : {
 		  'active' : 1,
 			'sort' : 25,
-			'name' : 'Lightning Strike',
+			'name' : '闪电打击',
 			'nickname' : 'B4_2',
 			'branch' : 'blue',
 			'bonus' : ' Titan Health Reduction',
@@ -2521,7 +2521,7 @@ var skills = {
 		'ds' : {
 		  'active' : 1,
 			'sort' : 26,
-			'name' : 'Dimensional Shift',
+			'name' : '相位转移',
 			'nickname' : 'B4_3',
 			'branch' : 'blue',
 			'bonus' : ' Primary Active Skill Effects',
@@ -2554,7 +2554,7 @@ var skills = {
 		'mt' : {
 			'active' : 1,
 			'sort' : 28,
-			'name' : 'Master Thief',
+			'name' : '盗圣',
 			'nickname' : 'G1',
 			'branch' : 'green',
 			'bonus' : ' All Gold Earned',
@@ -2595,7 +2595,7 @@ var skills = {
 		'an' : {
 			'active' : 1,
 			'sort' : 28,
-			'name' : 'Assassinate',
+			'name' : '刺杀',
 			'nickname' : 'G2_1',
 			'branch' : 'green',
 			'bonus' : ' Deadly Strike Damage',
@@ -2636,7 +2636,7 @@ var skills = {
 		'sm' : {
 			'active' : 1,
 			'sort' : 29,
-			'name' : 'Silent March',
+			'name' : '无声行军',
 			'nickname' : 'G2_2',
 			'branch' : 'green',
 			'bonus' : ' Inactive Damage',
@@ -2667,7 +2667,7 @@ var skills = {
 		'ab' : {
 			'active' : 1,
 			'sort' : 30,
-			'name' : 'Ambush',
+			'name' : '伏击',
 			'nickname' : 'G2_3',
 			'branch' : 'green',
 			'bonus' : ' Multi-Spawn Chance',
@@ -2698,7 +2698,7 @@ var skills = {
 		'tv' : {
 			'active' : 1,
 			'sort' : 31,
-			'name' : 'Twilight\'s Veil',
+			'name' : '暮光面纱',
 			'nickname' : 'G3_1',
 			'branch' : 'green',
 			'bonus' : ' Inactive Pet Damage',
@@ -2729,7 +2729,7 @@ var skills = {
 		'gs' : {
 			'active' : 1,
 			'sort' : 32,
-			'name' : 'Ghost Ship',
+			'name' : '幽灵战舰',
 			'nickname' : 'G3_2',
 			'branch' : 'green',
 			'bonus' : ' Inactive Clan Ship Damage',
@@ -2760,7 +2760,7 @@ var skills = {
 		'sa' : {
 			'active' : 1,
 			'sort' : 33,
-			'name' : 'Shadow Assassin',
+			'name' : '暗影刺杀',
 			'nickname' : 'G3_3',
 			'branch' : 'green',
 			'bonus' : ' Inactive Clone Damage',
