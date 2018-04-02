@@ -805,9 +805,6 @@ function calculate(data, k, regenerate, pinch) {
 			}
 		}
 	});
-	if('' == winner_e) {
-		console.log(k, oldEff(data,k,v));
-	}
 	if(true === regenerate) {
 		regenerateArtifacts();
 		winner_n = temp_winner_n;
