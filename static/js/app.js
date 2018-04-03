@@ -701,7 +701,6 @@ function oldEff(data, k, v) {
 	data.data[k].current_effect = current_effect;
 	if(v.max == -1 || v.max > v.level) {
 		var cost = Math.pow(v.level + 1, v.cexpo) * v.ccoef;
-		var costDec = Decimal(1/cost);
 		data.data[k].cost = cost;
 		data.data[k].displayCost = displayTruncated(cost);
 		var next_effect = 1 + v.effect * Math.pow(v.level + 1, Math.pow((1 + (v.cexpo - 1) * Math.min(v.grate * (v.level + 1), v.gmax)), v.gexpo));
@@ -709,8 +708,8 @@ function oldEff(data, k, v) {
 		var effect_eff = Math.pow(effect_diff, v.rating);
 		var ad_change = (((v.level + 1) * v.ad) - current_ad);
 		var ad_eff = 1 + (ad_change/data.totalAD);
-		var effDec = Decimal(effect_eff * ad_eff);
-		var eff = effDec.pow(costDec).sub(1).toNumber();
+		var effDec = effect_eff * ad_eff;
+ 		var eff = Math.abs(((effect_eff * ad_eff) - 1)/cost);	
 		data.data[k].efficiency = eff;
 	}
 	return(data);
@@ -729,11 +728,10 @@ function newEff(data, k, v, avglvl, cost, remainingArtifacts) {
 	} else  {
 		var next_effect = 1 + v.effect * Math.pow(v.max, Math.pow((1 + (v.cexpo - 1) * Math.min(v.grate * v.max, v.gmax)), v.gexpo));
 	}
-	var costDec = Decimal(1/cost/remainingArtifacts);
 	var effect_eff = Math.pow(Math.abs(next_effect), v.rating);
 	var ad_eff = 1 + ((avglvl * v.ad)/data.totalAD);
-	var effDec = Decimal(effect_eff * ad_eff);
-	var eff = effDec.pow(costDec).sub(1).toNumber();
+	var effDec = effect_eff * ad_eff;
+	var eff = Math.abs(((effect_eff * ad_eff) - 1)/cost/remainingArtifacts);	
 	data.data[k].efficiency = eff;
 	return(data)
 }
