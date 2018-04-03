@@ -794,7 +794,9 @@ function calculate(data, k, regenerate, pinch) {
 	winner_e = ''
 	var temp_winner_n = ''
 	winner_value = 0;
+	console.log('start');
 	$.each(data.data, function(k,v) {
+		console.log(k,v.efficiency);
 		obfuscate++;
 		if(v.efficiency > winner_value) {
 			if(v.level > 0 && v.active == 1) {
