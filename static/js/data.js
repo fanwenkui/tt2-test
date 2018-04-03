@@ -305,6 +305,7 @@ var artifacts = {
 			'type' : 'multiply',
 			'expo' : {
 				'gold' : [
+					'phom',
 					'all',
 					'splash'
 				]
