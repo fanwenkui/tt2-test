@@ -708,8 +708,8 @@ function oldEff(data, k, v) {
 		var effect_eff = Math.pow(effect_diff, v.rating);
 		var ad_change = (((v.level + 1) * v.ad) - current_ad);
 		var ad_eff = 1 + (ad_change/data.totalAD);
-		var effDec = Decimal(effect_eff * ad_eff);
-		var eff = effDec.pow(1/cost).sub(1).toNumber();
+		var effDec = effect_eff * ad_eff;
+ 		var eff = Math.abs(((effect_eff * ad_eff) - 1)/cost);	
 		data.data[k].efficiency = eff;
 	}
 	return(data);
@@ -730,8 +730,8 @@ function newEff(data, k, v, avglvl, cost, remainingArtifacts) {
 	}
 	var effect_eff = Math.pow(Math.abs(next_effect), v.rating);
 	var ad_eff = 1 + ((avglvl * v.ad)/data.totalAD);
-	var effDec = Decimal(effect_eff * ad_eff);
-	var eff = effDec.pow(1/cost/remainingArtifacts).sub(1).toNumber();
+	var effDec = effect_eff * ad_eff;
+	var eff = Math.abs(((effect_eff * ad_eff) - 1)/cost/remainingArtifacts);	
 	data.data[k].efficiency = eff;
 	return(data)
 }
@@ -906,12 +906,11 @@ function calculateAll(data, regenerate) {
 	var next_artifact_cost = artifact_costs[next_artifact];
 	var average_level = determineAverage(artifacts.data);
 	$.each(data.data, function(k,v) {
-		data.data[k].efficiency = -1;
 		data.data[k].cost = '';
 		data.data[k].displayCost = '';
 		if(v.level > 0 && v.active == 1) {
 			data = oldEff(data, k, v);
-			if(-1 != data.data[k].efficiency && data.data[k].efficiency > winner_value) {
+			if(data.data[k].efficiency > winner_value) {
 				winner_e = k;
 				temp_winner_n = '';
 				winner_value = data.data[k].efficiency;
