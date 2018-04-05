@@ -129,14 +129,14 @@ function calculateWeight(k,v) {
 				break;
 
 			case 'pet_gold':
-				v.rating += pets_gold * reducts.gold;
+				v.rating += pets_gold * reducts.gold * reducts.hero[build];
 				v.color = 'warning';
 				break;
 
 			case 'skill':
 				v.rating += reducts.hs[build];
 				v.rating += reducts.ds[build];
-				v.rating += reducts.gold;
+				v.rating += reducts.gold * reducts.hero[build];
 				v.rating += reducts.fs[build];
 				v.rating += reducts.wc[build];
 				v.rating += reducts.sc[build];
@@ -146,7 +146,7 @@ function calculateWeight(k,v) {
 			case 'equip':
 				v.rating += 1;
 				v.rating += reducts.hero[build];
-				v.rating += reducts.gold;
+				v.rating += reducts.gold * reducts.hero[build];
 				v.rating += reducts.companion[build];
 				v.color = 'info';
 				break;
@@ -154,7 +154,7 @@ function calculateWeight(k,v) {
 	} else if(undefined != v.expo.flat) {
 		switch(v.expo.flat) {
 			case 'gold':
-				v.rating = Math.pow(reducts.gold, reducts.hero[build]);
+				v.rating = reducts.gold * reducts.hero[build];
 				v.color = 'warning';
 				break;
 
@@ -241,19 +241,19 @@ function calculateWeight(k,v) {
 	} else if(undefined != v.expo.gold) {
 		$.each(v.expo.gold, function(k2,v2) {
 			if(gold == v2) {
-				v.rating = Math.pow(reducts.gold, reducts.hero[build]);
+				v.rating = reducts.gold * reducts.hero[build];
 				return false;
 			} else if('splash' == v2) {
-				v.rating = reducts.splash[build] * Math.pow(reducts.gold, reducts.hero[build]);
+				v.rating = reducts.splash[build] * reducts.gold * reducts.hero[build];
 				return false;
 			} else if('inactive' == v2) {
 				if(!active) {
-					v.rating = Math.pow(reducts.gold, reducts.hero[build]);
+					v.rating = reducts.gold * reducts.hero[build];
 				}
 				return false;
 			} else if('active' == v2) {
 				if(active) {
-					v.rating = Math.pow(reducts.gold, reducts.hero[build]);
+					v.rating = reducts.gold * reducts.hero[build];
 				}
 				return false;
 			}
@@ -266,7 +266,7 @@ function calculateWeight(k,v) {
 function determineColor(value) {
 	if(reducts.gold == value) {
 		return 'warning';
-	} else if(Math.pow(reducts.gold, reducts.hero[build]) == value) {
+	} else if(reducts.gold * reducts.hero[build] == value) {
 		return 'warning';
 	} else if(1 == value) {
 		return 'success';
