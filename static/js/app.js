@@ -820,7 +820,7 @@ function calculate(data, k, regenerate, pinch) {
 function determineSkillWinner(prevWinners) {
 	winner_svalue = 0;
 	var winner = '';
-	$.each(skills.data, function(k,v) {
+	$.each(skills.data, function(k,v)) {
 		console.log(k, prevWinners.indexOf(k);
 		if(-1 != prevWinners.indexOf(k)) {
 			return true;
