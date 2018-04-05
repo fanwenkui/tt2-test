@@ -900,19 +900,19 @@ function calculateAllSkills() {
 	calculateSkillTotals();
 	regenerateSkills();
 	var next_skill = '';
-	if('' != winner_s1) {
+	if('' != winner_s1 && (0 != skills.data[winner_s1].rating && 0 != skills.data[winner_s1].level)) {
 		next_skill += '<button type="button" class="btn btn-primary mb-2 mr-2 col-12 col-md-6 col-lg-4 col-xl-3" onclick="acceptSkill(\'' + winner_s1 + '\')">#1: ' + skills.data[winner_s1].name + ' (costs ' + skills.data[winner_s1].cost + ' SP) <span class="badge ml-2 badge-pill badge-' + ('info' == skills.data[winner_s1].color ? 'success' : skills.data[winner_s1].color) + '">' + skills.data[winner_s1].nickname + '</span>';
 	}
-	if('' != winner_s2) {
+	if('' != winner_s2 && (0 != skills.data[winner_s1].rating && 0 != skills.data[winner_s1].level)) {
 		next_skill += '<button type="button" class="btn btn-primary mb-2 mr-2 col-12 col-md-6 col-lg-4 col-xl-3" onclick="acceptSkill(\'' + winner_s2 + '\')">#2: ' + skills.data[winner_s2].name + ' (costs ' + skills.data[winner_s2].cost + ' SP) <span class="badge ml-2 badge-pill badge-' + ('info' == skills.data[winner_s2].color ? 'success' : skills.data[winner_s2].color) + '">' + skills.data[winner_s2].nickname + '</span>';
 	}
-	if('' != winner_s3) {
+	if('' != winner_s3 && (0 != skills.data[winner_s1].rating && 0 != skills.data[winner_s1].level)) {
 		next_skill += '<button type="button" class="btn btn-primary mb-2 mr-2 col-12 col-md-6 col-lg-4 col-xl-3" onclick="acceptSkill(\'' + winner_s3 + '\')">#3: ' + skills.data[winner_s3].name + ' (costs ' + skills.data[winner_s3].cost + ' SP) <span class="badge ml-2 badge-pill badge-' + ('info' == skills.data[winner_s3].color ? 'success' : skills.data[winner_s3].color) + '">' + skills.data[winner_s3].nickname + '</span></button>';
 	}
-	if('' != winner_s4) {
+	if('' != winner_s4 && (0 != skills.data[winner_s1].rating && 0 != skills.data[winner_s1].level)) {
 		next_skill += '<button type="button" class="btn btn-primary mb-2 mr-2 col-12 col-md-6 col-lg-4 col-xl-3" onclick="acceptSkill(\'' + winner_s4 + '\')">#4: ' + skills.data[winner_s4].name + ' (costs ' + skills.data[winner_s4].cost + ' SP) <span class="badge ml-2 badge-pill badge-' + ('info' == skills.data[winner_s4].color ? 'success' : skills.data[winner_s4].color) + '">' + skills.data[winner_s4].nickname + '</span></button>';
 	}
-	if('' != winner_s5) {
+	if('' != winner_s5 && (0 != skills.data[winner_s1].rating && 0 != skills.data[winner_s1].level)) {
 		next_skill += '<button type="button" class="btn btn-primary mb-2 mr-2 col-12 col-md-6 col-lg-4 col-xl-3" onclick="acceptSkill(\'' + winner_s5 + '\')">#5: ' + skills.data[winner_s5].name + ' (costs ' + skills.data[winner_s5].cost + ' SP) <span class="badge ml-2 badge-pill badge-' + ('info' == skills.data[winner_s5].color ? 'success' : skills.data[winner_s5].color) + '">' + skills.data[winner_s5].nickname + '</span></button>';
 	}
 	next_skill += '';
