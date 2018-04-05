@@ -821,7 +821,7 @@ function determineSkillWinner(prevWinners) {
 	winner_svalue = 0;
 	var winner = '';
 	$.each(skills.data, function(k,v) {
-		console.log(k, prevWinners.indexOf(k));
+		console.log(k, prevWinners.indexOf(k), v.efficiency);
 		if(-1 != prevWinners.indexOf(k)) {
 			return true;
 		}
