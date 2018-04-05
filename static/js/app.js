@@ -821,10 +821,12 @@ function determineSkillWinner(prevWinners) {
 	winner_svalue = 0;
 	var winner = '';
 	$.each(skills.data, function(k,v) {
-		console.log(k, prevWinners.indexOf(k), v.efficiency);
+		console.log(k, prevWinners.indexOf(k), v.efficiency, winner_svalue);
 		if(-1 != prevWinners.indexOf(k)) {
+			console.log('skipping');
 			return true;
 		}
+		console.log('keeping going');
 		if(v.efficiency > winner_svalue &&
 			v.max > v.level
 		) {
