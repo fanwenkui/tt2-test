@@ -154,7 +154,7 @@ function calculateWeight(k,v) {
 	} else if(undefined != v.expo.flat) {
 		switch(v.expo.flat) {
 			case 'gold':
-				v.rating = reducts.gold;
+				v.rating = Math.pow(reducts.gold, reducts.hero[build]);
 				v.color = 'warning';
 				break;
 
@@ -241,19 +241,19 @@ function calculateWeight(k,v) {
 	} else if(undefined != v.expo.gold) {
 		$.each(v.expo.gold, function(k2,v2) {
 			if(gold == v2) {
-				v.rating = reducts.gold;
+				v.rating = Math.pow(reducts.gold, reducts.hero[build]);
 				return false;
 			} else if('splash' == v2) {
-				v.rating = reducts.splash[build] * reducts.gold;
+				v.rating = reducts.splash[build] * Math.pow(reducts.gold, reducts.hero[build]);
 				return false;
 			} else if('inactive' == v2) {
 				if(!active) {
-					v.rating = reducts.gold;
+					v.rating = Math.pow(reducts.gold, reducts.hero[build]);
 				}
 				return false;
 			} else if('active' == v2) {
 				if(active) {
-					v.rating = reducts.gold;
+					v.rating = Math.pow(reducts.gold, reducts.hero[build]);
 				}
 				return false;
 			}
@@ -265,6 +265,8 @@ function calculateWeight(k,v) {
 
 function determineColor(value) {
 	if(reducts.gold == value) {
+		return 'warning';
+	} else if(Math.pow(reducts.gold, reducts.hero[build]) == value) {
 		return 'warning';
 	} else if(1 == value) {
 		return 'success';
