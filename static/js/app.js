@@ -833,27 +833,27 @@ function determineSkillWinner(prevWinners) {
 			if(skills.totals[v.branch] >= tiers[v.tier] && (-1 == v.prereq || 0 < skills.data[v.prereq].level)) {
 				winner = k;
 				winner_svalue = v.efficiency;
-			} else if(skills.totals[v.branch] < tiers[v.tier] && -1 == skills.data[v.prereq].prereq) {
+			} else if(skills.totals[v.branch] < tiers[v.tier] && -1 == skills.data[v.prereq].prereq && -1 != prevWinners.indexOf(v.prereq)) {
 				winner = v.prereq;
 				winner_svalue = v.efficiency;
 			} else if(skills.totals[v.branch] >= tiers[v.tier] && -1 == skills.data[skills.data[v.prereq].prereq].prereq) {
-				if(0 < skills.data[skills.data[v.prereq].prereq].level) {
+				if(0 < skills.data[skills.data[v.prereq].prereq].level && -1 != prevWinners.indexOf(v.prereq)) {
 					winner = v.prereq;
 					winner_svalue = v.efficiency;
-				} else {
+				} else if(-1 != prevWinners.indexOf(skills.data[v.prereq].prereq)) {
 					winner = skills.data[v.prereq].prereq;
 					winner_svalue = v.efficiency;
 				}
 			} else if(skills.totals[v.branch] >= tiers[v.tier] && -1 == skills.data[skills.data[skills.data[v.prereq].prereq].prereq].prereq) {
 				if(0 < skills.data[skills.data[skills.data[v.prereq].prereq].prereq].level) {
-					if(0 < skills.data[skills.data[v.prereq].prereq].level) {
+					if(0 < skills.data[skills.data[v.prereq].prereq].level && -1 != prevWinners.indexOf(v.prereq)) {
 						winner = v.prereq;
 						winner_svalue = v.efficiency;
-					} else {
+					} else if(-1 != prevWinners.indexOf(skills.data[v.prereq].prereq)) {
 						winner = skills.data[v.prereq].prereq;
 						winner_svalue = v.efficiency;
 					}
-				} else {
+				} else if(-1 != prevWinners.indexOf(skills.data[skills.data[v.prereq].prereq].prereq)) {
 					winner = skills.data[skills.data[v.prereq].prereq].prereq;
 					winner_svalue = v.efficiency;
 				}
