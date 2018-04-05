@@ -293,9 +293,15 @@
 				</div>
 				<div class="tab-pane fade" id="sp" role="tabpanel" aria-labelledby="sp-tab">
 					<p>BETA</p>
-					<p>The next best thing for you to spend your SP on is:</p>
-					<p><span id="nextskill"></span> [<span id="nextskilllvl"></span> => <span id="nextskilllvlpl"></span>] (costs <span id="nextskillcost"></span> SP) <span id="nextskillbadge" class="badge badge-pill ml-2"></span></p>
-					<button id="acceptSkillSugg" type="button" class="btn btn-primary mb-4" onclick="acceptSkill()">Accept Skill Suggestion</button>
+					<p>The following are your next best options for how to spend your SP ranked in order of effectiveness. If you choose to take one of the recommendations, press the button and it will recalculate your next top recommendations. This allows you to decide if you want to save up for your #1 recommendation or take a less effective (but likely cheaper) recommendation.</p>
+					<div class="row mb-2 ml-2">
+						Legend:
+						<span class="badge badge-pill badge-success ml-2">Build</span>
+						<span class="badge badge-pill badge-secondary ml-2">Partial</span>
+						<span class="badge badge-pill badge-warning ml-2">Gold</span>
+						<span class="badge badge-pill badge-danger ml-2">Prereq</span>
+					</div>
+					<div id="nextskill"></div>
 					<div class="container">
 						<div class="row">
 							<div class="col-6 col-md-3 col-lg-2 skillselfie">
