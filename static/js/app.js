@@ -821,7 +821,7 @@ function determineSkillWinner(prevWinners) {
 	winner_svalue = 0;
 	var winner = '';
 	$.each(skills.data, function(k,v) {
-		console.log(k, prevWinners.indexOf(k), v.efficiency, winner_svalue);
+		console.log(k, prevWinners.indexOf(k), v.efficiency, winner_svalue, winner);
 		if(-1 != prevWinners.indexOf(k)) {
 			console.log('skipping');
 			return true;
@@ -833,27 +833,27 @@ function determineSkillWinner(prevWinners) {
 			if(skills.totals[v.branch] >= tiers[v.tier] && (-1 == v.prereq || 0 < skills.data[v.prereq].level)) {
 				winner = k;
 				winner_svalue = v.efficiency;
-			} else if(skills.totals[v.branch] < tiers[v.tier] && -1 == skills.data[v.prereq].prereq && -1 != prevWinners.indexOf(v.prereq)) {
+			} else if(skills.totals[v.branch] < tiers[v.tier] && -1 == skills.data[v.prereq].prereq && -1 == prevWinners.indexOf(v.prereq)) {
 				winner = v.prereq;
 				winner_svalue = v.efficiency;
 			} else if(skills.totals[v.branch] >= tiers[v.tier] && -1 == skills.data[skills.data[v.prereq].prereq].prereq) {
-				if(0 < skills.data[skills.data[v.prereq].prereq].level && -1 != prevWinners.indexOf(v.prereq)) {
+				if(0 < skills.data[skills.data[v.prereq].prereq].level && -1 == prevWinners.indexOf(v.prereq)) {
 					winner = v.prereq;
 					winner_svalue = v.efficiency;
-				} else if(-1 != prevWinners.indexOf(skills.data[v.prereq].prereq)) {
+				} else if(-1 == prevWinners.indexOf(skills.data[v.prereq].prereq)) {
 					winner = skills.data[v.prereq].prereq;
 					winner_svalue = v.efficiency;
 				}
 			} else if(skills.totals[v.branch] >= tiers[v.tier] && -1 == skills.data[skills.data[skills.data[v.prereq].prereq].prereq].prereq) {
 				if(0 < skills.data[skills.data[skills.data[v.prereq].prereq].prereq].level) {
-					if(0 < skills.data[skills.data[v.prereq].prereq].level && -1 != prevWinners.indexOf(v.prereq)) {
+					if(0 < skills.data[skills.data[v.prereq].prereq].level && -1 == prevWinners.indexOf(v.prereq)) {
 						winner = v.prereq;
 						winner_svalue = v.efficiency;
-					} else if(-1 != prevWinners.indexOf(skills.data[v.prereq].prereq)) {
+					} else if(-1 == prevWinners.indexOf(skills.data[v.prereq].prereq)) {
 						winner = skills.data[v.prereq].prereq;
 						winner_svalue = v.efficiency;
 					}
-				} else if(-1 != prevWinners.indexOf(skills.data[skills.data[v.prereq].prereq].prereq)) {
+				} else if(-1 == prevWinners.indexOf(skills.data[skills.data[v.prereq].prereq].prereq)) {
 					winner = skills.data[skills.data[v.prereq].prereq].prereq;
 					winner_svalue = v.efficiency;
 				}
