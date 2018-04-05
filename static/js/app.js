@@ -821,12 +821,9 @@ function determineSkillWinner(prevWinners) {
 	winner_svalue = 0;
 	var winner = '';
 	$.each(skills.data, function(k,v) {
-		console.log(k, prevWinners.indexOf(k), v.efficiency, winner_svalue, winner);
 		if(-1 != prevWinners.indexOf(k)) {
-			console.log('skipping');
 			return true;
 		}
-		console.log('keeping going');
 		if(v.efficiency > winner_svalue &&
 			v.max > v.level
 		) {
@@ -882,21 +879,15 @@ function calculateAllSkills() {
 			skills.data[k].current_effect3 = '';
 		}
 	});
-	console.log(prevWinners)
 	winner_s1 = determineSkillWinner(prevWinners);
 	prevWinners.push(winner_s1);
-	console.log(prevWinners, winner_s1)
 	winner_s2 = determineSkillWinner(prevWinners);
 	prevWinners.push(winner_s2);
-	console.log(prevWinners, winner_s2)
 	winner_s3 = determineSkillWinner(prevWinners);
 	prevWinners.push(winner_s3);
-	console.log(prevWinners, winner_s3)
 	winner_s4 = determineSkillWinner(prevWinners);
 	prevWinners.push(winner_s4);
-	console.log(prevWinners, winner_s4)
 	winner_s5 = determineSkillWinner(prevWinners);
-	console.log(prevWinners, winner_s5)
 	calculateSkillTotals();
 	regenerateSkills();
 	var next_skill = '';
