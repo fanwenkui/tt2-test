@@ -6,7 +6,7 @@ var winner_s3 = '';
 var winner_s4 = '';
 var winner_s5 = '';
 var winner_value = 0;
-var winner_svalue = -999999999;
+var winner_svalue = 0;
 var obfuscate = 0;
 var white_rabbit = 0;
 
@@ -817,13 +817,57 @@ function calculate(data, k, regenerate, pinch) {
 	return(data);
 }
 
+function determineSkillWinner(prevWinners) {
+	winner_svalue = 0;
+	var winner = '';
+	$.each(skills.data, function(k,v) {
+		if(-1 != prevWinners.indexOf(k)) {
+			return true;
+		}
+		if(v.efficiency > winner_svalue &&
+			v.max > v.level
+		) {
+			if(skills.totals[v.branch] >= tiers[v.tier] && (-1 == v.prereq || 0 < skills.data[v.prereq].level)) {
+				winner = k;
+				winner_svalue = v.efficiency;
+			} else if(skills.totals[v.branch] < tiers[v.tier] && -1 == skills.data[v.prereq].prereq) {
+				winner = v.prereq;
+				winner_svalue = v.efficiency;
+			} else if(skills.totals[v.branch] >= tiers[v.tier] && -1 == skills.data[skills.data[v.prereq].prereq].prereq) {
+				if(0 < skills.data[skills.data[v.prereq].prereq].level) {
+					winner = v.prereq;
+					winner_svalue = v.efficiency;
+				} else {
+					winner = skills.data[v.prereq].prereq;
+					winner_svalue = v.efficiency;
+				}
+			} else if(skills.totals[v.branch] >= tiers[v.tier] && -1 == skills.data[skills.data[skills.data[v.prereq].prereq].prereq].prereq) {
+				if(0 < skills.data[skills.data[skills.data[v.prereq].prereq].prereq].level) {
+					if(0 < skills.data[skills.data[v.prereq].prereq].level) {
+						winner = v.prereq;
+						winner_svalue = v.efficiency;
+					} else {
+						winner = skills.data[v.prereq].prereq;
+						winner_svalue = v.efficiency;
+					}
+				} else {
+					winner = skills.data[skills.data[v.prereq].prereq].prereq;
+					winner_svalue = v.efficiency;
+				}
+			}
+		}
+	});
+	return(winner);
+}
+
+
 function calculateAllSkills() {
 	winner_s1 = '';
 	winner_s2 = '';
 	winner_s3 = '';
 	winner_s4 = '';
 	winner_s5 = '';
-	winner_svalue = -999999999;
+	var prevWinners = [];
 	$.each(skills.data, function(k,v) {
 		skills.data[k].efficiency = -1;
 		skills.data[k].cost = '';
@@ -835,85 +879,32 @@ function calculateAllSkills() {
 			skills.data[k].current_effect3 = '';
 		}
 	});
-	$.each(skills.data, function(k,v) {
-		if(v.efficiency > winner_svalue &&
-			v.max > v.level
-		) {
-			if(skills.totals[v.branch] >= tiers[v.tier] && (-1 == v.prereq || 0 < skills.data[v.prereq].level)) {
-				winner_s5 = winner_s4;
-				winner_s4 = winner_s3;
-				winner_s3 = winner_s2;
-				winner_s2 = winner_s1;
-				winner_s1 = k;
-				winner_svalue = v.efficiency;
-			} else if(skills.totals[v.branch] < tiers[v.tier] && -1 == skills.data[v.prereq].prereq) {
-				winner_s5 = winner_s4;
-				winner_s4 = winner_s3;
-				winner_s3 = winner_s2;
-				winner_s2 = winner_s1;
-				winner_s1 = v.prereq;
-				winner_svalue = v.efficiency;
-			} else if(skills.totals[v.branch] >= tiers[v.tier] && -1 == skills.data[skills.data[v.prereq].prereq].prereq) {
-				if(0 < skills.data[skills.data[v.prereq].prereq].level) {
-					winner_s5 = winner_s4;
-					winner_s4 = winner_s3;
-					winner_s3 = winner_s2;
-					winner_s2 = winner_s1;
-					winner_s1 = v.prereq;
-					winner_svalue = v.efficiency;
-				} else {
-					winner_s5 = winner_s4;
-					winner_s4 = winner_s3;
-					winner_s3 = winner_s2;
-					winner_s2 = winner_s1;
-					winner_s1 = skills.data[v.prereq].prereq;
-					winner_svalue = v.efficiency;
-				}
-			} else if(skills.totals[v.branch] >= tiers[v.tier] && -1 == skills.data[skills.data[skills.data[v.prereq].prereq].prereq].prereq) {
-				if(0 < skills.data[skills.data[skills.data[v.prereq].prereq].prereq].level) {
-					if(0 < skills.data[skills.data[v.prereq].prereq].level) {
-						winner_s5 = winner_s4;
-						winner_s4 = winner_s3;
-						winner_s3 = winner_s2;
-						winner_s2 = winner_s1;
-						winner_s1 = v.prereq;
-						winner_svalue = v.efficiency;
-					} else {
-						winner_s5 = winner_s4;
-						winner_s4 = winner_s3;
-						winner_s3 = winner_s2;
-						winner_s2 = winner_s1;
-						winner_s1 = skills.data[v.prereq].prereq;
-						winner_svalue = v.efficiency;
-					}
-				} else {
-					winner_s5 = winner_s4;
-					winner_s4 = winner_s3;
-					winner_s3 = winner_s2;
-					winner_s2 = winner_s1;
-					winner_s1 = skills.data[skills.data[v.prereq].prereq].prereq;
-					winner_svalue = v.efficiency;
-				}
-			}
-		}
-	});
+	winner_s1 = determineSkillWinner(prevWinners);
+	prevWinners.push(winner_s1);
+	winner_s2 = determineSkillWinner(prevWinners);
+	prevWinners.push(winner_s2);
+	winner_s3 = determineSkillWinner(prevWinners);
+	prevWinners.push(winner_s3);
+	winner_s4 = determineSkillWinner(prevWinners);
+	prevWinners.push(winner_s4);
+	winner_s5 = determineSkillWinner(prevWinners);
 	calculateSkillTotals();
 	regenerateSkills();
 	var next_skill = '';
-	if('' != winner_s1 && (0 != skills.data[winner_s1].rating && 0 != skills.data[winner_s1].level)) {
-		next_skill += '<button type="button" class="btn btn-primary mb-2 mr-2 col-12 col-md-6 col-lg-4 col-xl-3" onclick="acceptSkill(\'' + winner_s1 + '\')">#1: ' + skills.data[winner_s1].name + ' (costs ' + skills.data[winner_s1].cost + ' SP) <span class="badge ml-2 badge-pill badge-' + ('info' == skills.data[winner_s1].color ? 'success' : skills.data[winner_s1].color) + '">' + skills.data[winner_s1].nickname + '</span>';
+	if('' != winner_s1) {
+		next_skill += '<button type="button" class="btn btn-primary mb-2 mr-2 col-12 col-md-6 col-lg-4 col-xl-3" onclick="acceptSkill(\'' + winner_s1 + '\')">#1: ' + skills.data[winner_s1].name + ' ' + skills.data[winner_s1].nickname + ' (costs ' + skills.data[winner_s1].cost + ' SP) <span class="badge ml-2 badge-pill badge-' + ('info' == skills.data[winner_s1].color ? 'success' : skills.data[winner_s1].color) + '">' + skills.data[winner_s1].efficiency.toExponential(3) + '</span>';
 	}
-	if('' != winner_s2 && (0 != skills.data[winner_s1].rating && 0 != skills.data[winner_s1].level)) {
-		next_skill += '<button type="button" class="btn btn-primary mb-2 mr-2 col-12 col-md-6 col-lg-4 col-xl-3" onclick="acceptSkill(\'' + winner_s2 + '\')">#2: ' + skills.data[winner_s2].name + ' (costs ' + skills.data[winner_s2].cost + ' SP) <span class="badge ml-2 badge-pill badge-' + ('info' == skills.data[winner_s2].color ? 'success' : skills.data[winner_s2].color) + '">' + skills.data[winner_s2].nickname + '</span>';
+	if('' != winner_s2) {
+		next_skill += '<button type="button" class="btn btn-primary mb-2 mr-2 col-12 col-md-6 col-lg-4 col-xl-3" onclick="acceptSkill(\'' + winner_s2 + '\')">#2: ' + skills.data[winner_s2].name + ' ' + skills.data[winner_s2].nickname + ' (costs ' + skills.data[winner_s2].cost + ' SP) <span class="badge ml-2 badge-pill badge-' + ('info' == skills.data[winner_s2].color ? 'success' : skills.data[winner_s2].color) + '">' + skills.data[winner_s2].efficiency.toExponential(3) + '</span>';
 	}
-	if('' != winner_s3 && (0 != skills.data[winner_s1].rating && 0 != skills.data[winner_s1].level)) {
-		next_skill += '<button type="button" class="btn btn-primary mb-2 mr-2 col-12 col-md-6 col-lg-4 col-xl-3" onclick="acceptSkill(\'' + winner_s3 + '\')">#3: ' + skills.data[winner_s3].name + ' (costs ' + skills.data[winner_s3].cost + ' SP) <span class="badge ml-2 badge-pill badge-' + ('info' == skills.data[winner_s3].color ? 'success' : skills.data[winner_s3].color) + '">' + skills.data[winner_s3].nickname + '</span></button>';
+	if('' != winner_s3) {
+		next_skill += '<button type="button" class="btn btn-primary mb-2 mr-2 col-12 col-md-6 col-lg-4 col-xl-3" onclick="acceptSkill(\'' + winner_s3 + '\')">#3: ' + skills.data[winner_s3].name + ' ' + skills.data[winner_s3].nickname + ' (costs ' + skills.data[winner_s3].cost + ' SP) <span class="badge ml-2 badge-pill badge-' + ('info' == skills.data[winner_s3].color ? 'success' : skills.data[winner_s3].color) + '">' + skills.data[winner_s3].efficiency.toExponential(3) + '</span></button>';
 	}
-	if('' != winner_s4 && (0 != skills.data[winner_s1].rating && 0 != skills.data[winner_s1].level)) {
-		next_skill += '<button type="button" class="btn btn-primary mb-2 mr-2 col-12 col-md-6 col-lg-4 col-xl-3" onclick="acceptSkill(\'' + winner_s4 + '\')">#4: ' + skills.data[winner_s4].name + ' (costs ' + skills.data[winner_s4].cost + ' SP) <span class="badge ml-2 badge-pill badge-' + ('info' == skills.data[winner_s4].color ? 'success' : skills.data[winner_s4].color) + '">' + skills.data[winner_s4].nickname + '</span></button>';
+	if('' != winner_s4) {
+		next_skill += '<button type="button" class="btn btn-primary mb-2 mr-2 col-12 col-md-6 col-lg-4 col-xl-3" onclick="acceptSkill(\'' + winner_s4 + '\')">#4: ' + skills.data[winner_s4].name + ' ' + skills.data[winner_s4].nickname + ' (costs ' + skills.data[winner_s4].cost + ' SP) <span class="badge ml-2 badge-pill badge-' + ('info' == skills.data[winner_s4].color ? 'success' : skills.data[winner_s4].color) + '">' + skills.data[winner_s4].efficiency.toExponential(3) + '</span></button>';
 	}
-	if('' != winner_s5 && (0 != skills.data[winner_s1].rating && 0 != skills.data[winner_s1].level)) {
-		next_skill += '<button type="button" class="btn btn-primary mb-2 mr-2 col-12 col-md-6 col-lg-4 col-xl-3" onclick="acceptSkill(\'' + winner_s5 + '\')">#5: ' + skills.data[winner_s5].name + ' (costs ' + skills.data[winner_s5].cost + ' SP) <span class="badge ml-2 badge-pill badge-' + ('info' == skills.data[winner_s5].color ? 'success' : skills.data[winner_s5].color) + '">' + skills.data[winner_s5].nickname + '</span></button>';
+	if('' != winner_s5) {
+		next_skill += '<button type="button" class="btn btn-primary mb-2 mr-2 col-12 col-md-6 col-lg-4 col-xl-3" onclick="acceptSkill(\'' + winner_s5 + '\')">#5: ' + skills.data[winner_s5].name + ' ' + skills.data[winner_s5].nickname + ' (costs ' + skills.data[winner_s5].cost + ' SP) <span class="badge ml-2 badge-pill badge-' + ('info' == skills.data[winner_s5].color ? 'success' : skills.data[winner_s5].color) + '">' + skills.data[winner_s5].efficiency.toExponential(3) + '</span></button>';
 	}
 	next_skill += '';
 	$('#nextskill').empty().append(next_skill);
