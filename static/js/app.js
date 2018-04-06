@@ -303,7 +303,7 @@ function regenerateSkills() {
 		$('#skill' + k + 'cost').empty().append(value);
 		value = '';
 		if(1 == v.active && undefined != v.efficiency) {
-			value = v.efficiency.toExponential(12);
+			value = v.efficiency;
 		}
 		$('#skill' + k + 'eff').empty().append(value);
 		value = '';
@@ -651,46 +651,47 @@ function skillEff(k, v) {
 		current_effect = v.levels[v.level].bonus;
 	}
 	if(-1 != v.bonus2) {
-		current_effect2 = v.level > 0 ? v.levels[v.level].bonus2 : 1;
+		current_effect2 = v.level > 0 ? v.levels[v.level].bonus2 : 'X';
 	}
 	if(-1 != v.bonus3) {
-		current_effect3 = v.level > 0 ? v.levels[v.level].bonus3 : 1;
+		current_effect3 = v.level > 0 ? v.levels[v.level].bonus3 : 'X';
 	}
 	skills.data[k].current_effect = current_effect;
 	skills.data[k].current_effect2 = current_effect2;
 	skills.data[k].current_effect3 = current_effect3;
 	var running_eff = 1;
 	if(v.max > v.level) {
-		if(false == current_effect) {
+		if(false === current_effect) {
 			current_effect = 0;
-			current_effect2 = 0;
-			current_effect3 = 0;
 		}
-		skills.data[k].cost = v.levels[v.level + 1].cost;;
+		skills.data[k].cost = v.levels[v.level + 1].cost;
 		var lvl = v.level + 1;
 		var totalCost = 0;
 		while(lvl > 0) {
 			totalCost += v.levels[lvl--].cost;
 		}
 		var next_effect = v.levels[v.level + 1].bonus;
-		var effect_diff = Math.abs(next_effect)/(0 != current_effect ? Math.abs(current_effect) : Math.abs(next_effect/2));
+		var effect_diff = Math.abs(next_effect)/(0 < v.level && 0 != current_effect && 'X' != current_effect ? Math.abs(current_effect) : Math.abs(next_effect/2));
 		var effect_eff = Math.pow(effect_diff, v.rating);
 		running_eff *= effect_eff;
-		if(false != current_effect2) {
+		if(false !== current_effect2) {
 			var next_effect2 = v.levels[v.level + 1].bonus2;
-			var effect_diff2 = Math.abs(next_effect2)/(0 != current_effect2 ? Math.abs(current_effect2) : Math.abs(next_effect2/2));
-			var effect_eff2 = Math.pow(effect_diff2, v.rating);
-			if('cs' == k) {
-//				running_eff /= effect_eff2;
-			} else {
-				running_eff *= effect_eff2;
+			if(0 != next_effect2) {
+				var effect_diff2 = Math.abs(next_effect2)/(0 < v.level && 0 != current_effect2 && 'X' != current_effect2 ? Math.abs(current_effect2) : Math.abs(next_effect2/2));
+				var effect_eff2 = Math.pow(effect_diff2, v.rating);
+				if('cs' == k) {
+				} else {
+					running_eff *= effect_eff2;
+				}
 			}
 		}
-		if(false != current_effect3) {
+		if(false !== current_effect3) {
 			var next_effect3 = v.levels[v.level + 1].bonus3;
-			var effect_diff3 = Math.abs(next_effect3)/(0 != current_effect3 ? Math.abs(current_effect3) : Math.abs(next_effect3/2));
-			var effect_eff3 = Math.pow(effect_diff3, v.rating);
-			running_eff *= next_effect3;
+			if(0 != next_effect3) {
+				var effect_diff3 = Math.abs(next_effect3)/(0 < v.level && 0 != current_effect3 && 'X' != current_effect3 ? Math.abs(current_effect3) : Math.abs(next_effect3/2));
+				var effect_eff3 = Math.pow(effect_diff3, v.rating);
+				running_eff *= next_effect3;
+			}
 		}
 		var effDec = Decimal(running_eff);
 		var eff = effDec.pow(1/totalCost).sub(1).toNumber();
@@ -869,7 +870,7 @@ function calculateAllSkills() {
 	winner_s5 = '';
 	var prevWinners = [];
 	$.each(skills.data, function(k,v) {
-		skills.data[k].efficiency = -1;
+		skills.data[k].efficiency = 0;
 		skills.data[k].cost = '';
 		if(v.active == 1) {
 			skillEff(k, v);
