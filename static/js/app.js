@@ -258,7 +258,7 @@ function regenerateArtifacts() {
 		}
 		$('#' + k + 'cost').empty().append(value);
 		value = '';
-		if(1 == v.active && undefined != v.efficiency) {
+		if(1 == v.active && undefined != v.efficiency && '' != v.efficiency) {
 			value = v.efficiency.toExponential(12);
 		}
 		$('#' + k + 'eff').empty().append(value);
@@ -302,7 +302,7 @@ function regenerateSkills() {
 		}
 		$('#skill' + k + 'cost').empty().append(value);
 		value = '';
-		if(1 == v.active && undefined != v.efficiency) {
+		if(1 == v.active && undefined != v.efficiency && '' != v.efficiency) {
 			value = v.efficiency;
 		}
 		$('#skill' + k + 'eff').empty().append(value);
