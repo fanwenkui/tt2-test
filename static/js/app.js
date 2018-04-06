@@ -3,7 +3,7 @@ var winner_n = '';
 var winner_s1 = '';
 var winner_s2 = '';
 var winner_s3 = '';
-var winner_s4 = ''; 
+var winner_s4 = '';
 var winner_s5 = '';
 var winner_value = 0;
 var winner_svalue = 0;
@@ -644,6 +644,7 @@ function rejectSuggestions() {
 }
 
 function skillEff(k, v) {
+	console.log(k);
 	var current_effect = false;
 	var current_effect2 = false;
 	var current_effect3 = false;
@@ -661,12 +662,12 @@ function skillEff(k, v) {
 	skills.data[k].current_effect3 = current_effect3;
 	var running_eff = 1;
 	if(v.max > v.level) {
-		if(false == current_effect) {
+		if(false === current_effect) {
 			current_effect = 0;
 			current_effect2 = 0;
 			current_effect3 = 0;
 		}
-		skills.data[k].cost = v.levels[v.level + 1].cost;;
+		skills.data[k].cost = v.levels[v.level + 1].cost;
 		var lvl = v.level + 1;
 		var totalCost = 0;
 		while(lvl > 0) {
@@ -676,7 +677,8 @@ function skillEff(k, v) {
 		var effect_diff = Math.abs(next_effect)/(0 != current_effect ? Math.abs(current_effect) : Math.abs(next_effect/2));
 		var effect_eff = Math.pow(effect_diff, v.rating);
 		running_eff *= effect_eff;
-		if(false != current_effect2) {
+		console.log(running_eff);
+		if(false !== current_effect2) {
 			var next_effect2 = v.levels[v.level + 1].bonus2;
 			var effect_diff2 = Math.abs(next_effect2)/(0 != current_effect2 ? Math.abs(current_effect2) : Math.abs(next_effect2/2));
 			var effect_eff2 = Math.pow(effect_diff2, v.rating);
@@ -686,14 +688,17 @@ function skillEff(k, v) {
 				running_eff *= effect_eff2;
 			}
 		}
-		if(false != current_effect3) {
+		console.log(running_eff);
+		if(false !== current_effect3) {
 			var next_effect3 = v.levels[v.level + 1].bonus3;
 			var effect_diff3 = Math.abs(next_effect3)/(0 != current_effect3 ? Math.abs(current_effect3) : Math.abs(next_effect3/2));
 			var effect_eff3 = Math.pow(effect_diff3, v.rating);
 			running_eff *= next_effect3;
 		}
+		console.log(running_eff);
 		var effDec = Decimal(running_eff);
 		var eff = effDec.pow(1/totalCost).sub(1).toNumber();
+		console.log(eff);
 		skills.data[k].efficiency = eff;
 	}
 }
