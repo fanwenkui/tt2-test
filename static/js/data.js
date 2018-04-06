@@ -8,13 +8,13 @@ var pets_dmg = {
 };
 
 var reducts = {
-	'gold' : 0.82,
+	'gold' : 44/55,
 	'helmet' : {
 		'hero' : 1,
 		'tap' : 1,
 		'pet' : 1,
-		'sc' : .67,
-		'hs' : .67,
+		'sc' : 2/3,
+		'hs' : 2/3,
 		'cs' : 1
 	},
 	'sword' : {
@@ -29,7 +29,7 @@ var reducts = {
 		'hero' : 0,
 		'tap' : 1,
 		'pet' : 1,
-		'sc' : .67,
+		'sc' : 2/3,
 		'hs' : 1,
 		'cs' : 0
 	},
@@ -37,7 +37,7 @@ var reducts = {
 		'hero' : 1,
 		'tap' : .5,
 		'pet' : .5,
-		'sc' : .67,
+		'sc' : 2/3,
 		'hs' : .5,
 		'cs' : 1
 	},
@@ -46,14 +46,14 @@ var reducts = {
 		'tap' : 1,
 		'pet' : .5,
 		'sc' : .5,
-		'hs' : .67,
+		'hs' : 2/3,
 		'cs' : .5
 	},
 	'wc' : {
 		'hero' : 1,
 		'tap' : .5,
 		'pet' : 1,
-		'sc' : .67,
+		'sc' : 2/3,
 		'hs' : .5,
 		'cs' : 1
 	},
@@ -69,8 +69,8 @@ var reducts = {
 		'hero' : 0,
 		'tap' : 1,
 		'pet' : 0,
-		'sc' : .67,
-		'hs' : .67,
+		'sc' : 2/3,
+		'hs' : 2/3,
 		'cs' : 0
 	},
 	'crit' : {
