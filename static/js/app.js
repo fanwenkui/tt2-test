@@ -12,7 +12,6 @@ var white_rabbit = 0;
 var comeUndone = '';
 var recalc_litmus = true;
 var halp = ('1' == getURLParameter('halp') ? true : false);
-console.log(halp);
 
 function updateRecalc() {
 	if($('#recalc_on').prop('checked') == true) {
@@ -412,7 +411,9 @@ function optimize() {
 }
 
 function generateUpgrades() {
-	adjustWeights();
+	if(false == recalc_litmus) {
+		adjustWeights();
+	}
 	obfuscate = 0;
 	white_rabbit = new Date();
 	$('#export_wrap').hide();
