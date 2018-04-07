@@ -156,6 +156,7 @@ function calculateWeight(k,v) {
 				v.rating += 1;
 				v.rating += reducts.hero[build];
 				v.rating += reducts.gold;
+				v.rating += 1;
 				v.rating += reducts.companion[build];
 				v.color = 'info';
 				break;
