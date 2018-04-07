@@ -66,7 +66,6 @@ function adjustWeights() {
 		case 'boomoh':
 		case 'aya':
 		case 'yzafa':
-		case 'finn':
 			hero_type = 'melee_ground';
 			break;
 
@@ -79,6 +78,7 @@ function adjustWeights() {
 		case 'dex':
 		case 'lala':
 		case 'miki':
+		case 'finn':
 			hero_type = 'ranged_ground';
 			break;
 
@@ -156,6 +156,7 @@ function calculateWeight(k,v) {
 				v.rating += 1;
 				v.rating += reducts.hero[build];
 				v.rating += reducts.gold;
+				v.rating += 1;
 				v.rating += reducts.companion[build];
 				v.color = 'info';
 				break;
@@ -164,6 +165,11 @@ function calculateWeight(k,v) {
 		switch(v.expo.flat) {
 			case 'gold':
 				v.rating = reducts.gold;
+				v.color = 'warning';
+				break;
+
+			case 'gold_phom':
+				v.rating = reducts.gold * ('phom' == gold ? (3/4) : 1);
 				v.color = 'warning';
 				break;
 
