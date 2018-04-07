@@ -66,7 +66,6 @@ function adjustWeights() {
 		case 'boomoh':
 		case 'aya':
 		case 'yzafa':
-		case 'finn':
 			hero_type = 'melee_ground';
 			break;
 
@@ -79,6 +78,7 @@ function adjustWeights() {
 		case 'dex':
 		case 'lala':
 		case 'miki':
+		case 'finn':
 			hero_type = 'ranged_ground';
 			break;
 
