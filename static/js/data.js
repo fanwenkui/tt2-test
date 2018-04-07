@@ -140,13 +140,13 @@ var artifacts = {
 			'name' : 'Book of Shadows',
 			'nickname' : 'BoS',
 			'bonus' : ' Prestige Relic',
-			'ad' : .3,
+			'ad' : .2,
 			'effect' : .05,
 			'max' : -1,
 			'gmax' : 0.12,
 			'grate' : .0001,
 			'gexpo' : .5,
-			'ccoef' : .7,
+			'ccoef' : .6,
 			'cexpo' : 2.5,
 			'type' : 'multiply',
 			'expo' : {
@@ -158,24 +158,18 @@ var artifacts = {
 			'sort' : 2,
 			'name' : 'Stone of the Valrunes',
 			'nickname' : 'SotV',
-			'bonus' : ' Basic Titan Gold',
+			'bonus' : ' Gold Per Activated Skill',
 			'ad' : .5,
-			'effect' : .3,
+			'effect' : .01,
 			'max' : -1,
-			'gmax' : 0.4,
-			'grate' : .00025,
+			'gmax' : 0.36,
+			'grate' : .00018,
 			'gexpo' : .5,
 			'ccoef' : .7,
 			'cexpo' : 1.8,
 			'type' : 'multiply',
 			'expo' : {
-				'gold' : [
-					'sov',
-					'phom',
-					'all',
-					'splash',
-					'inactive'
-				]
+				'sum' : 'skill_gold'
 			}
 		},
 		'coc' : {
@@ -245,14 +239,35 @@ var artifacts = {
 				'flat' : 'gold'
 			}
 		},
-		'zc' : {
+		'kb' : {
 			'active' : 1,
 			'sort' : 6,
+			'name' : 'Khrysos Bowl',
+			'nickname' : 'KB',
+			'bonus' : ' Unskilled Gold',
+			'ad' : .3,
+			'effect' : .3,
+			'max' : -1,
+			'gmax' : 0.4,
+			'grate' : .0002,
+			'gexpo' : .5,
+			'ccoef' : .7,
+			'cexpo' : 1.8,
+			'type' : 'multiply',
+			'expo' : {
+				'gold' : [
+					'inactive'
+				]
+			}
+		},
+		'zc' : {
+			'active' : 1,
+			'sort' : 7,
 			'name' : 'Zakynthos Coin',
 			'nickname' : 'ZC',
 			'bonus' : ' Inactive Gold',
 			'ad' : .3,
-			'effect' : .2,
+			'effect' : .6,
 			'max' : -1,
 			'gmax' : 0.4,
 			'grate' : .0002,
@@ -268,12 +283,12 @@ var artifacts = {
 		},
 		'gfa' : {
 			'active' : 1,
-			'sort' : 7,
+			'sort' : 8,
 			'name' : 'Great Fay Medallion',
 			'nickname' : 'GFM',
 			'bonus' : ' Fairy Gold',
 			'ad' : .4,
-			'effect' : .1,
+			'effect' : .3,
 			'max' : -1,
 			'gmax' : 0.4,
 			'grate' : .00018,
@@ -290,7 +305,7 @@ var artifacts = {
 		},
 		'coe' : {
 			'active' : 1,
-			'sort' : 8,
+			'sort' : 9,
 			'name' : 'Coins of Ebizu',
 			'nickname' : 'CoE',
 			'bonus' : ' Splash Gold',
@@ -313,7 +328,7 @@ var artifacts = {
 		},
 		'hsw' : {
 			'active' : 1,
-			'sort' : 9,
+			'sort' : 10,
 			'name' : 'Heavenly Sword',
 			'nickname' : 'HSw',
 			'bonus' : ' All Artifact Damage',
@@ -332,7 +347,7 @@ var artifacts = {
 		},
 		'dr' : {
 			'active' : 1,
-			'sort' : 10,
+			'sort' : 11,
 			'name' : 'Divine Retribution',
 			'nickname' : 'DR',
 			'bonus' : ' All Damage',
@@ -351,7 +366,7 @@ var artifacts = {
 		},
 		'dh' : {
 			'active' : 1,
-			'sort' : 11,
+			'sort' : 12,
 			'name' : 'Drunken Hammer',
 			'nickname' : 'DH',
 			'bonus' : ' Tap Damage',
@@ -370,7 +385,7 @@ var artifacts = {
 		},
 		'ss' : {
 			'active' : 1,
-			'sort' : 12,
+			'sort' : 13,
 			'name' : 'Samosek Sword',
 			'nickname' : 'SS',
 			'bonus' : ' Sword Attack Damage',
@@ -389,7 +404,7 @@ var artifacts = {
 		},
 		'tr' : {
 			'active' : 1,
-			'sort' : 13,
+			'sort' : 14,
 			'name' : 'The Retaliator',
 			'nickname' : 'TR',
 			'bonus' : ' Critical Damage',
@@ -408,7 +423,7 @@ var artifacts = {
 		},
 		'hb' : {
 			'active' : 1,
-			'sort' : 14,
+			'sort' : 15,
 			'name' : 'Hero\'s Blade',
 			'nickname' : 'HB',
 			'bonus' : ' All Hero Damage',
@@ -427,7 +442,7 @@ var artifacts = {
 		},
 		'tsos' : {
 			'active' : 1,
-			'sort' : 15,
+			'sort' : 16,
 			'name' : 'The Sword of Storms',
 			'nickname' : 'TSoS',
 			'bonus' : ' Melee Hero Damage',
@@ -446,7 +461,7 @@ var artifacts = {
 		},
 		'fb' : {
 			'active' : 1,
-			'sort' : 16,
+			'sort' : 17,
 			'name' : 'Furies\' Bow',
 			'nickname' : 'FB',
 			'bonus' : ' Ranged Hero Damage',
@@ -465,7 +480,7 @@ var artifacts = {
 		},
 		'cota' : {
 			'active' : 1,
-			'sort' : 17,
+			'sort' : 18,
 			'name' : 'Charm of the Ancients',
 			'nickname' : 'CotA',
 			'bonus' : ' Spell Hero Damage',
@@ -484,7 +499,7 @@ var artifacts = {
 		},
 		'ttt' : {
 			'active' : 1,
-			'sort' : 18,
+			'sort' : 19,
 			'name' : 'Tiny Titan Tree',
 			'nickname' : 'TTT',
 			'bonus' : ' Ground Hero Damage',
@@ -503,7 +518,7 @@ var artifacts = {
 		},
 		'hh' : {
 			'active' : 1,
-			'sort' : 19,
+			'sort' : 20,
 			'name' : 'Helm of Hermes',
 			'nickname' : 'HoH',
 			'bonus' : ' Flying Hero Damage',
@@ -522,7 +537,7 @@ var artifacts = {
 		},
 		'foe' : {
 			'active' : 1,
-			'sort' : 20,
+			'sort' : 21,
 			'name' : 'Fruit of Eden',
 			'nickname' : 'FoE',
 			'bonus' : ' Pet Damage',
@@ -541,7 +556,7 @@ var artifacts = {
 		},
 		'ie' : {
 			'active' : 1,
-			'sort' : 21,
+			'sort' : 22,
 			'name' : 'Influential Elixir',
 			'nickname' : 'IE',
 			'bonus' : ' Clan Ship Damage',
@@ -560,7 +575,7 @@ var artifacts = {
 		},
 		'orc' : {
 			'active' : 1,
-			'sort' : 22,
+			'sort' : 23,
 			'name' : 'O\'Ryan\'s Charm',
 			'nickname' : 'oRC',
 			'bonus' : ' Companion Damage',
@@ -579,7 +594,7 @@ var artifacts = {
 		},
 		'hos2' : {
 			'active' : 1,
-			'sort' : 23,
+			'sort' : 24,
 			'name' : 'Heart of Storms',
 			'nickname' : 'HoS',
 			'bonus' : ' Pet Damage Bonuses',
@@ -598,7 +613,7 @@ var artifacts = {
 		},
 		'ao' : {
 			'active' : 1,
-			'sort' : 24,
+			'sort' : 25,
 			'name' : 'Apollo Orb',
 			'nickname' : 'AO',
 			'bonus' : ' Pet Gold Bonuses',
@@ -615,12 +630,12 @@ var artifacts = {
 				'sum' : 'pet_gold'
 			}
 		},
-		'af' : {
+		'eop' : {
 			'active' : 1,
-			'sort' : 25,
-			'name' : 'Avian Feather',
-			'nickname' : 'AF',
-			'bonus' : ' Inactive Damage',
+			'sort' : 26,
+			'name' : 'Earrings of Portara',
+			'nickname' : 'EoP',
+			'bonus' : ' Unskilled Damage',
 			'ad' : .3,
 			'effect' : .2,
 			'max' : -1,
@@ -634,9 +649,28 @@ var artifacts = {
 				'flat' : 'inactive'
 			}
 		},
+		'af' : {
+			'active' : 1,
+			'sort' : 27,
+			'name' : 'Avian Feather',
+			'nickname' : 'AF',
+			'bonus' : ' Inactive Damage',
+			'ad' : .3,
+			'effect' : .5,
+			'max' : -1,
+			'gmax' : 0.4,
+			'grate' : .0002,
+			'gexpo' : .5,
+			'ccoef' : .6,
+			'cexpo' : 1.7,
+			'type' : 'multiply',
+			'expo' : {
+				'flat' : 'inactive'
+			}
+		},
 		'hos' : {
 			'active' : 1,
-			'sort' : 26,
+			'sort' : 28,
 			'name' : 'Corrupted Rune Heart',
 			'nickname' : 'CRH',
 			'bonus' : ' Splash Damage',
@@ -655,7 +689,7 @@ var artifacts = {
 		},
 		'td' : {
 			'active' : 1,
-			'sort' : 27,
+			'sort' : 29,
 			'name' : 'Durendal Sword',
 			'nickname' : 'DS',
 			'bonus' : ' Non-Boss Damage',
@@ -674,7 +708,7 @@ var artifacts = {
 		},
 		'hs2' : {
 			'active' : 1,
-			'sort' : 28,
+			'sort' : 30,
 			'name' : 'Helheim Skull',
 			'nickname' : 'HSk',
 			'bonus' : ' Boss Damage',
@@ -693,7 +727,7 @@ var artifacts = {
 		},
 		'roc' : {
 			'active' : 1,
-			'sort' : 29,
+			'sort' : 31,
 			'name' : 'Ring of Calisto',
 			'nickname' : 'RoC',
 			'bonus' : ' All Equipment Boost',
@@ -712,7 +746,7 @@ var artifacts = {
 		},
 		'bod' : {
 			'active' : 1,
-			'sort' : 27,
+			'sort' : 32,
 			'name' : 'Blade of Damocles',
 			'nickname' : 'BoD',
 			'bonus' : ' Sword Boost',
@@ -731,7 +765,7 @@ var artifacts = {
 		},
 		'hom' : {
 			'active' : 1,
-			'sort' : 31,
+			'sort' : 33,
 			'name' : 'Helmet of Madness',
 			'nickname' : 'HoM',
 			'bonus' : ' Helmet Boost',
@@ -750,7 +784,7 @@ var artifacts = {
 		},
 		'tp' : {
 			'active' : 1,
-			'sort' : 32,
+			'sort' : 34,
 			'name' : 'Titanium Plating',
 			'nickname' : 'TP',
 			'bonus' : ' Armor Boost',
@@ -769,7 +803,7 @@ var artifacts = {
 		},
 		'as' : {
 			'active' : 1,
-			'sort' : 33,
+			'sort' : 35,
 			'name' : 'Amethyst Staff',
 			'nickname' : 'ASt',
 			'bonus' : ' Slash Boost',
@@ -788,7 +822,7 @@ var artifacts = {
 		},
 		'ig' : {
 			'active' : 1,
-			'sort' : 34,
+			'sort' : 36,
 			'name' : 'Invader\'s Gjalarhorn',
 			'nickname' : 'IG',
 			'bonus' : ' All Active Skill Effect',
@@ -807,7 +841,7 @@ var artifacts = {
 		},
 		'tm' : {
 			'active' : 1,
-			'sort' : 35,
+			'sort' : 37,
 			'name' : 'Titan\'s Mask',
 			'nickname' : 'TM',
 			'bonus' : ' Heavenly Strike Damage',
@@ -826,7 +860,7 @@ var artifacts = {
 		},
 		'rt' : {
 			'active' : 1,
-			'sort' : 36,
+			'sort' : 38,
 			'name' : 'Royal Toxin',
 			'nickname' : 'RT',
 			'bonus' : ' Deadly Strike Effect',
@@ -845,7 +879,7 @@ var artifacts = {
 		},
 		'lp' : {
 			'active' : 1,
-			'sort' : 37,
+			'sort' : 39,
 			'name' : 'Laborer\'s Pendant',
 			'nickname' : 'LP',
 			'bonus' : ' Hand of Midas Gold Bonus',
@@ -864,7 +898,7 @@ var artifacts = {
 		},
 		'bor' : {
 			'active' : 1,
-			'sort' : 38,
+			'sort' : 40,
 			'name' : 'Bringer of Ragnarok',
 			'nickname' : 'BoR',
 			'bonus' : ' Fire Sword Damage',
@@ -883,7 +917,7 @@ var artifacts = {
 		},
 		'pof' : {
 			'active' : 1,
-			'sort' : 39,
+			'sort' : 41,
 			'name' : 'Parchment of Foresight',
 			'nickname' : 'PoF',
 			'bonus' : ' War Cry Damage',
@@ -902,7 +936,7 @@ var artifacts = {
 		},
 		'eoe' : {
 			'active' : 1,
-			'sort' : 40,
+			'sort' : 42,
 			'name' : 'Elixir of Eden',
 			'nickname' : 'EoE',
 			'bonus' : ' Shadow Clone Damage',
@@ -921,7 +955,7 @@ var artifacts = {
 		},
 		'hoti' : {
 			'active' : 1,
-			'sort' : 41,
+			'sort' : 43,
 			'name' : 'Hourglass of the Impatient',
 			'nickname' : 'HotI',
 			'bonus' : ' All Active Skill Cooldown',
@@ -940,7 +974,7 @@ var artifacts = {
 		},
 		'pt' : {
 			'active' : 1,
-			'sort' : 42,
+			'sort' : 44,
 			'name' : 'Phantom Timepiece',
 			'nickname' : 'PT',
 			'bonus' : 's All Active Skill Duration',
@@ -959,7 +993,7 @@ var artifacts = {
 		},
 		'fs' : {
 			'active' : 1,
-			'sort' : 43,
+			'sort' : 45,
 			'name' : 'Forbidden Scroll',
 			'nickname' : 'FS',
 			'bonus' : 's Deadly Strike Duration',
@@ -978,7 +1012,7 @@ var artifacts = {
 		},
 		'rof' : {
 			'active' : 1,
-			'sort' : 44,
+			'sort' : 46,
 			'name' : 'Ring of Fealty',
 			'nickname' : 'RoF',
 			'bonus' : 's Hand of Midas Duration',
@@ -997,7 +1031,7 @@ var artifacts = {
 		},
 		'ga' : {
 			'active' : 1,
-			'sort' : 45,
+			'sort' : 47,
 			'name' : 'Glacial Axe',
 			'nickname' : 'GA',
 			'bonus' : 's Fire Sword Duration',
@@ -1016,7 +1050,7 @@ var artifacts = {
 		},
 		'a' : {
 			'active' : 1,
-			'sort' : 46,
+			'sort' : 48,
 			'name' : 'Aegis',
 			'nickname' : 'A',
 			'bonus' : 's War Cry Duration',
@@ -1035,7 +1069,7 @@ var artifacts = {
 		},
 		'sg' : {
 			'active' : 1,
-			'sort' : 47,
+			'sort' : 49,
 			'name' : 'Swamp Guantlet',
 			'nickname' : 'SG',
 			'bonus' : 's Shadow Clone Duration',
@@ -1054,7 +1088,7 @@ var artifacts = {
 		},
 		'ip' : {
 			'active' : 1,
-			'sort' : 48,
+			'sort' : 50,
 			'name' : 'Infinity Pendulum',
 			'nickname' : 'IP',
 			'bonus' : ' Heavenly Strike Mana Cost',
@@ -1073,7 +1107,7 @@ var artifacts = {
 		},
 		'gok' : {
 			'active' : 1,
-			'sort' : 49,
+			'sort' : 51,
 			'name' : 'Glove of Kuma',
 			'nickname' : 'GoK',
 			'bonus' : ' Deadly Strike Mana Cost',
@@ -1092,7 +1126,7 @@ var artifacts = {
 		},
 		'ts' : {
 			'active' : 1,
-			'sort' : 50,
+			'sort' : 52,
 			'name' : 'Titan Spear',
 			'nickname' : 'TS',
 			'bonus' : ' Hand of Midas Mana Cost',
@@ -1111,7 +1145,7 @@ var artifacts = {
 		},
 		'os' : {
 			'active' : 1,
-			'sort' : 51,
+			'sort' : 53,
 			'name' : 'Oak Staff',
 			'nickname' : 'OS',
 			'bonus' : ' Fire Sword Mana Cost',
@@ -1130,7 +1164,7 @@ var artifacts = {
 		},
 		'tac' : {
 			'active' : 1,
-			'sort' : 52,
+			'sort' : 54,
 			'name' : 'The Arcana Cloak',
 			'nickname' : 'TAC',
 			'bonus' : ' War Cry Mana Cost',
@@ -1149,7 +1183,7 @@ var artifacts = {
 		},
 		'ho' : {
 			'active' : 1,
-			'sort' : 53,
+			'sort' : 55,
 			'name' : 'Hunter\'s Ointment',
 			'nickname' : 'HO',
 			'bonus' : ' Shadow Clone Mana Cost',
@@ -1168,7 +1202,7 @@ var artifacts = {
 		},
 		'ae' : {
 			'active' : 1,
-			'sort' : 54,
+			'sort' : 56,
 			'name' : 'Ambrosia Elixir',
 			'nickname' : 'AE',
 			'bonus' : ' Mana Pool Cap',
@@ -1187,7 +1221,7 @@ var artifacts = {
 		},
 		'ms' : {
 			'active' : 1,
-			'sort' : 55,
+			'sort' : 57,
 			'name' : 'Mystic Staff',
 			'nickname' : 'MS',
 			'bonus' : ' Mana Regeneration',
@@ -1204,15 +1238,34 @@ var artifacts = {
 				'sum' : 'skill'
 			}
 		},
+		'mbos' : {
+			'active' : 1,
+			'sort' : 58,
+			'name' : 'Mystical Beans of Senzu',
+			'nickname' : 'MBoS',
+			'bonus' : ' Mana Refund Percent',
+			'ad' : 2,
+			'effect' : .0025,
+			'max' : 40,
+			'gmax' : 0,
+			'grate' : 0,
+			'gexpo' : 1,
+			'ccoef' : .5,
+			'cexpo' : 2.6,
+			'type' : 'pct',
+			'expo' : {
+				'sum' : 'skill'
+			}
+		},
 		'eof' : {
 			'active' : 1,
-			'sort' : 56,
+			'sort' : 59,
 			'name' : 'Egg of Fortune',
 			'nickname' : 'EoF',
 			'bonus' : ' Chesterson Chance',
 			'ad' : 2,
-			'effect' : .01,
-			'max' : 10,
+			'effect' : .005,
+			'max' : 40,
 			'gmax' : 0,
 			'grate' : 0,
 			'gexpo' : 1,
@@ -1231,7 +1284,7 @@ var artifacts = {
 		},
 		'dc' : {
 			'active' : 1,
-			'sort' : 57,
+			'sort' : 60,
 			'name' : 'Divine Chalice',
 			'nickname' : 'DC',
 			'bonus' : ' 10x Gold Chance',
@@ -1254,7 +1307,7 @@ var artifacts = {
 		},
 		'is' : {
 			'active' : 1,
-			'sort' : 58,
+			'sort' : 61,
 			'name' : 'Invader\'s Shield',
 			'nickname' : 'IS',
 			'bonus' : ' Multiple Fairy Chance',
@@ -1273,13 +1326,13 @@ var artifacts = {
 		},
 		'aom' : {
 			'active' : 1,
-			'sort' : 59,
+			'sort' : 62,
 			'name' : 'Axe of Muerte',
 			'nickname' : 'AoM',
 			'bonus' : ' Critical Chance',
 			'ad' : 3,
 			'effect' : 0.005,
-			'max' : 20,
+			'max' : 40,
 			'gmax' : 0,
 			'grate' : 0,
 			'gexpo' : 1,
@@ -1292,13 +1345,13 @@ var artifacts = {
 		},
 		'eotk' : {
 			'active' : 1,
-			'sort' : 60,
+			'sort' : 63,
 			'name' : 'Essence of the Kitsune',
 			'nickname' : 'EotK',
 			'bonus' : ' Multi-Spawn Chance',
 			'ad' : 3,
 			'effect' : .005,
-			'max' : 20,
+			'max' : 40,
 			'gmax' : 0,
 			'grate' : 0,
 			'gexpo' : 1,
@@ -1309,9 +1362,47 @@ var artifacts = {
 				'flat' : 'dmg'
 			}
 		},
+		'boh' : {
+			'active' : 1,
+			'sort' : 64,
+			'name' : 'Boots of Hermes',
+			'nickname' : 'BoH',
+			'bonus' : ' Portar Chance',
+			'ad' : 3,
+			'effect' : .001,
+			'max' : 40,
+			'gmax' : 0,
+			'grate' : 0,
+			'gexpo' : 1,
+			'ccoef' : .8,
+			'cexpo' : 2.5,
+			'type' : 'pct',
+			'expo' : {
+				'flat' : 'dmg'
+			}
+		},
+		'lfoa' : {
+			'active' : 1,
+			'sort' : 65,
+			'name' : 'Lucky Foot of Al-mi\'raj',
+			'nickname' : 'LFoA',
+			'bonus' : ' All Probabilities',
+			'ad' : 2,
+			'effect' : .0025,
+			'max' : 40,
+			'gmax' : 0,
+			'grate' : 0,
+			'gexpo' : 1,
+			'ccoef' : .5,
+			'cexpo' : 2.6,
+			'type' : 'multiply',
+			'expo' : {
+				'flat' : 'dmg'
+			}
+		},
 		'lkm' : {
 			'active' : 1,
-			'sort' : 61,
+			'sort' : 66,
 			'name' : 'Lost King\'s Mask',
 			'nickname' : 'LKM',
 			'bonus' : ' All Upgrade Cost',
@@ -1330,7 +1421,7 @@ var artifacts = {
 		},
 		'sor' : {
 			'active' : 1,
-			'sort' : 62,
+			'sort' : 67,
 			'name' : 'Staff of Radiance',
 			'nickname' : 'SoR',
 			'bonus' : ' Hero Upgrade Cost',
@@ -1349,12 +1440,12 @@ var artifacts = {
 		},
 		'tms' : {
 			'active' : 1,
-			'sort' : 63,
+			'sort' : 68,
 			'name' : 'The Master\'s Sword',
 			'nickname' : 'TMS',
-			'bonus' : ' Sword Master Upgrade Cost',
+			'bonus' : ' Tap Damage from Heroes',
 			'ad' : 2,
-			'effect' : -.02,
+			'effect' : .0001,
 			'max' : 40,
 			'gmax' : 0,
 			'grate' : 0,
@@ -1368,7 +1459,7 @@ var artifacts = {
 		},
 		'as2' : {
 			'active' : 1,
-			'sort' : 64,
+			'sort' : 69,
 			'name' : 'Aram Spear',
 			'nickname' : 'ASp',
 			'bonus' : ' All Titan HP',
@@ -1387,7 +1478,7 @@ var artifacts = {
 		},
 		'wod' : {
 			'active' : 1,
-			'sort' : 65,
+			'sort' : 70,
 			'name' : 'Ward of Darkness',
 			'nickname' : 'WoD',
 			'bonus' : 's Boss Timer Duration',
@@ -1474,7 +1565,12 @@ var artifact_costs = {
 	'63' : 96144140647,
 	'64' : 163647145909,
 	'65' : 279906771691,
-	'66' : -1
+	'66' : 3840000000000,
+	'67' : 53170000000000,
+	'68' : 738330000000000,
+	'69' : 10300000000000000,
+	'70' : 144000000000000000,
+	'71' : -1
 };
 
 // x = 1.4067499999999975
@@ -2115,27 +2211,27 @@ var skills = {
 			'nickname' : 'Y4_1',
 			'branch' : 'yellow',
 			'bonus' : ' All Hero Damage per Tap',
-			'bonus2' : 's Cooldown',
-			'bonus3' : -1,
+			'bonus2' : -1,
+			'bonus3' : ' Taps per Sequence',
 			'tier' : 4,
 			'prereq' : 'ti',
 			'max' : 12,
 			'type' : 'multiply',
-			'type2' : 'add',
-			'type3' : -1,
+			'type2' : -1,
+			'type3' : 'add',
 			'levels' : {
-				'1' : { 'cost' : 3, 'bonus' : 1.3, 'bonus2' : 0, 'bonus3' : 0 },
-				'2' : { 'cost' : 4, 'bonus' : 1.5, 'bonus2' : -.5, 'bonus3' : 0 },
-				'3' : { 'cost' : 5, 'bonus' : 1.9, 'bonus2' : -1, 'bonus3' : 0 },
-				'4' : { 'cost' : 7, 'bonus' : 2.4, 'bonus2' : -2, 'bonus3' : 0 },
-				'5' : { 'cost' : 9, 'bonus' : 3.3, 'bonus2' : -3, 'bonus3' : 0 },
-				'6' : { 'cost' : 12, 'bonus' : 4.7, 'bonus2' : -4, 'bonus3' : 0 },
-				'7' : { 'cost' : 16, 'bonus' : 7.1, 'bonus2' : -5, 'bonus3' : 0 },
-				'8' : { 'cost' : 21, 'bonus' : 11.6, 'bonus2' : -6, 'bonus3' : 0 },
-				'9' : {	'cost' : 27, 'bonus' : 20.5, 'bonus2' : -7, 'bonus3' : 0 },
-				'10' : { 'cost' : 35, 'bonus' : 39, 'bonus2' : -8, 'bonus3' : 0 },
-				'11' : { 'cost' : 46, 'bonus' : 83, 'bonus2' : -9, 'bonus3' : 0 },
-				'12' : { 'cost' : 60, 'bonus' : 195, 'bonus2' : -10, 'bonus3' : 0 }
+				'1' : { 'cost' : 3, 'bonus' : 1.3, 'bonus2' : 0, 'bonus3' : 5 },
+				'2' : { 'cost' : 4, 'bonus' : 1.5, 'bonus2' : 0, 'bonus3' : 5 },
+				'3' : { 'cost' : 5, 'bonus' : 1.9, 'bonus2' : 0, 'bonus3' : 5 },
+				'4' : { 'cost' : 7, 'bonus' : 2.4, 'bonus2' : 0, 'bonus3' : 5 },
+				'5' : { 'cost' : 9, 'bonus' : 3.3, 'bonus2' : 0, 'bonus3' : 5 },
+				'6' : { 'cost' : 12, 'bonus' : 4.7, 'bonus2' : 0, 'bonus3' : 5 },
+				'7' : { 'cost' : 16, 'bonus' : 7.1, 'bonus2' : 0, 'bonus3' : 5 },
+				'8' : { 'cost' : 21, 'bonus' : 11.6, 'bonus2' : 0, 'bonus3' : 5 },
+				'9' : {	'cost' : 27, 'bonus' : 20.5, 'bonus2' : 0, 'bonus3' : 5 },
+				'10' : { 'cost' : 35, 'bonus' : 39, 'bonus2' : 0, 'bonus3' : 5 },
+				'11' : { 'cost' : 46, 'bonus' : 83, 'bonus2' : 0, 'bonus3' : 5 },
+				'12' : { 'cost' : 60, 'bonus' : 195, 'bonus2' : 0, 'bonus3' : 5 }
 			},
 			'expo' : {
 				'reduct' : 'hero'
@@ -2379,34 +2475,34 @@ var skills = {
 			'branch' : 'blue',
 			'bonus' : ' of Mana Capacity Recovered',
 			'bonus2' : -1,
-			'bonus3' : -1,
+			'bonus3' : ' Chance to Trigger Effect',
 			'tier' : 3,
 			'prereq' : 'ar',
 			'max' : 20,
 			'type' : 'pct_pos',
-			'type2' : 'add',
-			'type3' : -1,
+			'type2' : -1,
+			'type3' : 'pct_pos',
 			'levels' : {
-				'1' : { 'cost' : 2, 'bonus' : .0005, 'bonus2' : 0, 'bonus3' : 0 },
-				'2' : { 'cost' : 2, 'bonus' : .0007, 'bonus2' : 0, 'bonus3' : 0 },
-				'3' : { 'cost' : 3, 'bonus' : .0009, 'bonus2' : 0, 'bonus3' : 0	},
-				'4' : { 'cost' : 3, 'bonus' : .0012, 'bonus2' : 0, 'bonus3' : 0 },
-				'5' : { 'cost' : 3, 'bonus' : .0015, 'bonus2' : 0, 'bonus3' : 0 },
-				'6' : { 'cost' : 4, 'bonus' : .0019, 'bonus2' : 0, 'bonus3' : 0 },
-				'7' : { 'cost' : 5, 'bonus' : .0024, 'bonus2' : 0, 'bonus3' : 0 },
-				'8' : { 'cost' : 5, 'bonus' : .003, 'bonus2' : 0, 'bonus3' : 0 },
-				'9' : {	'cost' : 6, 'bonus' : .0036, 'bonus2' : 0, 'bonus3' : 0 },
-				'10' : { 'cost' : 7, 'bonus' : .0044, 'bonus2' : 0, 'bonus3' : 0 },
-				'11' : { 'cost' : 8, 'bonus' : .0053, 'bonus2' : 0, 'bonus3' : 0 },
-				'12' : { 'cost' : 9, 'bonus' : .0063, 'bonus2' : 0, 'bonus3' : 0 },
-				'13' : { 'cost' : 11, 'bonus' : .0075, 'bonus2' : 0, 'bonus3' : 0 },
-				'14' : { 'cost' : 12, 'bonus' : .0089, 'bonus2' : 0, 'bonus3' : 0 },
-				'15' : { 'cost' : 14, 'bonus' : .0106, 'bonus2' : 0, 'bonus3' : 0 },
-				'16' : { 'cost' : 16, 'bonus' : .0125, 'bonus2' : 0, 'bonus3' : 0 },
-				'17' : { 'cost' : 19, 'bonus' : .0148, 'bonus2' : 0, 'bonus3' : 0 },
-				'18' : { 'cost' : 22, 'bonus' : .0174, 'bonus2' : 0, 'bonus3' : 0 },
-				'19' : { 'cost' : 25, 'bonus' : .0205, 'bonus2' : 0, 'bonus3' : 0 },
-				'20' : { 'cost' : 28, 'bonus' : .024, 'bonus2' : 0, 'bonus3' : 0 }
+				'1' : { 'cost' : 2, 'bonus' : .0005, 'bonus2' : 0, 'bonus3' : .0005 },
+				'2' : { 'cost' : 2, 'bonus' : .0007, 'bonus2' : 0, 'bonus3' : .0005 },
+				'3' : { 'cost' : 3, 'bonus' : .0009, 'bonus2' : 0, 'bonus3' : .0005	},
+				'4' : { 'cost' : 3, 'bonus' : .0012, 'bonus2' : 0, 'bonus3' : .0005 },
+				'5' : { 'cost' : 3, 'bonus' : .0015, 'bonus2' : 0, 'bonus3' : .0005 },
+				'6' : { 'cost' : 4, 'bonus' : .0019, 'bonus2' : 0, 'bonus3' : .0005 },
+				'7' : { 'cost' : 5, 'bonus' : .0024, 'bonus2' : 0, 'bonus3' : .0005 },
+				'8' : { 'cost' : 5, 'bonus' : .003, 'bonus2' : 0, 'bonus3' : .0005 },
+				'9' : {	'cost' : 6, 'bonus' : .0036, 'bonus2' : 0, 'bonus3' : .0005 },
+				'10' : { 'cost' : 7, 'bonus' : .0044, 'bonus2' : 0, 'bonus3' : .0005 },
+				'11' : { 'cost' : 8, 'bonus' : .0053, 'bonus2' : 0, 'bonus3' : .0005 },
+				'12' : { 'cost' : 9, 'bonus' : .0063, 'bonus2' : 0, 'bonus3' : .0005 },
+				'13' : { 'cost' : 11, 'bonus' : .0075, 'bonus2' : 0, 'bonus3' : .0005 },
+				'14' : { 'cost' : 12, 'bonus' : .0089, 'bonus2' : 0, 'bonus3' : .0005 },
+				'15' : { 'cost' : 14, 'bonus' : .0106, 'bonus2' : 0, 'bonus3' : .0005 },
+				'16' : { 'cost' : 16, 'bonus' : .0125, 'bonus2' : 0, 'bonus3' : .0005 },
+				'17' : { 'cost' : 19, 'bonus' : .0148, 'bonus2' : 0, 'bonus3' : .0005 },
+				'18' : { 'cost' : 22, 'bonus' : .0174, 'bonus2' : 0, 'bonus3' : .0005 },
+				'19' : { 'cost' : 25, 'bonus' : .0205, 'bonus2' : 0, 'bonus3' : .0005 },
+				'20' : { 'cost' : 28, 'bonus' : .024, 'bonus2' : 0, 'bonus3' : .0005 }
 			},
 			'expo' : {
 				'reduct' : 'tap'
@@ -2469,18 +2565,18 @@ var skills = {
 			'type2' : 'pct_pos',
 			'type3' : -1,
 			'levels' : {
-				'1' : { 'cost' : 3, 'bonus' : 6, 'bonus2' : .005, 'bonus3' : 0 },
-				'2' : { 'cost' : 4, 'bonus' : 10, 'bonus2' : .0055, 'bonus3' : 0 },
-				'3' : { 'cost' : 5, 'bonus' : 15, 'bonus2' : .006, 'bonus3' : 0	},
-				'4' : { 'cost' : 7, 'bonus' : 22, 'bonus2' : .0065, 'bonus3' : 0 },
-				'5' : { 'cost' : 9, 'bonus' : 31, 'bonus2' : .007, 'bonus3' : 0 },
-				'6' : { 'cost' : 12, 'bonus' : 43, 'bonus2' : .0075, 'bonus3' : 0 },
-				'7' : { 'cost' : 16, 'bonus' : 59, 'bonus2' : .008, 'bonus3' : 0 },
-				'8' : { 'cost' : 21, 'bonus' : 80, 'bonus2' : .0085, 'bonus3' : 0 },
-				'9' : {	'cost' : 27, 'bonus' : 107, 'bonus2' : .009, 'bonus3' : 0 },
-				'10' : { 'cost' : 35, 'bonus' : 142, 'bonus2' : .01, 'bonus3' : 0 },
-				'11' : { 'cost' : 46, 'bonus' : 188, 'bonus2' : .011, 'bonus3' : 0 },
-				'12' : { 'cost' : 60, 'bonus' : 248, 'bonus2' : .012, 'bonus3' : 0 }
+				'1' : { 'cost' : 3, 'bonus' : 2, 'bonus2' : .005, 'bonus3' : 0 },
+				'2' : { 'cost' : 4, 'bonus' : 4, 'bonus2' : .005, 'bonus3' : 0 },
+				'3' : { 'cost' : 5, 'bonus' : 6.5, 'bonus2' : .005, 'bonus3' : 0	},
+				'4' : { 'cost' : 7, 'bonus' : 10, 'bonus2' : .005, 'bonus3' : 0 },
+				'5' : { 'cost' : 9, 'bonus' : 14.5, 'bonus2' : .005, 'bonus3' : 0 },
+				'6' : { 'cost' : 12, 'bonus' : 20.5, 'bonus2' : .005, 'bonus3' : 0 },
+				'7' : { 'cost' : 16, 'bonus' : 28.5, 'bonus2' : .005, 'bonus3' : 0 },
+				'8' : { 'cost' : 21, 'bonus' : 39, 'bonus2' : .005, 'bonus3' : 0 },
+				'9' : {	'cost' : 27, 'bonus' : 52.5, 'bonus2' : .005, 'bonus3' : 0 },
+				'10' : { 'cost' : 35, 'bonus' : 70, 'bonus2' : .005, 'bonus3' : 0 },
+				'11' : { 'cost' : 46, 'bonus' : 93, 'bonus2' : .005, 'bonus3' : 0 },
+				'12' : { 'cost' : 60, 'bonus' : 123, 'bonus2' : .005, 'bonus3' : 0 }
 			},
 			'expo' : {
 				'reduct' : 'hs'
@@ -2600,35 +2696,35 @@ var skills = {
 			'nickname' : 'G2_1',
 			'branch' : 'green',
 			'bonus' : ' Deadly Strike Damage',
-			'bonus2' : ' Deadly Strike Chance',
+			'bonus2' : 's Deadly Strike Duration',
 			'bonus3' : -1,
 			'tier' : 2,
 			'prereq' : 'mt',
 			'max' : 20,
 			'type' : 'multiply',
-			'type2' : 'pct_pos',
+			'type2' : 'add',
 			'type3' : -1,
 			'levels' : {
-				'1' : { 'cost' : 1, 'bonus' : 1.6, 'bonus2' : .01, 'bonus3' : 0 },
-				'2' : { 'cost' : 2, 'bonus' : 2.3, 'bonus2' : .02, 'bonus3' : 0 },
-				'3' : { 'cost' : 2, 'bonus' : 3.3, 'bonus2' : .03, 'bonus3' : 0	},
-				'4' : { 'cost' : 3, 'bonus' : 5.2, 'bonus2' : .04, 'bonus3' : 0 },
-				'5' : { 'cost' : 3, 'bonus' : 8.2, 'bonus2' : .05, 'bonus3' : 0 },
-				'6' : { 'cost' : 3, 'bonus' : 12.8, 'bonus2' : .06, 'bonus3' : 0 },
-				'7' : { 'cost' : 4, 'bonus' : 21.9, 'bonus2' : .07, 'bonus3' : 0 },
-				'8' : { 'cost' : 5, 'bonus' : 40.4, 'bonus2' : .08, 'bonus3' : 0 },
-				'9' : {	'cost' : 5, 'bonus' : 74.5, 'bonus2' : .09, 'bonus3' : 0 },
-				'10' : { 'cost' : 6, 'bonus' : 148.3, 'bonus2' : .1, 'bonus3' : 0 },
-				'11' : { 'cost' : 7, 'bonus' : 317.8, 'bonus2' : .11, 'bonus3' : 0 },
-				'12' : { 'cost' : 8, 'bonus' : 731.6, 'bonus2' : .12, 'bonus3' : 0 },
-				'13' : { 'cost' : 9, 'bonus' : 1800, 'bonus2' : .13, 'bonus3' : 0 },
-				'14' : { 'cost' : 11, 'bonus' : 5070, 'bonus2' : .14, 'bonus3' : 0 },
-				'15' : { 'cost' : 12, 'bonus' : 15200, 'bonus2' : .15, 'bonus3' : 0 },
-				'16' : { 'cost' : 14, 'bonus' : 51300, 'bonus2' : .16, 'bonus3' : 0 },
-				'17' : { 'cost' : 16, 'bonus' : 194000, 'bonus2' : .17, 'bonus3' : 0 },
-				'18' : { 'cost' : 19, 'bonus' : 860000, 'bonus2' : .18, 'bonus3' : 0 },
-				'19' : { 'cost' : 22, 'bonus' : 4420000, 'bonus2' : .19, 'bonus3' : 0 },
-				'20' : { 'cost' : 25, 'bonus' : 26100000, 'bonus2' : .2, 'bonus3' : 0 }
+				'1' : { 'cost' : 1, 'bonus' : 1.6, 'bonus2' : 2, 'bonus3' : 0 },
+				'2' : { 'cost' : 2, 'bonus' : 2.3, 'bonus2' : 4.5, 'bonus3' : 0 },
+				'3' : { 'cost' : 2, 'bonus' : 3.3, 'bonus2' : 8.9, 'bonus3' : 0	},
+				'4' : { 'cost' : 3, 'bonus' : 5.2, 'bonus2' : 13.3, 'bonus3' : 0 },
+				'5' : { 'cost' : 3, 'bonus' : 8.2, 'bonus2' : 17.7, 'bonus3' : 0 },
+				'6' : { 'cost' : 3, 'bonus' : 12.8, 'bonus2' : 24.1, 'bonus3' : 0 },
+				'7' : { 'cost' : 4, 'bonus' : 21.9, 'bonus2' : 32.8, 'bonus3' : 0 },
+				'8' : { 'cost' : 5, 'bonus' : 40.4, 'bonus2' : 41.5, 'bonus3' : 0 },
+				'9' : {	'cost' : 5, 'bonus' : 74.5, 'bonus2' : 52.6, 'bonus3' : 0 },
+				'10' : { 'cost' : 6, 'bonus' : 148.3, 'bonus2' : 66.2, 'bonus3' : 0 },
+				'11' : { 'cost' : 7, 'bonus' : 317.8, 'bonus2' : 82.5, 'bonus3' : 0 },
+				'12' : { 'cost' : 8, 'bonus' : 731.6, 'bonus2' : 101.7, 'bonus3' : 0 },
+				'13' : { 'cost' : 9, 'bonus' : 1800, 'bonus2' : 126.7, 'bonus3' : 0 },
+				'14' : { 'cost' : 11, 'bonus' : 5070, 'bonus2' : 154.9, 'bonus3' : 0 },
+				'15' : { 'cost' : 12, 'bonus' : 15200, 'bonus2' : 189.5, 'bonus3' : 0 },
+				'16' : { 'cost' : 14, 'bonus' : 51300, 'bonus2' : 231, 'bonus3' : 0 },
+				'17' : { 'cost' : 16, 'bonus' : 194000, 'bonus2' : 283.1, 'bonus3' : 0 },
+				'18' : { 'cost' : 19, 'bonus' : 860000, 'bonus2' : 346.7, 'bonus3' : 0 },
+				'19' : { 'cost' : 22, 'bonus' : 4420000, 'bonus2' : 422.2, 'bonus3' : 0 },
+				'20' : { 'cost' : 25, 'bonus' : 26100000, 'bonus2' : 510, 'bonus3' : 0 }
 			},
 			'expo' : {
 				'reduct' : 'ds'
@@ -2671,26 +2767,26 @@ var skills = {
 			'name' : 'Ambush',
 			'nickname' : 'G2_3',
 			'branch' : 'green',
-			'bonus' : ' Multi-Spawn Chance',
-			'bonus2' : -1,
+			'bonus' : ' Max Multi-Spawn Count',
+			'bonus2' : ' Multi-Spawn Chance',
 			'bonus3' : -1,
 			'tier' : 2,
 			'prereq' : 'mt',
 			'max' : 10,
-			'type' : 'pct_pos',
-			'type2' : -1,
+			'type' : 'add',
+			'type2' : 'pct_pos',
 			'type3' : -1,
 			'levels' : {
-				'1' : { 'cost' : 1, 'bonus' : .01, 'bonus2' : 0, 'bonus3' : 0 },
-				'2' : { 'cost' : 2, 'bonus' : .019, 'bonus2' : 0, 'bonus3' : 0 },
-				'3' : { 'cost' : 2, 'bonus' : .032, 'bonus2' : 0, 'bonus3' : 0 },
-				'4' : { 'cost' : 3, 'bonus' : .051, 'bonus2' : 0, 'bonus3' : 0 },
-				'5' : { 'cost' : 3, 'bonus' : .077, 'bonus2' : 0, 'bonus3' : 0 },
-				'6' : { 'cost' : 3, 'bonus' : .114, 'bonus2' : 0, 'bonus3' : 0 },
-				'7' : { 'cost' : 4, 'bonus' : .167, 'bonus2' : 0, 'bonus3' : 0 },
-				'8' : { 'cost' : 5, 'bonus' : .242, 'bonus2' : 0, 'bonus3' : 0 },
-				'9' : {	'cost' : 5, 'bonus' : .349, 'bonus2' : 0, 'bonus3' : 0 },
-				'10' : { 'cost' : 6, 'bonus' : .5, 'bonus2' : 0, 'bonus3' : 0 }
+				'1' : { 'cost' : 1, 'bonus' : 1, 'bonus2' : .01, 'bonus3' : 0 },
+				'2' : { 'cost' : 2, 'bonus' : 2, 'bonus2' : .016, 'bonus3' : 0 },
+				'3' : { 'cost' : 2, 'bonus' : 4, 'bonus2' : .024, 'bonus3' : 0 },
+				'4' : { 'cost' : 3, 'bonus' : 6, 'bonus2' : .036, 'bonus3' : 0 },
+				'5' : { 'cost' : 3, 'bonus' : 8, 'bonus2' : .052, 'bonus3' : 0 },
+				'6' : { 'cost' : 3, 'bonus' : 10, 'bonus2' : .075, 'bonus3' : 0 },
+				'7' : { 'cost' : 4, 'bonus' : 12, 'bonus2' : .107, 'bonus3' : 0 },
+				'8' : { 'cost' : 5, 'bonus' : 14, 'bonus2' : .151, 'bonus3' : 0 },
+				'9' : {	'cost' : 5, 'bonus' : 16, 'bonus2' : .213, 'bonus3' : 0 },
+				'10' : { 'cost' : 6, 'bonus' : 20, 'bonus2' : .3, 'bonus3' : 0 }
 			},
 			'expo' : {
 				'flat' : 'inactive'

@@ -143,6 +143,17 @@ function calculateWeight(k,v) {
 				v.color = 'info';
 				break;
 
+			case 'skill_gold':
+				v.rating += reducts.hs[build];
+				v.rating += reducts.ds[build];
+				v.rating += reducts.fs[build];
+				v.rating += reducts.wc[build];
+				v.rating += reducts.sc[build];
+				v.rating *= reducts.gold
+				v.rating += reducts.gold;
+				v.color = 'warning';
+				break;
+
 			case 'equip':
 				v.rating += 1;
 				v.rating += reducts.hero[build];
