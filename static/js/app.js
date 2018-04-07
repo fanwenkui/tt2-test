@@ -9,6 +9,7 @@ var winner_value = 0;
 var winner_svalue = 0;
 var obfuscate = 0;
 var white_rabbit = 0;
+var comeUndone = '';
 
 function toggleDark() {
 	$('body').removeClass('bg-dark text-light');
@@ -933,9 +934,24 @@ function acceptSkill(skill) {
 		'event_action': 'Accept',
 		'event_label': 'SP',
 	});
+	comeUndone = skill;
 	skills.data[skill].level++;
 	calculateSkillTotals();
 	adjustWeights();
+}
+
+function undoSkill() {
+	gtag('event', 'Upgrades', {
+		'event_category': 'Upgrades',
+		'event_action': 'Undo',
+		'event_label': 'SP',
+	});
+	if('' != comeUndone) {
+		skills.data[comeUndone].level--;
+		calculateSkillTotals();
+		adjustWeights();
+		comeUndone = '';
+	}
 }
 
 function calculateAll(data, regenerate) {

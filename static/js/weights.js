@@ -136,7 +136,7 @@ function calculateWeight(k,v) {
 			case 'skill':
 				v.rating += reducts.hs[build];
 				v.rating += reducts.ds[build];
-				v.rating += reducts.gold;
+				v.rating += reducts.gold * ('phom' == gold ? .5 : 1);;
 				v.rating += reducts.fs[build];
 				v.rating += reducts.wc[build];
 				v.rating += reducts.sc[build];
@@ -145,7 +145,7 @@ function calculateWeight(k,v) {
 
 			case 'skill_gold':
 				v.rating += (0 < reducts.ds[build] ? .8 : (0 < artifacts.data.gok.level ? .8 : 0));
-				v.rating += reducts.gold;
+				v.rating += reducts.gold * ('phom' == gold ? .5 : 1);;
 				v.rating += (0 < reducts.fs[build] ? .8 : (0 < artifacts.data.os.level ? .8 : 0));
 				v.rating += (0 < reducts.wc[build] ? .8 : (0 < artifacts.data.tac.level ? .8 : 0));
 				v.rating += (0 < reducts.sc[build] ? .8 : (0 < artifacts.data.ho.level ? .8 : 0));
@@ -169,7 +169,7 @@ function calculateWeight(k,v) {
 				break;
 
 			case 'gold_phom':
-				v.rating = reducts.gold * ('phom' == gold ? (3/4) : 1);
+				v.rating = reducts.gold * ('phom' == gold ? .5 : 1);
 				v.color = 'warning';
 				break;
 
