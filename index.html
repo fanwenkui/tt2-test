@@ -162,6 +162,15 @@
 					<p>Enter your artifact & skill data below to receive recommendations on the Relics & SP tabs.</p>
 					<h5>Artifacts</h5>
 					<p>Fill out the current level of your artifacts. If you want to ignore an artifact uncheck it. If you don't have it yet, set it to 0 and it will let you know when you should save up and roll the dice on a new artifact.</p>
+					<p>If this is your first time using the tool, turn off auto-recalculations until you finish entering your artifact levels to prevent the tool from becoming bogged down with recalculating constantly as you enter numbers. This is especially important if you have extremely large artifact levels.</p>
+					<div class="btn-group btn-group-toggle" data-toggle="buttons">
+					  <label id="btnrecalcon" class="btn btn-primary active">
+					    <input type="radio" name="recalc" id="recalc_on" autocomplete="off" checked onchange="updateRecalc();"> Auto Recalc. ON
+					  </label>
+					  <label id="btnrecalcoff" class="btn btn-secondary">
+					    <input type="radio" name="recalc" id="recalc_off" autocomplete="off" onchange="updateRecalc();"> Auto Recalc. OFF
+					  </label>
+					</div>
 					<p>AD Sanity Check: <span id="adsanity">0%</span></p>
 					<button type="button" class="btn btn-primary mb-3" onclick="checkAllArtifacts();">Check All Artifacts</button>
 					<button type="button" class="btn btn-secondary mb-3" onclick="dalViewArtifact(1);">Take a Selfie of your Artifacts</button>

@@ -10,6 +10,32 @@ var winner_svalue = 0;
 var obfuscate = 0;
 var white_rabbit = 0;
 var comeUndone = '';
+var recalc_litmus = true;
+var halp = ('1' == getURLParameter('halp') ? true : false);
+console.log(halp);
+
+function updateRecalc() {
+	if($('#recalc_on').prop('checked') == true) {
+		$('#btnrecalcon').removeClass('btn-secondary').addClass('btn-primary');
+		$('#btnrecalcoff').removeClass('btn-primary').addClass('btn-secondary');
+		recalc_litmus = true;
+	} else {
+		$('#btnrecalcoff').removeClass('btn-secondary').addClass('btn-primary');
+		$('#btnrecalcon').removeClass('btn-primary').addClass('btn-secondary');
+		recalc_litmus = false;
+	}
+}
+
+function getURLParameter(sParam) {
+	var sPageURL = window.location.search.substring(1);
+  var sURLVariables = sPageURL.split('&');
+  for(var i = 0; i < sURLVariables.length; i++) {
+    var sParameterName = sURLVariables[i].split('=');
+    if (sParameterName[0] == sParam) {
+      return sParameterName[1];
+    }
+  }
+}
 
 function toggleDark() {
 	$('body').removeClass('bg-dark text-light');
@@ -321,7 +347,11 @@ function regenerateSkills() {
 function updateArtifact(k) {
 	artifacts.data[k].level = parseInt($('#' + k).val());
 	artifacts.totalAD = calculateTotalAD(artifacts.data, true);
-	adjustWeights();
+	if(true == recalc_litmus) {
+		adjustWeights();
+	} else {
+		storeData();
+	}
 }
 
 function updateSkill(k) {
@@ -382,6 +412,7 @@ function optimize() {
 }
 
 function generateUpgrades() {
+	adjustWeights();
 	obfuscate = 0;
 	white_rabbit = new Date();
 	$('#export_wrap').hide();
@@ -1266,4 +1297,6 @@ $('#import_wrap').hide();
 $('#relicsuggs').hide();
 generateArtifacts();
 generateSkills();
-adjustWeights();
+if(false == halp) {
+	adjustWeights();
+}
