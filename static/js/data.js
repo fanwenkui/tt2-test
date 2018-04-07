@@ -33,6 +33,14 @@ var reducts = {
 		'hs' : 1,
 		'cs' : 0
 	},
+	'tap_hs' : {
+		'hero' : 0,
+		'tap' : 1,
+		'pet' : 1,
+		'sc' : 2/3,
+		'hs' : 1/3,
+		'cs' : 0
+	},
 	'hero' : {
 		'hero' : 1,
 		'tap' : .5,
@@ -78,6 +86,14 @@ var reducts = {
 		'tap' : 1,
 		'pet' : 1,
 		'sc' : 1,
+		'hs' : 1,
+		'cs' : 1
+	},
+	'crit_sc' : {
+		'hero' : 0,
+		'tap' : 1,
+		'pet' : 1,
+		'sc' : 0,
 		'hs' : 1,
 		'cs' : 1
 	},
@@ -1758,7 +1774,6 @@ var skills = {
 				'gold' : [
 					'phom',
 					'coc',
-					'sov',
 					'all',
 				]
 			}
@@ -1801,7 +1816,7 @@ var skills = {
 				'20' : { 'cost' : 28, 'bonus' : 73000000, 'bonus2' : -.2, 'bonus3' : 0 }
 			},
 			'expo' : {
-				'reduct' : 'crit'
+				'reduct' : 'crit_sc'
 			}
 		},
 		'si' : {
@@ -2349,7 +2364,7 @@ var skills = {
 				'20' : { 'cost' : 25, 'bonus' : 1720000000, 'bonus2' : 100000, 'bonus3' : 0 }
 			},
 			'expo' : {
-				'flat' : 'gold'
+				'flat' : 'gold_phom'
 			}
 		},
 		'ar' : {
@@ -2612,7 +2627,7 @@ var skills = {
 				'12' : { 'cost' : 60, 'bonus' : .5, 'bonus2' : .025, 'bonus3' : 0 }
 			},
 			'expo' : {
-				'reduct' : 'tap'
+				'reduct' : 'tap_hs'
 			}
 		},
 		'ds' : {
