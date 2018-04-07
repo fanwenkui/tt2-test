@@ -996,9 +996,9 @@ function calculateAll(data, regenerate) {
 	$.each(data.data, function(k,v) {
 		data.data[k].cost = '';
 		data.data[k].displayCost = '';
-		if(v.level > 0 && v.active == 1 && (-1 == v.max || v.max > v.level)) {
+		if(v.level > 0 && v.active == 1) {
 			data = oldEff(data, k, v);
-			if(data.data[k].efficiency > winner_value) {
+			if(data.data[k].efficiency > winner_value && (-1 == v.max || v.max > v.level)) {
 				winner_e = k;
 				winner_value = data.data[k].efficiency;
 			}
