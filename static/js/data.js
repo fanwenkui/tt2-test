@@ -1365,9 +1365,9 @@ var artifacts = {
         'boh' : {
             'active' : 1,
             'sort' : 64,
-            'name' : 'Boots of Hermes',
+            'name' : '爱马仕之靴',
             'nickname' : 'BoH',
-            'bonus' : ' Portar Chance',
+            'bonus' : ' 跳关怪几率',
             'ad' : 3,
             'effect' : .001,
             'max' : 40,
