@@ -697,6 +697,10 @@ function skillEff(k, v) {
 	skills.data[k].current_effect2 = current_effect2;
 	skills.data[k].current_effect3 = current_effect3;
 	var running_eff = 1;
+	if(v.max < v.level) {
+		v.level = v.max;
+		skills.data[k].level = v.max;
+	}
 	if(v.max > v.level) {
 		if(false === current_effect) {
 			current_effect = 0;
@@ -797,6 +801,10 @@ function calculateSkillTotals() {
 	skills.totals.blue = 0;
 	skills.totals.green = 0;
 	$.each(skills.data, function(k,v) {
+		if(v.level > v.max) {
+			v.level = v.max;
+			skills.data[k].level = v.max;
+		}
 		if(v.level > 0) {
 			var lvl = 1;
 			while(lvl <= v.level) {
@@ -1161,7 +1169,7 @@ if (storageAvailable('localStorage')) {
 	if(null != localSkills && 'undefined' != typeof localSkills.data) {
 		$.each(localSkills.data, function(k, v) {
 			if(undefined != skills.data[k]) {
-				skills.data[k].level = v.level;
+				skills.data[k].level = (v.max < v.level ? v.max : v.level);
 				skills.data[k].active = v.active;
 			}
 		});
