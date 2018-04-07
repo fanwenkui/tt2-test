@@ -203,11 +203,11 @@ function updateActive(k) {
 	if($('#' + k + 'active').is(':checked')) {
 		artifacts.data[k].active = 1;
 		$('#' + k + 'row').removeClass('text-dark bg-secondary');
-		$('#' + k).prop('readonly', false);
+//		$('#' + k).prop('readonly', false);
 	} else {
 		artifacts.data[k].active = 0;
 		$('#' + k + 'row').addClass('text-dark bg-secondary');
-		$('#' + k).prop('readonly', true);
+//		$('#' + k).prop('readonly', true);
 	}
 	adjustBoS();
 	artifacts = calculate(artifacts, k, true, true);
@@ -217,11 +217,11 @@ function updateActiveSkill(k) {
 	if($('#skill' + k + 'active').is(':checked')) {
 		skills.data[k].active = 1;
 		$('#skill' + k + 'row').removeClass('text-dark bg-secondary');
-		$('#skill' + k).prop('readonly', false);
+//		$('#skill' + k).prop('readonly', false);
 	} else {
 		skills.data[k].active = 0;
 		$('#skill' + k + 'row').addClass('text-dark bg-secondary');
-		$('#skill' + k).prop('readonly', true);
+//		$('#skill' + k).prop('readonly', true);
 	}
 	calculateAllSkills();
 }
