@@ -146,7 +146,7 @@ var artifacts = {
 			'gmax' : 0.12,
 			'grate' : .0001,
 			'gexpo' : .5,
-			'ccoef' : .6,
+			'ccoef' : .7,
 			'cexpo' : 2.5,
 			'type' : 'multiply',
 			'expo' : {
@@ -165,7 +165,7 @@ var artifacts = {
 			'gmax' : 0.36,
 			'grate' : .00018,
 			'gexpo' : .5,
-			'ccoef' : .7,
+			'ccoef' : .6,
 			'cexpo' : 1.8,
 			'type' : 'multiply',
 			'expo' : {
