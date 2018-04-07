@@ -144,13 +144,11 @@ function calculateWeight(k,v) {
 				break;
 
 			case 'skill_gold':
-				v.rating += reducts.hs[build];
-				v.rating += reducts.ds[build];
-				v.rating += reducts.fs[build];
-				v.rating += reducts.wc[build];
-				v.rating += reducts.sc[build];
-				v.rating *= reducts.gold
+				v.rating += (0 < reducts.ds[build] ? .8 : (0 < artifacts.data.gok.level ? .8 : 0));
 				v.rating += reducts.gold;
+				v.rating += (0 < reducts.fs[build] ? .8 : (0 < artifacts.data.os.level ? .8 : 0));
+				v.rating += (0 < reducts.wc[build] ? .8 : (0 < artifacts.data.tac.level ? .8 : 0));
+				v.rating += (0 < reducts.sc[build] ? .8 : (0 < artifacts.data.ho.level ? .8 : 0));
 				v.color = 'warning';
 				break;
 

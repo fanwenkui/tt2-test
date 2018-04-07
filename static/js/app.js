@@ -320,7 +320,7 @@ function regenerateSkills() {
 function updateArtifact(k) {
 	artifacts.data[k].level = parseInt($('#' + k).val());
 	artifacts.totalAD = calculateTotalAD(artifacts.data, true);
-	artifacts = calculate(artifacts, k, true, true);
+	adjustWeights();
 }
 
 function updateSkill(k) {
