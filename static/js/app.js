@@ -350,7 +350,8 @@ function updateArtifact(k) {
 }
 
 function updateSkill(k) {
-	skills.data[k].level = parseInt($('#skill' + k).val());
+	var lvl = parseInt($('#skill' + k).val();
+	skills.data[k].level = (skills.data[k].max < lvl ? skills.data[k].max : lvl);
 	adjustWeights();
 }
 function countArtifacts(data) {
