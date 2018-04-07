@@ -89,7 +89,7 @@ function generateArtifacts() {
 				row += '</label>';
 			row += '</td>';
 			row += '<td>';
-				row += '<input' + (1 == v.active ? '' : ' readonly="readonly"') + ' id="' + k + '" value="' + v.level + '" type="tel" class="form-control artlvl" placeholder="0" aria-label="Level of ' + v.name + '" aria-describedby="basic-addon' + k + '"onchange="updateArtifact(\'' + k + '\')">';
+				row += '<input id="' + k + '" value="' + v.level + '" type="tel" class="form-control artlvl" placeholder="0" aria-label="Level of ' + v.name + '" aria-describedby="basic-addon' + k + '"onchange="updateArtifact(\'' + k + '\')">';
 			row += '</td>';
 			row += '<td>';
 				row += '<span class="badge" id="' + k + 'expo"></span>';
@@ -148,7 +148,7 @@ function generateSkills() {
 				row += '</label>';
 			row += '</td>';
 			row += '<td>';
-				row += '<input' + (1 == v.active ? '' : ' readonly="readonly"') + ' id="skill' + k + '" value="' + v.level + '" type="tel" class="form-control artlvl" placeholder="0" aria-label="Level of ' + v.name + '" aria-describedby="basic-addonskill' + k + '"onchange="updateSkill(\'' + k + '\')">';
+				row += '<input id="skill' + k + '" value="' + v.level + '" type="tel" class="form-control artlvl" placeholder="0" aria-label="Level of ' + v.name + '" aria-describedby="basic-addonskill' + k + '"onchange="updateSkill(\'' + k + '\')">';
 			row += '</td>';
 			row += '<td>';
 				row += '<span class="badge" id="skill' + k + 'expo"></span>';
@@ -203,11 +203,9 @@ function updateActive(k) {
 	if($('#' + k + 'active').is(':checked')) {
 		artifacts.data[k].active = 1;
 		$('#' + k + 'row').removeClass('text-dark bg-secondary');
-//		$('#' + k).prop('readonly', false);
 	} else {
 		artifacts.data[k].active = 0;
 		$('#' + k + 'row').addClass('text-dark bg-secondary');
-//		$('#' + k).prop('readonly', true);
 	}
 	adjustBoS();
 	artifacts = calculate(artifacts, k, true, true);
@@ -217,11 +215,9 @@ function updateActiveSkill(k) {
 	if($('#skill' + k + 'active').is(':checked')) {
 		skills.data[k].active = 1;
 		$('#skill' + k + 'row').removeClass('text-dark bg-secondary');
-//		$('#skill' + k).prop('readonly', false);
 	} else {
 		skills.data[k].active = 0;
 		$('#skill' + k + 'row').addClass('text-dark bg-secondary');
-//		$('#skill' + k).prop('readonly', true);
 	}
 	calculateAllSkills();
 }
