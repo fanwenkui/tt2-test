@@ -133,14 +133,14 @@ var reducts = {
 
 var artifacts = {
 	'totalAD' : 0,
-	'data' : {
-		'bos' : {
-			'active' : 1,
+  'data' : {
+	  'bos' : {
+		  'active' : 1,
 			'sort' : 1,
 			'name' : '暗影之书',
 			'nickname' : 'BoS',
 			'bonus' : ' 蜕变圣物',
-			'ad' : .2,
+			'ad' : .3,
 			'effect' : .05,
 			'max' : -1,
 			'gmax' : 0.12,
@@ -159,7 +159,7 @@ var artifacts = {
 			'name' : '瓦如恩之石',
 			'nickname' : 'SotV',
 			'bonus' : ' 巨人黄金',
-			'ad' : .5,
+			'ad' : .2,
 			'effect' : .01,
 			'max' : -1,
 			'gmax' : 0.36,
@@ -1593,9 +1593,9 @@ var skills = {
 		'blue' : 0,
 		'green' : 0
 	},
-	'data' : {
-		'kv' : {
-			'active' : 1,
+  'data' : {
+	  'kv' : {
+		  'active' : 1,
 			'sort' : 1,
 			'name' : '骑士之勇',
 			'nickname' : 'R1',
@@ -1636,7 +1636,7 @@ var skills = {
 			}
 		},
 		'cho' : {
-			'active' : 1,
+		  'active' : 1,
 			'sort' : 2,
 			'name' : '骑士勋章',
 			'nickname' : 'R2_1',
@@ -1677,7 +1677,7 @@ var skills = {
 			}
 		},
 		'pe' : {
-			'active' : 1,
+		  'active' : 1,
 			'sort' : 3,
 			'name' : '宠物进化',
 			'nickname' : 'R2_2',
@@ -1718,7 +1718,7 @@ var skills = {
 			}
 		},
 		'phom' : {
-			'active' : 1,
+		  'active' : 1,
 			'sort' : 4,
 			'name' : '米达斯之心',
 			'branch' : 'red',
@@ -1764,7 +1764,7 @@ var skills = {
 			}
 		},
 		'cs' : {
-			'active' : 1,
+		  'active' : 1,
 			'sort' : 5,
 			'name' : '劈砍',
 			'nickname' : 'R3_1',
@@ -1805,7 +1805,7 @@ var skills = {
 			}
 		},
 		'si' : {
-			'active' : 1,
+		  'active' : 1,
 			'sort' : 6,
 			'name' : '召唤地狱火',
 			'nickname' : 'R3_2',
@@ -1846,7 +1846,7 @@ var skills = {
 			}
 		},
 		'lbu' : {
-			'active' : 1,
+		  'active' : 1,
 			'sort' : 7,
 			'name' : '闪电爆发',
 			'nickname' : 'R3_3',
@@ -1887,7 +1887,7 @@ var skills = {
 			}
 		},
 		'bf' : {
-			'active' : 1,
+		  'active' : 1,
 			'sort' : 8,
 			'name' : '野蛮之怒',
 			'nickname' : 'R4_1',
@@ -1920,7 +1920,7 @@ var skills = {
 			}
 		},
 		'fz' : {
-			'active' : 1,
+		  'active' : 1,
 			'sort' : 9,
 			'name' : '闪电穿梭',
 			'nickname' : 'R4_3',
@@ -1953,7 +1953,7 @@ var skills = {
 			}
 		},
 		'mc' : {
-			'active' : 1,
+		  'active' : 1,
 			'sort' : 10,
 			'name' : '指挥官',
 			'nickname' : 'Y1',
@@ -1994,7 +1994,7 @@ var skills = {
 			}
 		},
 		'sow' : {
-			'active' : 1,
+		  'active' : 1,
 			'sort' : 11,
 			'name' : '战利品',
 			'nickname' : 'Y2_1',
@@ -2041,7 +2041,7 @@ var skills = {
 			}
 		},
 		'hm' : {
-			'active' : 1,
+		  'active' : 1,
 			'sort' : 12,
 			'name' : '英雄王者',
 			'nickname' : 'Y2_2',
@@ -2082,7 +2082,7 @@ var skills = {
 			}
 		},
 		'aas' : {
-			'active' : 1,
+		  'active' : 1,
 			'sort' : 13,
 			'name' : '空袭',
 			'nickname' : 'Y2_3',
@@ -2123,7 +2123,7 @@ var skills = {
 			}
 		},
 		'ti' : {
-			'active' : 1,
+		  'active' : 1,
 			'sort' : 14,
 			'name' : '战略洞悉',
 			'nickname' : 'Y3_1',
@@ -2164,7 +2164,7 @@ var skills = {
 			}
 		},
 		'coo' : {
-			'active' : 1,
+		  'active' : 1,
 			'sort' : 15,
 			'name' : '协同进攻',
 			'nickname' : 'Y3_3',
@@ -2205,7 +2205,7 @@ var skills = {
 			}
 		},
 		'aaw' : {
-			'active' : 1,
+		  'active' : 1,
 			'sort' : 16,
 			'name' : '灵魂觉醒',
 			'nickname' : 'Y4_1',
@@ -2238,7 +2238,7 @@ var skills = {
 			}
 		},
 		'as' : {
-			'active' : 1,
+		  'active' : 1,
 			'sort' : 16,
 			'name' : '锚定射击',
 			'nickname' : 'Y4_3',
@@ -2435,7 +2435,7 @@ var skills = {
 			}
 		},
 		'fc' : {
-			'active' : 1,
+		  'active' : 1,
 			'sort' : 21,
 			'name' : '仙女魔力',
 			'nickname' : 'B3_1',
@@ -2468,7 +2468,7 @@ var skills = {
 			}
 		},
 		'ms' : {
-			'active' : 1,
+		  'active' : 1,
 			'sort' : 22,
 			'name' : '法力虹吸',
 			'nickname' : 'B3_2',
@@ -2510,7 +2510,7 @@ var skills = {
 			}
 		},
 		'ed' : {
-			'active' : 1,
+		  'active' : 1,
 			'sort' : 23,
 			'name' : '永恒黑暗',
 			'nickname' : 'B3_3',
@@ -2551,7 +2551,7 @@ var skills = {
 			}
 		},
 		'mm' : {
-			'active' : 1,
+		  'active' : 1,
 			'sort' : 24,
 			'name' : '曼尼马纳',
 			'nickname' : 'B4_1',
@@ -2584,7 +2584,7 @@ var skills = {
 			}
 		},
 		'ls' : {
-			'active' : 1,
+		  'active' : 1,
 			'sort' : 25,
 			'name' : '闪电打击',
 			'nickname' : 'B4_2',
@@ -2617,7 +2617,7 @@ var skills = {
 			}
 		},
 		'ds' : {
-			'active' : 1,
+		  'active' : 1,
 			'sort' : 26,
 			'name' : '相位转移',
 			'nickname' : 'B4_3',
