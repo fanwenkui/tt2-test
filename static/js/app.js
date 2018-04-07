@@ -352,6 +352,7 @@ function updateArtifact(k) {
 function updateSkill(k) {
 	var lvl = parseInt($('#skill' + k).val();
 	skills.data[k].level = (skills.data[k].max < lvl ? skills.data[k].max : lvl);
+	$('#skill' + k).val(lvl);
 	adjustWeights();
 }
 function countArtifacts(data) {
@@ -701,6 +702,7 @@ function skillEff(k, v) {
 	if(v.max < v.level) {
 		v.level = v.max;
 		skills.data[k].level = v.max;
+		$('#skill' + k).val(v.max);
 	}
 	if(v.max > v.level) {
 		if(false === current_effect) {
@@ -805,6 +807,7 @@ function calculateSkillTotals() {
 		if(v.level > v.max) {
 			v.level = v.max;
 			skills.data[k].level = v.max;
+			$('#skill' + k).val(v.max);
 		}
 		if(v.level > 0) {
 			var lvl = 1;
