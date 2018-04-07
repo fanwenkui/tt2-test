@@ -164,6 +164,15 @@
 					<p>在下面输入您的神器和技能数据，以生成圣物和技能建议升级方案</p>
 					<h5>神器</h5>
 					<p>填写您当前拥有神器的级别。请不要勾选您希望忽略升级的神器。如果你还没有某个神器，请勾选并设置他的级别为0，这将会推荐您保留圣物以挖掘新的神器</p>
+					<p>如果这是您第一次使用该工具，请关闭自动计算功能，直到完成神器等级的录入，以防止该工具在录入时不断计算影响流畅度，特别是如果您的神器等级很高，这就尤为重要</p>
+					<div class="btn-group btn-group-toggle" data-toggle="buttons">
+					  <label id="btnrecalcon" class="btn btn-primary active">
+					    <input type="radio" name="recalc" id="recalc_on" autocomplete="off" checked onchange="updateRecalc();"> 自动计算：开
+					  </label>
+					  <label id="btnrecalcoff" class="btn btn-secondary">
+					    <input type="radio" name="recalc" id="recalc_off" autocomplete="off" onchange="updateRecalc();"> 自动计算：关
+					  </label>
+					</div>
 					<p>神器伤害： <span id="adsanity">0%</span></p>
 					<button type="button" class="btn btn-primary mb-3" onclick="checkAllArtifacts();">选中全部</button>
 					<button type="button" class="btn btn-secondary mb-3" onclick="dalViewArtifact(1);">截图模式</button>
