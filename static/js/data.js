@@ -909,7 +909,7 @@ var artifacts = {
 			'cexpo' : 1.7,
 			'type' : 'multiply',
 			'expo' : {
-				'flat' : 'gold'
+				'flat' : 'gold_phom'
 			}
 		},
 		'bor' : {
@@ -1042,7 +1042,7 @@ var artifacts = {
 			'cexpo' : 2.4,
 			'type' : 'add',
 			'expo' : {
-				'flat' : 'gold'
+				'flat' : 'gold_phom'
 			}
 		},
 		'ga' : {
@@ -1156,7 +1156,7 @@ var artifacts = {
 			'cexpo' : 3,
 			'type' : 'add',
 			'expo' : {
-				'flat' : 'gold'
+				'flat' : 'gold_phom'
 			}
 		},
 		'os' : {

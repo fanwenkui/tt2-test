@@ -169,7 +169,7 @@ function calculateWeight(k,v) {
 				break;
 
 			case 'gold_phom':
-				v.rating = reducts.gold * ('phom' == gold ? (3/4) : 1);
+				v.rating = reducts.gold * ('phom' == gold ? .5 : 1);
 				v.color = 'warning';
 				break;
 
