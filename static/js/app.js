@@ -84,7 +84,7 @@ function generateArtifacts() {
 			row += '</td>';
 			row += '<td>';
 				row += '<label for="' + k + 'active" id="basic-addon' + k + '">';
-					row += '<span class="d-block d-sm-none">' + v.nickname + '</span>';
+					row += '<span class="d-block d-sm-none">' + v.name + '</span>';
 					row += '<span class="d-none d-sm-block">' + v.name + '</span>';
 				row += '</label>';
 			row += '</td>';
@@ -143,7 +143,7 @@ function generateSkills() {
 			row += '</td>';
 			row += '<td>';
 				row += '<label for="skill' + k + 'active" id="basic-addonskill' + k + '">';
-					row += '<span class="d-block d-sm-none">' + v.nickname + '</span>';
+					row += '<span class="d-block d-sm-none">' + v.name + '</span>';
 					row += '<span class="d-none d-sm-block">' + v.name + '</span>';
 				row += '</label>';
 			row += '</td>';
@@ -429,7 +429,7 @@ function generateUpgrades() {
 	$('#relicreccs').hide();
 	storeData();
 	if(winner_n != '') {
-		$('#new_artifact').empty().append('<em>NOTE: You would be better off saving up for a new artifact (' + artifacts.data[winner_n].name + ').</em>');
+		$('#new_artifact').empty().append('<em>注意：你最好积累圣物以挖掘新神器 (' + artifacts.data[winner_n].name + ').</em>');
 	}
 	relics = new Decimal(('' == $('#relics').val() ? 0 : $('#relics').val()) + '.' + ('' == $('#relics_decimal').val() ? 0 : $('#relics_decimal').val()));
 	buffer = 0;
