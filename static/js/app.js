@@ -12,7 +12,6 @@ var white_rabbit = 0;
 var comeUndone = '';
 var recalc_litmus = true;
 var halp = ('1' == getURLParameter('halp') ? true : false);
-console.log(halp);
 
 function updateRecalc() {
 	if($('#recalc_on').prop('checked') == true) {
@@ -90,7 +89,7 @@ function generateArtifacts() {
 				row += '</label>';
 			row += '</td>';
 			row += '<td>';
-				row += '<input' + (1 == v.active ? '' : ' readonly="readonly"') + ' id="' + k + '" value="' + v.level + '" type="tel" class="form-control artlvl" placeholder="0" aria-label="Level of ' + v.name + '" aria-describedby="basic-addon' + k + '"onchange="updateArtifact(\'' + k + '\')">';
+				row += '<input id="' + k + '" value="' + v.level + '" type="tel" class="form-control artlvl" placeholder="0" aria-label="Level of ' + v.name + '" aria-describedby="basic-addon' + k + '"onchange="updateArtifact(\'' + k + '\')">';
 			row += '</td>';
 			row += '<td>';
 				row += '<span class="badge" id="' + k + 'expo"></span>';
@@ -149,7 +148,7 @@ function generateSkills() {
 				row += '</label>';
 			row += '</td>';
 			row += '<td>';
-				row += '<input' + (1 == v.active ? '' : ' readonly="readonly"') + ' id="skill' + k + '" value="' + v.level + '" type="tel" class="form-control artlvl" placeholder="0" aria-label="Level of ' + v.name + '" aria-describedby="basic-addonskill' + k + '"onchange="updateSkill(\'' + k + '\')">';
+				row += '<input id="skill' + k + '" value="' + v.level + '" type="tel" class="form-control artlvl" placeholder="0" aria-label="Level of ' + v.name + '" aria-describedby="basic-addonskill' + k + '"onchange="updateSkill(\'' + k + '\')">';
 			row += '</td>';
 			row += '<td>';
 				row += '<span class="badge" id="skill' + k + 'expo"></span>';
@@ -204,11 +203,9 @@ function updateActive(k) {
 	if($('#' + k + 'active').is(':checked')) {
 		artifacts.data[k].active = 1;
 		$('#' + k + 'row').removeClass('text-dark bg-secondary');
-		$('#' + k).prop('readonly', false);
 	} else {
 		artifacts.data[k].active = 0;
 		$('#' + k + 'row').addClass('text-dark bg-secondary');
-		$('#' + k).prop('readonly', true);
 	}
 	adjustBoS();
 	artifacts = calculate(artifacts, k, true, true);
@@ -218,11 +215,9 @@ function updateActiveSkill(k) {
 	if($('#skill' + k + 'active').is(':checked')) {
 		skills.data[k].active = 1;
 		$('#skill' + k + 'row').removeClass('text-dark bg-secondary');
-		$('#skill' + k).prop('readonly', false);
 	} else {
 		skills.data[k].active = 0;
 		$('#skill' + k + 'row').addClass('text-dark bg-secondary');
-		$('#skill' + k).prop('readonly', true);
 	}
 	calculateAllSkills();
 }
@@ -355,7 +350,9 @@ function updateArtifact(k) {
 }
 
 function updateSkill(k) {
-	skills.data[k].level = parseInt($('#skill' + k).val());
+	var lvl = parseInt($('#skill' + k).val());
+	skills.data[k].level = (skills.data[k].max < lvl ? skills.data[k].max : lvl);
+	$('#skill' + k).val(lvl);
 	adjustWeights();
 }
 function countArtifacts(data) {
@@ -412,7 +409,9 @@ function optimize() {
 }
 
 function generateUpgrades() {
-	adjustWeights();
+	if(false == recalc_litmus) {
+		adjustWeights();
+	}
 	obfuscate = 0;
 	white_rabbit = new Date();
 	$('#export_wrap').hide();
@@ -700,6 +699,11 @@ function skillEff(k, v) {
 	skills.data[k].current_effect2 = current_effect2;
 	skills.data[k].current_effect3 = current_effect3;
 	var running_eff = 1;
+	if(v.max < v.level) {
+		v.level = v.max;
+		skills.data[k].level = v.max;
+		$('#skill' + k).val(v.max);
+	}
 	if(v.max > v.level) {
 		if(false === current_effect) {
 			current_effect = 0;
@@ -800,6 +804,11 @@ function calculateSkillTotals() {
 	skills.totals.blue = 0;
 	skills.totals.green = 0;
 	$.each(skills.data, function(k,v) {
+		if(v.level > v.max) {
+			v.level = v.max;
+			skills.data[k].level = v.max;
+			$('#skill' + k).val(v.max);
+		}
 		if(v.level > 0) {
 			var lvl = 1;
 			while(lvl <= v.level) {
@@ -996,9 +1005,9 @@ function calculateAll(data, regenerate) {
 	$.each(data.data, function(k,v) {
 		data.data[k].cost = '';
 		data.data[k].displayCost = '';
-		if(v.level > 0 && v.active == 1 && (-1 == v.max || v.max > v.level)) {
+		if(v.level > 0 && v.active == 1) {
 			data = oldEff(data, k, v);
-			if(data.data[k].efficiency > winner_value) {
+			if(data.data[k].efficiency > winner_value && (-1 == v.max || v.max > v.level)) {
 				winner_e = k;
 				winner_value = data.data[k].efficiency;
 			}
@@ -1164,7 +1173,7 @@ if (storageAvailable('localStorage')) {
 	if(null != localSkills && 'undefined' != typeof localSkills.data) {
 		$.each(localSkills.data, function(k, v) {
 			if(undefined != skills.data[k]) {
-				skills.data[k].level = v.level;
+				skills.data[k].level = (v.max < v.level ? v.max : v.level);
 				skills.data[k].active = v.active;
 			}
 		});
