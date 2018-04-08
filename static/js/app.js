@@ -428,6 +428,15 @@ function generateUpgrades() {
 	$('#relicsuggs').show();
 	$('#relicreccs').hide();
 	storeData();
+/*
+	var quickCheck = 0;
+	$.each(artifacts.data, function(k,v) {
+		if(0 == v.level && v.rating >= 3 && v.rating > quickCheck) {
+			quickCheck = v.rating;
+			winner_n = k;
+		}
+	});
+*/
 	if(winner_n != '') {
 		$('#new_artifact').empty().append('<em>NOTE: You would be better off saving up for a new artifact (' + artifacts.data[winner_n].name + ').</em>');
 	}
