@@ -109,7 +109,6 @@
 									<option value="coc">Chesterson</option>
 									<option value="fairy">Fairies</option>
 									<option value="phom">Heart of Midas</option>
-									<option value="sov">SotV</option>
 								</select>
 							</div>
 							<div class="form-group col-12 col-md-6 col-lg-4">
@@ -163,7 +162,7 @@
 					<h5>Artifacts</h5>
 					<p>Fill out the current level of your artifacts. If you want to ignore an artifact uncheck it. If you don't have it yet, set it to 0 and it will let you know when you should save up and roll the dice on a new artifact.</p>
 					<p>If this is your first time using the tool, turn off auto-recalculations until you finish entering your artifact levels to prevent the tool from becoming bogged down with recalculating constantly as you enter numbers. This is especially important if you have extremely large artifact levels.</p>
-					<div class="btn-group btn-group-toggle" data-toggle="buttons">
+					<div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
 					  <label id="btnrecalcon" class="btn btn-primary active">
 					    <input type="radio" name="recalc" id="recalc_on" autocomplete="off" checked onchange="updateRecalc();"> Auto Recalc. ON
 					  </label>
@@ -299,7 +298,7 @@
 						</div>
 						<p id="new_artifact" class="ml-2"></p>
 						<div class="col-12 col-md-8 col-lg-6 mb-4">
-							<div class="progress mb-3" id="progressBar">
+							<div class="progress mb-3 border border-dark" id="progressBar">
 								<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%" id="progress"></div>
 							</div>
 							<div id="pudding" class="mb-4"></div>
