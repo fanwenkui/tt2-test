@@ -724,6 +724,10 @@ function skillEff(k, v) {
 			totalCost += v.levels[lvl--].cost;
 		}
 		var next_effect = v.levels[v.level + 1].bonus;
+		if('aaw' == k && 0 < v.level) {
+			next_effect = Math.pow(next_effect, v.levels[v.level + 1].bonus3);
+			current_effect = Math.pow(current_effect, v.levels[v.level].bonus3);
+		}
 		var effect_diff = Math.abs(next_effect)/(0 < v.level && 0 != current_effect && 'X' != current_effect ? Math.abs(current_effect) : Math.abs(next_effect/2));
 		var effect_eff = Math.pow(effect_diff, v.rating);
 		running_eff *= effect_eff;
@@ -747,7 +751,7 @@ function skillEff(k, v) {
 			}
 		}
 		var effDec = Decimal(running_eff);
-		var eff = effDec.pow(1/totalCost).sub(1).toNumber();
+		var eff = effDec.pow(1/v.levels[v.level + 1].cost).sub(1).toNumber();
 		skills.data[k].efficiency = eff;
 	}
 }
@@ -1106,6 +1110,14 @@ function displayEffect(value, type) {
 			if(false != value) {
 				value = value -1
 			}
+			if(value > 0) {
+				return '+' + displayTruncated(value);
+			} else {
+				return displayTruncated(value);
+			}
+			break;
+
+		case 'add_skill':
 			if(value > 0) {
 				return '+' + displayTruncated(value);
 			} else {
