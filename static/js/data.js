@@ -113,6 +113,14 @@ var reducts = {
 		'hs' : 0,
 		'cs' : 0
 	},
+	'rev_cs' : {
+		'hero' : 1,
+		'tap' : 1,
+		'pet' : 1,
+		'sc' : 1,
+		'hs' : 0,
+		'cs' : 0
+	},
 	'cs' : {
 		'hero' : 0,
 		'tap' : 0,
@@ -2282,7 +2290,7 @@ var skills = {
 				'12' : { 'cost' : 60, 'bonus' : 11800000000000, 'bonus2' : 2, 'bonus3' : 0 }
 			},
 			'expo' : {
-				'flat' : 'dmg'
+				'flat' : 'rev_cs'
 			}
 		},
 		'lbr' : {

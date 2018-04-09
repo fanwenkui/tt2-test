@@ -428,6 +428,15 @@ function generateUpgrades() {
 	$('#relicsuggs').show();
 	$('#relicreccs').hide();
 	storeData();
+/*
+	var quickCheck = 0;
+	$.each(artifacts.data, function(k,v) {
+		if(0 == v.level && v.rating >= 3 && v.rating > quickCheck) {
+			quickCheck = v.rating;
+			winner_n = k;
+		}
+	});
+*/
 	if(winner_n != '') {
 		$('#new_artifact').empty().append('<em>NOTE: You would be better off saving up for a new artifact (' + artifacts.data[winner_n].name + ').</em>');
 	}
@@ -734,7 +743,7 @@ function skillEff(k, v) {
 			if(0 != next_effect3) {
 				var effect_diff3 = Math.abs(next_effect3)/(0 < v.level && 0 != current_effect3 && 'X' != current_effect3 ? Math.abs(current_effect3) : Math.abs(next_effect3/2));
 				var effect_eff3 = Math.pow(effect_diff3, v.rating);
-				running_eff *= next_effect3;
+				running_eff *= effect_eff3;
 			}
 		}
 		var effDec = Decimal(running_eff);
