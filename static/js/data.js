@@ -1714,7 +1714,7 @@ var skills = {
 			'prereq' : 'kv',
 			'max' : 20,
 			'type' : 'multiply',
-			'type2' : 'add',
+			'type2' : 'add_skill',
 			'type3' : -1,
 			'levels' : {
 				'1' : { 'cost' : 1, 'bonus' : 1.5, 'bonus2' : 0, 'bonus3' : 0 },
@@ -1754,8 +1754,8 @@ var skills = {
 			'tier' : 2,
 			'prereq' : 'kv',
 			'max' : 20,
-			'type' : 'add',
-			'type2' : 'add',
+			'type' : 'add_skill',
+			'type2' : 'add_skill',
 			'type3' : -1,
 			'levels' : {
 				'1' : { 'cost' : 1, 'bonus' : 4, 'bonus2' : 0, 'bonus3' : 0 },
@@ -1882,7 +1882,7 @@ var skills = {
 			'prereq' : 'phom',
 			'max' : 20,
 			'type' : 'multiply',
-			'type2' : 'add',
+			'type2' : 'add_skill',
 			'type3' : -1,
 			'levels' : {
 				'1' : { 'cost' : 2, 'bonus' : 3, 'bonus2' : 2, 'bonus3' : 0 },
@@ -1923,7 +1923,7 @@ var skills = {
 			'prereq' : 'cs',
 			'max' : 12,
 			'type' : 'multiply',
-			'type2' : 'add',
+			'type2' : 'add_skill',
 			'type3' : -1,
 			'levels' : {
 				'1' : { 'cost' : 3, 'bonus' : 2.5, 'bonus2' : 1, 'bonus3' : 0 },
@@ -1956,7 +1956,7 @@ var skills = {
 			'prereq' : 'lbu',
 			'max' : 12,
 			'type' : 'multiply',
-			'type2' : 'add',
+			'type2' : 'add_skill',
 			'type3' : -1,
 			'levels' : {
 				'1' : { 'cost' : 3, 'bonus' : 1, 'bonus2' : 0, 'bonus3' : 0 },
@@ -2077,7 +2077,7 @@ var skills = {
 			'prereq' : 'mc',
 			'max' : 20,
 			'type' : 'multiply',
-			'type2' : 'add',
+			'type2' : 'add_skill',
 			'type3' : -1,
 			'levels' : {
 				'1' : { 'cost' : 1, 'bonus' : 1.5, 'bonus2' : 1, 'bonus3' : 0 },
@@ -2118,7 +2118,7 @@ var skills = {
 			'prereq' : 'mc',
 			'max' : 20,
 			'type' : 'multiply',
-			'type2' : 'add',
+			'type2' : 'add_skill',
 			'type3' : -1,
 			'levels' : {
 				'1' : { 'cost' : 1, 'bonus' : 1.5, 'bonus2' : 1, 'bonus3' : 0 },
@@ -2200,7 +2200,7 @@ var skills = {
 			'prereq' : 'aas',
 			'max' : 20,
 			'type' : 'multiply',
-			'type2' : 'add',
+			'type2' : 'add_skill',
 			'type3' : -1,
 			'levels' : {
 				'1' : { 'cost' : 2, 'bonus' : 1.8, 'bonus2' : 0, 'bonus3' : 0 },
@@ -2242,7 +2242,7 @@ var skills = {
 			'max' : 12,
 			'type' : 'multiply',
 			'type2' : -1,
-			'type3' : 'add',
+			'type3' : 'add_skill',
 			'levels' : {
 				'1' : { 'cost' : 3, 'bonus' : 1.3, 'bonus2' : 0, 'bonus3' : 5 },
 				'2' : { 'cost' : 4, 'bonus' : 1.5, 'bonus2' : 0, 'bonus3' : 5 },
@@ -2274,7 +2274,7 @@ var skills = {
 			'prereq' : 'coo',
 			'max' : 12,
 			'type' : 'multiply',
-			'type2' : 'add',
+			'type2' : 'add_skill',
 			'type3' : -1,
 			'levels' : {
 				'1' : { 'cost' : 3, 'bonus' : 3.5, 'bonus2' : .8, 'bonus3' : 0 },
@@ -2306,8 +2306,8 @@ var skills = {
 			'tier' : 1,
 			'prereq' : -1,
 			'max' : 20,
-			'type' : 'add',
-			'type2' : 'add',
+			'type' : 'add_skill',
+			'type2' : 'add_skill',
 			'type3' : -1,
 			'levels' : {
 				'1' : { 'cost' : 1, 'bonus' : 5, 'bonus2' : .1, 'bonus3' : 0 },
@@ -2389,7 +2389,7 @@ var skills = {
 			'prereq' : 'lbr',
 			'max' : 20,
 			'type' : 'multiply',
-			'type2' : 'add',
+			'type2' : 'add_skill',
 			'type3' : -1,
 			'levels' : {
 				'1' : { 'cost' : 1, 'bonus' : 2, 'bonus2' : 0, 'bonus3' : 0 },
@@ -2430,7 +2430,7 @@ var skills = {
 			'prereq' : 'lbr',
 			'max' : 20,
 			'type' : 'multiply',
-			'type2' : 'add',
+			'type2' : 'add_skill',
 			'type3' : -1,
 			'levels' : {
 				'1' : { 'cost' : 1, 'bonus' : 1.5, 'bonus2' : .1, 'bonus3' : 0 },
@@ -2471,7 +2471,7 @@ var skills = {
 			'prereq' : 'mu',
 			'max' : 10,
 			'type' : 'pct_pos',
-			'type2' : 'add',
+			'type2' : 'add_skill',
 			'type3' : -1,
 			'levels' : {
 				'1' : { 'cost' : 2, 'bonus' : .04, 'bonus2' : -4, 'bonus3' : 0 },
@@ -2545,8 +2545,8 @@ var skills = {
 			'tier' : 3,
 			'prereq' : 'pv',
 			'max' : 20,
-			'type' : 'add',
-			'type2' : 'add',
+			'type' : 'add_skill',
+			'type2' : 'add_skill',
 			'type3' : -1,
 			'levels' : {
 				'1' : { 'cost' : 2, 'bonus' : 2, 'bonus2' : 0, 'bonus3' : 0 },
@@ -2586,7 +2586,7 @@ var skills = {
 			'tier' : 4,
 			'prereq' : 'fc',
 			'max' : 12,
-			'type' : 'add',
+			'type' : 'add_skill',
 			'type2' : 'pct_pos',
 			'type3' : -1,
 			'levels' : {
@@ -2727,7 +2727,7 @@ var skills = {
 			'prereq' : 'mt',
 			'max' : 20,
 			'type' : 'multiply',
-			'type2' : 'add',
+			'type2' : 'add_skill',
 			'type3' : -1,
 			'levels' : {
 				'1' : { 'cost' : 1, 'bonus' : 1.6, 'bonus2' : 2, 'bonus3' : 0 },
@@ -2768,7 +2768,7 @@ var skills = {
 			'prereq' : 'mt',
 			'max' : 10,
 			'type' : 'multiply',
-			'type2' : 'add',
+			'type2' : 'add_skill',
 			'type3' : 'pct_pos',
 			'levels' : {
 				'1' : { 'cost' : 1, 'bonus' : 1, 'bonus2' : 0, 'bonus3' : .99 },
@@ -2798,7 +2798,7 @@ var skills = {
 			'tier' : 2,
 			'prereq' : 'mt',
 			'max' : 10,
-			'type' : 'add',
+			'type' : 'add_skill',
 			'type2' : 'pct_pos',
 			'type3' : -1,
 			'levels' : {
