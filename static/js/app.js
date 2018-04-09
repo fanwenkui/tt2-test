@@ -743,7 +743,7 @@ function skillEff(k, v) {
 			if(0 != next_effect3) {
 				var effect_diff3 = Math.abs(next_effect3)/(0 < v.level && 0 != current_effect3 && 'X' != current_effect3 ? Math.abs(current_effect3) : Math.abs(next_effect3/2));
 				var effect_eff3 = Math.pow(effect_diff3, v.rating);
-				running_eff *= next_effect3;
+				running_eff *= effect_eff3;
 			}
 		}
 		var effDec = Decimal(running_eff);
