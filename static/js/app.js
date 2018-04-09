@@ -725,8 +725,8 @@ function skillEff(k, v) {
 		}
 		var next_effect = v.levels[v.level + 1].bonus;
 		if('aaw' == k) {
-			next_effect = Math.pow(next_effect, 5);
-			current_effect = Math.pow(current_effect, 5);
+			next_effect = Math.pow(next_effect, v.levels[v.level + 1].bonus3);
+			current_effect = Math.pow(current_effect, v.levels[v.level].bonus3);
 		}
 		var effect_diff = Math.abs(next_effect)/(0 < v.level && 0 != current_effect && 'X' != current_effect ? Math.abs(current_effect) : Math.abs(next_effect/2));
 		var effect_eff = Math.pow(effect_diff, v.rating);
