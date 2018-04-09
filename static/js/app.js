@@ -724,7 +724,7 @@ function skillEff(k, v) {
 			totalCost += v.levels[lvl--].cost;
 		}
 		var next_effect = v.levels[v.level + 1].bonus;
-		if('aaw' == k) {
+		if('aaw' == k && 0 < v.level) {
 			next_effect = Math.pow(next_effect, v.levels[v.level + 1].bonus3);
 			current_effect = Math.pow(current_effect, v.levels[v.level].bonus3);
 		}
