@@ -1,4 +1,7 @@
 var winner_e = '';
+var winner_e10 = '';
+var winner_e100 = '';
+var winner_e1000 = '';
 var winner_n = '';
 var winner_s1 = '';
 var winner_s2 = '';
@@ -6,6 +9,9 @@ var winner_s3 = '';
 var winner_s4 = '';
 var winner_s5 = '';
 var winner_value = 0;
+var winner_value10 = 0;
+var winner_value100 = 0;
+var winner_value1000 = 0;
 var winner_svalue = 0;
 var obfuscate = 0;
 var white_rabbit = 0;
@@ -381,30 +387,93 @@ function determineAverage(data) {
 	return(y);
 }
 
-function optimize() {
-	while(buffer-- > 0 && relics >= temp_artifacts.data[winner_e].cost) {
+function determineArtifactStepWinner(step) {
+  var temp_winner = '';
+  switch(step) {
+    case 1:
+      temp_winner = winner_e;
+      break;
+    case 10:
+      temp_winner = winner_e10;
+      break;
+    case 100:
+      temp_winner = winner_e100;
+      break;
+    case 1000:
+      temp_winner = winner_e1000;
+      break;
+  }
+  return(temp_winner);
+}
+
+function determineArtifactStep(v, step) {
+  var interval = 0;
+  switch(step) {
+    case 1:
+      interval = 1;
+      break;
+    case 10:
+      interval = v.efficiency10_int;
+      break;
+    case 100:
+      interval = v.efficiency100_int;
+      break;
+    case 1000:
+      interval = v.efficiency1000_int;
+      break;
+  }
+  return(interval);
+}
+
+function determineArtifactCost(v, step) {
+  var cost = 0;
+  switch(step) {
+    case 1:
+      cost = v.cost;
+      break;
+    case 10:
+      cost = v.efficiency10_cost;
+      break;
+    case 100:
+      cost = v.efficiency100_cost;
+      break;
+    case 1000:
+      cost = v.efficiency1000_cost;
+      break;
+  }
+  return(cost);
+}
+
+function optimize(data, step, relics, buffer, orelics, obuffer) {
+  var temp_winner = determineArtifactStepWinner(step);
+  var temp_step = determineArtifactStep(data.data[temp_winner], step);
+  var temp_cost= determineArtifactCost(data.data[temp_winner], step);
+	while(buffer-- > 0 && relics >= temp_cost) {
 		obfuscate++;
-		if(undefined == upgrades[winner_e]) {
-			upgrades[winner_e] = 1;
+		if(undefined == upgrades[temp_winner]) {
+			upgrades[temp_winner] = temp_step;
 		} else {
-			upgrades[winner_e]++;
+			upgrades[temp_winner] += temp_step;
 		}
-		relics -= temp_artifacts.data[winner_e].cost;
-		temp_artifacts.data[winner_e].level++;
-		temp_artifacts = calculate(temp_artifacts, winner_e, false, false);
+		relics -= temp_cost;
+		data.data[temp_winner].level += temp_step;
+		data = calculate(data, temp_winner, false, false);
+    temp_winner = determineArtifactStepWinner(step);
+    temp_step = determineArtifactStep(data.data[temp_winner], step);
+    temp_cost= determineArtifactCost(data.data[temp_winner], step);
 	}
- 	if(relics >= temp_artifacts.data[winner_e].cost) {
+ 	if(relics >= temp_cost) {
 		var progress = (1 - (relics > 0 ? relics / orelics : 0 / orelics)) * 100;
 		$('#progress').width(progress + '%');
 		$('#progress').prop('aria-valuenow', progress);
 		buffer = obuffer;
-		window.setTimeout(optimize, 1);
+		window.setTimeout(function(){ optimize(data, step, relics, buffer, orelics, obuffer); }, 1);
 	} else {
 		var progress = 100;
 		$('#progress').width(progress + '%');
 		$('#progress').prop('aria-valuenow', progress);
 		$('#progress').removeClass('progress-bar-striped progress-bar-animated');
-		renderSuggestions();
+		renderSuggestions(data);
 	}
 }
 
@@ -428,7 +497,6 @@ function generateUpgrades() {
 	$('#relicsuggs').show();
 	$('#relicreccs').hide();
 	storeData();
-/*
 	var quickCheck = 0;
 	$.each(artifacts.data, function(k,v) {
 		if(0 == v.level && v.rating >= 3 && v.rating > quickCheck) {
@@ -436,11 +504,10 @@ function generateUpgrades() {
 			winner_n = k;
 		}
 	});
-*/
 	if(winner_n != '') {
 		$('#new_artifact').empty().append('<em>NOTE: You would be better off saving up for a new artifact (' + artifacts.data[winner_n].name + ').</em>');
 	}
-	relics = new Decimal(('' == $('#relics').val() ? 0 : $('#relics').val()) + '.' + ('' == $('#relics_decimal').val() ? 0 : $('#relics_decimal').val()));
+	var relics = new Decimal(('' == $('#relics').val() ? 0 : $('#relics').val()) + '.' + ('' == $('#relics_decimal').val() ? 0 : $('#relics_decimal').val()));
 	buffer = 0;
 	switch($('#relic_factor').val()) {
 		case '_':
@@ -572,44 +639,32 @@ function generateUpgrades() {
 			buffer = 100000000;
 			break;
 	}
-	orelics = relics;
-	obuffer = buffer;
+	var orelics = relics;
+	var obuffer = buffer;
 	upgrades = {};
-	temp_artifacts = $.extend(true, {}, artifacts);
+	var temp_artifacts = $.extend(true, {}, artifacts);
 	var litmus = false;
 	$.each(temp_artifacts.data, function(k,v) {
 		if(v.level > 0) { litmus = true; }
 	});
 	if(false == litmus) {
-		$('#suggestions').empty().append('<p>You must have at least 1 artifact enabled to use this.</p>');
+		$('#suggestions').empty().append('<p>You must have at least 1 artifact enabled to receive upgrade suggestions.</p>');
 		return
 	}
 	if(relics > 0) {
-		optimize();
+    var step = parseInt($('#ocd').val());
+		optimize(temp_artifacts, step, relics, buffer, orelics, obuffer);
 	} else {
-		renderSuggestions();
+		renderSuggestions(temp_artifacts);
 	}
 }
 
-function renderSuggestions() {
+function renderSuggestions(data) {
 	winner_e = '';
+	winner_e10 = '';
+	winner_e100 = '';
+	winner_e1000 = '';
 	winner_n = '';
-	var step = (null == $('#ocd').val() ? 1 : $('#ocd').val());
-	if(1 != step) {
-		$.each(artifacts.data, function(k,v) {
-			obfuscate++;
-			if(k in upgrades) {
-				var x = Math.floor(temp_artifacts.data[k].level/step) * step;
-				if(x > artifacts.data[k].level) {
-					temp_artifacts.data[k].level = x;
-					temp_artifacts = calculate(temp_artifacts, k, false, false);
-					upgrades[k] = x - artifacts.data[k].level;
-				} else if(-1 == artifacts.data[k].max) {
-					delete upgrades[k];
-				}
-			}
-		});
-	}
 	var suggestions = '';
 	var litmus = false;
 	$.each(upgrades, function(k,v) {
@@ -628,7 +683,7 @@ function renderSuggestions() {
 					suggestions += '<span>';
 						suggestions += '<span class="d-inline d-sm-none">' + v.nickname + '</span>';
 						suggestions += '<span class="d-none d-sm-inline">' + v.name + '</span>';
-						suggestions += ' <small>' + displayTruncated(v.level) + '&#x00A0;=>&#x00A0;' + displayTruncated(temp_artifacts.data[k].level) + '</small>';
+						suggestions += ' <small>' + displayTruncated(v.level) + '&#x00A0;=>&#x00A0;' + displayTruncated(data.data[k].level) + '</small>';
 						suggestions += '<span class="badge badge-' + v.color + ' ml-3">+' + upgrades[k] + '</span>';
 					suggestions += '</span>';
 					suggestions += '<button class="badge badge-secondary" type="button" data-toggle="collapse" data-target="#' + k + 'deets" aria-expanded="false" aria-controls="' + k + 'deets">&#x00A0;i&#x00A0;</button>';
@@ -637,12 +692,12 @@ function renderSuggestions() {
 					suggestions += '<div class="card-body">';
 						suggestions += '<dl class="row">';
 							suggestions += '<dt class="col-3 col-sm-6 text-right">Effect</dt>';
-							suggestions += '<dd class="col-9 col-sm-6">' + displayEffect(artifacts.data[k].current_effect, artifacts.data[k].type) + ' => ' + displayEffect(temp_artifacts.data[k].current_effect, artifacts.data[k].type) + '</dd>';
+							suggestions += '<dd class="col-9 col-sm-6">' + displayEffect(v.current_effect, v.type) + ' => ' + displayEffect(data.data[k].current_effect, artifacts.data[k].type) + '</dd>';
 							suggestions += '<dt class="col-3 col-sm-6 text-right">';
 								suggestions += '<span class="d-block d-sm-none">AD</span>';
 								suggestions += '<span class="d-none d-sm-block">Artifact Damage</span>';
 							suggestions += '</dt>';
-							suggestions += '<dd class="col-9 col-sm-6">' + displayPct(artifacts.data[k].current_ad) + ' => ' + displayPct(temp_artifacts.data[k].current_ad) + '</dd>';
+							suggestions += '<dd class="col-9 col-sm-6">' + displayPct(v.current_ad) + ' => ' + displayPct(data.data[k].current_ad) + '</dd>';
 						suggestions += '</dl>';
 					suggestions += '</div>';
 				suggestions += '</div>';
@@ -762,19 +817,59 @@ function oldEff(data, k, v) {
 	data.data[k].current_ad = current_ad;
 	data.data[k].current_effect = current_effect;
 	if(v.max == -1 || v.max > v.level) {
-		var cost = Math.pow(v.level + 1, v.cexpo) * v.ccoef;
+    var cost = Math.pow(v.level + 1, v.cexpo) * v.ccoef;
 		data.data[k].cost = cost;
 		data.data[k].displayCost = displayTruncated(cost);
-		var next_effect = 1 + v.effect * Math.pow(v.level + 1, Math.pow((1 + (v.cexpo - 1) * Math.min(v.grate * (v.level + 1), v.gmax)), v.gexpo));
-		var effect_diff = Math.abs(next_effect)/Math.abs(current_effect);
-		var effect_eff = Math.pow(effect_diff, v.rating);
-		var ad_change = (((v.level + 1) * v.ad) - current_ad);
-		var ad_eff = 1 + (ad_change/data.totalAD);
-		var effDec = effect_eff * ad_eff;
- 		var eff = Math.abs(((effect_eff * ad_eff) - 1)/cost);
-		data.data[k].efficiency = eff;
+		data.data[k].efficiency = calculateArtifactEfficiency(v, cost, 1, current_ad, current_effect, data.totalAD);
+    var int10 = calculateArtifactEfficiencyInterval(v, 10);
+    var cost10 = calculateArtifactEfficiencyCost(v, int10);
+    data.data[k].efficiency10_int = int10;
+    data.data[k].efficiency10_cost = cost10;
+    data.data[k].efficiency10 = calculateArtifactEfficiency(v, cost10, int10, current_ad, current_effect, data.totalAD);
+    var int100 = calculateArtifactEfficiencyInterval(v, 100);
+    var cost100 = calculateArtifactEfficiencyCost(v, int100);
+    data.data[k].efficiency100_int = int100;
+    data.data[k].efficiency100_cost = cost100;
+    data.data[k].efficiency100 = calculateArtifactEfficiency(v, cost100, int100, current_ad, current_effect, data.totalAD);
+    var int1000 = calculateArtifactEfficiencyInterval(v, 1000);
+    var cost1000 = calculateArtifactEfficiencyCost(v, int1000);
+    data.data[k].efficiency1000_int = int1000;
+    data.data[k].efficiency1000_cost = cost1000;
+    data.data[k].efficiency1000 = calculateArtifactEfficiency(v, cost1000, int1000, current_ad, current_effect, data.totalAD);
 	}
 	return(data);
+}
+
+function calculateArtifactEfficiencyInterval(v, levels) {
+    var squad = (v.level + levels) % levels;
+    if(0 != squad) {
+      levels = levels - squad;
+    }
+    if(0 < v.max && v.level + levels > v.max) {
+      levels = v.max - v.level;
+    }
+    return(levels);
+}
+
+function calculateArtifactEfficiencyCost(v, levels) {
+  var runningLevel = v.level + 1;
+  var cost = 0;
+  while(0 < levels--) {
+    obfuscate++;
+    cost += Math.pow(runningLevel++, v.cexpo) * v.ccoef;
+  }
+  return(cost);
+}
+
+function calculateArtifactEfficiency(v, cost, lvlChange, current_ad, current_effect, totalAD) {
+    obfuscate++;
+		var next_effect = 1 + v.effect * Math.pow(v.level + lvlChange, Math.pow((1 + (v.cexpo - 1) * Math.min(v.grate * (v.level + lvlChange), v.gmax)), v.gexpo));
+		var effect_diff = Math.abs(next_effect)/Math.abs(current_effect);
+		var effect_eff = Math.pow(effect_diff, v.rating);
+		var ad_change = (((v.level + lvlChange) * v.ad) - current_ad);
+		var ad_eff = 1 + (ad_change/totalAD);
+ 		var eff = Math.abs(((effect_eff * ad_eff) - 1)/cost);
+    return(eff);
 }
 
 function newEff(data, k, v, avglvl, cost, remainingArtifacts) {
@@ -792,7 +887,6 @@ function newEff(data, k, v, avglvl, cost, remainingArtifacts) {
 	}
 	var effect_eff = Math.pow(Math.abs(next_effect), v.rating);
 	var ad_eff = 1 + ((avglvl * v.ad)/data.totalAD);
-	var effDec = effect_eff * ad_eff;
 	var eff = Math.abs(((effect_eff * ad_eff) - 1)/cost/remainingArtifacts);
 	data.data[k].efficiency = eff;
 	return(data)
@@ -840,7 +934,7 @@ function calculateSkillTotals() {
 }
 
 function calculate(data, k, regenerate, pinch) {
-	obfuscate++;
+  obfuscate += 1;
 	var next_artifact = countArtifacts(artifacts.data) + 1;
 	var next_artifact_cost = artifact_costs[next_artifact];
 	var average_level = determineAverage(artifacts.data);
@@ -858,10 +952,22 @@ function calculate(data, k, regenerate, pinch) {
 		data.data[k].current_ad = '';
 		data.data[k].current_effect = '';
 	}
+  determineArtifactWinner(data, regenerate, next_artifact_cost, pinch);
+	data.totalAD = calculateTotalAD(data.data, regenerate);
+	return(data);
+}
+
+function determineArtifactWinner(data, regenerate, next_artifact_cost, pinch) {
 	winner_e = ''
+	winner_e10 = ''
+	winner_e100 = ''
+	winner_e1000 = ''
 	var temp_winner_n = ''
 	var temp_winner_value = 0
 	winner_value = 0;
+	winner_value10 = 0;
+	winner_value100 = 0;
+	winner_value1000 = 0;
 	$.each(data.data, function(k,v) {
 		obfuscate++;
 		if(v.efficiency > winner_value) {
@@ -875,6 +981,27 @@ function calculate(data, k, regenerate, pinch) {
 				}
 			}
 		}
+		obfuscate++;
+		if(v.efficiency10 > winner_value10) {
+			if(v.level > 0 && v.active == 1 && (-1 == v.max || v.max > v.level)) {
+				winner_e10 = k;
+				winner_value10 = v.efficiency10;
+			}
+		}
+		obfuscate++;
+		if(v.efficiency100 > winner_value100) {
+			if(v.level > 0 && v.active == 1 && (-1 == v.max || v.max > v.level)) {
+				winner_e100 = k;
+				winner_value100 = v.efficiency100;
+			}
+		}
+		obfuscate++;
+		if(v.efficiency1000 > winner_value1000) {
+			if(v.level > 0 && v.active == 1 && (-1 == v.max || v.max > v.level)) {
+				winner_e1000 = k;
+				winner_value1000 = v.efficiency1000;
+			}
+		}
 	});
 	if(true === regenerate) {
 		regenerateArtifacts();
@@ -884,8 +1011,7 @@ function calculate(data, k, regenerate, pinch) {
 			winner_n = '';
 		}
 	}
-	data.totalAD = calculateTotalAD(data.data, regenerate);
-	return(data);
+
 }
 
 function determineSkillWinner(prevWinners) {
@@ -1020,31 +1146,14 @@ function calculateAll(data, regenerate) {
 		data.data[k].displayCost = '';
 		if(v.level > 0 && v.active == 1) {
 			data = oldEff(data, k, v);
-			if(data.data[k].efficiency > winner_value && (-1 == v.max || v.max > v.level)) {
-				winner_e = k;
-				winner_value = data.data[k].efficiency;
-			}
 		} else if(v.level == 0 && next_artifact_cost != -1 && v.active == 1) {
-			data = newEff(data, k, v, average_level, next_artifact_cost, Object.keys(artifact_costs).length - 3 - next_artifact);
-			if(data.data[k].efficiency > winner_value) {
-				if(data.data[k].efficiency > temp_winner_value) {
-					temp_winner_n = k;
-					temp_winner_value = data.data[k].efficiency;
-				}
-			}
+			data = newEff(data, k, v, average_level, next_artifact_cost, Object.keys(artifact_costs).length - 1 - next_artifact);
 		} else {
 			data.data[k].current_ad = '';
 			data.data[k].current_effect = '';
 		}
 	});
-	if(true === regenerate) {
-		regenerateArtifacts();
-		if('' != temp_winner_n && data.data[temp_winner_n].efficiency > winner_value) {
-			winner_n = temp_winner_n;
-		} else {
-			winner_n = '';
-		}
-	}
+  determineArtifactWinner(data, regenerate, next_artifact_cost, true);
 	data.totalAD = calculateTotalAD(data.data, regenerate);
 	return(data)
 }
