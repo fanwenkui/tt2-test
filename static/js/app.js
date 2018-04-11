@@ -3,6 +3,7 @@ var winner_e10 = '';
 var winner_e100 = '';
 var winner_e1000 = '';
 var winner_e10000 = '';
+var winner_e1000000 = '';
 var winner_n = '';
 var winner_s1 = '';
 var winner_s2 = '';
@@ -14,6 +15,7 @@ var winner_value10 = 0;
 var winner_value100 = 0;
 var winner_value1000 = 0;
 var winner_value10000 = 0;
+var winner_value1000000 = 0;
 var winner_svalue = 0;
 var obfuscate = 0;
 var white_rabbit = 0;
@@ -406,6 +408,8 @@ function determineArtifactStepWinner(step) {
       break;
     case 10000:
       temp_winner = winner_e10000;
+	case 1000000:
+      temp_winner = winner_e1000000;
   }
   return(temp_winner);
 }
@@ -427,6 +431,10 @@ function determineArtifactStep(v, step) {
       break;
 	case 10000:
 	  interval = v.efficiency10000_int;
+	  break;
+	case 1000000:
+	  interval = v.efficiency1000000_int;
+	  break;
   }
   return(interval);
 }
@@ -449,6 +457,9 @@ function determineArtifactCost(v, step) {
     case 10000:
       cost = v.efficiency10000_cost;
       break;
+	case 1000000:
+	  cost = v.efficiency1000000_cost;
+	  break;
   }
   return(cost);
 }
@@ -674,6 +685,7 @@ function renderSuggestions(data) {
 	winner_e100 = '';
 	winner_e1000 = '';
 	winner_e10000 = '';
+	winner_e1000000 = '';
 	winner_n = '';
 	var suggestions = '';
 	var litmus = false;
@@ -851,6 +863,11 @@ function oldEff(data, k, v) {
     data.data[k].efficiency10000_int = int10000;
     data.data[k].efficiency10000_cost = cost10000;
     data.data[k].efficiency10000 = calculateArtifactEfficiency(v, cost10000, int10000, current_ad, current_effect, data.totalAD);
+    var int1000000 = calculateArtifactEfficiencyInterval(v, 1000000);
+    var cost1000000 = calculateArtifactEfficiencyCost(v, int1000000);
+    data.data[k].efficiency1000000_int = int1000000;
+    data.data[k].efficiency1000000_cost = cost1000000;
+    data.data[k].efficiency1000000 = calculateArtifactEfficiency(v, cost1000000, int1000000, current_ad, current_effect, data.totalAD);
 	}
 	return(data);
 }
@@ -978,6 +995,7 @@ function determineArtifactWinner(data, regenerate, next_artifact_cost, pinch) {
 	winner_e100 = ''
 	winner_e1000 = ''
 	winner_e10000 = ''
+	winner_e1000000 = ''
 	var temp_winner_n = ''
 	var temp_winner_value = 0
 	winner_value = 0;
@@ -985,6 +1003,7 @@ function determineArtifactWinner(data, regenerate, next_artifact_cost, pinch) {
 	winner_value100 = 0;
 	winner_value1000 = 0;
 	winner_value10000 = 0;
+	winner_value1000000 = 0;
 	$.each(data.data, function(k,v) {
 		obfuscate++;
 		if(v.efficiency > winner_value) {
@@ -1024,7 +1043,15 @@ function determineArtifactWinner(data, regenerate, next_artifact_cost, pinch) {
             if(v.level > 0 && v.active == 1 && (-1 == v.max || v.max > v.level)) {
                 winner_e10000 = k;
                 winner_value10000 = v.efficiency10000;
-            }		}
+            }
+		}
+        obfuscate++;
+        if(v.efficiency1000000 > winner_value1000000) {
+            if(v.level > 0 && v.active == 1 && (-1 == v.max || v.max > v.level)) {
+                winner_e1000000 = k;
+                winner_value1000000 = v.efficiency1000000;
+            }
+        }
 	});
 	if(true === regenerate) {
 		regenerateArtifacts();
