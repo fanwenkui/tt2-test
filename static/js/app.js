@@ -3,6 +3,7 @@ var winner_e10 = '';
 var winner_e100 = '';
 var winner_e1000 = '';
 var winner_e10000 = '';
+var winner_e100000 = '';
 var winner_e1000000 = '';
 var winner_n = '';
 var winner_s1 = '';
@@ -15,6 +16,7 @@ var winner_value10 = 0;
 var winner_value100 = 0;
 var winner_value1000 = 0;
 var winner_value10000 = 0;
+var winner_value100000 = 0;
 var winner_value1000000 = 0;
 var winner_svalue = 0;
 var obfuscate = 0;
@@ -408,8 +410,13 @@ function determineArtifactStepWinner(step) {
       break;
     case 10000:
       temp_winner = winner_e10000;
-	case 1000000:
+      break;
+    case 100000:
+      temp_winner = winner_e100000;
+      break;
+    case 1000000:
       temp_winner = winner_e1000000;
+      break;
   }
   return(temp_winner);
 }
@@ -429,12 +436,15 @@ function determineArtifactStep(v, step) {
     case 1000:
       interval = v.efficiency1000_int;
       break;
-	case 10000:
-	  interval = v.efficiency10000_int;
-	  break;
-	case 1000000:
-	  interval = v.efficiency1000000_int;
-	  break;
+    case 10000:
+      interval = v.efficiency10000_int;
+      break;
+    case 100000:
+      interval = v.efficiency100000_int;
+      break;
+    case 1000000:
+      interval = v.efficiency1000000_int;
+      break;
   }
   return(interval);
 }
@@ -457,9 +467,12 @@ function determineArtifactCost(v, step) {
     case 10000:
       cost = v.efficiency10000_cost;
       break;
-	case 1000000:
-	  cost = v.efficiency1000000_cost;
-	  break;
+    case 100000:
+      cost = v.efficiency100000_cost;
+      break;
+    case 1000000:
+      cost = v.efficiency1000000_cost;
+      break;
   }
   return(cost);
 }
@@ -516,10 +529,13 @@ function generateUpgrades() {
 	$('#progressBar').show();
 	$('#relicsuggs').show();
 	$('#relicreccs').hide();
+	if(null == $('#ocd').val()) {
+		$('#ocd').val('1');
+	}
 	storeData();
 	var quickCheck = 0;
 	$.each(artifacts.data, function(k,v) {
-		if(0 == v.level && v.rating >= 3 && v.rating > quickCheck) {
+		if(0 == v.level && v.rating >= 3 && v.rating > quickCheck && "1" == v.active) {
 			quickCheck = v.rating;
 			winner_n = k;
 		}
@@ -685,6 +701,7 @@ function renderSuggestions(data) {
 	winner_e100 = '';
 	winner_e1000 = '';
 	winner_e10000 = '';
+	winner_e100000 = '';
 	winner_e1000000 = '';
 	winner_n = '';
 	var suggestions = '';
@@ -863,6 +880,11 @@ function oldEff(data, k, v) {
     data.data[k].efficiency10000_int = int10000;
     data.data[k].efficiency10000_cost = cost10000;
     data.data[k].efficiency10000 = calculateArtifactEfficiency(v, cost10000, int10000, current_ad, current_effect, data.totalAD);
+    var int100000 = calculateArtifactEfficiencyInterval(v, 100000);
+    var cost100000 = calculateArtifactEfficiencyCost(v, int100000);
+    data.data[k].efficiency100000_int = int100000;
+    data.data[k].efficiency100000_cost = cost100000;
+    data.data[k].efficiency100000 = calculateArtifactEfficiency(v, cost100000, int100000, current_ad, current_effect, data.totalAD);
     var int1000000 = calculateArtifactEfficiencyInterval(v, 1000000);
     var cost1000000 = calculateArtifactEfficiencyCost(v, int1000000);
     data.data[k].efficiency1000000_int = int1000000;
@@ -884,12 +906,8 @@ function calculateArtifactEfficiencyInterval(v, levels) {
 }
 
 function calculateArtifactEfficiencyCost(v, levels) {
-  var runningLevel = v.level + 1;
-  var cost = 0;
-  while(0 < levels--) {
-    obfuscate++;
-    cost += Math.pow(runningLevel++, v.cexpo) * v.ccoef;
-  }
+  obfuscate++;
+  var cost = Math.pow((v.ccoef/(v.cexpo+1)) * (v.level + levels), (v.cexpo + 1)) - Math.pow((v.ccoef/(v.cexpo+1)) * v.level, (v.cexpo + 1));
   return(cost);
 }
 
@@ -995,6 +1013,7 @@ function determineArtifactWinner(data, regenerate, next_artifact_cost, pinch) {
 	winner_e100 = ''
 	winner_e1000 = ''
 	winner_e10000 = ''
+	winner_e100000 = ''
 	winner_e1000000 = ''
 	var temp_winner_n = ''
 	var temp_winner_value = 0
@@ -1003,6 +1022,7 @@ function determineArtifactWinner(data, regenerate, next_artifact_cost, pinch) {
 	winner_value100 = 0;
 	winner_value1000 = 0;
 	winner_value10000 = 0;
+	winner_value100000 = 0;
 	winner_value1000000 = 0;
 	$.each(data.data, function(k,v) {
 		obfuscate++;
@@ -1040,22 +1060,29 @@ function determineArtifactWinner(data, regenerate, next_artifact_cost, pinch) {
 		}
 		obfuscate++;
 		if(v.efficiency10000 > winner_value10000) {
-            if(v.level > 0 && v.active == 1 && (-1 == v.max || v.max > v.level)) {
-                winner_e10000 = k;
-                winner_value10000 = v.efficiency10000;
-            }
+			if(v.level > 0 && v.active == 1 && (-1 == v.max || v.max > v.level)) {
+				winner_e10000 = k;
+				winner_value10000 = v.efficiency10000;
+			}
 		}
-        obfuscate++;
-        if(v.efficiency1000000 > winner_value1000000) {
-            if(v.level > 0 && v.active == 1 && (-1 == v.max || v.max > v.level)) {
-                winner_e1000000 = k;
-                winner_value1000000 = v.efficiency1000000;
-            }
-        }
+		obfuscate++;
+		if(v.efficiency100000 > winner_value100000) {
+			if(v.level > 0 && v.active == 1 && (-1 == v.max || v.max > v.level)) {
+				winner_e100000 = k;
+				winner_value100000 = v.efficiency100000;
+			}
+		}
+		obfuscate++;
+		if(v.efficiency1000000 > winner_value1000000) {
+			if(v.level > 0 && v.active == 1 && (-1 == v.max || v.max > v.level)) {
+				winner_e1000000 = k;
+				winner_value1000000 = v.efficiency1000000;
+			}
+		}
 	});
 	if(true === regenerate) {
 		regenerateArtifacts();
-		if('' != temp_winner_n && data.data[temp_winner_n].efficiency > winner_value) {
+		if('' != temp_winner_n && data.data[temp_winner_n].efficiency > winner_value && "1" == data.data[temp_winner_n].active) {
 			winner_n = temp_winner_n;
 		} else {
 			winner_n = '';
