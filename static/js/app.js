@@ -499,7 +499,7 @@ function generateUpgrades() {
 	storeData();
 	var quickCheck = 0;
 	$.each(artifacts.data, function(k,v) {
-		if(0 == v.level && v.rating >= 3 && v.rating > quickCheck) {
+		if(0 == v.level && v.rating >= 3 && v.rating > quickCheck && "1" == v.active) {
 			quickCheck = v.rating;
 			winner_n = k;
 		}
