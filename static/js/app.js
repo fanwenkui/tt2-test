@@ -480,7 +480,7 @@ function determineArtifactCost(v, step) {
 function optimize(data, step, relics, buffer, orelics, obuffer) {
   var temp_winner = determineArtifactStepWinner(step);
   var temp_step = determineArtifactStep(data.data[temp_winner], step);
-  var temp_cost= determineArtifactCost(data.data[temp_winner], step);
+  var temp_cost = determineArtifactCost(data.data[temp_winner], step);
 	while(buffer-- > 0 && relics >= temp_cost) {
 		obfuscate++;
 		if(undefined == upgrades[temp_winner]) {
@@ -907,7 +907,7 @@ function calculateArtifactEfficiencyInterval(v, levels) {
 
 function calculateArtifactEfficiencyCost(v, levels) {
   obfuscate++;
-  var cost = Math.pow((v.ccoef/(v.cexpo+1)) * (v.level + levels), (v.cexpo + 1)) - Math.pow((v.ccoef/(v.cexpo+1)) * v.level, (v.cexpo + 1));
+  var cost = (v.ccoef/(v.cexpo+1)) * Math.pow(v.level + levels, v.cexpo + 1) - (v.ccoef/(v.cexpo+1)) * Math.pow(v.level, v.cexpo + 1);
   return(cost);
 }
 
