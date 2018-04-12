@@ -1005,7 +1005,7 @@ function determineArtifactWinner(data, regenerate, next_artifact_cost, pinch) {
 	});
 	if(true === regenerate) {
 		regenerateArtifacts();
-		if('' != temp_winner_n && data.data[temp_winner_n].efficiency > winner_value) {
+		if('' != temp_winner_n && data.data[temp_winner_n].efficiency > winner_value && "1" == data.data[temp_winner_n].active) {
 			winner_n = temp_winner_n;
 		} else {
 			winner_n = '';
