@@ -422,7 +422,6 @@ function determineArtifactStepWinner(step) {
 }
 
 function determineArtifactStep(v, step) {
-  console.log(v.name);
   var interval = 0;
   switch(step) {
     case 1:
