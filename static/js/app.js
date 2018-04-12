@@ -496,6 +496,9 @@ function generateUpgrades() {
 	$('#progressBar').show();
 	$('#relicsuggs').show();
 	$('#relicreccs').hide();
+	if(null == $('#ocd').val()) {
+		$('#ocd').val('1');
+	}
 	storeData();
 	var quickCheck = 0;
 	$.each(artifacts.data, function(k,v) {
