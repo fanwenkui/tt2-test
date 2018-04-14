@@ -2711,7 +2711,7 @@ var skills = {
 				'20' : { 'cost' : 25, 'bonus' : 281000000, 'bonus2' : 235000, 'bonus3' : 0 }
 			},
 			'expo' : {
-				'flat' : 'gold'
+				'flat' : 'inactive_gold'
 			}
 		},
 		'an' : {
@@ -2814,7 +2814,7 @@ var skills = {
 				'10' : { 'cost' : 6, 'bonus' : 20, 'bonus2' : .3, 'bonus3' : 0 }
 			},
 			'expo' : {
-				'flat' : 'inactive'
+				'flat' : 'inactive_phom'
 			}
 		},
 		'tv' : {

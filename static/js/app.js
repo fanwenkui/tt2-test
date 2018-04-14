@@ -807,6 +807,7 @@ function skillEff(k, v) {
 		skills.data[k].level = v.max;
 		$('#skill' + k).val(v.max);
 	}
+	var active = 'online' == $('#active').val();
 	if(v.max > v.level) {
 		if(false === current_effect) {
 			current_effect = 0;
@@ -817,22 +818,29 @@ function skillEff(k, v) {
 		while(lvl > 0) {
 			totalCost += v.levels[lvl--].cost;
 		}
-		var next_effect = v.levels[v.level + 1].bonus;
-		if('aaw' == k && 0 < v.level) {
-			next_effect = Math.pow(next_effect, v.levels[v.level + 1].bonus3);
-			current_effect = Math.pow(current_effect, v.levels[v.level].bonus3);
+		if(true == active && undefined != v.expo.flat && ('inactive_pet' == v.expo.flat || 'inactive_ship' == v.expo.flat || 'inactive_clone' == v.expo.flat)) {
+		} else if(true == active && undefined != v.expo.flat && 'inactive_phom' == v.expo.flat) {
+		} else {
+			var next_effect = v.levels[v.level + 1].bonus;
+			if('aaw' == k && 0 < v.level) {
+				next_effect = Math.pow(next_effect, v.levels[v.level + 1].bonus3);
+				current_effect = Math.pow(current_effect, v.levels[v.level].bonus3);
+			}
+			var effect_diff = Math.abs(next_effect)/(0 < v.level && 0 != current_effect && 'X' != current_effect ? Math.abs(current_effect) : Math.abs(next_effect/2));
+			var effect_eff = Math.pow(effect_diff, v.rating);
+			running_eff *= effect_eff;
 		}
-		var effect_diff = Math.abs(next_effect)/(0 < v.level && 0 != current_effect && 'X' != current_effect ? Math.abs(current_effect) : Math.abs(next_effect/2));
-		var effect_eff = Math.pow(effect_diff, v.rating);
-		running_eff *= effect_eff;
 		if(false !== current_effect2) {
-			var next_effect2 = v.levels[v.level + 1].bonus2;
-			if(0 != next_effect2) {
-				var effect_diff2 = Math.abs(next_effect2)/(0 < v.level && 0 != current_effect2 && 'X' != current_effect2 ? Math.abs(current_effect2) : Math.abs(next_effect2/2));
-				var effect_eff2 = Math.pow(effect_diff2, v.rating);
-				if('cs' == k) {
-				} else {
-					running_eff *= effect_eff2;
+			if(true == active && undefined != v.expo.flat && 'inactive_gold' == v.expo.flat) {
+			} else {
+				var next_effect2 = v.levels[v.level + 1].bonus2;
+				if(0 != next_effect2) {
+					var effect_diff2 = Math.abs(next_effect2)/(0 < v.level && 0 != current_effect2 && 'X' != current_effect2 ? Math.abs(current_effect2) : Math.abs(next_effect2/2));
+					var effect_eff2 = Math.pow(effect_diff2, v.rating);
+					if('cs' == k) {
+					} else {
+						running_eff *= effect_eff2;
+					}
 				}
 			}
 		}
