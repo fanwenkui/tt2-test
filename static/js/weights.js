@@ -187,6 +187,11 @@ function calculateWeight(k,v) {
 				}
 				break;
 
+			case 'inactive_gold':
+				v.rating = reducts.gold;
+				v.color = 'warning';
+				break;
+
 			case 'dmg':
 				v.rating = 1;
 				v.color = 'info';
