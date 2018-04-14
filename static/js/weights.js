@@ -144,17 +144,19 @@ function calculateWeight(k,v) {
 				break;
 
 			case 'skill_gold':
-				v.rating += (0 < reducts.ds[build] ? .8 : (0 < artifacts.data.gok.level ? .8 : 0));
+				v.rating += (0 < reducts.hs[build] ? reducts.gold : (0 < artifacts.data.ip.level ? reducts.gold : 0));
+				v.rating += (0 < reducts.ds[build] ? reducts.gold : (0 < artifacts.data.gok.level ? reducts.gold : 0));
+				v.rating += (0 < reducts.fs[build] ? reducts.gold : (0 < artifacts.data.os.level ? reducts.gold : 0));
+				v.rating += (0 < reducts.wc[build] ? reducts.gold : (0 < artifacts.data.tac.level ? reducts.gold : 0));
+				v.rating += (0 < reducts.sc[build] ? reducts.gold : (0 < artifacts.data.ho.level ? reducts.gold : 0));
+        v.rating = (3 * reducts.gold < v.rating ? 3 * reducts.gold : v.rating);
 				v.rating += reducts.gold * ('phom' == gold ? .5 : 1);;
-				v.rating += (0 < reducts.fs[build] ? .8 : (0 < artifacts.data.os.level ? .8 : 0));
-				v.rating += (0 < reducts.wc[build] ? .8 : (0 < artifacts.data.tac.level ? .8 : 0));
-				v.rating += (0 < reducts.sc[build] ? .8 : (0 < artifacts.data.ho.level ? .8 : 0));
 				v.color = 'warning';
 				break;
 
 			case 'equip':
-				v.rating += 1;
-				v.rating += reducts.hero[build];
+				v.rating += reducts.sword[build];
+				v.rating += reducts.helmet[build];
 				v.rating += reducts.gold;
 				v.rating += 1;
 				v.rating += reducts.companion[build];
@@ -210,7 +212,7 @@ function calculateWeight(k,v) {
 
 			case 'inactive_pet':
 				if(0 == active) {
-					v.rating = reducts.pet[build] + ('pet' == build ? reducts.ds[build] : 0);
+					v.rating = reducts.pet[build];
 					v.color = determineColor(v.rating);
 				} else {
 					v.rating = ('pet' == build ? reducts.ds[build] : 0);
@@ -221,7 +223,7 @@ function calculateWeight(k,v) {
 
 			case 'inactive_ship':
 				if(0 == active) {
-					v.rating = reducts.cs[build] + ('cs' == build ? reducts.ds[build] : 0);
+					v.rating = reducts.cs[build];
 					v.color = determineColor(v.rating);
 				} else {
 					v.rating = ('cs' == build ? reducts.ds[build] : 0);
@@ -231,7 +233,7 @@ function calculateWeight(k,v) {
 
 			case 'inactive_clone':
 				if(0 == active) {
-					v.rating = reducts.sc[build] + ('sc' == build ? reducts.ds[build] : 0);
+					v.rating = reducts.sc[build];
 					v.color = determineColor(v.rating);
 				} else {
 					v.rating = ('sc' == build ? reducts.ds[build] : 0);
