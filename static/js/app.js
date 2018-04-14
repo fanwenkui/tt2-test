@@ -818,7 +818,7 @@ function skillEff(k, v) {
 		while(lvl > 0) {
 			totalCost += v.levels[lvl--].cost;
 		}
-		if(true == active && undefined != v.expo.flat && ('inactive_pet' == v.expo.flat || 'inactive_ship' == v.expo.flat || 'inactive_clone' == v.expo.flat) {
+		if(true == active && undefined != v.expo.flat && ('inactive_pet' == v.expo.flat || 'inactive_ship' == v.expo.flat || 'inactive_clone' == v.expo.flat)) {
 		} else {
 			var next_effect = v.levels[v.level + 1].bonus;
 			if('aaw' == k && 0 < v.level) {
