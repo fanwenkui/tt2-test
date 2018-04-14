@@ -807,7 +807,7 @@ function skillEff(k, v) {
 		skills.data[k].level = v.max;
 		$('#skill' + k).val(v.max);
 	}
-	var active = 'online' == '('#active').val();
+	var active = 'online' == $('#active').val();
 	if(v.max > v.level) {
 		if(false === current_effect) {
 			current_effect = 0;
