@@ -182,7 +182,7 @@ function calculateWeight(k,v) {
 					v.rating = 1;
 					v.color = 'success';
 				} else {
-					v.rating = reducts.gold * ('phom' == gold ? .5 : 0);
+					v.rating = reducts.gold * ('phom' == gold ? 1 : 0);
 					v.color = 'warning';
 				}
 				break;
