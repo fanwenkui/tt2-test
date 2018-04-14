@@ -2,6 +2,7 @@ var hero_type = '';
 var build = '';
 var gold = '';
 var active = '';
+var splash = '';
 
 function adjustWeights() {
 	gtag('event', 'Dark Mode', {
@@ -39,6 +40,7 @@ function adjustWeights() {
 	}
 	build = $('#build').val();
 	active = ("online" == $('#active').val() ? true : false);
+	splash = (true == $('#wet').prop('checked') ? true: false);
 	gold = $('#gold').val();
 
 	switch($('#hero').val()) {
@@ -124,7 +126,7 @@ function calculateWeight(k,v) {
 				v.rating += pets_dmg.all;
 				v.rating += pets_dmg.tap * reducts.tap[build];
 				v.rating += pets_dmg.hero * reducts.hero[build];
-				v.rating += pets_dmg.splash * reducts.splash[build];
+				v.rating += pets_dmg.splash * reducts.splash[build] * (true == splash ? 1 : 0);
 				v.color = 'info';
 				break;
 
@@ -242,7 +244,7 @@ function calculateWeight(k,v) {
 				break;
 		}
 	} else if(undefined != v.expo.reduct) {
-		if('splash' == v.expo.reduct && $('#dry').prop('checked') == true) {
+		if('splash' == v.expo.reduct && false == splash) {
 			v.rating = 0;
 		} else {
 			v.rating = reducts[v.expo.reduct][build];
