@@ -1781,7 +1781,6 @@ var skills = {
 			'expo' : {
 				'gold' : [
 					'phom',
-					'coc',
 					'all',
 				]
 			}
