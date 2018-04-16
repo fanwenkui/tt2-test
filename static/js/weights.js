@@ -277,19 +277,27 @@ function calculateWeight(k,v) {
 			if(gold == v2) {
 				v.rating = reducts.gold;
 				return false;
+			} else if('partial_splash' == v2) {
+				v.rating = reducts.splash[build] * reducts.gold * .5;
+				return false;
 			} else if('splash' == v2) {
 				v.rating = reducts.splash[build] * reducts.gold;
 				return false;
+			} else if('partial_inactive' == v2) {
+				if(!active) {
+					v.rating = reducts.gold * .5;
+					return false;
+				}
 			} else if('inactive' == v2) {
 				if(!active) {
 					v.rating = reducts.gold;
+					return false;
 				}
-				return false;
 			} else if('active' == v2) {
 				if(active) {
 					v.rating = reducts.gold;
+					return false;
 				}
-				return false;
 			}
 		});
 		v.color = determineColor(v.rating);
