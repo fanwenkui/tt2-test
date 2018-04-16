@@ -1782,7 +1782,6 @@ var skills = {
 			'expo' : {
 				'gold' : [
 					'phom',
-					'coc',
 					'all',
 				]
 			}
@@ -2059,8 +2058,8 @@ var skills = {
 					'coc',
 					'fairy',
 					'phom',
-					'splash',
-					'inactive'
+					'partial_splash',
+					'partial_inactive'
 				]
 			}
 		},
@@ -2244,18 +2243,18 @@ var skills = {
 			'type2' : -1,
 			'type3' : 'add_skill',
 			'levels' : {
-				'1' : { 'cost' : 3, 'bonus' : 1.3, 'bonus2' : 0, 'bonus3' : 5 },
-				'2' : { 'cost' : 4, 'bonus' : 1.5, 'bonus2' : 0, 'bonus3' : 5 },
-				'3' : { 'cost' : 5, 'bonus' : 1.9, 'bonus2' : 0, 'bonus3' : 5 },
-				'4' : { 'cost' : 7, 'bonus' : 2.4, 'bonus2' : 0, 'bonus3' : 5 },
-				'5' : { 'cost' : 9, 'bonus' : 3.3, 'bonus2' : 0, 'bonus3' : 5 },
-				'6' : { 'cost' : 12, 'bonus' : 4.7, 'bonus2' : 0, 'bonus3' : 5 },
-				'7' : { 'cost' : 16, 'bonus' : 7.1, 'bonus2' : 0, 'bonus3' : 5 },
-				'8' : { 'cost' : 21, 'bonus' : 11.6, 'bonus2' : 0, 'bonus3' : 5 },
-				'9' : {	'cost' : 27, 'bonus' : 20.5, 'bonus2' : 0, 'bonus3' : 5 },
-				'10' : { 'cost' : 35, 'bonus' : 39, 'bonus2' : 0, 'bonus3' : 5 },
-				'11' : { 'cost' : 46, 'bonus' : 83, 'bonus2' : 0, 'bonus3' : 5 },
-				'12' : { 'cost' : 60, 'bonus' : 195, 'bonus2' : 0, 'bonus3' : 5 }
+				'1' : { 'cost' : 3, 'bonus' : Math.pow(1.3, 5), 'bonus2' : 0, 'bonus3' : 5 },
+				'2' : { 'cost' : 4, 'bonus' : Math.pow(1.5, 5), 'bonus2' : 0, 'bonus3' : 5 },
+				'3' : { 'cost' : 5, 'bonus' : Math.pow(1.9, 5), 'bonus2' : 0, 'bonus3' : 5 },
+				'4' : { 'cost' : 7, 'bonus' : Math.pow(2.4, 5), 'bonus2' : 0, 'bonus3' : 5 },
+				'5' : { 'cost' : 9, 'bonus' : Math.pow(3.3, 5), 'bonus2' : 0, 'bonus3' : 5 },
+				'6' : { 'cost' : 12, 'bonus' : Math.pow(4.7, 5), 'bonus2' : 0, 'bonus3' : 5 },
+				'7' : { 'cost' : 16, 'bonus' : Math.pow(7.1, 5), 'bonus2' : 0, 'bonus3' : 5 },
+				'8' : { 'cost' : 21, 'bonus' : Math.pow(11.6, 5), 'bonus2' : 0, 'bonus3' : 5 },
+				'9' : {	'cost' : 27, 'bonus' : Math.pow(20.5, 5), 'bonus2' : 0, 'bonus3' : 5 },
+				'10' : { 'cost' : 35, 'bonus' : Math.pow(39, 5), 'bonus2' : 0, 'bonus3' : 5 },
+				'11' : { 'cost' : 46, 'bonus' : Math.pow(83, 5), 'bonus2' : 0, 'bonus3' : 5 },
+				'12' : { 'cost' : 60, 'bonus' : Math.pow(195, 5), 'bonus2' : 0, 'bonus3' : 5 }
 			},
 			'expo' : {
 				'reduct' : 'hero'
