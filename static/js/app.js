@@ -853,7 +853,7 @@ function skillEff(k, v) {
 			}
 		}
 		var effDec = Decimal(running_eff);
-		var eff = effDec.pow(1/v.levels[v.level + 1].cost).sub(1).toNumber();
+		var eff = effDec.pow(1/v.levels[v.level + 1].cost).toNumber();
 		skills.data[k].efficiency = eff;
 	}
 }
