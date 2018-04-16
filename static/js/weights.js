@@ -152,7 +152,7 @@ function calculateWeight(k,v) {
 				v.rating += (0 < reducts.wc[build] ? reducts.gold : (0 < artifacts.data.tac.level ? reducts.gold : 0));
 				v.rating += (0 < reducts.sc[build] ? reducts.gold : (0 < artifacts.data.ho.level ? reducts.gold : 0));
         v.rating = (3 * reducts.gold < v.rating ? 3 * reducts.gold : v.rating);
-				v.rating += reducts.gold * ('phom' == gold ? .5 : 1);;
+				v.rating += reducts.gold;
 				v.color = 'warning';
 				break;
 
