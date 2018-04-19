@@ -827,7 +827,7 @@ function skillEff(k, v) {
 				current_effect = Math.pow(current_effect, v.levels[v.level].bonus3);
 			}
 			var effect_diff = Math.abs(next_effect)/(0 < v.level && 0 != current_effect && 'X' != current_effect ? Math.abs(current_effect) : Math.abs(next_effect/2));
-			var effect_eff = Math.pow(effect_diff, v.rating);
+			var effect_eff = Math.pow(effect_diff, (0 == v.rating ? .00001 : v.rating));
 			running_eff *= effect_eff;
 		}
 		if(false !== current_effect2) {
@@ -836,7 +836,7 @@ function skillEff(k, v) {
 				var next_effect2 = v.levels[v.level + 1].bonus2;
 				if(0 != next_effect2) {
 					var effect_diff2 = Math.abs(next_effect2)/(0 < v.level && 0 != current_effect2 && 'X' != current_effect2 ? Math.abs(current_effect2) : Math.abs(next_effect2/2));
-					var effect_eff2 = Math.pow(effect_diff2, v.rating);
+					var effect_eff2 = Math.pow(effect_diff2, (0 == v.rating ? .00001 : v.rating));
 					if('cs' == k) {
 					} else {
 						running_eff *= effect_eff2;
@@ -848,12 +848,12 @@ function skillEff(k, v) {
 			var next_effect3 = v.levels[v.level + 1].bonus3;
 			if(0 != next_effect3) {
 				var effect_diff3 = Math.abs(next_effect3)/(0 < v.level && 0 != current_effect3 && 'X' != current_effect3 ? Math.abs(current_effect3) : Math.abs(next_effect3/2));
-				var effect_eff3 = Math.pow(effect_diff3, v.rating);
+				var effect_eff3 = Math.pow(effect_diff3, (0 == v.rating ? .00001 : v.rating));
 				running_eff *= effect_eff3;
 			}
 		}
 		var effDec = Decimal(running_eff);
-		var eff = effDec.pow(1/v.levels[v.level + 1].cost).sub(.99999).toNumber();
+		var eff = effDec.pow(1/v.levels[v.level + 1].cost).sub(1).toNumber();
 		skills.data[k].efficiency = eff;
 	}
 }
