@@ -1384,7 +1384,7 @@ var artifacts = {
 			'cexpo' : 2.5,
 			'type' : 'pct',
 			'expo' : {
-				'flat' : 'inactive'
+				'flat' : 'inactive_phom'
 			}
 		},
 		'boh' : {
