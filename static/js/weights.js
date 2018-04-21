@@ -192,6 +192,11 @@ function calculateWeight(k,v) {
 				v.color = 'warning';
 				break;
 
+      case 'rev_cs':
+        v.rating = reducts.rev_cs[build];
+        v.color = 'success';
+        break;
+
 			case 'dmg':
 				v.rating = 1;
 				v.color = 'info';
