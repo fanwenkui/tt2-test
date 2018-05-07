@@ -275,9 +275,9 @@
 						</form>
 						<form class="mb-4">
 							<div class="input-group col-12 col-md-6 col-xl-4">
-								<span class="input-group-text">Round to the Nearest</span>
+								<span class="input-group-text">Use Increments of </span>
 								<select id="ocd">
-									<option value="1">N/A</option>
+									<option value="1">1</option>
 									<option value="10">10</option>
 									<option value="100">100</option>
 									<option value="1000">1K</option>
@@ -286,6 +286,8 @@
                   <option value="1000000">1M</option>
 								</select>
 							</div>
+							<label class="ml-4"><small>Note, because the bonus effects and the cost of artifacts don't scale linearly, when you change your increments you might get different results. This is because 1 set of 1000 might not be the same as 10 sets of 100, when you evaluate each individual set. After a few prestiges this will start to balance out and you'll see the same types of results you saw before switching up your increments.<br /><br />
+							Also, there are no plans to implement a %-based method at this time, but many people have continued to use this and just get as close as they can to the recommendations provided using 1%.</small></label>
 				  	</form>
 						<button id="generateRelicUpdates" type="button" class="btn btn-primary mb-4" onclick="generateUpgrades()">Generate Upgrades</button>
 					</div>
