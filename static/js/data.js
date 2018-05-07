@@ -93,8 +93,8 @@ var reducts = {
 		'hero' : 0,
 		'tap' : 1,
 		'pet' : 1,
-		'sc' : 0,
-		'hs' : 1,
+		'sc' : .3,
+		'hs' : .6,
 		'cs' : 1
 	},
 	'splash' : {
@@ -2485,9 +2485,7 @@ var skills = {
 				'10' : { 'cost' : 7, 'bonus' : 2.75, 'bonus2' : -60, 'bonus3' : 0 }
 			},
 			'expo' : {
-				'gold' : [
-					'fairy',
-				]
+				'sum' : 'skill'
 			}
 		},
 		'ms' : {
@@ -2603,7 +2601,7 @@ var skills = {
 				'12' : { 'cost' : 60, 'bonus' : 123, 'bonus2' : .005, 'bonus3' : 0 }
 			},
 			'expo' : {
-				'reduct' : 'hs'
+				'sum' : 'skill'
 			}
 		},
 		'ls' : {
