@@ -489,6 +489,11 @@ function optimize(data, step, relics, buffer, orelics, obuffer) {
 			upgrades[temp_winner] += temp_step;
 		}
 		relics -= temp_cost;
+		if(undefined == data.data[temp_winner].upgradeCost) {
+			data.data[temp_winner].upgradeCost = temp_cost;
+		} else {
+			data.data[temp_winner].upgradeCost += temp_cost;
+		}
 		data.data[temp_winner].level += temp_step;
 		data = calculate(data, temp_winner, false, false);
     temp_winner = determineArtifactStepWinner(step);
@@ -723,7 +728,8 @@ function renderSuggestions(data) {
 						suggestions += '<span class="d-inline d-sm-none">' + v.name + '</span>';
 						suggestions += '<span class="d-none d-sm-inline">' + v.name + '</span>';
 						suggestions += ' <small>' + displayTruncated(v.level) + '&#x00A0;=>&#x00A0;' + displayTruncated(data.data[k].level) + '</small>';
-						suggestions += '<span class="badge badge-' + v.color + ' ml-3">+' + upgrades[k] + '</span>';
+						suggestions += '<span class="badge badge-' + v.color + ' ml-3">+' + upgrades[k] + '</span><br />';
+						suggestions += '<small>' + displayTruncated(data.data[k].upgradeCost) + ' relics</small>';
 					suggestions += '</span>';
 					suggestions += '<button class="badge badge-secondary" type="button" data-toggle="collapse" data-target="#' + k + 'deets" aria-expanded="false" aria-controls="' + k + 'deets">&#x00A0;i&#x00A0;</button>';
 				suggestions += '</div>';
