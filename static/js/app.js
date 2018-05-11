@@ -477,6 +477,48 @@ function determineArtifactCost(v, step) {
   return(cost);
 }
 
+function processPct(v, relics, totalAD) {
+	var current_ad = v.level * v.ad;
+	var current_effect = 1 + v.effect * Math.pow(v.level, Math.pow((1 + (v.cexpo - 1) * Math.min(v.grate * v.level, v.gmax)), v.gexpo));
+  var levels = 0;
+  var cost = 0;
+  var total_cost = 0;
+	if(v.max == -1 || v.max > v.level) {
+    var litmus = true;
+    while(true == litmus) {
+      cost = calculateArtifactEfficiencyCost(v, 1);
+      relics -= cost;
+      if(0 < relics) {
+        levels++;
+        v.level++;
+        total_cost += cost;
+      } else {
+        litmus = false;
+      }
+    }
+    return(calculateArtifactEfficiency(v, total_cost, levels, current_ad, current_effect, totalAD));
+	}
+	return(-1);
+}
+
+function optimizePct(data, step, relics, buffer, orelics, obuffer) {
+  var winnerPct = '';
+  var winnerPct_value = 0;
+  var temp_value = 0;
+  var relics_pct = Math.floor(relics * (step/100));
+  $.each(data.data, function(k,v) {
+    var orig_level = v.level;
+    console.log(k);
+    temp_value = processPct(v, relics_pct, data.totalAD);
+    console.log(temp_value);
+    v.level = orig_level;
+    if(temp_value > winnerPct_value) {
+      winnerPct = k;
+      winnerPct_value = temp_value;
+    }
+  });
+}
+
 function optimize(data, step, relics, buffer, orelics, obuffer) {
   var temp_winner = determineArtifactStepWinner(step);
   var temp_step = determineArtifactStep(data.data[temp_winner], step);
@@ -693,8 +735,13 @@ function generateUpgrades() {
 		return
 	}
 	if(relics > 0) {
-    var step = parseInt($('#ocd').val());
-		optimize(temp_artifacts, step, relics, buffer, orelics, obuffer);
+    if('pct' == $('#ocd').val().substring(0,3)) {
+      var step = parseInt($('#ocd').val().substring(3));
+      optimizePct(temp_artifacts, step, relics, buffer, orelics, obuffer);
+    } else {
+      var step = parseInt($('#ocd').val());
+      optimize(temp_artifacts, step, relics, buffer, orelics, obuffer);
+    }
 	} else {
 		renderSuggestions(temp_artifacts);
 	}
