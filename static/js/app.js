@@ -559,7 +559,7 @@ function optimizePct() {
 			u_temp_artifacts.totalAD = calculateTotalAD(u_temp_artifacts.data, false);
 		}
 	if('' != winnerPct && u_relics >= u_threshhold) {
-		var progress = (1 - (u_relics > 0 ? u_relics / u_orelics : 0 / u_orelics)) * 100;
+		var progress = (1 - (u_relics > 0 ? u_relics / (u_orelics - u_threshhold) : 0 / u_orelics)) * 100;
 		$('#progress').width(progress + '%');
 		$('#progress').prop('aria-valuenow', progress);
 		buffer = u_obuffer;
@@ -597,7 +597,7 @@ function optimize() {
     temp_cost= determineArtifactCost(u_temp_artifacts.data[temp_winner], u_step);
 	}
  	if(u_relics >= temp_cost) {
-		var progress = (1 - (u_relics > 0 ? u_relics / (u_orelics - u_threshhold) : 0 / u_orelics)) * 100;
+		var progress = (1 - (u_relics > 0 ? u_relics / u_orelics : 0 / u_orelics)) * 100;
 		$('#progress').width(progress + '%');
 		$('#progress').prop('aria-valuenow', progress);
 		buffer = u_obuffer;
