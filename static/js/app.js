@@ -477,83 +477,137 @@ function determineArtifactCost(v, step) {
   return(cost);
 }
 
-function processPct(v, relics, totalAD) {
+function processPct(k, v, relics, totalAD, tattoo) {
 	var current_ad = v.level * v.ad;
 	var current_effect = 1 + v.effect * Math.pow(v.level, Math.pow((1 + (v.cexpo - 1) * Math.min(v.grate * v.level, v.gmax)), v.gexpo));
   var levels = 0;
   var cost = 0;
   var total_cost = 0;
-	if(v.max == -1 || v.max > v.level) {
-    var litmus = true;
-    while(true == litmus) {
-      cost = calculateArtifactEfficiencyCost(v, 1);
-      relics -= cost;
-      if(0 < relics) {
-        levels++;
-        v.level++;
-        total_cost += cost;
-      } else {
-        litmus = false;
-      }
-    }
-    return(calculateArtifactEfficiency(v, total_cost, levels, current_ad, current_effect, totalAD));
+	if(1 == v.active && 0 != v.level) {
+		if(-1 == v.max) {
+			while(true) {
+				obfuscate++;
+	      cost = calculateArtifactEfficiencyCost(v, 1);
+	      relics -= cost;
+	      if(0 < relics) {
+	        levels++;
+	        v.level++;
+	        total_cost += cost;
+	      } else {
+					if(true == tattoo) {
+						u_relics -= total_cost;
+						upgrades.steps.push({
+							'k' : k,
+							'levels' : levels,
+							'cost' : total_cost
+						})
+						return;
+					} else if(0 < levels) {
+						return(calculateArtifactEfficiency(v, total_cost, levels, current_ad, current_effect, totalAD));
+					} else {
+						return(-1);
+					}
+	      }
+	    }
+		} else if(v.max > v.level) {
+			var levels = v.max - v.level;
+			while(0 < levels) {
+				obfuscate++;
+				cost = calculateArtifactEfficiencyCost(v, levels);
+				if(cost <= relics) {
+					v.level += levels;
+					if(true == tattoo) {
+						u_relics -= cost;
+						upgrades.steps.push({
+							'k' : k,
+							'levels' : levels,
+							'cost' : cost
+						})
+						return;
+					} else if(0 < levels) {
+						return(calculateArtifactEfficiency(v, cost, levels, current_ad, current_effect, totalAD));
+					} else {
+						return(-1);
+					}
+				} else {
+					levels--
+				}
+			}
+		}
 	}
 	return(-1);
 }
 
-function optimizePct(data, step, relics, buffer, orelics, obuffer) {
-  var winnerPct = '';
-  var winnerPct_value = 0;
-  var temp_value = 0;
-  var relics_pct = Math.floor(relics * (step/100));
-  $.each(data.data, function(k,v) {
-    var orig_level = v.level;
-    console.log(k);
-    temp_value = processPct(v, relics_pct, data.totalAD);
-    console.log(temp_value);
-    v.level = orig_level;
-    if(temp_value > winnerPct_value) {
-      winnerPct = k;
-      winnerPct_value = temp_value;
-    }
-  });
+function optimizePct() {
+		obfuscate++;
+	  var winnerPct = '';
+	  var winnerPct_value = 0;
+	  var temp_value = 0;
+	  var relics_pct = Math.floor(u_relics * (u_step/100));
+	  $.each(u_temp_artifacts.data, function(k,v) {
+			obfuscate++;
+	    var orig_level = v.level;
+	    temp_value = processPct(k, v, relics_pct, u_temp_artifacts.totalAD, false);
+	    v.level = orig_level;
+	    if(temp_value > winnerPct_value) {
+	      winnerPct = k;
+	      winnerPct_value = temp_value;
+	    }
+	  });
+		if('' != winnerPct) {
+			processPct(winnerPct, u_temp_artifacts.data[winnerPct], relics_pct, u_temp_artifacts.totalAD, true);
+			u_temp_artifacts.totalAD = calculateTotalAD(u_temp_artifacts.data, false);
+		}
+	if('' != winnerPct && u_relics >= u_threshhold) {
+		var progress = (1 - (u_relics > 0 ? u_relics / u_orelics : 0 / u_orelics)) * 100;
+		$('#progress').width(progress + '%');
+		$('#progress').prop('aria-valuenow', progress);
+		buffer = u_obuffer;
+		window.setTimeout(optimizePct, 1);
+	} else {
+		var progress = 100;
+		$('#progress').width(progress + '%');
+		$('#progress').prop('aria-valuenow', progress);
+		$('#progress').removeClass('progress-bar-striped progress-bar-animated');
+		renderPctSuggestions(u_temp_artifacts);
+	}
 }
 
-function optimize(data, step, relics, buffer, orelics, obuffer) {
-  var temp_winner = determineArtifactStepWinner(step);
-  var temp_step = determineArtifactStep(data.data[temp_winner], step);
-  var temp_cost = determineArtifactCost(data.data[temp_winner], step);
-	while(buffer-- > 0 && relics >= temp_cost) {
+function optimize() {
+  var temp_winner = determineArtifactStepWinner(u_step);
+  var temp_step = determineArtifactStep(u_temp_artifacts.data[temp_winner], u_step);
+  var temp_cost = determineArtifactCost(u_temp_artifacts.data[temp_winner], u_step);
+	while(buffer-- > 0 && u_relics >= temp_cost) {
 		obfuscate++;
 		if(undefined == upgrades[temp_winner]) {
 			upgrades[temp_winner] = temp_step;
 		} else {
 			upgrades[temp_winner] += temp_step;
 		}
-		relics -= temp_cost;
-		if(undefined == data.data[temp_winner].upgradeCost) {
-			data.data[temp_winner].upgradeCost = temp_cost;
+		u_relics -= temp_cost;
+		if(undefined == u_temp_artifacts.data[temp_winner].upgradeCost) {
+			u_temp_artifacts.data[temp_winner].upgradeCost = temp_cost;
 		} else {
-			data.data[temp_winner].upgradeCost += temp_cost;
+			u_temp_artifacts.data[temp_winner].upgradeCost += temp_cost;
 		}
-		data.data[temp_winner].level += temp_step;
-		data = calculate(data, temp_winner, false, false);
-    temp_winner = determineArtifactStepWinner(step);
-    temp_step = determineArtifactStep(data.data[temp_winner], step);
-    temp_cost= determineArtifactCost(data.data[temp_winner], step);
+		u_temp_artifacts.data[temp_winner].level += temp_step;
+		u_temp_artifacts = calculate(u_temp_artifacts, temp_winner, false, false);
+    temp_winner = determineArtifactStepWinner(u_step);
+    temp_step = determineArtifactStep(u_temp_artifacts.data[temp_winner], u_step);
+    temp_cost= determineArtifactCost(u_temp_artifacts.data[temp_winner], u_step);
 	}
- 	if(relics >= temp_cost) {
-		var progress = (1 - (relics > 0 ? relics / orelics : 0 / orelics)) * 100;
+ 	if(u_relics >= temp_cost) {
+		var progress = (1 - (u_relics > 0 ? u_relics / (u_orelics - u_threshhold) : 0 / u_orelics)) * 100;
 		$('#progress').width(progress + '%');
 		$('#progress').prop('aria-valuenow', progress);
-		buffer = obuffer;
-		window.setTimeout(function(){ optimize(data, step, relics, buffer, orelics, obuffer); }, 1);
+		buffer = u_obuffer;
+		window.setTimeout(optimize, 1);
 	} else {
 		var progress = 100;
 		$('#progress').width(progress + '%');
 		$('#progress').prop('aria-valuenow', progress);
 		$('#progress').removeClass('progress-bar-striped progress-bar-animated');
-		renderSuggestions(data);
+		renderSuggestions(u_temp_artifacts);
 	}
 }
 
@@ -590,160 +644,162 @@ function generateUpgrades() {
 	if(winner_n != '') {
 		$('#new_artifact').empty().append('<em>NOTE: You would be better off saving up for a new artifact (' + artifacts.data[winner_n].name + ').</em>');
 	}
-	var relics = new Decimal(('' == $('#relics').val() ? 0 : $('#relics').val()) + '.' + ('' == $('#relics_decimal').val() ? 0 : $('#relics_decimal').val()));
+	u_relics = new Decimal(('' == $('#relics').val() ? 0 : $('#relics').val()) + '.' + ('' == $('#relics_decimal').val() ? 0 : $('#relics_decimal').val()));
 	buffer = 0;
 	switch($('#relic_factor').val()) {
 		case '_':
-			relics = relics.toNumber();
+			u_relics = u_relics.toNumber();
 			buffer = 10;
 			break;
 		case 'K':
-			relics = relics.mul(1000).toNumber();
+			u_relics = u_relics.mul(1000).toNumber();
 			buffer = 100;
 			break;
 		case 'M':
-			relics = relics.mul(1000000).toNumber();
+			u_relics = u_relics.mul(1000000).toNumber();
 			buffer = 250;
 			break;
 		case 'B':
-			relics = relics.mul(1000000000).toNumber();
+			u_relics = u_relics.mul(1000000000).toNumber();
 			buffer = 500;
 			break;
 		case 'T':
-			relics = relics.mul(1000000000000).toNumber();
+			u_relics = u_relics.mul(1000000000000).toNumber();
 			buffer = 750;
 			break;
 		case 'e13':
-			relics = relics.mul(10000000000000).toNumber();
+			u_relics = u_relics.mul(10000000000000).toNumber();
 			buffer = 1000;
 			break;
 		case 'e14':
-			relics = relics.mul(100000000000000).toNumber();
+			u_relics = u_relics.mul(100000000000000).toNumber();
 			buffer = 2500;
 			break;
 		case 'e15':
-			relics = relics.mul(1000000000000000).toNumber();
+			u_relics = u_relics.mul(1000000000000000).toNumber();
 			buffer = 5000;
 			break;
 		case 'e16':
-			relics = relics.mul(10000000000000000).toNumber();
+			u_relics = u_relics.mul(10000000000000000).toNumber();
 			buffer = 7500;
 			break;
 		case 'e17':
-			relics = relics.mul(100000000000000000).toNumber();
+			u_relics = u_relics.mul(100000000000000000).toNumber();
 			buffer = 10000;
 			break;
 		case 'e18':
-			relics = relics.mul(1000000000000000000).toNumber();
+			u_relics = u_relics.mul(1000000000000000000).toNumber();
 			buffer = 25000;
 			break;
 		case 'e19':
-			relics = relics.mul(10000000000000000000).toNumber();
+			u_relics = u_relics.mul(10000000000000000000).toNumber();
 			buffer = 50000;
 			break;
 		case 'e20':
-			relics = relics.mul(100000000000000000000).toNumber();
+			u_relics = u_relics.mul(100000000000000000000).toNumber();
 			buffer = 75000;
 			break;
 		case 'e21':
-			relics = relics.mul(1000000000000000000000).toNumber();
+			u_relics = u_relics.mul(1000000000000000000000).toNumber();
 			buffer = 100000;
 			break;
 		case 'e22':
-			relics = relics.mul(10000000000000000000000).toNumber();
+			u_relics = u_relics.mul(10000000000000000000000).toNumber();
 			buffer = 125000;
 			break;
 		case 'e23':
-			relics = relics.mul(100000000000000000000000).toNumber();
+			u_relics = u_relics.mul(100000000000000000000000).toNumber();
 			buffer = 150000;
 			break;
 		case 'e24':
-			relics = relics.mul(1000000000000000000000000).toNumber();
+			u_relics = u_relics.mul(1000000000000000000000000).toNumber();
 			buffer = 175000;
 			break;
 		case 'e25':
-			relics = relics.mul(10000000000000000000000000).toNumber();
+			u_relics = u_relics.mul(10000000000000000000000000).toNumber();
 			buffer = 250000;
 			break;
 		case 'e26':
-			relics = relics.mul(100000000000000000000000000).toNumber();
+			u_relics = u_relics.mul(100000000000000000000000000).toNumber();
 			buffer = 500000;
 			break;
 		case 'e27':
-			relics = relics.mul(1000000000000000000000000000).toNumber();
+			u_relics = u_relics.mul(1000000000000000000000000000).toNumber();
 			buffer = 750000;
 			break;
 		case 'e28':
-			relics = relics.mul(10000000000000000000000000000).toNumber();
+			u_relics = u_relics.mul(10000000000000000000000000000).toNumber();
 			buffer = 1000000;
 			break;
 		case 'e29':
-			relics = relics.mul(100000000000000000000000000000).toNumber();
+			u_relics = u_relics.mul(100000000000000000000000000000).toNumber();
 			buffer = 1250000;
 			break;
 		case 'e30':
-			relics = relics.mul(1000000000000000000000000000000).toNumber();
+			u_relics = u_relics.mul(1000000000000000000000000000000).toNumber();
 			buffer = 1500000;
 			break;
 		case 'e31':
-			relics = relics.mul(10000000000000000000000000000000).toNumber();
+			u_relics = u_relics.mul(10000000000000000000000000000000).toNumber();
 			buffer = 1750000;
 			break;
 		case 'e32':
-			relics = relics.mul(100000000000000000000000000000000).toNumber();
+			u_relics = u_relics.mul(100000000000000000000000000000000).toNumber();
 			buffer = 2500000;
 			break;
 		case 'e33':
-			relics = relics.mul(1000000000000000000000000000000000).toNumber();
+			u_relics = u_relics.mul(1000000000000000000000000000000000).toNumber();
 			buffer = 5000000;
 			break;
 		case 'e34':
-			relics = relics.mul(10000000000000000000000000000000000).toNumber();
+			u_relics = u_relics.mul(10000000000000000000000000000000000).toNumber();
 			buffer = 7500000;
 			break;
 		case 'e35':
-			relics = relics.mul(100000000000000000000000000000000000).toNumber();
+			u_relics = u_relics.mul(100000000000000000000000000000000000).toNumber();
 			buffer = 10000000;
 			break;
 		case 'e36':
-			relics = relics.mul(1000000000000000000000000000000000000).toNumber();
+			u_relics = u_relics.mul(1000000000000000000000000000000000000).toNumber();
 			buffer = 12500000;
 			break;
 		case 'e37':
-			relics = relics.mul(10000000000000000000000000000000000000).toNumber();
+			u_relics = u_relics.mul(10000000000000000000000000000000000000).toNumber();
 			buffer = 25000000;
 			break;
 		case 'e38':
-			relics = relics.mul(100000000000000000000000000000000000000).toNumber();
+			u_relics = u_relics.mul(100000000000000000000000000000000000000).toNumber();
 			buffer = 75000000;
 			break;
 		case 'e39':
-			relics = relics.mul(1000000000000000000000000000000000000000).toNumber();
+			u_relics = u_relics.mul(1000000000000000000000000000000000000000).toNumber();
 			buffer = 100000000;
 			break;
 	}
-	var orelics = relics;
-	var obuffer = buffer;
+	u_orelics = u_relics;
+	u_obuffer = buffer;
 	upgrades = {};
-	var temp_artifacts = $.extend(true, {}, artifacts);
+	u_temp_artifacts = $.extend(true, {}, artifacts);
 	var litmus = false;
-	$.each(temp_artifacts.data, function(k,v) {
+	$.each(u_temp_artifacts.data, function(k,v) {
 		if(v.level > 0) { litmus = true; }
 	});
 	if(false == litmus) {
 		$('#suggestions').empty().append('<p>You must have at least 1 artifact enabled to receive upgrade suggestions.</p>');
 		return
 	}
-	if(relics > 0) {
+	if(u_relics > 0) {
     if('pct' == $('#ocd').val().substring(0,3)) {
-      var step = parseInt($('#ocd').val().substring(3));
-      optimizePct(temp_artifacts, step, relics, buffer, orelics, obuffer);
+      u_step = parseInt($('#ocd').val().substring(3));
+			u_threshhold = Math.floor(u_relics * u_step/100);
+			upgrades.steps = [];
+			window.setTimeout(optimizePct, 1);
     } else {
-      var step = parseInt($('#ocd').val());
-      optimize(temp_artifacts, step, relics, buffer, orelics, obuffer);
+      u_step = parseInt($('#ocd').val());
+			window.setTimeout(optimize, 1);
     }
 	} else {
-		renderSuggestions(temp_artifacts);
+		renderSuggestions(u_temp_artifacts);
 	}
 }
 
@@ -762,6 +818,7 @@ function renderSuggestions(data) {
 		litmus = true;
 	});
 	if(false == litmus) {
+		$('#pudding').empty();
 		$('#suggestions').empty().append('<p>You cannot afford to make the next best upgrade(s). Please try again when you have more relics or try lowering your rounding to see results.</p>');
 		$('#accept').empty().append('<button type="button" class="btn btn-danger" onclick="rejectSuggestions();">Cancel</button>');
 		relics = 0;
@@ -803,6 +860,53 @@ function renderSuggestions(data) {
 	$('#suggestions').empty().append(suggestions);
 	$('#accept2').show();
 	$('#accept').empty().append('<button type="button" class="btn btn-primary" onclick="acceptSuggestions();">Complete</button><button type="button" class="btn btn-danger" onclick="rejectSuggestions();">Cancel</button>');
+}
+
+function renderPctSuggestions(data) {
+	var suggestions = '<ol>';
+	if(0 == upgrades.steps.length) {
+		$('#pudding').empty();
+		$('#suggestions').empty().append('<p>You cannot afford to make the next best upgrade(s). Please try again when you have more relics or try lowering your rounding to see results.</p>');
+		$('#accept').empty().append('<button type="button" class="btn btn-danger" onclick="rejectSuggestions();">Cancel</button>');
+		u_relics = 0;
+		return;
+	}
+	$.each(upgrades.steps, function(k,v) {
+		suggestions += '<li>';
+			suggestions += '<span class="d-inline d-sm-none">' + artifacts.data[v.k].nickname + '</span>';
+			suggestions += '<span class="d-none d-sm-inline">' + artifacts.data[v.k].name + '</span>';
+			suggestions += '<span class="badge badge-' + artifacts.data[v.k].color + ' ml-3">+' + displayTruncated(v.levels) + '</span> ';
+			suggestions += '<small>' + displayTruncated(v.cost) + ' relics</small>';
+		suggestions += '</li>';
+	});
+	suggestions += '</ol>';
+	var alice = new Date();
+	var curiouser = alice.getTime() - white_rabbit.getTime();
+	$('#pudding').empty().append('Total Calculations Performed: ' + obfuscate + ' in ' + (curiouser / 1000).toFixed(3) + 's (' + ((obfuscate/curiouser) * 1000).toFixed(3) + '/s)');
+	$('#suggestions').empty().append(suggestions);
+	$('#accept2').show();
+	$('#accept').empty().append('<button type="button" class="btn btn-primary" onclick="acceptPctSuggestions();">Complete</button><button type="button" class="btn btn-danger" onclick="rejectSuggestions();">Cancel</button>');
+}
+
+function acceptPctSuggestions() {
+	gtag('event', 'Upgrades', {
+		'event_category': 'Upgrades',
+		'event_action': 'Accept',
+		'event_label': 'Artifacts Pct',
+	});
+	$.each(upgrades.steps, function(k,v) {
+		artifacts.data[v.k].level += v.levels;
+	});
+	artifacts.totalAD = calculateTotalAD(artifacts.data, true);
+	$('#new_artifact').empty();
+	$('#accept').empty();
+	$('#accept2').hide();
+	$('#suggestions').empty();
+	$('#relics').val('');
+	$('#relics_decimal').val('');
+	$('#relicsuggs').hide();
+	$('#relicreccs').show();
+	adjustWeights();
 }
 
 function acceptSuggestions() {
