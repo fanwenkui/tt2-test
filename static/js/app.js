@@ -544,7 +544,6 @@ function processPct(k, v, relics, totalAD, tattoo) {
 			total_cost += cost;
       relics -= cost;
 			if(true == tattoo) {
-				console.log('winner',k,running_dowse,total_cost);
 				u_relics -= total_cost;
 				upgrades.steps.push({
 					'k' : k,
@@ -553,7 +552,6 @@ function processPct(k, v, relics, totalAD, tattoo) {
 				})
 				return(running_dowse);
 			} else if(0 < running_dowse) {
-				console.log(k,running_dowse,total_cost);
 				return(calculateArtifactEfficiency(v, total_cost, running_dowse, current_ad, current_effect, totalAD));
 			} else {
 				return(-1);
