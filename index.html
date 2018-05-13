@@ -40,7 +40,7 @@
 						<a class="nav-link" id="changelog-tab" data-toggle="tab" href="#changelog" aria-controls="changelog" aria-selected="false">更新日志</a>
 					</li>
 				</ul>
-				<h1 class="h4">TT2 优化器（汉化版 by RiggZh） <span class="badge badge-secondary">2.7.6.1</span></h1>
+				<h1 class="h4">TT2 优化器（汉化版 by RiggZh） <span class="badge badge-secondary">2.7.6.2</span></h1>
 			</div>
 			<div class="tab-content" id="tabContent">
 			  <div class="tab-pane fade show active" id="style" role="tabpanel" aria-labelledby="style-tab">
@@ -294,8 +294,8 @@
                   <option value="pct25">25%</option>
 								</select>
 							</div>
-							<label class="ml-4"><small>Note, because the bonus effects and the cost of artifacts don't scale linearly, when you change your increments you might get different results. This is because 1 set of 1000 might not be the same as 10 sets of 100, when you evaluate each individual set. After a few prestiges this will start to balance out and you'll see the same types of results you saw before switching up your increments.<br /><br />
-                Also, note that if you use the % options they ONLY work with in-game rounding option turned <strong>OFF</strong> at this time and I definitely only recommend using the 5% or 25% options; 1% is too crazy in terms of upgrades offered. It also seems to get real close in terms of calculating the upgrades the way the game does but it isn't 100% perfectly matched; it's unclear what the difference is. However, this should still get you the general shape of distribution that is most optimized.</small></label>
+							<label class="ml-4"><small>请注意，因为神器效果和神器花费不是线性增长，所以当你改变购买指数时可能会有不同的结果。这是因为，1次升级1000可能不等于10次升级。在几次蜕变后，这将开始平衡，你会看到近似的结果<br /><br />
+                此外，请注意，如果你使用%选项，则需要<strong>关闭游戏中的四舍五入选项</strong>，推荐使用5%或者25%而不是1%。在计算游戏升级的过程中，这只是一个近似值并不是100%准确，目前还不清楚不同的原因。然而这仍能为您提供最优的优化方案</small></label>
 				  	</form>
 						<button id="generateRelicUpdates" type="button" class="btn btn-primary mb-4" onclick="generateUpgrades()">生成升级方案</button>
 					</div>
@@ -395,6 +395,9 @@
 					<p class="small">* 只有在您升级技能且没有刷新本工具页面时才能回退。另外，它只能回退一次.</p>
 				</div>
 				<div class="tab-pane fade" id="changelog" role="tabpanel" aria-labelledby="changelog-tab">
+					<h5>2.7.6.2 2018-5-13 11:17</h5>
+					添加对非四舍五入状态下的圣物百分比升级选项<br>
+					<br>
 					<h5>2.7.6.1 2018-5-8 22:34</h5>
 					添加圣物成本以帮助估算百分比<br>
 					<br>
