@@ -924,16 +924,16 @@ function renderPctSuggestions(data) {
 			suggestions += '<span class="d-inline d-sm-none">' + artifacts.data[v.k].nickname + '</span>';
 			suggestions += '<span class="d-none d-sm-inline">' + artifacts.data[v.k].name + '</span>';
 			suggestions += '<span class="badge badge-' + artifacts.data[v.k].color + ' ml-3">+' + displayTruncated(v.levels) + '</span> ';
-			suggestions += '<small>' + displayTruncated(v.cost) + ' relics</small>';
+			suggestions += '<small>花费 ' + displayTruncated(v.cost) + ' 圣物</small>';
 		suggestions += '</li>';
 	});
 	suggestions += '</ol>';
 	var alice = new Date();
 	var curiouser = alice.getTime() - white_rabbit.getTime();
-	$('#pudding').empty().append('Total Calculations Performed: ' + obfuscate + ' in ' + (curiouser / 1000).toFixed(3) + 's (' + ((obfuscate/curiouser) * 1000).toFixed(3) + '/s)');
+	$('#pudding').empty().append('共执行计算 ' + obfuscate + '次 在 ' + (curiouser / 1000).toFixed(3) + '秒内 (' + ((obfuscate/curiouser) * 1000).toFixed(3) + '/s)');
 	$('#suggestions').empty().append(suggestions);
 	$('#accept2').show();
-	$('#accept').empty().append('<button type="button" class="btn btn-primary" onclick="acceptPctSuggestions();">Complete</button><button type="button" class="btn btn-danger" onclick="rejectSuggestions();">Cancel</button>');
+	$('#accept').empty().append('<button type="button" class="btn btn-primary" onclick="acceptPctSuggestions();">完成</button><button type="button" class="btn btn-danger" onclick="rejectSuggestions();">取消</button>');
 }
 
 function acceptPctSuggestions() {
