@@ -502,12 +502,15 @@ function processPct(k, v, relics, totalAD, tattoo) {
 	var orig_level = v.level;
 	if(1 == v.active && 0 != v.level) {
 		if(-1 == v.max) {
+			var orig_relics = relics;
+			var real_orig_level = v.level;
 			dowse = dowsingRod(v, 100000, relics) * 100000;
 			v.level = orig_level;
 			running_dowse += dowse;
 			cost = calculateArtifactEfficiencyCost(v, dowse);
 			total_cost += cost;
       relics -= cost;
+			v.level += running_dowse;
 			orig_level = v.level;
 			dowse = dowsingRod(v, 10000, relics) * 10000;
 			v.level = orig_level;
@@ -515,6 +518,7 @@ function processPct(k, v, relics, totalAD, tattoo) {
 			cost = calculateArtifactEfficiencyCost(v, dowse);
 			total_cost += cost;
       relics -= cost;
+			v.level += running_dowse;
 			orig_level = v.level;
 			dowse = dowsingRod(v, 1000, relics) * 1000;
 			v.level = orig_level;
@@ -522,6 +526,7 @@ function processPct(k, v, relics, totalAD, tattoo) {
 			cost = calculateArtifactEfficiencyCost(v, dowse);
 			total_cost += cost;
       relics -= cost;
+			v.level += running_dowse;
 			orig_level = v.level;
 			dowse = dowsingRod(v, 100, relics) * 100;
 			v.level = orig_level;
@@ -529,6 +534,7 @@ function processPct(k, v, relics, totalAD, tattoo) {
 			cost = calculateArtifactEfficiencyCost(v, dowse);
 			total_cost += cost;
       relics -= cost;
+			v.level += running_dowse;
 			orig_level = v.level;
 			dowse = dowsingRod(v, 10, relics) * 10;
 			v.level = orig_level;
@@ -536,6 +542,7 @@ function processPct(k, v, relics, totalAD, tattoo) {
 			cost = calculateArtifactEfficiencyCost(v, dowse);
 			total_cost += cost;
       relics -= cost;
+			v.level += running_dowse;
 			orig_level = v.level;
 			dowse = dowsingRod(v, 1, relics) * 1;
 			v.level = orig_level;
