@@ -502,8 +502,6 @@ function processPct(k, v, relics, totalAD, tattoo) {
 	var orig_level = v.level;
 	if(1 == v.active && 0 != v.level) {
 		if(-1 == v.max) {
-			var orig_relics = relics;
-			var real_orig_level = v.level;
 			dowse = dowsingRod(v, 100000, relics) * 100000;
 			v.level = orig_level;
 			running_dowse += dowse;
