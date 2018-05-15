@@ -695,7 +695,7 @@ function generateUpgrades() {
 		}
 	});
 	if(winner_n != '') {
-		$('#new_artifact').empty().append('<em>注意：你最好积累圣物以挖掘新神器 (' + artifacts.data[winner_n].name + ').</em>');
+		$('#new_artifact').empty().append('<em>提示：您最好积攒圣物以用来挖掘新神器 (' + artifacts.data[winner_n].name + '[最优]).</em>');
 	}
 	u_relics = new Decimal(('' == $('#relics').val() ? 0 : $('#relics').val()) + '.' + ('' == $('#relics_decimal').val() ? 0 : $('#relics_decimal').val()));
 	buffer = 0;
@@ -838,7 +838,7 @@ function generateUpgrades() {
 		if(v.level > 0) { litmus = true; }
 	});
 	if(false == litmus) {
-		$('#suggestions').empty().append('<p>You must have at least 1 artifact enabled to receive upgrade suggestions.</p>');
+		$('#suggestions').empty().append('<p>您应该至少拥有1件神器以接收优化建议方案</p>');
 		return
 	}
 	if(u_relics > 0) {
@@ -872,8 +872,8 @@ function renderSuggestions(data) {
 	});
 	if(false == litmus) {
 		$('#pudding').empty();
-		$('#suggestions').empty().append('<p>没有任何对于您的升级建议，请您在有更多的圣物时重试，或降低购买倍数以查看结果</p>');
-		$('#accept').empty().append('<button type="button" class="btn btn-danger" onclick="rejectSuggestions();">Cancel</button>');
+		$('#suggestions').empty().append('<p>目前没有任何对于您的升级建议，请您在拥有更多的圣物时重试，或降低您的购买倍数选项</p>');
+		$('#accept').empty().append('<button type="button" class="btn btn-danger" onclick="rejectSuggestions();">取消</button>');
 		relics = 0;
 		return;
 	}
@@ -919,8 +919,8 @@ function renderPctSuggestions(data) {
 	var suggestions = '<ol>';
 	if(0 == upgrades.steps.length) {
 		$('#pudding').empty();
-		$('#suggestions').empty().append('<p>You cannot afford to make the next best upgrade(s). Please try again when you have more relics or try lowering your rounding to see results.</p>');
-		$('#accept').empty().append('<button type="button" class="btn btn-danger" onclick="rejectSuggestions();">Cancel</button>');
+		$('#suggestions').empty().append('<p>目前没有任何对于您的升级建议，请您在拥有更多的圣物时重试，或降低您的购买倍数选项</p>');
+		$('#accept').empty().append('<button type="button" class="btn btn-danger" onclick="rejectSuggestions();">取消</button>');
 		u_relics = 0;
 		return;
 	}

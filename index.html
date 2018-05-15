@@ -47,9 +47,7 @@
 					<p>如有翻译问题可通过<a href="https://github.com/riggzh/tt2-artifacts/issues"> GitHub </a>提交 Issues。</p>
 					<p>↓↓↓以下为作者原说明↓↓↓ <a href="https://tt2-optimizer.herokuapp.com/">点击此处跳转英文原版</a>  感谢原作者 tsukinoooo</p>
 					<p>此工具旨在帮助您确定根据你的游戏风格最大化圣物和技能点所带来的提升。在神器方面，它应该能在帮助您在提高神器伤害的同时确定优先神器升级顺序。在技能方面，它应该能帮助您确定最优技能书。如果您发现任何错误或者建议, 请随时通过 reddit与我联系， /u/tsukinoooo</p>
-					<p>第一次访问，请在本选项卡填写您的游戏风格，然后在“输入”选项卡填写您当前的神器等级和技能，在“圣物”选项卡填写您预期花费的圣物数量来计算升级方案，在“技能”选项卡接收加点的建议</p>
-					<p>如果您想忽略某个神器，请取消勾选。如果某个神器被勾选且等级为0，本工具将尽可能的推荐您在恰当的时候挖掘神器而不是升级已有神器</p>
-					<p>现在请您根据您的游戏风格回答以下问题</p>
+					<p>第一次访问，请在本选项卡填写您的游戏风格，然后在“输入”选项卡填写您当前的神器等级和技能，在“圣物”选项卡填写您预期花费的圣物数量来计算升级方案，在“技能”选项卡接收加点的建议</p>					  <p>现在请您根据您的游戏风格回答以下问题</p>
 					<form>
 						<div class="form-row mb-4">
 							<div class="form-group col-12 col-md-6 col-lg-4">
@@ -162,9 +160,9 @@
           </div>
 				</div>
 			  <div class="tab-pane fade" id="artifactab" role="tabpanel" aria-labelledby="artifacts-tab">
-					<p>在下面输入您的神器和技能数据，以生成圣物和技能建议升级方案</p>
+					<p>请在下面输入您的神器和技能等级，以生成圣物和技能的升级建议方案</p>
 					<h5>神器</h5>
-					<p>填写您当前拥有神器的级别。请不要勾选您希望忽略升级的神器。如果你还没有某个神器，请勾选并设置他的级别为0，这将会推荐您保留圣物以挖掘新的神器</p>
+					<p>填写您当前已有神器的级别。如您不希望获得某项神器的升级，请取消勾选。如您还没有获得该神器，请设置它的级别为 0 ，我们这将会在适当的时候推荐您积攒圣物以挖掘新的神器</p>
 					<p>如果这是您第一次使用该工具，请关闭自动计算功能，直到完成神器等级的录入，以防止该工具在录入时不断计算影响流畅度，特别是如果您的神器等级很高，这就尤为重要</p>
 					<div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
 					  <label id="btnrecalcon" class="btn btn-primary active">
@@ -201,7 +199,7 @@
 						</table>
 					</div>
 					<h5>技能</h5>
-					<p>填写您当前已点技能的级别。请不要勾选您希望忽略升级的技能。如果您还没有点这个技能，请设置它的级别为0</p>
+					<p>填写您当前已点技能的级别。如您不希望获得某项技能的升级，请取消勾选。如您还没点这个技能，请设置它的级别为 0</p>
 					<button type="button" class="btn btn-primary mb-3" onclick="checkAllSkills();">选中所有技能</button>
 					<button type="button" class="btn btn-danger mb-3" onclick="resetSkills();">重置所有技能</button>
 					<div class="col-12 col-md-8 col-lg-6">
@@ -234,7 +232,7 @@
 				</div>
 			  <div class="tab-pane fade" id="reccs" role="tabpanel" aria-labelledby="reccs-tab">
 					<div id="relicreccs">
-						<p>输入预计花费的圣物数量</p>
+						<p>请输入预计花费的圣物数量：	</p>
 						<form class="mb-4">
 							<div class="input-group col-12 col-md-6 col-xl-4">
 								<input type="tel" id="relics" class="form-control" placeholder="0" aria-label="whole numbers for relics">
@@ -293,8 +291,8 @@
                   <option value="pct25">25%</option>
 								</select>
 							</div>
-							<label class="ml-4"><small>请注意，因为神器效果和神器花费不是线性增长，所以当你改变购买指数时可能会有不同的结果。这是因为，1次升级1000可能不等于10次升级。在几次蜕变后，这将开始平衡，你会看到近似的结果<br /><br />
-                此外，请注意，如果你使用%选项，则需要<strong>关闭游戏中的四舍五入选项</strong>，推荐使用5%或者25%而不是1%。以%选项得到的结果总会和实际有些许偏离，因为无法确认具体的圣物数量（1.36e17可以从1.355e17到1.364e17），但这也是十分接近了。请不要感到困惑，因为它时低时高，所以您依然能得到最优的结果</small></label>
+							<label class="ml-4"><small>请注意，因为神器效果和神器花费不是线性增长，所以当你改变购买指数时可能会有不同的结果。这是因为，1次升级1000可能不等于10次升级。在几次升级后，会趋近于平衡，您会看到近似的结果<br /><br />
+                此外，请注意，如果您使用%选项，则需要<strong>关闭游戏中的四舍五入选项</strong>，推荐使用5%或者25%而不是1%。以%选项得到的结果总会和实际有些许偏离，因为无法确认具体的圣物数量（1.36e17可以表示从1.355e17到1.364e17），但这也是十分接近了。请不要感到困惑，因为它时低时高，所以您依然能得到最优的结果</small></label>
 				  	</form>
 						<button id="generateRelicUpdates" type="button" class="btn btn-primary mb-4" onclick="generateUpgrades()">生成升级方案</button>
 					</div>
@@ -314,13 +312,13 @@
 							</div>
 							<div id="pudding" class="mb-4"></div>
 							<div id="suggestions"></div>
-							<p id="accept2">如果您购买了所有这些升级，请点击完成按钮更新神器状态表并清除结果。</p>
+							<p id="accept2">如果您购买了所有这些升级，请点击完成按钮更新神器表</p>
 							<div id="accept"></div>
 						</div>
 					</div>
 				</div>
 				<div class="tab-pane fade" id="sp" role="tabpanel" aria-labelledby="sp-tab">
-					<p>以下是按照技能点收益列出的推荐选项，如果您采取某一项建议，请点击该建议按钮，这将重新计算您的下一个建议。您可以决定是使用最高收益还是较低收益的技能（花费更少的技能点）</p>
+					<p>以下是按照收益列出的推荐技能，如果您采取某一项建议，请点击该建议按钮，这将重新计算您的下一个建议。您可以决定是使用最高收益还是较低收益的技能（花费更少的技能点）</p>
 					<div class="row mb-2 ml-2">
 						图例:
 						<span class="badge badge-pill badge-success ml-2">主要伤害</span>
@@ -389,41 +387,41 @@
 							</div>
 						</div>
 					</div>
-					<button type="button" class="btn btn-danger mt-3 mb-3 mr-2" onclick="undoSkill();">回退上个技能*</button>
+					<button type="button" class="btn btn-danger mt-3 mb-3 mr-2" onclick="undoSkill();">回退上个技能 *</button>
 					<button type="button" class="btn btn-danger mt-3 mb-3" onclick="resetSkills();">重置所有技能</button>
-					<p class="small">* 只有在您升级技能且没有刷新本工具页面时才能回退。另外，它只能回退一次.</p>
+					<p class="small">* 您只有在未刷新本页面时才能进行回退，且只能回退一次</p>
 				</div>
 				<div class="tab-pane fade" id="changelog" role="tabpanel" aria-labelledby="changelog-tab">
 					<h5>2.7.6.3 2018-5-15 13:52</h5>
 					修正计算精度错误<br>
 					<br>
 					<h5>2.7.6.2 2018-5-13 11:17</h5>
-					添加对非四舍五入状态下的圣物百分比升级选项<br>
+					添加圣物百分比升级选项（仅支持非四舍五入）<br>
 					<br>
 					<h5>2.7.6.1 2018-5-8 22:34</h5>
-					添加圣物成本以帮助估算百分比<br>
+					添加升级方案中显示圣物成本以帮助估算百分比花费<br>
 					<br>
 					<h5>2.7.6.0 2018-5-7 09:40</h5>
 					调整暴击对影分身的加成<br>
 					优化技能“仙女魔力”和“曼尼马纳”的收益<br>
 					<br>
                     <h5>2.7.4.0 2018-4-21 22:32</h5>
-                    优化技能“锚定射击”对非大船和天堂流的构建<br>
+                    增加技能“锚定射击”对除大船和天堂流的其他流派构建<br>
                     <br>
 					<h5>2.7.3.3 2018-4-19 15:16</h5>
 					优化神器“神狐精华”的离线收益<br>
 					优化技能“米达斯之心”的收益<br>
 					<br>
 					<h5>2.7.3.2 2018-4-17 10:15</h5>
-					修正有主要收益技能全部点满后不对次要收益技能进行建议的问题<br>
-					修正技能列表收益显示错误的问题<br>
-					修正神器“瓦如恩之石”对技能“米达斯之手”的错误计算的问题<br>
-					修正灵魂觉醒的参数<br>
+					修正有主要收益技能全部点满后不对次要收益技能进行建议<br>
+					修正技能列表收益显示错误<br>
+					修正神器“瓦如恩之石”对技能“米达斯之手”的计算<br>
+					修正技能“灵魂觉醒”的收益<br>
 					技能比较中现在会显示更多位小数<br>
 					<br>
 					<h5>2.7.3.1 2018-4-16 14:38</h5>
-					修正技能“战利品”和“灵魂觉醒”的参数<br>
-					修正神器“满足宝箱”对宝箱兽金钱的错误计算的问题<br>
+					修正技能“战利品”和“灵魂觉醒”的收益<br>
+					修正神器“满足宝箱”对宝箱兽金钱的计算<br>
 					优化技能“战利品”的收益<br>
 				</div>
 				</div>
