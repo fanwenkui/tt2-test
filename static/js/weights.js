@@ -135,6 +135,12 @@ function calculateWeight(k,v) {
 				v.color = 'warning';
 				break;
 
+			case 'tap_mana':
+				v.rating = reducts.tap[build];
+				v.rating *= skills.data.ms.levels[Math.min(skills.data.ms.level + 1, skills.data.ms.max)].bonus3;
+				v.color = determineColor(v.rating);
+				break;
+
 			case 'skill':
 				v.rating += reducts.hs[build];
 				v.rating += reducts.ds[build];
@@ -142,6 +148,28 @@ function calculateWeight(k,v) {
 				v.rating += reducts.fs[build];
 				v.rating += reducts.wc[build];
 				v.rating += reducts.sc[build];
+				v.color = 'info';
+				break;
+
+			case 'skill_fairy':
+				v.rating += reducts.hs[build];
+				v.rating += reducts.ds[build];
+				v.rating += reducts.gold * ('phom' == gold ? .5 : 1);;
+				v.rating += reducts.fs[build];
+				v.rating += reducts.wc[build];
+				v.rating += reducts.sc[build];
+				v.rating *= skills.data.fc.levels[Math.min(skills.data.fc.level + 1, skills.data.fc.max)].bonus;
+				v.color = 'info';
+				break;
+
+			case 'skill_mana':
+				v.rating += reducts.hs[build];
+				v.rating += reducts.ds[build];
+				v.rating += reducts.gold * ('phom' == gold ? .5 : 1);;
+				v.rating += reducts.fs[build];
+				v.rating += reducts.wc[build];
+				v.rating += reducts.sc[build];
+				v.rating *= skills.data.mm.levels[Math.min(skills.data.mm.level + 1, skills.data.mm.max)].bonus2;
 				v.color = 'info';
 				break;
 
