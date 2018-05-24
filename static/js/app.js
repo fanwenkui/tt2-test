@@ -926,7 +926,7 @@ function renderPctSuggestions(data) {
 	}
 	$.each(upgrades.steps, function(k,v) {
 		suggestions += '<li>';
-			suggestions += '<span class="d-inline d-sm-none">' + artifacts.data[v.k].nickname + '</span>';
+			suggestions += '<span class="d-inline d-sm-none">' + artifacts.data[v.k].name + '</span>';
 			suggestions += '<span class="d-none d-sm-inline">' + artifacts.data[v.k].name + '</span>';
 			suggestions += '<span class="badge badge-' + artifacts.data[v.k].color + ' ml-3">+' + displayTruncated(v.levels) + '</span> ';
 			suggestions += '<small>花费 ' + displayTruncated(v.cost) + ' 圣物</small>';
