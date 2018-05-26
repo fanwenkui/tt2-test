@@ -143,6 +143,26 @@ function generateArtifacts() {
 	});
 }
 
+function determineTextColor(branch) {
+	switch(branch) {
+		case 'red':
+			return 'text-danger';
+			break;
+
+		case 'yellow':
+			return 'text-warning';
+			break;
+
+		case 'blue':
+			return 'text-primary';
+			break;
+
+		case 'green':
+			return 'text-success';
+			break;
+	}
+}
+
 function generateSkills() {
 	$('#skills').empty();
 	$.each(skills.data, function(k,v) {
@@ -155,8 +175,8 @@ function generateSkills() {
 			row += '</td>';
 			row += '<td>';
 				row += '<label for="skill' + k + 'active" id="basic-addonskill' + k + '">';
-					row += '<span class="d-block d-sm-none">' + v.name + '</span>';
-					row += '<span class="d-none d-sm-block">' + v.name + '</span>';
+					row += '<span class="d-block d-sm-none ' + determineTextColor(v.branch) + '">' + v.name + '</span>';
+					row += '<span class="d-none d-sm-block ' + determineTextColor(v.branch) + '">' + v.name + '</span>';
 				row += '</label>';
 			row += '</td>';
 			row += '<td>';
@@ -343,8 +363,14 @@ function regenerateSkills() {
 		}
 		$('#skill' + k + 'eff').empty().append(value);
 		value = '';
-		if(undefined != v.rating) {
-			value = v.rating.toFixed(2).replace(/\.?0+$/, '');
+		if(undefined != v.rating1) {
+			value = v.rating1.toFixed(2).replace(/\.?0+$/, '');
+		}
+		if(undefined != v.rating2) {
+			value += '/' + v.rating2.toFixed(2).replace(/\.?0+$/, '');
+		}
+		if(undefined != v.rating3) {
+			value += '/' + v.rating3.toFixed(2).replace(/\.?0+$/, '');
 		}
 		$('#skill' + k + 'expo').empty().append(value).removeClass().addClass('badge').addClass('badge-' + ('info' == v.color ? 'success' : v.color));
 	});
@@ -1028,29 +1054,23 @@ function skillEff(k, v) {
 		while(lvl > 0) {
 			totalCost += v.levels[lvl--].cost;
 		}
-		if(true == active && undefined != v.expo.flat && ('inactive_pet' == v.expo.flat || 'inactive_ship' == v.expo.flat || 'inactive_clone' == v.expo.flat)) {
-		} else if(true == active && undefined != v.expo.flat && 'inactive_phom' == v.expo.flat) {
-		} else {
-			var next_effect = v.levels[v.level + 1].bonus;
-			if('aaw' == k && 0 < v.level) {
-				next_effect = Math.pow(next_effect, v.levels[v.level + 1].bonus3);
-				current_effect = Math.pow(current_effect, v.levels[v.level].bonus3);
-			}
-			var effect_diff = Math.abs(next_effect)/(0 < v.level && 0 != current_effect && 'X' != current_effect ? Math.abs(current_effect) : Math.abs(next_effect/2));
-			var effect_eff = Math.pow(effect_diff, (0 == v.rating ? .00001 : v.rating));
-			running_eff *= effect_eff;
+		var next_effect = v.levels[v.level + 1].bonus;
+		if('aaw' == k && 0 < v.level) {
+			next_effect = Math.pow(next_effect, v.levels[v.level + 1].bonus3);
+			current_effect = Math.pow(current_effect, v.levels[v.level].bonus3);
 		}
+		var effect_diff = Math.abs(next_effect)/(0 < v.level && 0 != current_effect && 'X' != current_effect ? Math.abs(current_effect) : Math.abs(next_effect/2));
+		var effect_eff = Math.pow(effect_diff, (0 == v.rating1 ? .00001 : v.rating1));
+		running_eff *= effect_eff;
 		if(false !== current_effect2) {
-			if(true == active && undefined != v.expo.flat && 'inactive_gold' == v.expo.flat) {
-			} else {
-				var next_effect2 = v.levels[v.level + 1].bonus2;
-				if(0 != next_effect2) {
-					var effect_diff2 = Math.abs(next_effect2)/(0 < v.level && 0 != current_effect2 && 'X' != current_effect2 ? Math.abs(current_effect2) : Math.abs(next_effect2/2));
-					var effect_eff2 = Math.pow(effect_diff2, (0 == v.rating ? .00001 : v.rating));
-					if('cs' == k) {
-					} else {
-						running_eff *= effect_eff2;
-					}
+			var next_effect2 = v.levels[v.level + 1].bonus2;
+			if(0 != next_effect2) {
+				var effect_diff2 = Math.abs(next_effect2)/(0 < v.level && 0 != current_effect2 && 'X' != current_effect2 ? Math.abs(current_effect2) : Math.abs(next_effect2/2));
+				var effect_eff2 = Math.pow(effect_diff2, (0 == v.rating2 ? .00001 : v.rating2));
+				if('cs' == k) {
+					running_eff /= effect_eff2;
+				} else {
+					running_eff *= effect_eff2;
 				}
 			}
 		}
@@ -1058,7 +1078,7 @@ function skillEff(k, v) {
 			var next_effect3 = v.levels[v.level + 1].bonus3;
 			if(0 != next_effect3) {
 				var effect_diff3 = Math.abs(next_effect3)/(0 < v.level && 0 != current_effect3 && 'X' != current_effect3 ? Math.abs(current_effect3) : Math.abs(next_effect3/2));
-				var effect_eff3 = Math.pow(effect_diff3, (0 == v.rating ? .00001 : v.rating));
+				var effect_eff3 = Math.pow(effect_diff3, (0 == v.rating3 ? .00001 : v.rating3));
 				running_eff *= effect_eff3;
 			}
 		}
@@ -1316,9 +1336,7 @@ function determineSkillWinner(prevWinners) {
 		if(-1 != prevWinners.indexOf(k)) {
 			return true;
 		}
-		if(v.efficiency > winner_svalue &&
-			v.max > v.level
-		) {
+		if(v.efficiency > winner_svalue && v.max > v.level) {
 			if(skills.totals[v.branch] >= tiers[v.tier] && (-1 == v.prereq || 0 < skills.data[v.prereq].level)) {
 				winner = k;
 				winner_svalue = v.efficiency;
