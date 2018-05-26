@@ -163,7 +163,7 @@ function calculateWeight(k,expo) {
 			case 'pet_skill_phom':
 				results.rating *= 3 * reducts.pet[build];
 				if('phom' == gold || 'all' == gold) {
-					results.rating += reducts.gold;
+					results.rating = (results.rating < reducts.gold ? reducts.gold : results.rating);
 				}
 				results.color = determineColor(results.rating);
 				break;
@@ -186,8 +186,10 @@ function calculateWeight(k,expo) {
 				results.rating += reducts.wc[build];
 				results.rating += reducts.sc[build];
 				results.rating *= skills.data.fc.levels[Math.min(skills.data.fc.level + 1, skills.data.fc.max)].bonus;
-				results.rating += ('fairy' == gold ? reducts.gold : 0);
-				results.rating += ('all' == gold ? reducts.gold : 0);
+				if(results.rating < reducts.gold) {
+					results.rating = ('fairy' == gold ? reducts.gold : results.rating);
+					results.rating = ('all' == gold ? reducts.gold : results.rating);
+				}
 				results.color = 'info';
 				break;
 
@@ -245,7 +247,7 @@ function calculateWeight(k,expo) {
 					results.rating = 1;
 					results.color = 'success';
 				} else {
-					results.rating = reducts.gold * ('phom' == gold ? 1 : 0);
+					results.rating = reducts.gold * (('phom' == gold || 'all' == gold) ? 1 : 0);
 					results.color = 'warning';
 				}
 				break;
