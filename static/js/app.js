@@ -593,7 +593,6 @@ function processPct(k, v, relics, totalAD, tattoo) {
 				obfuscate++;
 				cost = calculateArtifactEfficiencyCost(v, levels);
 				if(cost <= relics) {
-					v.level += levels;
 					if(true == tattoo) {
 						u_relics -= cost;
 						upgrades.steps.push({
@@ -601,7 +600,7 @@ function processPct(k, v, relics, totalAD, tattoo) {
 							'levels' : levels,
 							'cost' : cost
 						})
-						return;
+						return(levels);
 					} else if(0 < levels) {
 						return(calculateArtifactEfficiency(v, cost, levels, current_ad, current_effect, totalAD));
 					} else {
@@ -617,26 +616,26 @@ function processPct(k, v, relics, totalAD, tattoo) {
 }
 
 function optimizePct() {
+	obfuscate++;
+  var winnerPct = '';
+  var winnerPct_value = 0;
+  var temp_value = 0;
+  var relics_pct = Math.floor(u_relics * (u_step/100));
+  $.each(u_temp_artifacts.data, function(k,v) {
 		obfuscate++;
-	  var winnerPct = '';
-	  var winnerPct_value = 0;
-	  var temp_value = 0;
-	  var relics_pct = Math.floor(u_relics * (u_step/100));
-	  $.each(u_temp_artifacts.data, function(k,v) {
-			obfuscate++;
-	    var orig_level = v.level;
-	    temp_value = processPct(k, v, relics_pct, u_temp_artifacts.totalAD, false);
-	    v.level = orig_level;
-	    if(temp_value > winnerPct_value) {
-	      winnerPct = k;
-	      winnerPct_value = temp_value;
-	    }
-	  });
-		if('' != winnerPct) {
-			var dowse = processPct(winnerPct, u_temp_artifacts.data[winnerPct], relics_pct, u_temp_artifacts.totalAD, true);
-			u_temp_artifacts.data[winnerPct].level += dowse;
-			u_temp_artifacts.totalAD = calculateTotalAD(u_temp_artifacts.data, false);
-		}
+    var orig_level = v.level;
+    temp_value = processPct(k, v, relics_pct, u_temp_artifacts.totalAD, false);
+    v.level = orig_level;
+    if(temp_value > winnerPct_value) {
+      winnerPct = k;
+      winnerPct_value = temp_value;
+    }
+  });
+	if('' != winnerPct) {
+		var dowse = processPct(winnerPct, u_temp_artifacts.data[winnerPct], relics_pct, u_temp_artifacts.totalAD, true);
+		u_temp_artifacts.data[winnerPct].level += dowse;
+		u_temp_artifacts.totalAD = calculateTotalAD(u_temp_artifacts.data, false);
+	}
 	if('' != winnerPct && u_relics >= u_threshhold) {
 		var progress = (1 - (u_relics > 0 ? u_relics / (u_orelics - u_threshhold) : 0 / u_orelics)) * 100;
 		$('#progress').width(progress + '%');
