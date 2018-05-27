@@ -178,6 +178,18 @@ function calculateWeight(k,expo) {
 				results.color = 'info';
 				break;
 
+			case 'skill_tap':
+				results.rating += reducts.hs[build];
+				results.rating += reducts.ds[build];
+				results.rating += reducts.gold * ('phom' == gold ? .5 : 1);
+				results.rating += reducts.fs[build];
+				results.rating += reducts.wc[build];
+				results.rating += reducts.sc[build];
+				results.rating *= reducts.tap[build];
+				results.color = determineColor(results.rating);
+				break;
+
+
 			case 'skill_fairy':
 				results.rating += reducts.hs[build];
 				results.rating += reducts.ds[build];
@@ -190,7 +202,7 @@ function calculateWeight(k,expo) {
 					results.rating = ('fairy' == gold ? reducts.gold : results.rating);
 					results.rating = ('all' == gold ? reducts.gold : results.rating);
 				}
-				results.color = 'info';
+				results.color = determineColor(results.rating);
 				break;
 
 			case 'skill_mana':

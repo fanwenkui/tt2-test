@@ -151,7 +151,7 @@ var reducts = {
 		'pet' : 1,
 		'sc' : 1,
 		'hs' : 1,
-		'cs' : 2/5
+		'cs' : 1/4
 	},
 	'cs' : {
 		'hero' : 0,
@@ -2753,8 +2753,8 @@ var skills = {
 				'25' : { 'cost' : 57, 'bonus' : .052, 'bonus2' : 0, 'bonus3' : .005 }
 			},
 			'expos' : {
-					'b1' : { 'reduct' : 'tap' },
-					'b3' : { 'reduct' : 'tap' }
+					'b1' : { 'sum' : 'skill_tap' },
+					'b3' : { 'sum' : 'skill_tap' }
 			}
 		},
 		'ed' : {
