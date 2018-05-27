@@ -185,7 +185,6 @@ function calculateWeight(k,expo) {
 				results.rating += reducts.fs[build];
 				results.rating += reducts.wc[build];
 				results.rating += reducts.sc[build];
-				results.rating *= skills.data.ms.levels[Math.min(skills.data.ms.level + 1, skills.data.ms.max)].bonus3;
 				results.rating *= reducts.tap[build];
 				results.color = 'info';
 				break;
