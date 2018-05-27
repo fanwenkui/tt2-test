@@ -202,7 +202,7 @@ function calculateWeight(k,expo) {
 					results.rating = ('fairy' == gold ? reducts.gold : results.rating);
 					results.rating = ('all' == gold ? reducts.gold : results.rating);
 				}
-				results.color = 'info';
+				results.color = determineColor(results.rating);
 				break;
 
 			case 'skill_mana':
