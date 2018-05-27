@@ -151,7 +151,7 @@ var reducts = {
 		'pet' : 1,
 		'sc' : 1,
 		'hs' : 1,
-		'cs' : 2/5
+		'cs' : 1/4
 	},
 	'cs' : {
 		'hero' : 0,
