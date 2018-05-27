@@ -178,6 +178,19 @@ function calculateWeight(k,expo) {
 				results.color = 'info';
 				break;
 
+			case 'skill_tap':
+				results.rating += reducts.hs[build];
+				results.rating += reducts.ds[build];
+				results.rating += reducts.gold * ('phom' == gold ? .5 : 1);
+				results.rating += reducts.fs[build];
+				results.rating += reducts.wc[build];
+				results.rating += reducts.sc[build];
+				results.rating *= skills.data.ms.levels[Math.min(skills.data.ms.level + 1, skills.data.ms.max)].bonus3;
+				results.rating *= reducts.tap[build];
+				results.color = 'info';
+				break;
+
+
 			case 'skill_fairy':
 				results.rating += reducts.hs[build];
 				results.rating += reducts.ds[build];
