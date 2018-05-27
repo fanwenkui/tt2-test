@@ -186,7 +186,7 @@ function calculateWeight(k,expo) {
 				results.rating += reducts.wc[build];
 				results.rating += reducts.sc[build];
 				results.rating *= reducts.tap[build];
-				results.color = 'info';
+				results.color = determineColor(results.rating);
 				break;
 
 
