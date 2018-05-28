@@ -526,7 +526,14 @@ function processPct(k, v, relics, totalAD, tattoo) {
 	var dowse = 0;
 	var running_dowse = 0;
 	var orig_level = v.level;
-	if(1 == v.active && 0 != v.level) {
+	var fresh = false;
+	if(1 == v.active) {
+		if(0 == v.level) {
+			fresh = true;
+			orig_level = 1;
+			var next_artifact = countArtifacts(artifacts.data) + 1;
+			total_cost = artifact_costs[next_artifact];
+		}
 		if(-1 == v.max) {
 			dowse = dowsingRod(v, 100000, relics) * 100000;
 			v.level = orig_level;
@@ -574,7 +581,7 @@ function processPct(k, v, relics, totalAD, tattoo) {
 			cost = calculateArtifactEfficiencyCost(v, dowse);
 			total_cost += cost;
       relics -= cost;
-			if(true == tattoo) {
+			if(true == tattoo && false == fresh) {
 				u_relics -= total_cost;
 				upgrades.steps.push({
 					'k' : k,
@@ -593,7 +600,7 @@ function processPct(k, v, relics, totalAD, tattoo) {
 				obfuscate++;
 				cost = calculateArtifactEfficiencyCost(v, levels);
 				if(cost <= relics) {
-					if(true == tattoo) {
+					if(true == tattoo && false == fresh) {
 						u_relics -= cost;
 						upgrades.steps.push({
 							'k' : k,
@@ -611,6 +618,8 @@ function processPct(k, v, relics, totalAD, tattoo) {
 				}
 			}
 		}
+	} else {
+
 	}
 	return(-1);
 }
@@ -620,17 +629,33 @@ function optimizePct() {
   var winnerPct = '';
   var winnerPct_value = 0;
   var temp_value = 0;
+	var temp_new_value = 0;
   var relics_pct = Math.floor(u_relics * (u_step/100));
   $.each(u_temp_artifacts.data, function(k,v) {
 		obfuscate++;
     var orig_level = v.level;
-    temp_value = processPct(k, v, relics_pct, u_temp_artifacts.totalAD, false);
+		temp_value = processPct(k, v, relics_pct, u_temp_artifacts.totalAD, false);
+		console.log(k,temp_value,orig_level);
     v.level = orig_level;
     if(temp_value > winnerPct_value) {
-      winnerPct = k;
-      winnerPct_value = temp_value;
+			console.log(v.level,k,temp_value,temp_new_value);
+			if(0 == v.level) {
+				console.log('zero!');
+				if(temp_value > temp_new_value) {
+					console.log('new winner');
+					winner_n = k;
+					temp_new_value = temp_value;
+				}
+			} else {
+				console.log('existing');
+				console.log('winner_n',winner_n);
+				winnerPct = k;
+				console.log('winner_n',winner_n);
+	      winnerPct_value = temp_value;
+			}
     }
   });
+	console.log('winner_n',winner_n);
 	if('' != winnerPct) {
 		var dowse = processPct(winnerPct, u_temp_artifacts.data[winnerPct], relics_pct, u_temp_artifacts.totalAD, true);
 		u_temp_artifacts.data[winnerPct].level += dowse;
@@ -719,9 +744,6 @@ function generateUpgrades() {
 			winner_n = k;
 		}
 	});
-	if(winner_n != '') {
-		$('#new_artifact').empty().append('<em>NOTE: You would be better off saving up for a new artifact (' + artifacts.data[winner_n].name + ').</em>');
-	}
 	u_relics = new Decimal(('' == $('#relics').val() ? 0 : $('#relics').val()) + '.' + ('' == $('#relics_decimal').val() ? 0 : $('#relics_decimal').val()));
 	buffer = 0;
 	switch($('#relic_factor').val()) {
@@ -882,6 +904,9 @@ function generateUpgrades() {
 }
 
 function renderSuggestions(data) {
+	if(winner_n != '') {
+		$('#new_artifact').empty().append('<em>NOTE: You would be better off saving up for a new artifact (' + artifacts.data[winner_n].name + ').</em>');
+	}
 	winner_e = '';
 	winner_e10 = '';
 	winner_e100 = '';
@@ -941,6 +966,17 @@ function renderSuggestions(data) {
 }
 
 function renderPctSuggestions(data) {
+	if(winner_n != '') {
+		$('#new_artifact').empty().append('<em>NOTE: You would be better off saving up for a new artifact (' + artifacts.data[winner_n].name + ').</em>');
+	}
+	winner_e = '';
+	winner_e10 = '';
+	winner_e100 = '';
+	winner_e1000 = '';
+	winner_e10000 = '';
+	winner_e100000 = '';
+	winner_e1000000 = '';
+	winner_n = '';
 	var suggestions = '<ol>';
 	if(0 == upgrades.steps.length) {
 		$('#pudding').empty();
@@ -1319,7 +1355,7 @@ function determineArtifactWinner(data, regenerate, next_artifact_cost, pinch) {
 	});
 	if(true === regenerate) {
 		regenerateArtifacts();
-		if('' != temp_winner_n && data.data[temp_winner_n].efficiency > winner_value && "1" == data.data[temp_winner_n].active) {
+		if('' != temp_winner_n && data.data[temp_winner_n].efficiency >= winner_value && "1" == data.data[temp_winner_n].active) {
 			winner_n = temp_winner_n;
 		} else {
 			winner_n = '';
