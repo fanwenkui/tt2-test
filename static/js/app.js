@@ -635,27 +635,19 @@ function optimizePct() {
 		obfuscate++;
     var orig_level = v.level;
 		temp_value = processPct(k, v, relics_pct, u_temp_artifacts.totalAD, false);
-		console.log(k,temp_value,orig_level);
     v.level = orig_level;
     if(temp_value > winnerPct_value) {
-			console.log(v.level,k,temp_value,temp_new_value);
 			if(0 == v.level) {
-				console.log('zero!');
 				if(temp_value > temp_new_value) {
-					console.log('new winner');
 					winner_n = k;
 					temp_new_value = temp_value;
 				}
 			} else {
-				console.log('existing');
-				console.log('winner_n',winner_n);
 				winnerPct = k;
-				console.log('winner_n',winner_n);
 	      winnerPct_value = temp_value;
 			}
     }
   });
-	console.log('winner_n',winner_n);
 	if('' != winnerPct) {
 		var dowse = processPct(winnerPct, u_temp_artifacts.data[winnerPct], relics_pct, u_temp_artifacts.totalAD, true);
 		u_temp_artifacts.data[winnerPct].level += dowse;
