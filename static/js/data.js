@@ -113,20 +113,12 @@ var reducts = {
 		'hs' : 1,
 		'cs' : 1
 	},
-	'crit_sc_pos' : {
-		'hero' : 0,
-		'tap' : 1,
-		'pet' : 1,
-		'sc' : 1/5,
-		'hs' : 3/5,
-		'cs' : 1
-	},
 	'crit_sc_neg' : {
-		'hero' : 0,
-		'tap' : 1/5,
-		'pet' : 1/5,
+		'hero' : 1,
+		'tap' : 0,
+		'pet' : 0,
 		'sc' : 1,
-		'hs' : 3/5,
+		'hs' : 0,
 		'cs' : 0
 	},
 	'splash' : {
@@ -1948,7 +1940,7 @@ var skills = {
 				'25' : { 'cost' : 57, 'bonus' : 1390000000000000, 'bonus2' : -.25, 'bonus3' : 0 }
 			},
 			'expos' : {
-					'b1' : { 'reduct' : 'crit_sc_pos' },
+					'b1' : { 'reduct' : 'crit' },
 					'b2' : { 'reduct' : 'crit_sc_neg' }
 			}
 		},
