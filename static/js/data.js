@@ -2828,7 +2828,8 @@ var skills = {
 				'15' : { 'cost' : 131, 'bonus' : 278, 'bonus2' : 0, 'bonus3' : .02 }
 			},
 			'expos' : {
-					'b1' : { 'sum' : 'skill_mana' }
+					'b1' : { 'sum' : 'skill_mana' },
+					'b3' : { 'sum' : 'skill_mana' }
 			}
 		},
 		'ls' : {
