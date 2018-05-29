@@ -2809,7 +2809,7 @@ var skills = {
 			'max' : 15,
 			'type' : 'add_skill',
 			'type2' : -1,
-			'type3' : -1,
+			'type3' : 'pct_pos',
 			'levels' : {
 				'1' : { 'cost' : 3, 'bonus' : 2, 'bonus2' : 0, 'bonus3' : .02 },
 				'2' : { 'cost' : 4, 'bonus' : 4, 'bonus2' : 0, 'bonus3' : .02 },
