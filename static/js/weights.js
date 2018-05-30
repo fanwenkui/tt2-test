@@ -185,7 +185,7 @@ function calculateWeight(k,expo) {
 				results.rating += reducts.fs[build];
 				results.rating += reducts.wc[build];
 				results.rating += reducts.sc[build];
-				results.rating *= reducts.tap[build];
+				results.rating *= reducts.tap[build] * ('hs' == build ? 0 : 1);
 				results.color = determineColor(results.rating);
 				break;
 
@@ -212,8 +212,7 @@ function calculateWeight(k,expo) {
 				results.rating += reducts.fs[build];
 				results.rating += reducts.wc[build];
 				results.rating += reducts.sc[build];
-				results.rating *= artifacts.data.op.current_effect;
-				results.rating *= (0 < artifacts.data.op.level ? 1 : 0);
+				results.rating *= (artifacts.data.op.current_effect + skills.data.mm.levels[Math.min(skills.data.mm.level + 1, skills.data.mm.max)].bonus3);
 				results.color = determineColor(results.rating);
 				break;
 
