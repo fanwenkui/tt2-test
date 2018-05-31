@@ -14,7 +14,7 @@ var reducts = {
 		'tap' : 1,
 		'pet' : 1,
 		'sc' : 3/5,
-		'hs' : 2/3,
+		'hs' : 1,
 		'cs' : 1
 	},
 	'sword' : {
@@ -2809,7 +2809,7 @@ var skills = {
 			'max' : 15,
 			'type' : 'add_skill',
 			'type2' : -1,
-			'type3' : -1,
+			'type3' : 'pct_pos',
 			'levels' : {
 				'1' : { 'cost' : 3, 'bonus' : 2, 'bonus2' : 0, 'bonus3' : .02 },
 				'2' : { 'cost' : 4, 'bonus' : 4, 'bonus2' : 0, 'bonus3' : .02 },
@@ -2828,7 +2828,8 @@ var skills = {
 				'15' : { 'cost' : 131, 'bonus' : 278, 'bonus2' : 0, 'bonus3' : .02 }
 			},
 			'expos' : {
-					'b1' : { 'sum' : 'skill_mana' }
+					'b1' : { 'sum' : 'skill_mana' },
+					'b3' : { 'sum' : 'skill_mana' }
 			}
 		},
 		'ls' : {
