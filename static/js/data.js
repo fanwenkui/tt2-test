@@ -241,7 +241,6 @@ var artifacts = {
 					'fairy',
 					'phom',
 					'all',
-					'splash',
 					'inactive'
 				]
 			}
@@ -370,7 +369,6 @@ var artifacts = {
 				'gold' : [
 					'phom',
 					'all',
-					'splash'
 				]
 			}
 		},
@@ -1344,7 +1342,6 @@ var artifacts = {
 					'coc',
 					'phom',
 					'all',
-					'splash',
 					'active'
 				]
 			}
@@ -2205,7 +2202,6 @@ var skills = {
 						'coc',
 						'fairy',
 						'phom',
-						'partial_splash',
 						'partial_inactive',
 						'all'
 					] },

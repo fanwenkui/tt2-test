@@ -340,12 +340,6 @@ function calculateWeight(k,expo) {
 			if(gold == v2) {
 				results.rating = reducts.gold;
 				return false;
-			} else if('partial_splash' == v2) {
-				results.rating = reducts.splash[build] * reducts.gold * .5;
-				return false;
-			} else if('splash' == v2) {
-				results.rating = reducts.splash[build] * reducts.gold;
-				return false;
 			} else if('partial_inactive' == v2) {
 				if(!active) {
 					results.rating = reducts.gold * .5;
