@@ -5,39 +5,39 @@ var active = '';
 var splash = '';
 
 function adjustWeights() {
-	gtag('event', 'Dark Mode', {
-		'event_category': 'Dark Mode',
-		'event_action': 'Setting',
-		'event_label': ($('#dark').prop('checked') ? 'Dark' : 'Light' )
-	});
-	if($('#build').val()) {
-		gtag('event', 'Build', {
-			'event_category': 'Build',
-			'event_action': 'Value',
-			'event_label': $('#build').val()
-		});
-	}
-	if($('#hero').val()) {
-		gtag('event', 'Hero', {
-			'event_category': 'Hero',
-			'event_action': 'Set',
-			'event_label': $('#hero').val()
-		});
-	}
-	if($('#gold').val()) {
-		gtag('event', 'Gold', {
-			'event_category': 'Gold',
-			'event_action': 'Set',
-			'event_label': $('#gold').val()
-		});
-	}
-	if($('#active').val()) {
-		gtag('event', 'Active', {
-			'event_category': 'Active',
-			'event_action': 'Set',
-			'event_label': $('#active').val()
-		});
-	}
+	// gtag('event', 'Dark Mode', {
+	// 	'event_category': 'Dark Mode',
+	// 	'event_action': 'Setting',
+	// 	'event_label': ($('#dark').prop('checked') ? 'Dark' : 'Light' )
+	// });
+	// if($('#build').val()) {
+	// 	gtag('event', 'Build', {
+	// 		'event_category': 'Build',
+	// 		'event_action': 'Value',
+	// 		'event_label': $('#build').val()
+	// 	});
+	// }
+	// if($('#hero').val()) {
+	// 	gtag('event', 'Hero', {
+	// 		'event_category': 'Hero',
+	// 		'event_action': 'Set',
+	// 		'event_label': $('#hero').val()
+	// 	});
+	// }
+	// if($('#gold').val()) {
+	// 	gtag('event', 'Gold', {
+	// 		'event_category': 'Gold',
+	// 		'event_action': 'Set',
+	// 		'event_label': $('#gold').val()
+	// 	});
+	// }
+	// if($('#active').val()) {
+	// 	gtag('event', 'Active', {
+	// 		'event_category': 'Active',
+	// 		'event_action': 'Set',
+	// 		'event_label': $('#active').val()
+	// 	});
+	// }
 	build = $('#build').val();
 	active = ("online" == $('#active').val() ? true : false);
 	splash = (true == $('#wet').prop('checked') ? true: false);
