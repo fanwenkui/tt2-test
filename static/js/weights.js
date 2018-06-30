@@ -236,6 +236,25 @@ function calculateWeight(k,expo) {
 				results.rating += reducts.companion[build];
 				results.color = 'info';
 				break;
+
+			case 'ash':
+				results.color = 'info';
+				if('cs' != build) {
+					results.rating = 1;
+				} else {
+					var cd = 20;
+					var dur = 30;
+					var wcdur = 30;
+					wcdur += (artifacts.data.a.effect * artifacts.data.a.level);
+					wcdur *= (0 < skills.data.ds.level ? 1 + skills.data.ds.levels[skills.data.ds.level].bonus2 : 1);
+					cd += (skills.data.coo.levels[skills.data.coo.level].bonus2);
+					var coper = wcdur / (dur + cd);
+					var csper = wcdur / 4.5;
+					var cmdmg = ((1 / 240) * (0 < skills.data.aas.level ? skills.data.aas.levels[skills.data.aas.level].bonus : 1)) * 6;
+					var cmdmgadj = cmdmg * (0 < skills.data.as.level ? skills.data.as.levels[skills.data.as.level].bonus2 : 1);
+					results.rating = Math.min(1, (coper / csper) + cmdmgadj);
+				}
+				break;
 		}
 	} else if(undefined != expo.flat) {
 		switch(expo.flat) {
