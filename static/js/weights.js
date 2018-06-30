@@ -247,7 +247,7 @@ function calculateWeight(k,expo) {
 					var wcdur = 30;
 					wcdur += (artifacts.data.a.effect * artifacts.data.a.level);
 					wcdur *= (0 < skills.data.ds.level ? 1 + skills.data.ds.levels[skills.data.ds.level].bonus2 : 1);
-					cd += (skills.data.coo.levels[skills.data.coo.level].bonus2);
+					cd += (0 < skills.data.coo.level ? skills.data.coo.levels[skills.data.coo.level].bonus2 : 0);
 					var coper = wcdur / (dur + cd);
 					var csper = wcdur / 4.5;
 					var cmdmg = ((1 / 240) * (0 < skills.data.aas.level ? skills.data.aas.levels[skills.data.aas.level].bonus : 1)) * 6;
