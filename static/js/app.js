@@ -1089,7 +1089,7 @@ function skillEff(k, v) {
 		var effect_diff = Math.abs(next_effect)/(0 < v.level && 0 != current_effect && 'X' != current_effect ? Math.abs(current_effect) : Math.abs(next_effect/2));
 		var effect_eff = Math.pow(effect_diff, (0 == v.rating1 ? .00001 : v.rating1));
 		running_eff *= effect_eff;
-		if(false !== current_effect2 && 0 != v.rating2) {
+		if(false !== current_effect2) {
 			var next_effect2 = v.levels[v.level + 1].bonus2;
 			if(0 != next_effect2) {
 				var effect_diff2 = Math.abs(next_effect2)/(0 < v.level && 0 != current_effect2 && 'X' != current_effect2 ? Math.abs(current_effect2) : Math.abs(next_effect2/2));
@@ -1101,7 +1101,7 @@ function skillEff(k, v) {
 				}
 			}
 		}
-		if(false !== current_effect3 && 0 != v.rating3) {
+		if(false !== current_effect3) {
 			var next_effect3 = v.levels[v.level + 1].bonus3;
 			if(0 != next_effect3) {
 				var effect_diff3 = Math.abs(next_effect3)/(0 < v.level && 0 != current_effect3 && 'X' != current_effect3 ? Math.abs(current_effect3) : Math.abs(next_effect3/2));
