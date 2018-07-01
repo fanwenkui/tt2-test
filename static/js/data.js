@@ -2248,7 +2248,7 @@ var skills = {
 			},
 			'expos' : {
 					'b1' : { 'flat' : 'dmg' },
-					'b2' : { 'flat' : 'dmg' }
+					'b2' : { 'flat' : 'none' }
 			}
 		},
 		'aas' : {
