@@ -1052,13 +1052,13 @@ function skillEff(k, v) {
 	var current_effect = false;
 	var current_effect2 = false;
 	var current_effect3 = false;
-	if(0 < v.level) {
+	if(0 < v.level && 0 != v.rating1) {
 		current_effect = v.levels[v.level].bonus;
 	}
-	if(-1 != v.bonus2) {
+	if(-1 != v.bonus2 && 0 != v.rating2) {
 		current_effect2 = v.level > 0 ? v.levels[v.level].bonus2 : 'X';
 	}
-	if(-1 != v.bonus3) {
+	if(-1 != v.bonus3 && 0 != v.rating3) {
 		current_effect3 = v.level > 0 ? v.levels[v.level].bonus3 : 'X';
 	}
 	skills.data[k].current_effect = current_effect;
