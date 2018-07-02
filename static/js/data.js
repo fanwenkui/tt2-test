@@ -54,13 +54,13 @@ var reducts = {
 		'tap' : 1,
 		'pet' : 2/3,
 		'sc' : 3/5,
-		'hs' : 2/3,
+		'hs' : 1/2,
 		'cs' : 1/2
 	},
 	'ds_pet' : {
 		'hero' : 0,
 		'tap' : 0,
-		'pet' : 2/3,
+		'pet' : 1,
 		'sc' : 0,
 		'hs' : 0,
 		'cs' : 0
@@ -71,13 +71,13 @@ var reducts = {
 		'pet' : 0,
 		'sc' : 0,
 		'hs' : 0,
-		'cs' : 1/2
+		'cs' : 1
 	},
 	'ds_clone' : {
 		'hero' : 0,
 		'tap' : 0,
 		'pet' : 0,
-		'sc' : 3/5,
+		'sc' : 1,
 		'hs' : 0,
 		'cs' : 0
 	},
@@ -136,14 +136,6 @@ var reducts = {
 		'sc' : 0,
 		'hs' : 0,
 		'cs' : 0
-	},
-	'rev_cs' : {
-		'hero' : 1,
-		'tap' : 1,
-		'pet' : 1,
-		'sc' : 1,
-		'hs' : 1,
-		'cs' : 1/4
 	},
 	'cs' : {
 		'hero' : 0,
@@ -2255,8 +2247,8 @@ var skills = {
 				'25' : { 'cost' : 50, 'bonus' : 2340000000000, 'bonus2' : 25, 'bonus3' : 0 }
 			},
 			'expos' : {
-					'b1' : { 'reduct' : 'wc' },
-					'b2' : { 'reduct' : 'wc' }
+					'b1' : { 'flat' : 'dmg' },
+					'b2' : { 'flat' : 'none' }
 			}
 		},
 		'aas' : {
@@ -2470,8 +2462,8 @@ var skills = {
 				'15' : { 'cost' : 131, 'bonus' : 1540000000000000000000, 'bonus2' : 2.2, 'bonus3' : 0 }
 			},
 			'expos' : {
-					'b1' : { 'reduct' : 'rev_cs' },
-					'b2' : { 'reduct' : 'rev_cs' }
+					'b1' : { 'sum' : 'ash' },
+					'b2' : { 'sum' : 'ash' }
 			}
 		},
 		'lbr' : {
