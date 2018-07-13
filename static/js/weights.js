@@ -168,6 +168,36 @@ function calculateWeight(k,expo) {
 				results.color = determineColor(results.rating);
 				break;
 
+			case 'tree_red':
+				results.rating += reducts.tap[build];
+				results.rating += reducts.pet[build];
+				results.rating += reducts.fs[build];
+				results.color = determineColor(results.rating);
+				break;
+
+			case 'tree_yellow':
+				results.rating += reducts.hero[build];
+				results.rating += reducts.cs[build];
+				results.rating += reducts.wc[build];
+				results.color = determineColor(results.rating);
+				break;
+
+			case 'tree_blue':
+				results.rating += reducts.hs[build];
+				results.rating += reducts.gold * ('phom' == gold ? .5 : 1);
+				results.rating += reducts.sc[build];
+				results.color = determineColor(results.rating);
+				break;
+
+			case 'tree_green':
+				if(0 == active) {
+					results.rating += reducts.gold;
+					results.rating += 1
+				}
+				results.rating += reducts.ds[build];
+				results.color = determineColor(results.rating);
+				break;
+
 			case 'skill':
 				results.rating += reducts.hs[build];
 				results.rating += reducts.ds[build];
@@ -308,6 +338,16 @@ function calculateWeight(k,expo) {
 				}
 				break;
 
+			case 'inactive_all':
+				if(0 == active) {
+					results.rating = 1;
+				} else {
+					results.rating = 0;
+				}
+				results.rating += 1;
+				results.color = 'info';
+				break;
+
 			case 'inactive':
 				if(0 == active) {
 					results.rating = 1;
@@ -369,6 +409,12 @@ function calculateWeight(k,expo) {
 					results.rating = reducts.gold;
 					return false;
 				}
+			} else if('inactive_all' == v2) {
+				if(!active) {
+					results.rating = reducts.gold;
+				}
+				results.rating += reducts.gold;
+				return false;
 			} else if('active' == v2) {
 				if(active) {
 					results.rating = reducts.gold;
