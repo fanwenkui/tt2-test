@@ -218,10 +218,9 @@ function generateSkills() {
 }
 
 function adjustBoS() {
-	var i = artifacts.data.bos.expo.sum_sort;
 	var expo = 0
 	$.each(artifacts.data, function(k,v) {
-		if(v.sort <= i && k != 'bos' && v.active == 1) {
+		if('bos' != k && 1 == v.active && -1 == v.max) {
 			expo += v.rating;
 		}
 	});
@@ -393,6 +392,7 @@ function updateSkill(k) {
 	$('#skill' + k).val(lvl);
 	adjustWeights(false);
 }
+
 function countArtifacts(data) {
 	var i = 0;
 	$.each(data, function(k,v) {
@@ -541,7 +541,7 @@ function processPct(k, v, relics, totalAD, tattoo) {
 			cost = calculateArtifactEfficiencyCost(v, dowse);
 			total_cost += cost;
       relics -= cost;
-			v.level += running_dowse;
+			v.level += dowse;
 			orig_level = v.level;
 			dowse = dowsingRod(v, 10000, relics) * 10000;
 			v.level = orig_level;
@@ -549,7 +549,7 @@ function processPct(k, v, relics, totalAD, tattoo) {
 			cost = calculateArtifactEfficiencyCost(v, dowse);
 			total_cost += cost;
       relics -= cost;
-			v.level += running_dowse;
+			v.level += dowse;
 			orig_level = v.level;
 			dowse = dowsingRod(v, 1000, relics) * 1000;
 			v.level = orig_level;
@@ -557,7 +557,7 @@ function processPct(k, v, relics, totalAD, tattoo) {
 			cost = calculateArtifactEfficiencyCost(v, dowse);
 			total_cost += cost;
       relics -= cost;
-			v.level += running_dowse;
+			v.level += dowse;
 			orig_level = v.level;
 			dowse = dowsingRod(v, 100, relics) * 100;
 			v.level = orig_level;
@@ -565,7 +565,7 @@ function processPct(k, v, relics, totalAD, tattoo) {
 			cost = calculateArtifactEfficiencyCost(v, dowse);
 			total_cost += cost;
       relics -= cost;
-			v.level += running_dowse;
+			v.level += dowse;
 			orig_level = v.level;
 			dowse = dowsingRod(v, 10, relics) * 10;
 			v.level = orig_level;
@@ -573,7 +573,7 @@ function processPct(k, v, relics, totalAD, tattoo) {
 			cost = calculateArtifactEfficiencyCost(v, dowse);
 			total_cost += cost;
       relics -= cost;
-			v.level += running_dowse;
+			v.level += dowse;
 			orig_level = v.level;
 			dowse = dowsingRod(v, 1, relics) * 1;
 			v.level = orig_level;
@@ -581,6 +581,7 @@ function processPct(k, v, relics, totalAD, tattoo) {
 			cost = calculateArtifactEfficiencyCost(v, dowse);
 			total_cost += cost;
       relics -= cost;
+			v.level += dowse;
 			if(true == tattoo && false == fresh) {
 				u_relics -= total_cost;
 				upgrades.steps.push({
@@ -649,7 +650,9 @@ function optimizePct() {
     }
   });
 	if('' != winnerPct) {
+		var orig_level = u_temp_artifacts.data[winnerPct].level;
 		var dowse = processPct(winnerPct, u_temp_artifacts.data[winnerPct], relics_pct, u_temp_artifacts.totalAD, true);
+		u_temp_artifacts.data[winnerPct].level = orig_level;
 		u_temp_artifacts.data[winnerPct].level += dowse;
 		u_temp_artifacts.totalAD = calculateTotalAD(u_temp_artifacts.data, false);
 	}
@@ -1190,11 +1193,10 @@ function calculateArtifactEfficiency(v, cost, lvlChange, current_ad, current_eff
 function newEff(data, k, v, avglvl, cost, remainingArtifacts) {
 	data.data[k].current_ad = '';
 	data.data[k].current_effect = '';
-	var i = 1;
+	v.level = 1;
 	var j = (v.max == -1 || v.max > avglvl ? avglvl : v.max);
-	while(i <= j) {
-		cost += Math.pow(i++, v.cexpo) * v.ccoef;
-	}
+	cost += calculateArtifactEfficiencyCost(v, j);
+	v.level = 0;
 	if(v.max == -1 || v.max > avglvl) {
 		var next_effect = 1 + v.effect * Math.pow(avglvl, Math.pow((1 + (v.cexpo - 1) * Math.min(v.grate * avglvl, v.gmax)), v.gexpo));
 	} else  {
@@ -1396,7 +1398,6 @@ function determineSkillWinner(prevWinners) {
 	});
 	return(winner);
 }
-
 
 function calculateAllSkills() {
 	winner_s1 = '';
