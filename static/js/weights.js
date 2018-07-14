@@ -283,8 +283,8 @@ function calculateWeight(k,expo) {
 					var cmdmgadj = cmdmg * (0 < skills.data.as.level ? skills.data.as.levels[skills.data.as.level].bonus2 : 1);
 					results.rating = Math.min(1, (coper / csper) + cmdmgadj);
 				}
-				break;
 				results.color = determineColor(results.rating, false);
+				break;
 		}
 	} else if(undefined != expo.flat) {
 		switch(expo.flat) {
