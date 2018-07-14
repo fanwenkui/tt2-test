@@ -4,7 +4,7 @@ var gold = '';
 var active = '';
 var splash = '';
 
-function adjustWeights() {
+function adjustWeights(full) {
 	gtag('event', 'Dark Mode', {
 		'event_category': 'Dark Mode',
 		'event_action': 'Setting',
@@ -105,7 +105,9 @@ function adjustWeights() {
 		artifacts.data[k].color = results.color;
 	});
 	adjustBoS();
-	artifacts = calculateAll(artifacts, true);
+	if(true == full) {
+		artifacts = calculateAll(artifacts, true);
+	}
 	$.each(skills.data, function(k,v) {
 		var results = calculateWeight(k,v.expos.b1);
 		skills.data[k].rating1 = results.rating;

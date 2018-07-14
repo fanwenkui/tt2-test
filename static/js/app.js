@@ -78,7 +78,7 @@ function toggleSplash(reweight) {
 		$('#btnwet').removeClass('btn-info').addClass('btn-dark text-secondary');
 	}
 	if(false != reweight) {
-		adjustWeights();
+		adjustWeights(true);
 	}
 }
 
@@ -381,7 +381,7 @@ function updateArtifact(k) {
 	artifacts.data[k].level = parseInt($('#' + k).val());
 	artifacts.totalAD = calculateTotalAD(artifacts.data, true);
 	if(true == recalc_litmus) {
-		adjustWeights();
+		adjustWeights(true);
 	} else {
 		storeData();
 	}
@@ -391,7 +391,7 @@ function updateSkill(k) {
 	var lvl = parseInt($('#skill' + k).val());
 	skills.data[k].level = (skills.data[k].max < lvl ? skills.data[k].max : lvl);
 	$('#skill' + k).val(lvl);
-	adjustWeights();
+	adjustWeights(false);
 }
 function countArtifacts(data) {
 	var i = 0;
@@ -708,7 +708,7 @@ function optimize() {
 
 function generateUpgrades() {
 	if(false == recalc_litmus) {
-		adjustWeights();
+		adjustWeights(true);
 	}
 	obfuscate = 0;
 	white_rabbit = new Date();
@@ -1012,7 +1012,7 @@ function acceptPctSuggestions() {
 	$('#relics_decimal').val('');
 	$('#relicsuggs').hide();
 	$('#relicreccs').show();
-	adjustWeights();
+	adjustWeights(true);
 }
 
 function acceptSuggestions() {
@@ -1033,7 +1033,7 @@ function acceptSuggestions() {
 	$('#relics_decimal').val('');
 	$('#relicsuggs').hide();
 	$('#relicreccs').show();
-	adjustWeights();
+	adjustWeights(true);
 }
 
 function rejectSuggestions() {
@@ -1456,7 +1456,7 @@ function acceptSkill(skill) {
 	comeUndone = skill;
 	skills.data[skill].level++;
 	calculateSkillTotals();
-	adjustWeights();
+	adjustWeights(false);
 }
 
 function undoSkill() {
@@ -1468,7 +1468,7 @@ function undoSkill() {
 	if('' != comeUndone) {
 		skills.data[comeUndone].level--;
 		calculateSkillTotals();
-		adjustWeights();
+		adjustWeights(false);
 		comeUndone = '';
 	}
 }
@@ -1768,7 +1768,7 @@ function importData() {
 	$('#import_wrap').hide();
 	generateArtifacts();
 	generateSkills();
-	adjustWeights();
+	adjustWeights(true);
 }
 
 $('#export_wrap').hide();
@@ -1777,5 +1777,5 @@ $('#relicsuggs').hide();
 generateArtifacts();
 generateSkills();
 if(false == halp) {
-	adjustWeights();
+	adjustWeights(true);
 }
