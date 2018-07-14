@@ -4,7 +4,7 @@ var gold = '';
 var active = '';
 var splash = '';
 
-function adjustWeights() {
+function adjustWeights(full) {
 	// gtag('event', 'Dark Mode', {
 	// 	'event_category': 'Dark Mode',
 	// 	'event_action': 'Setting',
@@ -105,7 +105,9 @@ function adjustWeights() {
 		artifacts.data[k].color = results.color;
 	});
 	adjustBoS();
-	artifacts = calculateAll(artifacts, true);
+	if(true == full) {
+		artifacts = calculateAll(artifacts, true);
+	}
 	$.each(skills.data, function(k,v) {
 		var results = calculateWeight(k,v.expos.b1);
 		skills.data[k].rating1 = results.rating;
@@ -165,7 +167,37 @@ function calculateWeight(k,expo) {
 				if('phom' == gold || 'all' == gold) {
 					results.rating = (results.rating < reducts.gold ? reducts.gold : results.rating);
 				}
-				results.color = determineColor(results.rating);
+				results.color = determineColor(results.rating, true);
+				break;
+
+			case 'tree_red':
+				results.rating += reducts.tap[build];
+				results.rating += reducts.pet[build];
+				results.rating += reducts.fs[build];
+				results.color = determineColor(results.rating, true);
+				break;
+
+			case 'tree_yellow':
+				results.rating += reducts.hero[build];
+				results.rating += reducts.cs[build];
+				results.rating += reducts.wc[build];
+				results.color = determineColor(results.rating, true);
+				break;
+
+			case 'tree_blue':
+				results.rating += reducts.hs[build];
+				results.rating += reducts.gold * ('phom' == gold ? .5 : 1);
+				results.rating += reducts.sc[build];
+				results.color = determineColor(results.rating, true);
+				break;
+
+			case 'tree_green':
+				if(0 == active) {
+					results.rating += reducts.gold;
+					results.rating += 1
+				}
+				results.rating += reducts.ds[build];
+				results.color = determineColor(results.rating, true);
 				break;
 
 			case 'skill':
@@ -187,7 +219,7 @@ function calculateWeight(k,expo) {
 				results.rating += reducts.sc[build];
 				results.rating *= reducts.tap[build] * ('hs' == build ? 0 : 1);
 				results.rating *= skills.data.ms.levels[Math.min(skills.data.ms.level + 1, skills.data.ms.max)].bonus3;
-				results.color = determineColor(results.rating);
+				results.color = determineColor(results.rating, true);
 				break;
 
 
@@ -203,7 +235,7 @@ function calculateWeight(k,expo) {
 					results.rating = ('fairy' == gold ? reducts.gold : results.rating);
 					results.rating = ('all' == gold ? reducts.gold : results.rating);
 				}
-				results.color = determineColor(results.rating);
+				results.color = determineColor(results.rating, false);
 				break;
 
 			case 'skill_mana':
@@ -214,7 +246,7 @@ function calculateWeight(k,expo) {
 				results.rating += reducts.wc[build];
 				results.rating += reducts.sc[build];
 				results.rating *= (artifacts.data.op.current_effect + skills.data.mm.levels[Math.min(skills.data.mm.level + 1, skills.data.mm.max)].bonus3) * .5;
-				results.color = determineColor(results.rating);
+				results.color = determineColor(results.rating, false);
 				break;
 
 			case 'skill_gold':
@@ -238,7 +270,6 @@ function calculateWeight(k,expo) {
 				break;
 
 			case 'ash':
-				results.color = 'info';
 				if('cs' != build) {
 					results.rating = 1;
 				} else {
@@ -254,6 +285,7 @@ function calculateWeight(k,expo) {
 					var cmdmgadj = cmdmg * (0 < skills.data.as.level ? skills.data.as.levels[skills.data.as.level].bonus2 : 1);
 					results.rating = Math.min(1, (coper / csper) + cmdmgadj);
 				}
+				results.color = determineColor(results.rating, false);
 				break;
 		}
 	} else if(undefined != expo.flat) {
@@ -308,6 +340,16 @@ function calculateWeight(k,expo) {
 				}
 				break;
 
+			case 'inactive_all':
+				if(0 == active) {
+					results.rating = 1;
+				} else {
+					results.rating = 0;
+				}
+				results.rating += 1;
+				results.color = 'info';
+				break;
+
 			case 'inactive':
 				if(0 == active) {
 					results.rating = 1;
@@ -321,7 +363,7 @@ function calculateWeight(k,expo) {
 			case 'inactive_pet':
 				if(0 == active) {
 					results.rating = reducts.pet[build];
-					results.color = determineColor(results.rating);
+					results.color = determineColor(results.rating, true);
 				}
 				break;
 
@@ -329,14 +371,14 @@ function calculateWeight(k,expo) {
 			case 'inactive_ship':
 				if(0 == active) {
 					results.rating = reducts.cs[build];
-					results.color = determineColor(results.rating);
+					results.color = determineColor(results.rating, true);
 				}
 				break;
 
 			case 'inactive_clone':
 				if(0 == active) {
 					results.rating = reducts.sc[build];
-					results.color = determineColor(results.rating);
+					results.color = determineColor(results.rating, true);
 				}
 				break;
 		}
@@ -346,14 +388,14 @@ function calculateWeight(k,expo) {
 		} else {
 			results.rating = reducts[expo.reduct][build];
 		}
-		results.color = determineColor(results.rating);
+		results.color = determineColor(results.rating, true);
 	} else if(undefined != expo.hero_type) {
 		if(-1 == hero_type.indexOf(expo.hero_type)) {
 			results.rating = 0;
 		} else {
 			results.rating = reducts.hero[build];
 		}
-		results.color = determineColor(results.rating);
+		results.color = determineColor(results.rating, true);
 	} else if(undefined != expo.gold) {
 		$.each(expo.gold, function(k2,v2) {
 			if(gold == v2) {
@@ -369,6 +411,12 @@ function calculateWeight(k,expo) {
 					results.rating = reducts.gold;
 					return false;
 				}
+			} else if('inactive_all' == v2) {
+				if(!active) {
+					results.rating = reducts.gold;
+				}
+				results.rating += reducts.gold;
+				return false;
 			} else if('active' == v2) {
 				if(active) {
 					results.rating = reducts.gold;
@@ -376,18 +424,20 @@ function calculateWeight(k,expo) {
 				}
 			}
 		});
-		results.color = determineColor(results.rating);
+		results.color = determineColor(results.rating, true);
 	}
 	return results;
 }
 
-function determineColor(value) {
+function determineColor(value, cap) {
 	if(reducts.gold == value) {
 		return 'warning';
 	} else if(1 == value) {
 		return 'success';
-	} else if(1 < value) {
+	} else if(1 < value && false == cap) {
 		return 'info';
+	} else if(1 < value && true == cap) {
+		return 'success';
 	} else if(0 == value) {
 		return 'danger';
 	} else {
