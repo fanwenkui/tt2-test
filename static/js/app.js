@@ -226,8 +226,6 @@ function adjustBoS() {
 	});
 	artifacts.data.bos.rating = expo;
 	artifacts = calculate(artifacts, 'bos', true, true);
-	artifacts.data.boh.rating = expo;
-	artifacts = calculate(artifacts, 'boh', true, true);
 }
 
 function updateActive(k) {
