@@ -301,7 +301,7 @@ function calculateWeight(k,expo) {
 				break;
 
 			case 'gold_phom':
-				results.rating = reducts.gold * ('phom' == gold ? .5 : 1);
+				results.rating = reducts.gold * ('phom' == gold || 'fairy' == gold ? .5 : 1);
 				results.color = 'warning';
 				break;
 
