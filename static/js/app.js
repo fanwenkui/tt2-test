@@ -996,11 +996,11 @@ function renderPctSuggestions(data) {
 }
 
 function acceptPctSuggestions() {
-	// gtag('event', 'Upgrades', {
-	// 	'event_category': 'Upgrades',
-	// 	'event_action': 'Accept',
-	// 	'event_label': 'Artifacts Pct',
-	// });
+	gtag('event', 'Upgrades', {
+		'event_category': 'Upgrades',
+		'event_action': 'Accept',
+		'event_label': 'Artifacts Pct',
+	});
 	$.each(upgrades.steps, function(k,v) {
 		artifacts.data[v.k].level += v.levels;
 	});
@@ -1017,11 +1017,11 @@ function acceptPctSuggestions() {
 }
 
 function acceptSuggestions() {
-	// gtag('event', 'Upgrades', {
-	// 	'event_category': 'Upgrades',
-	// 	'event_action': 'Accept',
-	// 	'event_label': 'Artifacts',
-	// });
+	gtag('event', 'Upgrades', {
+		'event_category': 'Upgrades',
+		'event_action': 'Accept',
+		'event_label': 'Artifacts',
+	});
 	$.each(upgrades, function(k,v) {
 		artifacts.data[k].level += v;
 	});
@@ -1447,11 +1447,11 @@ function calculateAllSkills() {
 }
 
 function acceptSkill(skill) {
-	// gtag('event', 'Upgrades', {
-	// 	'event_category': 'Upgrades',
-	// 	'event_action': 'Accept',
-	// 	'event_label': 'SP',
-	// });
+	gtag('event', 'Upgrades', {
+		'event_category': 'Upgrades',
+		'event_action': 'Accept',
+		'event_label': 'SP',
+	});
 	comeUndone = skill;
 	skills.data[skill].level++;
 	calculateSkillTotals();
@@ -1459,11 +1459,11 @@ function acceptSkill(skill) {
 }
 
 function undoSkill() {
-	// gtag('event', 'Upgrades', {
-	// 	'event_category': 'Upgrades',
-	// 	'event_action': 'Undo',
-	// 	'event_label': 'SP',
-	// });
+	gtag('event', 'Upgrades', {
+		'event_category': 'Upgrades',
+		'event_action': 'Undo',
+		'event_label': 'SP',
+	});
 	if('' != comeUndone) {
 		skills.data[comeUndone].level--;
 		calculateSkillTotals();
