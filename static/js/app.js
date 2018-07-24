@@ -2,9 +2,11 @@ var winner_e = '';
 var winner_e10 = '';
 var winner_e100 = '';
 var winner_e1000 = '';
+/*
 var winner_e10000 = '';
 var winner_e100000 = '';
 var winner_e1000000 = '';
+*/
 var winner_n = '';
 var winner_s1 = '';
 var winner_s2 = '';
@@ -15,9 +17,11 @@ var winner_value = 0;
 var winner_value10 = 0;
 var winner_value100 = 0;
 var winner_value1000 = 0;
+/*
 var winner_value10000 = 0;
 var winner_value100000 = 0;
 var winner_value1000000 = 0;
+*/
 var winner_svalue = 0;
 var obfuscate = 0;
 var white_rabbit = 0;
@@ -432,6 +436,7 @@ function determineArtifactStepWinner(step) {
     case 1000:
       temp_winner = winner_e1000;
       break;
+/*
     case 10000:
       temp_winner = winner_e10000;
       break;
@@ -441,6 +446,7 @@ function determineArtifactStepWinner(step) {
     case 1000000:
       temp_winner = winner_e1000000;
       break;
+*/
   }
   return(temp_winner);
 }
@@ -460,6 +466,7 @@ function determineArtifactStep(v, step) {
     case 1000:
       interval = v.efficiency1000_int;
       break;
+/*
     case 10000:
       interval = v.efficiency10000_int;
       break;
@@ -469,6 +476,7 @@ function determineArtifactStep(v, step) {
     case 1000000:
       interval = v.efficiency1000000_int;
       break;
+*/
   }
   return(interval);
 }
@@ -488,6 +496,7 @@ function determineArtifactCost(v, step) {
     case 1000:
       cost = v.efficiency1000_cost;
       break;
+/*
     case 10000:
       cost = v.efficiency10000_cost;
       break;
@@ -497,6 +506,7 @@ function determineArtifactCost(v, step) {
     case 1000000:
       cost = v.efficiency1000000_cost;
       break;
+*/
   }
   return(cost);
 }
@@ -533,6 +543,38 @@ function processPct(k, v, relics, totalAD, tattoo) {
 			total_cost = artifact_costs[next_artifact];
 		}
 		if(-1 == v.max) {
+			dowse = dowsingRod(v, 1000000000, relics) * 1000000000;
+			v.level = orig_level;
+			running_dowse += dowse;
+			cost = calculateArtifactEfficiencyCost(v, dowse);
+			total_cost += cost;
+      relics -= cost;
+			v.level += dowse;
+			orig_level = v.level;
+			dowse = dowsingRod(v, 100000000, relics) * 100000000;
+			v.level = orig_level;
+			running_dowse += dowse;
+			cost = calculateArtifactEfficiencyCost(v, dowse);
+			total_cost += cost;
+      relics -= cost;
+			v.level += dowse;
+			orig_level = v.level;
+			dowse = dowsingRod(v, 10000000, relics) * 10000000;
+			v.level = orig_level;
+			running_dowse += dowse;
+			cost = calculateArtifactEfficiencyCost(v, dowse);
+			total_cost += cost;
+      relics -= cost;
+			v.level += dowse;
+			orig_level = v.level;
+			dowse = dowsingRod(v, 1000000, relics) * 1000000;
+			v.level = orig_level;
+			running_dowse += dowse;
+			cost = calculateArtifactEfficiencyCost(v, dowse);
+			total_cost += cost;
+      relics -= cost;
+			v.level += dowse;
+			orig_level = v.level;
 			dowse = dowsingRod(v, 100000, relics) * 100000;
 			v.level = orig_level;
 			running_dowse += dowse;
@@ -868,6 +910,54 @@ function generateUpgrades() {
 			u_relics = u_relics.mul(1000000000000000000000000000000000000000).toNumber();
 			buffer = 100000000;
 			break;
+		case 'e40':
+			u_relics = u_relics.mul(10000000000000000000000000000000000000000).toNumber();
+			buffer = 125000000;
+			break;
+		case 'e41':
+			u_relics = u_relics.mul(100000000000000000000000000000000000000000).toNumber();
+			buffer = 150000000;
+			break;
+		case 'e42':
+			u_relics = u_relics.mul(1000000000000000000000000000000000000000000).toNumber();
+			buffer = 175000000;
+			break;
+		case 'e43':
+			u_relics = u_relics.mul(10000000000000000000000000000000000000000000).toNumber();
+			buffer = 250000000;
+			break;
+		case 'e44':
+			u_relics = u_relics.mul(100000000000000000000000000000000000000000000).toNumber();
+			buffer = 500000000;
+			break;
+		case 'e45':
+			u_relics = u_relics.mul(1000000000000000000000000000000000000000000000).toNumber();
+			buffer = 750000000;
+			break;
+		case 'e46':
+			u_relics = u_relics.mul(10000000000000000000000000000000000000000000000).toNumber();
+			buffer = 1000000000;
+			break;
+		case 'e47':
+			u_relics = u_relics.mul(100000000000000000000000000000000000000000000000).toNumber();
+			buffer = 1250000000;
+			break;
+		case 'e48':
+			u_relics = u_relics.mul(1000000000000000000000000000000000000000000000000).toNumber();
+			buffer = 1500000000;
+			break;
+		case 'e49':
+			u_relics = u_relics.mul(10000000000000000000000000000000000000000000000000).toNumber();
+			buffer = 1750000000;
+			break;
+		case 'e50':
+			u_relics = u_relics.mul(100000000000000000000000000000000000000000000000000).toNumber();
+			buffer = 2500000000;
+			break;
+		case 'e51':
+			u_relics = u_relics.mul(1000000000000000000000000000000000000000000000000000).toNumber();
+			buffer = 5000000000;
+			break;
 	}
 	u_orelics = u_relics;
 	u_obuffer = buffer;
@@ -904,9 +994,11 @@ function renderSuggestions(data) {
 	winner_e10 = '';
 	winner_e100 = '';
 	winner_e1000 = '';
+/*
 	winner_e10000 = '';
 	winner_e100000 = '';
 	winner_e1000000 = '';
+*/
 	winner_n = '';
 	var suggestions = '';
 	var litmus = false;
@@ -966,9 +1058,11 @@ function renderPctSuggestions(data) {
 	winner_e10 = '';
 	winner_e100 = '';
 	winner_e1000 = '';
+/*
 	winner_e10000 = '';
 	winner_e100000 = '';
 	winner_e1000000 = '';
+*/
 	winner_n = '';
 	var suggestions = '<ol>';
 	if(0 == upgrades.steps.length) {
@@ -1141,6 +1235,7 @@ function oldEff(data, k, v) {
     data.data[k].efficiency1000_int = int1000;
     data.data[k].efficiency1000_cost = cost1000;
     data.data[k].efficiency1000 = calculateArtifactEfficiency(v, cost1000, int1000, current_ad, current_effect, data.totalAD);
+/*
     var int10000 = calculateArtifactEfficiencyInterval(v, 10000);
     var cost10000 = calculateArtifactEfficiencyCost(v, int10000);
     data.data[k].efficiency10000_int = int10000;
@@ -1156,6 +1251,7 @@ function oldEff(data, k, v) {
     data.data[k].efficiency1000000_int = int1000000;
     data.data[k].efficiency1000000_cost = cost1000000;
     data.data[k].efficiency1000000 = calculateArtifactEfficiency(v, cost1000000, int1000000, current_ad, current_effect, data.totalAD);
+*/
 	}
 	return(data);
 }
@@ -1277,18 +1373,22 @@ function determineArtifactWinner(data, regenerate, next_artifact_cost, pinch) {
 	winner_e10 = ''
 	winner_e100 = ''
 	winner_e1000 = ''
+/*
 	winner_e10000 = ''
 	winner_e100000 = ''
 	winner_e1000000 = ''
+*/
 	var temp_winner_n = ''
 	var temp_winner_value = 0
 	winner_value = 0;
 	winner_value10 = 0;
 	winner_value100 = 0;
 	winner_value1000 = 0;
+/*
 	winner_value10000 = 0;
 	winner_value100000 = 0;
 	winner_value1000000 = 0;
+*/
 	$.each(data.data, function(k,v) {
 		obfuscate++;
 		if(v.efficiency > winner_value) {
@@ -1323,6 +1423,7 @@ function determineArtifactWinner(data, regenerate, next_artifact_cost, pinch) {
 				winner_value1000 = v.efficiency1000;
 			}
 		}
+/*
 		obfuscate++;
 		if(v.efficiency10000 > winner_value10000) {
 			if(v.level > 0 && v.active == 1 && (-1 == v.max || v.max > v.level)) {
@@ -1344,6 +1445,7 @@ function determineArtifactWinner(data, regenerate, next_artifact_cost, pinch) {
 				winner_value1000000 = v.efficiency1000000;
 			}
 		}
+*/
 	});
 	if(true === regenerate) {
 		regenerateArtifacts();
@@ -1503,7 +1605,34 @@ function displayPct(value) {
 }
 
 function displayTruncated(value) {
-	if(value > 999999999999999999999) {
+	if(value > 999999999999999999999999999999) {
+		value = (value / 1000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
+		value += 'e30/af';
+	} else if(value > 99999999999999999999999999999) {
+		value = (value / 100000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
+		value += 'e29';
+	} else if(value > 9999999999999999999999999999) {
+		value = (value / 10000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
+		value += 'e28';
+	} else if(value > 999999999999999999999999999) {
+		value = (value / 1000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
+		value += 'e27/ae';
+	} else if(value > 99999999999999999999999999) {
+		value = (value / 100000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
+		value += 'e26';
+	} else if(value > 9999999999999999999999999) {
+		value = (value / 10000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
+		value += 'e25';
+	} else if(value > 999999999999999999999999) {
+		value = (value / 1000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
+		value += 'e24/ad';
+	} else if(value > 99999999999999999999999) {
+		value = (value / 100000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
+		value += 'e23';
+	} else if(value > 9999999999999999999999) {
+		value = (value / 10000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
+		value += 'e22';
+	} else if(value > 999999999999999999999) {
 		value = (value / 1000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
 		value += 'e21/ac';
 	} else if(value > 99999999999999999999) {
@@ -1653,7 +1782,13 @@ if (storageAvailable('localStorage')) {
 	$('#gold').val(window.localStorage.getItem('gold'));
 	$('#active').val(window.localStorage.getItem('active'));
 	$('#relic_factor').val(window.localStorage.getItem('relic_factor'));
-	$('#ocd').val(window.localStorage.getItem('ocd'));
+	var ocd = window.localStorage.getItem('ocd');
+	if('pct' != ocd.substring(0,3)) {
+		if(1000 < parseInt(ocd)) {
+			ocd = 1000;
+		}
+	}
+	$('#ocd').val(ocd.toString());
 	if(window.localStorage.getItem('dark') == "1") {
 		$('#wolf').prop('checked', true);
 		$('#lamb').prop('checked', false);
@@ -1750,7 +1885,13 @@ function importData() {
 	}
 	toggleSplash(false);
 	$('#relic_factor').val(im[6]);
-	$('#ocd').val(im[7]);
+	var ocd = im[7];
+	if('pct' != ocd.substring(0,3)) {
+		if(1000 < parseInt(ocd)) {
+			ocd = 1000;
+		}
+	}
+	$('#ocd').val(ocd.toString());
 	var ima = im[8].split('|');
 	$.each(ima, function(k,v) {
 		var imaa = v.split('_');
