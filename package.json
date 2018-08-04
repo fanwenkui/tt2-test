@@ -1,7 +1,7 @@
 {
-  "name": "tt2-artifacts",
+  "name": "tt2-optimizer",
   "version": "1.0.1",
-  "description": "TT2 Artifact Optimizer",
+  "description": "TT2 Optimizer",
   "main": "index.js",
   "enginges": {
 	"node": "6.11.4"
@@ -19,12 +19,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tsukinoooo/tt2-artifacts.git"
+    "url": "git+https://github.com/juviasuisei/tt2-optimizer.git"
   },
-  "author": "Tsukinoooo",
+  "author": "Juvia Suisei",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/tsukinoooo/tt2-artifacts/issues"
+    "url": "https://github.com/juviasuisei/tt2-optimizer/issues"
   },
-  "homepage": "https://github.com/tsukinoooo/tt2-artifacts#readme"
+  "homepage": "https://github.com/juviasuisei/tt2-optimizer#readme"
 }
