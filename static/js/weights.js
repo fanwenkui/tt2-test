@@ -186,7 +186,7 @@ function calculateWeight(k,expo) {
 
 			case 'tree_blue':
 				results.rating += reducts.hs[build];
-				results.rating += reducts.gold * ('phom' == gold || 'fairy' == gold ? .5 : 1);
+				results.rating += reducts.gold * ('phom' == gold || 'fairy' == gold ? .6 : 1);
 				results.rating += reducts.sc[build];
 				results.color = determineColor(results.rating, true);
 				break;
@@ -203,7 +203,7 @@ function calculateWeight(k,expo) {
 			case 'skill':
 				results.rating += reducts.hs[build];
 				results.rating += reducts.ds[build];
-				results.rating += reducts.gold * ('phom' == gold || 'fairy' == gold ? .5 : 1);
+				results.rating += reducts.gold * ('phom' == gold || 'fairy' == gold ? .6 : 1);
 				results.rating += reducts.fs[build];
 				results.rating += reducts.wc[build];
 				results.rating += reducts.sc[build];
@@ -213,7 +213,7 @@ function calculateWeight(k,expo) {
 			case 'skill_tap':
 				results.rating += reducts.hs[build];
 				results.rating += reducts.ds[build];
-				results.rating += reducts.gold * ('phom' == gold || 'fairy' == gold ? .5 : 1);
+				results.rating += reducts.gold * ('phom' == gold || 'fairy' == gold ? .6 : 1);
 				results.rating += reducts.fs[build];
 				results.rating += reducts.wc[build];
 				results.rating += reducts.sc[build];
@@ -226,7 +226,7 @@ function calculateWeight(k,expo) {
 			case 'skill_fairy':
 				results.rating += reducts.hs[build];
 				results.rating += reducts.ds[build];
-				results.rating += reducts.gold * ('phom' == gold || 'fairy' == gold ? .5 : 1);
+				results.rating += reducts.gold * ('phom' == gold || 'fairy' == gold ? .6 : 1);
 				results.rating += reducts.fs[build];
 				results.rating += reducts.wc[build];
 				results.rating += reducts.sc[build];
@@ -241,7 +241,7 @@ function calculateWeight(k,expo) {
 			case 'skill_mana':
 				results.rating += reducts.hs[build];
 				results.rating += reducts.ds[build];
-				results.rating += reducts.gold * ('phom' == gold || 'fairy' == gold ? .5 : 1);
+				results.rating += reducts.gold * ('phom' == gold || 'fairy' == gold ? .6 : 1);
 				results.rating += reducts.fs[build];
 				results.rating += reducts.wc[build];
 				results.rating += reducts.sc[build];
@@ -301,7 +301,7 @@ function calculateWeight(k,expo) {
 				break;
 
 			case 'gold_phom':
-				results.rating = reducts.gold * ('phom' == gold || 'fairy' == gold ? .5 : 1);
+				results.rating = reducts.gold * ('phom' == gold || 'fairy' == gold ? .6 : 1);
 				results.color = 'warning';
 				break;
 
