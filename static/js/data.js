@@ -54,7 +54,7 @@ var reducts = {
 		'tap' : 1,
 		'pet' : 2/3,
 		'sc' : 3/5,
-		'hs' : 1/2,
+		'hs' : 3/5,
 		'cs' : 1/2
 	},
 	'ds_pet' : {
@@ -102,7 +102,7 @@ var reducts = {
 		'tap' : 1,
 		'pet' : 0,
 		'sc' : 3/5,
-		'hs' : 1,
+		'hs' : 4/5,
 		'cs' : 0
 	},
 	'crit' : {
@@ -176,7 +176,6 @@ var artifacts = {
   'data' : {
 	  'bos' : {
 		  'active' : 1,
-			'sort' : 1,
 			'name' : 'Book of Shadows',
 			'nickname' : 'BoS',
 			'bonus' : ' Prestige Relic',
@@ -190,12 +189,11 @@ var artifacts = {
 			'cexpo' : 2.5,
 			'type' : 'multiply',
 			'expo' : {
-				'sum_sort' : 43
+				'sum_sort' : 46
 			}
 		},
 		'sov' : {
 			'active' : 1,
-			'sort' : 2,
 			'name' : 'Stone of the Valrunes',
 			'nickname' : 'SotV',
 			'bonus' : ' Gold Per Activated Skill',
@@ -214,7 +212,6 @@ var artifacts = {
 		},
 		'coc' : {
 			'active' : 1,
-			'sort' : 3,
 			'name' : 'Chest of Contentment',
 			'nickname' : 'CoC',
 			'bonus' : ' Chesterson Gold',
@@ -231,7 +228,6 @@ var artifacts = {
 				'gold' : [
 					'coc',
 					'fairy',
-					'phom',
 					'all',
 					'inactive'
 				]
@@ -239,7 +235,6 @@ var artifacts = {
 		},
 		'hs' : {
 			'active' : 1,
-			'sort' : 4,
 			'name' : 'Heroic Shield',
 			'nickname' : 'HSh',
 			'bonus' : ' Boss Gold',
@@ -255,13 +250,13 @@ var artifacts = {
 			'expo' : {
 				'gold' : [
 					'boss',
+					'phom',
 					'all'
 				]
 			}
 		},
 		'bop' : {
 			'active' : 1,
-			'sort' : 5,
 			'name' : 'Book of Prophecy',
 			'nickname' : 'BoP',
 			'bonus' : ' All Gold',
@@ -280,7 +275,6 @@ var artifacts = {
 		},
 		'kb' : {
 			'active' : 1,
-			'sort' : 6,
 			'name' : 'Khrysos Bowl',
 			'nickname' : 'KB',
 			'bonus' : ' Stealth Gold',
@@ -301,7 +295,6 @@ var artifacts = {
 		},
 		'zc' : {
 			'active' : 1,
-			'sort' : 7,
 			'name' : 'Zakynthos Coin',
 			'nickname' : 'ZC',
 			'bonus' : ' Inactive Gold',
@@ -322,7 +315,6 @@ var artifacts = {
 		},
 		'gfa' : {
 			'active' : 1,
-			'sort' : 8,
 			'name' : 'Great Fay Medallion',
 			'nickname' : 'GFM',
 			'bonus' : ' Fairy Gold',
@@ -344,10 +336,9 @@ var artifacts = {
 		},
 		'coe' : {
 			'active' : 1,
-			'sort' : 9,
-			'name' : 'Coins of Ebizu',
-			'nickname' : 'CoE',
-			'bonus' : ' Splash Gold',
+			'name' : 'Neko Sculpture',
+			'nickname' : 'NS',
+			'bonus' : ' Heart of Midas Gold',
 			'max' : -1,
 			'effect' : .3,
 			'gmax' : .4,
@@ -360,13 +351,52 @@ var artifacts = {
 			'expo' : {
 				'gold' : [
 					'phom',
-					'all',
+					'all'
+				]
+			}
+		},
+		'coe2' : {
+			'active' : 1,
+			'name' : 'Coins of Ebizu',
+			'nickname' : 'CoE',
+			'bonus' : ' Multi-Spawn Gold',
+			'max' : -1,
+			'effect' : .2,
+			'gmax' : .4,
+			'grate' : .0002,
+			'gexpo' : .5,
+			'ad' : .3,
+			'ccoef' : .7,
+			'cexpo' : 1.8,
+			'type' : 'multiply',
+			'expo' : {
+				'flat' : 'gold_spawn'
+			}
+		},
+		'tbc' : {
+			'active' : 1,
+			'name' : 'The Bronzed Compass',
+			'nickname' : 'TBC',
+			'bonus' : ' Specialty Gold',
+			'max' : -1,
+			'effect' : .04,
+			'gmax' : .32,
+			'grate' : .00015,
+			'gexpo' : .5,
+			'ad' : .3,
+			'ccoef' : .7,
+			'cexpo' : 1.8,
+			'type' : 'multiply',
+			'expo' : {
+				'gold' : [
+					'phom',
+					'fairy',
+					'all'
 				]
 			}
 		},
 		'hsw' : {
 			'active' : 1,
-			'sort' : 10,
 			'name' : 'Heavenly Sword',
 			'nickname' : 'HSw',
 			'bonus' : ' All Artifact Damage',
@@ -385,7 +415,6 @@ var artifacts = {
 		},
 		'dr' : {
 			'active' : 1,
-			'sort' : 11,
 			'name' : 'Divine Retribution',
 			'nickname' : 'DR',
 			'bonus' : ' All Damage',
@@ -404,7 +433,7 @@ var artifacts = {
 		},
 		'dh' : {
 			'active' : 1,
-			'sort' : 12,
+			'sort' : 14,
 			'name' : 'Drunken Hammer',
 			'nickname' : 'DH',
 			'bonus' : ' Tap Damage',
@@ -423,7 +452,7 @@ var artifacts = {
 		},
 		'ss' : {
 			'active' : 1,
-			'sort' : 13,
+			'sort' : 15,
 			'name' : 'Samosek Sword',
 			'nickname' : 'SS',
 			'bonus' : ' Sword Attack Damage',
@@ -442,7 +471,7 @@ var artifacts = {
 		},
 		'tr' : {
 			'active' : 1,
-			'sort' : 14,
+			'sort' : 16,
 			'name' : 'The Retaliator',
 			'nickname' : 'TR',
 			'bonus' : ' Critical Damage',
@@ -459,9 +488,28 @@ var artifacts = {
 				'reduct' : 'crit'
 			}
 		},
+		'stp' : {
+			'active' : 1,
+			'sort' : 17,
+			'name' : 'Stryfe\'s Peace',
+			'nickname' : 'SP',
+			'bonus' : ' Fundamental Damage',
+			'max' : -1,
+			'effect' : .04,
+			'gmax' : .32,
+			'grate' : .00015,
+			'gexpo' : .5,
+			'ad' : 1,
+			'ccoef' : 1,
+			'cexpo' : 2,
+			'type' : 'multiply',
+			'expo' : {
+				'sum' : 'fundamental'
+			}
+		},
 		'hb' : {
 			'active' : 1,
-			'sort' : 15,
+			'sort' : 18,
 			'name' : 'Hero\'s Blade',
 			'nickname' : 'HB',
 			'bonus' : ' All Hero Damage',
@@ -480,7 +528,7 @@ var artifacts = {
 		},
 		'tsos' : {
 			'active' : 1,
-			'sort' : 16,
+			'sort' : 19,
 			'name' : 'The Sword of Storms',
 			'nickname' : 'TSoS',
 			'bonus' : ' Melee Hero Damage',
@@ -499,7 +547,6 @@ var artifacts = {
 		},
 		'fb' : {
 			'active' : 1,
-			'sort' : 17,
 			'name' : 'Furies\' Bow',
 			'nickname' : 'FB',
 			'bonus' : ' Ranged Hero Damage',
@@ -518,7 +565,6 @@ var artifacts = {
 		},
 		'cota' : {
 			'active' : 1,
-			'sort' : 18,
 			'name' : 'Charm of the Ancients',
 			'nickname' : 'CotA',
 			'bonus' : ' Spell Hero Damage',
@@ -537,7 +583,6 @@ var artifacts = {
 		},
 		'ttt' : {
 			'active' : 1,
-			'sort' : 19,
 			'name' : 'Tiny Titan Tree',
 			'nickname' : 'TTT',
 			'bonus' : ' Ground Hero Damage',
@@ -556,7 +601,6 @@ var artifacts = {
 		},
 		'hh' : {
 			'active' : 1,
-			'sort' : 20,
 			'name' : 'Helm of Hermes',
 			'nickname' : 'HoH',
 			'bonus' : ' Flying Hero Damage',
@@ -575,7 +619,6 @@ var artifacts = {
 		},
 		'foe' : {
 			'active' : 1,
-			'sort' : 21,
 			'name' : 'Fruit of Eden',
 			'nickname' : 'FoE',
 			'bonus' : ' Pet Damage',
@@ -594,7 +637,6 @@ var artifacts = {
 		},
 		'ie' : {
 			'active' : 1,
-			'sort' : 22,
 			'name' : 'Influential Elixir',
 			'nickname' : 'IE',
 			'bonus' : ' Clan Ship Damage',
@@ -613,7 +655,6 @@ var artifacts = {
 		},
 		'orc' : {
 			'active' : 1,
-			'sort' : 23,
 			'name' : 'O\'Ryan\'s Charm',
 			'nickname' : 'oRC',
 			'bonus' : ' Companion Damage',
@@ -632,7 +673,6 @@ var artifacts = {
 		},
 		'hos2' : {
 			'active' : 1,
-			'sort' : 24,
 			'name' : 'Heart of Storms',
 			'nickname' : 'HoS',
 			'bonus' : ' Pet Damage Bonuses',
@@ -651,7 +691,6 @@ var artifacts = {
 		},
 		'ao' : {
 			'active' : 1,
-			'sort' : 25,
 			'name' : 'Apollo Orb',
 			'nickname' : 'AO',
 			'bonus' : ' Pet Gold Bonuses',
@@ -670,7 +709,6 @@ var artifacts = {
 		},
 		'eop' : {
 			'active' : 1,
-			'sort' : 26,
 			'name' : 'Earrings of Portara',
 			'nickname' : 'EoP',
 			'bonus' : ' Stealth Damage',
@@ -689,7 +727,6 @@ var artifacts = {
 		},
 		'af' : {
 			'active' : 1,
-			'sort' : 27,
 			'name' : 'Avian Feather',
 			'nickname' : 'AF',
 			'bonus' : ' Inactive Damage',
@@ -708,7 +745,6 @@ var artifacts = {
 		},
 		'hos' : {
 			'active' : 1,
-			'sort' : 28,
 			'name' : 'Corrupted Rune Heart',
 			'nickname' : 'CRH',
 			'bonus' : ' Splash Damage',
@@ -727,7 +763,6 @@ var artifacts = {
 		},
 		'td' : {
 			'active' : 1,
-			'sort' : 29,
 			'name' : 'Durendal Sword',
 			'nickname' : 'DS',
 			'bonus' : ' Non-Boss Damage',
@@ -746,7 +781,6 @@ var artifacts = {
 		},
 		'hs2' : {
 			'active' : 1,
-			'sort' : 30,
 			'name' : 'Helheim Skull',
 			'nickname' : 'HSk',
 			'bonus' : ' Boss Damage',
@@ -765,7 +799,6 @@ var artifacts = {
 		},
 		'ob' : {
 			'active' : 1,
-			'sort' : 31,
 			'name' : 'Oath\'s Burden',
 			'nickname' : 'OB',
 			'bonus' : ' Knight Boost',
@@ -784,7 +817,6 @@ var artifacts = {
 		},
 		'cotc' : {
 			'active' : 1,
-			'sort' : 32,
 			'name' : 'Crown of the Constellation',
 			'nickname' : 'CotC',
 			'bonus' : ' Warlord Boost',
@@ -803,7 +835,6 @@ var artifacts = {
 		},
 		'ts2' : {
 			'active' : 1,
-			'sort' : 33,
 			'name' : 'Titania\'s Sceptre',
 			'nickname' : 'TSc',
 			'bonus' : ' Sorcerer Boost',
@@ -822,7 +853,6 @@ var artifacts = {
 		},
 		'fg' : {
 			'active' : 1,
-			'sort' : 34,
 			'name' : 'Fagin\'s Grip',
 			'nickname' : 'FG',
 			'bonus' : ' Rogue Boost',
@@ -841,7 +871,6 @@ var artifacts = {
 		},
 		'roc' : {
 			'active' : 1,
-			'sort' : 35,
 			'name' : 'Ring of Calisto',
 			'nickname' : 'RoC',
 			'bonus' : ' All Equipment Boost',
@@ -860,7 +889,6 @@ var artifacts = {
 		},
 		'bod' : {
 			'active' : 1,
-			'sort' : 36,
 			'name' : 'Blade of Damocles',
 			'nickname' : 'BoD',
 			'bonus' : ' Sword Primary Boost',
@@ -879,7 +907,6 @@ var artifacts = {
 		},
 		'hom' : {
 			'active' : 1,
-			'sort' : 37,
 			'name' : 'Helmet of Madness',
 			'nickname' : 'HoM',
 			'bonus' : ' Helmet Primary Boost',
@@ -898,7 +925,6 @@ var artifacts = {
 		},
 		'tp' : {
 			'active' : 1,
-			'sort' : 38,
 			'name' : 'Titanium Plating',
 			'nickname' : 'TP',
 			'bonus' : ' Armor Primary Boost',
@@ -917,7 +943,6 @@ var artifacts = {
 		},
 		'mb' : {
 			'active' : 1,
-			'sort' : 39,
 			'name' : 'Moonlight Bracelet',
 			'nickname' : 'MB',
 			'bonus' : ' Aura Primary Boost',
@@ -936,7 +961,6 @@ var artifacts = {
 		},
 		'as' : {
 			'active' : 1,
-			'sort' : 40,
 			'name' : 'Amethyst Staff',
 			'nickname' : 'ASt',
 			'bonus' : ' Slash Primary Boost',
@@ -955,7 +979,6 @@ var artifacts = {
 		},
 		'ig' : {
 			'active' : 1,
-			'sort' : 41,
 			'name' : 'Invader\'s Gjalarhorn',
 			'nickname' : 'IG',
 			'bonus' : ' All Active Skill Effect',
@@ -974,7 +997,6 @@ var artifacts = {
 		},
 		'tm' : {
 			'active' : 1,
-			'sort' : 42,
 			'name' : 'Titan\'s Mask',
 			'nickname' : 'TM',
 			'bonus' : ' Heavenly Strike Damage',
@@ -993,7 +1015,6 @@ var artifacts = {
 		},
 		'rt' : {
 			'active' : 1,
-			'sort' : 43,
 			'name' : 'Royal Toxin',
 			'nickname' : 'RT',
 			'bonus' : ' Deadly Strike Effect',
@@ -1012,7 +1033,6 @@ var artifacts = {
 		},
 		'lp' : {
 			'active' : 1,
-			'sort' : 44,
 			'name' : 'Laborer\'s Pendant',
 			'nickname' : 'LP',
 			'bonus' : ' Hand of Midas Gold Bonus',
@@ -1026,12 +1046,11 @@ var artifacts = {
 			'cexpo' : 1.7,
 			'type' : 'multiply',
 			'expo' : {
-				'flat' : 'gold_phom'
+				'flat' : 'hom'
 			}
 		},
 		'bor' : {
 			'active' : 1,
-			'sort' : 45,
 			'name' : 'Bringer of Ragnarok',
 			'nickname' : 'BoR',
 			'bonus' : ' Fire Sword Damage',
@@ -1050,7 +1069,6 @@ var artifacts = {
 		},
 		'pof' : {
 			'active' : 1,
-			'sort' : 46,
 			'name' : 'Parchment of Foresight',
 			'nickname' : 'PoF',
 			'bonus' : ' War Cry Damage',
@@ -1069,7 +1087,6 @@ var artifacts = {
 		},
 		'eoe' : {
 			'active' : 1,
-			'sort' : 47,
 			'name' : 'Elixir of Eden',
 			'nickname' : 'EoE',
 			'bonus' : ' Shadow Clone Damage',
@@ -1088,7 +1105,6 @@ var artifacts = {
 		},
 		'hoti' : {
 			'active' : 1,
-			'sort' : 48,
 			'name' : 'Hourglass of the Impatient',
 			'nickname' : 'HotI',
 			'bonus' : ' All Active Skill Cooldown',
@@ -1107,7 +1123,6 @@ var artifacts = {
 		},
 		'pt' : {
 			'active' : 1,
-			'sort' : 49,
 			'name' : 'Phantom Timepiece',
 			'nickname' : 'PT',
 			'bonus' : 's All Active Skill Duration',
@@ -1126,7 +1141,6 @@ var artifacts = {
 		},
 		'fs' : {
 			'active' : 1,
-			'sort' : 50,
 			'name' : 'Forbidden Scroll',
 			'nickname' : 'FS',
 			'bonus' : 's Deadly Strike Duration',
@@ -1145,7 +1159,6 @@ var artifacts = {
 		},
 		'rof' : {
 			'active' : 1,
-			'sort' : 51,
 			'name' : 'Ring of Fealty',
 			'nickname' : 'RoF',
 			'bonus' : 's Hand of Midas Duration',
@@ -1159,12 +1172,11 @@ var artifacts = {
 			'cexpo' : 2.4,
 			'type' : 'add',
 			'expo' : {
-				'flat' : 'gold_phom'
+				'flat' : 'hom'
 			}
 		},
 		'ga' : {
 			'active' : 1,
-			'sort' : 52,
 			'name' : 'Glacial Axe',
 			'nickname' : 'GA',
 			'bonus' : 's Fire Sword Duration',
@@ -1183,7 +1195,6 @@ var artifacts = {
 		},
 		'a' : {
 			'active' : 1,
-			'sort' : 53,
 			'name' : 'Aegis',
 			'nickname' : 'A',
 			'bonus' : 's War Cry Duration',
@@ -1202,7 +1213,6 @@ var artifacts = {
 		},
 		'sg' : {
 			'active' : 1,
-			'sort' : 54,
 			'name' : 'Swamp Guantlet',
 			'nickname' : 'SG',
 			'bonus' : 's Shadow Clone Duration',
@@ -1221,7 +1231,6 @@ var artifacts = {
 		},
 		'ip' : {
 			'active' : 1,
-			'sort' : 55,
 			'name' : 'Infinity Pendulum',
 			'nickname' : 'IP',
 			'bonus' : ' Heavenly Strike Mana Cost',
@@ -1240,7 +1249,6 @@ var artifacts = {
 		},
 		'gok' : {
 			'active' : 1,
-			'sort' : 56,
 			'name' : 'Glove of Kuma',
 			'nickname' : 'GoK',
 			'bonus' : ' Deadly Strike Mana Cost',
@@ -1259,7 +1267,6 @@ var artifacts = {
 		},
 		'ts' : {
 			'active' : 1,
-			'sort' : 57,
 			'name' : 'Titan Spear',
 			'nickname' : 'TSp',
 			'bonus' : ' Hand of Midas Mana Cost',
@@ -1273,12 +1280,11 @@ var artifacts = {
 			'cexpo' : 3,
 			'type' : 'add',
 			'expo' : {
-				'flat' : 'gold_phom'
+				'flat' : 'hom'
 			}
 		},
 		'os' : {
 			'active' : 1,
-			'sort' : 58,
 			'name' : 'Oak Staff',
 			'nickname' : 'OS',
 			'bonus' : ' Fire Sword Mana Cost',
@@ -1297,7 +1303,6 @@ var artifacts = {
 		},
 		'tac' : {
 			'active' : 1,
-			'sort' : 59,
 			'name' : 'The Arcana Cloak',
 			'nickname' : 'TAC',
 			'bonus' : ' War Cry Mana Cost',
@@ -1316,7 +1321,6 @@ var artifacts = {
 		},
 		'ho' : {
 			'active' : 1,
-			'sort' : 60,
 			'name' : 'Hunter\'s Ointment',
 			'nickname' : 'HO',
 			'bonus' : ' Shadow Clone Mana Cost',
@@ -1335,7 +1339,6 @@ var artifacts = {
 		},
 		'ae' : {
 			'active' : 1,
-			'sort' : 61,
 			'name' : 'Ambrosia Elixir',
 			'nickname' : 'AE',
 			'bonus' : ' Mana Pool Cap',
@@ -1354,7 +1357,6 @@ var artifacts = {
 		},
 		'ms' : {
 			'active' : 1,
-			'sort' : 62,
 			'name' : 'Mystic Staff',
 			'nickname' : 'MSt',
 			'bonus' : ' Mana Regeneration',
@@ -1373,7 +1375,6 @@ var artifacts = {
 		},
 		'mbos' : {
 			'active' : 1,
-			'sort' : 63,
 			'name' : 'Mystical Beans of Senzu',
 			'nickname' : 'MBoS',
 			'bonus' : ' Mana Refund Percent',
@@ -1392,7 +1393,6 @@ var artifacts = {
 		},
 		'eof' : {
 			'active' : 1,
-			'sort' : 64,
 			'name' : 'Egg of Fortune',
 			'nickname' : 'EoF',
 			'bonus' : ' Chesterson Chance',
@@ -1408,7 +1408,7 @@ var artifacts = {
 			'expo' : {
 				'gold' : [
 					'coc',
-					'phom',
+					'fairy',
 					'all',
 					'active'
 				]
@@ -1416,7 +1416,6 @@ var artifacts = {
 		},
 		'dc' : {
 			'active' : 1,
-			'sort' : 65,
 			'name' : 'Divine Chalice',
 			'nickname' : 'DC',
 			'bonus' : ' 10x Gold Chance',
@@ -1431,7 +1430,6 @@ var artifacts = {
 			'type' : 'pct',
 			'expo' : {
 				'gold' : [
-					'phom',
 					'all',
 					'active'
 				]
@@ -1439,7 +1437,6 @@ var artifacts = {
 		},
 		'is' : {
 			'active' : 1,
-			'sort' : 66,
 			'name' : 'Invader\'s Shield',
 			'nickname' : 'IS',
 			'bonus' : ' Multiple Fairy Chance',
@@ -1461,7 +1458,6 @@ var artifacts = {
 		},
 		'aom' : {
 			'active' : 1,
-			'sort' : 67,
 			'name' : 'Axe of Muerte',
 			'nickname' : 'AoM',
 			'bonus' : ' Critical Chance',
@@ -1480,7 +1476,6 @@ var artifacts = {
 		},
 		'eotk' : {
 			'active' : 1,
-			'sort' : 68,
 			'name' : 'Essence of the Kitsune',
 			'nickname' : 'EotK',
 			'bonus' : ' Multi-Spawn Chance',
@@ -1499,7 +1494,6 @@ var artifacts = {
 		},
 		'boh' : {
 			'active' : 1,
-			'sort' : 69,
 			'name' : 'Boots of Hermes',
 			'nickname' : 'BoH',
 			'bonus' : ' Portar Chance',
@@ -1518,7 +1512,6 @@ var artifacts = {
 		},
 		'ug' : {
 			'active' : 1,
-			'sort' : 70,
 			'name' : 'Unbound Gauntlet',
 			'nickname' : 'UG',
 			'bonus' : ' Snap Spawn Chance',
@@ -1537,7 +1530,6 @@ var artifacts = {
 		},
 		'op' : {
 			'active' : 1,
-			'sort' : 71,
 			'name' : 'Oberon Pendant',
 			'nickname' : 'OP',
 			'bonus' : ' Manni Mana Chance',
@@ -1556,7 +1548,6 @@ var artifacts = {
 		},
 		'lfoa' : {
 			'active' : 1,
-			'sort' : 72,
 			'name' : 'Lucky Foot of Al-mi\'raj',
 			'nickname' : 'LFoA',
 			'bonus' : ' All Probabilities',
@@ -1575,7 +1566,6 @@ var artifacts = {
 		},
 		'lkm' : {
 			'active' : 1,
-			'sort' : 73,
 			'name' : 'Lost King\'s Mask',
 			'nickname' : 'LKM',
 			'bonus' : ' All Upgrade Cost',
@@ -1594,7 +1584,6 @@ var artifacts = {
 		},
 		'sor' : {
 			'active' : 1,
-			'sort' : 74,
 			'name' : 'Staff of Radiance',
 			'nickname' : 'SoR',
 			'bonus' : ' Hero Upgrade Cost',
@@ -1613,7 +1602,6 @@ var artifacts = {
 		},
 		'msw' : {
 			'active' : 1,
-			'sort' : 75,
 			'name' : 'Morgelai Sword',
 			'nickname' : 'MSw',
 			'bonus' : ' Helper Weapon Boost',
@@ -1632,7 +1620,6 @@ var artifacts = {
 		},
 		'tms' : {
 			'active' : 1,
-			'sort' : 76,
 			'name' : 'The Master\'s Sword',
 			'nickname' : 'TMS',
 			'bonus' : ' Tap Damage from Heroes',
@@ -1651,7 +1638,6 @@ var artifacts = {
 		},
 		'as2' : {
 			'active' : 1,
-			'sort' : 77,
 			'name' : 'Aram Spear',
 			'nickname' : 'ASp',
 			'bonus' : ' All Titan HP',
@@ -1670,7 +1656,6 @@ var artifacts = {
 		},
 		'wod' : {
 			'active' : 1,
-			'sort' : 78,
 			'name' : 'Ward of Darkness',
 			'nickname' : 'WoD',
 			'bonus' : 's Boss Timer Duration',
@@ -1770,7 +1755,10 @@ var artifact_costs = {
 	'76' : 1210000000000000000000000,
 	'77' : 17600000000000000000000000,
 	'78' : 256000000000000000000000000,
-	'79' : -1
+	'79' : 3740000000000000000000000000,
+	'80' : 55000000000000000000000000000,
+	'81' : 812000000000000000000000000000,
+	'82' : -1
 };
 
 // x = 1.4067499999999975
@@ -1796,7 +1784,6 @@ var skills = {
   'data' : {
 	  'kv' : {
 		  'active' : 1,
-			'sort' : 1,
 			'name' : 'Knight\'s Valor',
 			'nickname' : 'R1',
 			'branch' : 'red',
@@ -1837,12 +1824,11 @@ var skills = {
 				'25' : { 'cost' : 50, 'bonus' : 1190000000000000, 'bonus2' : 0, 'bonus3' : 0 }
 			},
 			'expos' : {
-					'b1' : { 'reduct' : 'tap' }
+				'b1' : { 'reduct' : 'tap' }
 			}
 		},
 		'cho' : {
 		  'active' : 1,
-			'sort' : 2,
 			'name' : 'Chivalric Order',
 			'nickname' : 'R2_1',
 			'branch' : 'red',
@@ -1883,12 +1869,11 @@ var skills = {
 				'25' : { 'cost' : 50, 'bonus' : 24200000000, 'bonus2' : 0, 'bonus3' : 0 }
 			},
 			'expos' : {
-					'b1' : { 'reduct' : 'tap' }
+				'b1' : { 'reduct' : 'tap' }
 			}
 		},
 		'pe' : {
 		  'active' : 1,
-			'sort' : 3,
 			'name' : 'Pet Evolution',
 			'nickname' : 'R2_2',
 			'branch' : 'red',
@@ -1929,17 +1914,16 @@ var skills = {
 				'25' : { 'cost' : 50, 'bonus' : 4500000000000000, 'bonus2' : -15, 'bonus3' : 0 }
 			},
 			'expos' : {
-					'b1' : { 'reduct' : 'pet' },
-					'b2' : { 'reduct' : 'pet' }
+				'b1' : { 'reduct' : 'pet' },
+				'b2' : { 'reduct' : 'pet' }
 			}
 		},
 		'phom' : {
 		  'active' : 1,
-			'sort' : 4,
 			'name' : 'Heart of Midas',
 			'branch' : 'red',
 			'nickname' : 'R2_3',
-			'bonus' : ' Heart of Midas Gold',
+			'bonus' : ' Boss Gold',
 			'bonus2' : 's Cooldown',
 			'bonus3' : -1,
 			'tier' : 2,
@@ -1949,46 +1933,46 @@ var skills = {
 			'type2' : 'add_skill',
 			'type3' : -1,
 			'levels' : {
-				'1' : { 'cost' : 1, 'bonus' : 4, 'bonus2' : 0, 'bonus3' : 0 },
-				'2' : { 'cost' : 2, 'bonus' : 11.3, 'bonus2' : 1, 'bonus3' : 0 },
-				'3' : { 'cost' : 2, 'bonus' : 24.8, 'bonus2' : 2, 'bonus3' : 0 },
-				'4' : { 'cost' : 3, 'bonus' : 54.3, 'bonus2' : 3, 'bonus3' : 0 },
-				'5' : { 'cost' : 3, 'bonus' : 114, 'bonus2' : 4, 'bonus3' : 0 },
-				'6' : { 'cost' : 3, 'bonus' : 235, 'bonus2' : 5, 'bonus3' : 0 },
-				'7' : { 'cost' : 4, 'bonus' : 528, 'bonus2' : 6, 'bonus3' : 0 },
-				'8' : { 'cost' : 5, 'bonus' : 1290, 'bonus2' : 7, 'bonus3' : 0 },
-				'9' : {	'cost' : 5, 'bonus' : 3170, 'bonus2' : 8, 'bonus3' : 0 },
-				'10' : { 'cost' : 6, 'bonus' : 8510, 'bonus2' : 9, 'bonus3' : 0 },
-				'11' : { 'cost' : 7, 'bonus' : 25000, 'bonus2' : 10, 'bonus3' : 0 },
-				'12' : { 'cost' : 8, 'bonus' : 80000, 'bonus2' : 11, 'bonus3' : 0 },
-				'13' : { 'cost' : 9, 'bonus' : 279000, 'bonus2' : 12, 'bonus3' : 0 },
-				'14' : { 'cost' : 11, 'bonus' : 1160000, 'bonus2' : 13, 'bonus3' : 0 },
-				'15' : { 'cost' : 12, 'bonus' : 5200000, 'bonus2' : 14, 'bonus3' : 0 },
-				'16' : { 'cost' : 14, 'bonus' : 27500000, 'bonus2' : 15, 'bonus3' : 0 },
-				'17' : { 'cost' : 16, 'bonus' : 170000000, 'bonus2' : 16, 'bonus3' : 0 },
-				'18' : { 'cost' : 19, 'bonus' : 1330000000, 'bonus2' : 17, 'bonus3' : 0 },
-				'19' : { 'cost' : 22, 'bonus' : 13000000000, 'bonus2' : 18, 'bonus3' : 0 },
-				'20' : { 'cost' : 25, 'bonus' : 157000000000, 'bonus2' : 20, 'bonus3' : 0 },
-				'21' : { 'cost' : 28, 'bonus' : 2370000000000, 'bonus2' : 22, 'bonus3' : 0 },
-				'22' : { 'cost' : 33, 'bonus' : 50300000000000, 'bonus2' : 24, 'bonus3' : 0 },
-				'23' : { 'cost' : 38, 'bonus' : 1500000000000000, 'bonus2' : 26, 'bonus3' : 0 },
-				'24' : { 'cost' : 43, 'bonus' : 62000000000000000, 'bonus2' : 28, 'bonus3' : 0 },
-				'25' : { 'cost' : 50, 'bonus' : 4040000000000000000, 'bonus2' : 30, 'bonus3' : 0 }
+				'1' : { 'cost' : 1, 'bonus' : 1.8, 'bonus2' : 0, 'bonus3' : 0 },
+				'2' : { 'cost' : 2, 'bonus' : 2.98, 'bonus2' : 1, 'bonus3' : 0 },
+				'3' : { 'cost' : 2, 'bonus' : 4.93, 'bonus2' : 2, 'bonus3' : 0 },
+				'4' : { 'cost' : 3, 'bonus' : 9.16, 'bonus2' : 3, 'bonus3' : 0 },
+				'5' : { 'cost' : 3, 'bonus' : 17, 'bonus2' : 4, 'bonus3' : 0 },
+				'6' : { 'cost' : 3, 'bonus' : 31.6, 'bonus2' : 5, 'bonus3' : 0 },
+				'7' : { 'cost' : 4, 'bonus' : 65.7, 'bonus2' : 6, 'bonus3' : 0 },
+				'8' : { 'cost' : 5, 'bonus' : 152, 'bonus2' : 7, 'bonus3' : 0 },
+				'9' : {	'cost' : 5, 'bonus' : 353, 'bonus2' : 8, 'bonus3' : 0 },
+				'10' : { 'cost' : 6, 'bonus' : 910, 'bonus2' : 9, 'bonus3' : 0 },
+				'11' : { 'cost' : 7, 'bonus' : 2600, 'bonus2' : 10, 'bonus3' : 0 },
+				'12' : { 'cost' : 8, 'bonus' : 8240, 'bonus2' : 11, 'bonus3' : 0 },
+				'13' : { 'cost' : 9, 'bonus' : 28800, 'bonus2' : 12, 'bonus3' : 0 },
+				'14' : { 'cost' : 11, 'bonus' : 122000, 'bonus2' : 13, 'bonus3' : 0 },
+				'15' : { 'cost' : 12, 'bonus' : 571000, 'bonus2' : 14, 'bonus3' : 0 },
+				'16' : { 'cost' : 14, 'bonus' : 3200000, 'bonus2' : 15, 'bonus3' : 0 },
+				'17' : { 'cost' : 16, 'bonus' : 21500000, 'bonus2' : 16, 'bonus3' : 0 },
+				'18' : { 'cost' : 19, 'bonus' : 186000000, 'bonus2' : 17, 'bonus3' : 0 },
+				'19' : { 'cost' : 22, 'bonus' : 2080000000, 'bonus2' : 18, 'bonus3' : 0 },
+				'20' : { 'cost' : 25, 'bonus' : 29800000000, 'bonus2' : 20, 'bonus3' : 0 },
+				'21' : { 'cost' : 28, 'bonus' : 539000000000, 'bonus2' : 22, 'bonus3' : 0 },
+				'22' : { 'cost' : 33, 'bonus' : 14400000000000, 'bonus2' : 24, 'bonus3' : 0 },
+				'23' : { 'cost' : 38, 'bonus' : 558000000000000, 'bonus2' : 26, 'bonus3' : 0 },
+				'24' : { 'cost' : 43, 'bonus' : 31400000000000000, 'bonus2' : 28, 'bonus3' : 0 },
+				'25' : { 'cost' : 50, 'bonus' : 2920000000000000000, 'bonus2' : 30, 'bonus3' : 0 }
 			},
 			'expos' : {
-					'b1' : { 'gold' : [
-						'phom',
-						'all',
-					] },
-					'b2' : { 'gold' : [
-						'phom',
-						'all',
-					] }
+				'b1' : { 'gold' : [
+					'boss',
+					'phom',
+					'all',
+				] },
+				'b2' : { 'gold' : [
+					'phom',
+					'all',
+				] }
 			}
 		},
 		'cs' : {
 		  'active' : 1,
-			'sort' : 5,
 			'name' : 'Cleaving Strike',
 			'nickname' : 'R3_1',
 			'branch' : 'red',
@@ -2029,59 +2013,58 @@ var skills = {
 				'25' : { 'cost' : 57, 'bonus' : 1670000000000000000, 'bonus2' : -.25, 'bonus3' : 0 }
 			},
 			'expos' : {
-					'b1' : { 'reduct' : 'crit' },
-					'b2' : { 'reduct' : 'crit_sc_neg' }
+				'b1' : { 'reduct' : 'crit' },
+				'b2' : { 'reduct' : 'crit_sc_neg' }
 			}
 		},
 		'si' : {
 		  'active' : 1,
-			'sort' : 6,
 			'name' : 'Summon Inferno',
 			'nickname' : 'R3_2',
 			'branch' : 'red',
 			'bonus' : ' Fire Sword Damage',
-			'bonus2' : -1,
+			'bonus2' : 's Fire Sword Duration',
 			'bonus3' : -1,
 			'tier' : 3,
 			'prereq' : 'pe',
 			'max' : 25,
 			'type' : 'multiply',
-			'type2' : -1,
+			'type2' : 'add_skill',
 			'type3' : -1,
 			'levels' : {
-				'1' : { 'cost' : 2, 'bonus' : 1.6, 'bonus2' : 0, 'bonus3' : 0 },
-				'2' : { 'cost' : 2, 'bonus' : 2.37, 'bonus2' : 0, 'bonus3' : 0 },
-				'3' : { 'cost' : 3, 'bonus' : 3.89, 'bonus2' : 0, 'bonus3' : 0 },
-				'4' : { 'cost' : 3, 'bonus' : 6.38, 'bonus2' : 0, 'bonus3' : 0 },
-				'5' : { 'cost' : 3, 'bonus' : 10.5, 'bonus2' : 0, 'bonus3' : 0 },
-				'6' : { 'cost' : 4, 'bonus' : 19, 'bonus2' : 0, 'bonus3' : 0 },
-				'7' : { 'cost' : 5, 'bonus' : 37.9, 'bonus2' : 0, 'bonus3' : 0 },
-				'8' : { 'cost' : 5, 'bonus' : 75.6, 'bonus2' : 0, 'bonus3' : 0 },
-				'9' : {	'cost' : 6, 'bonus' : 166, 'bonus2' : 0, 'bonus3' : 0 },
-				'10' : { 'cost' : 7, 'bonus' : 401, 'bonus2' : 0, 'bonus3' : 0 },
-				'11' : { 'cost' : 8, 'bonus' : 1060, 'bonus2' : 0, 'bonus3' : 0 },
-				'12' : { 'cost' : 9, 'bonus' : 3060, 'bonus2' : 0, 'bonus3' : 0 },
-				'13' : { 'cost' : 11, 'bonus' : 10600, 'bonus2' : 0, 'bonus3' : 0 },
-				'14' : { 'cost' : 12, 'bonus' : 39800, 'bonus2' : 0, 'bonus3' : 0 },
-				'15' : { 'cost' : 14, 'bonus' : 177000, 'bonus2' : 0, 'bonus3' : 0 },
-				'16' : { 'cost' : 16, 'bonus' : 931000, 'bonus2' : 0, 'bonus3' : 0 },
-				'17' : { 'cost' : 19, 'bonus' : 6230000, 'bonus2' : 0, 'bonus3' : 0 },
-				'18' : { 'cost' : 22, 'bonus' : 52600000, 'bonus2' : 0, 'bonus3' : 0 },
-				'19' : { 'cost' : 25, 'bonus' : 559000000, 'bonus2' : 0, 'bonus3' : 0 },
-				'20' : { 'cost' : 28, 'bonus' : 7420000000, 'bonus2' : 0, 'bonus3' : 0 },
-				'21' : { 'cost' : 33, 'bonus' : 142000000000, 'bonus2' : 0, 'bonus3' : 0 },
-				'22' : { 'cost' : 38, 'bonus' : 3870000000000, 'bonus2' : 0, 'bonus3' : 0 },
-				'23' : { 'cost' : 43, 'bonus' : 149000000000000, 'bonus2' : 0, 'bonus3' : 0 },
-				'24' : { 'cost' : 50, 'bonus' : 9320000000000000, 'bonus2' : 0, 'bonus3' : 0 },
-				'25' : { 'cost' : 57, 'bonus' : 932000000000000000, 'bonus2' : 0, 'bonus3' : 0 }
+				'1' : { 'cost' : 2, 'bonus' : 1.6, 'bonus2' : 1, 'bonus3' : 0 },
+				'2' : { 'cost' : 2, 'bonus' : 2.37, 'bonus2' : 2, 'bonus3' : 0 },
+				'3' : { 'cost' : 3, 'bonus' : 3.89, 'bonus2' : 4, 'bonus3' : 0 },
+				'4' : { 'cost' : 3, 'bonus' : 6.38, 'bonus2' : 7, 'bonus3' : 0 },
+				'5' : { 'cost' : 3, 'bonus' : 10.5, 'bonus2' : 9, 'bonus3' : 0 },
+				'6' : { 'cost' : 4, 'bonus' : 19, 'bonus2' : 12, 'bonus3' : 0 },
+				'7' : { 'cost' : 5, 'bonus' : 37.9, 'bonus2' : 16, 'bonus3' : 0 },
+				'8' : { 'cost' : 5, 'bonus' : 75.6, 'bonus2' : 21, 'bonus3' : 0 },
+				'9' : {	'cost' : 6, 'bonus' : 166, 'bonus2' : 26, 'bonus3' : 0 },
+				'10' : { 'cost' : 7, 'bonus' : 401, 'bonus2' : 33, 'bonus3' : 0 },
+				'11' : { 'cost' : 8, 'bonus' : 1060, 'bonus2' : 41, 'bonus3' : 0 },
+				'12' : { 'cost' : 9, 'bonus' : 3060, 'bonus2' : 51, 'bonus3' : 0 },
+				'13' : { 'cost' : 11, 'bonus' : 10600, 'bonus2' : 63, 'bonus3' : 0 },
+				'14' : { 'cost' : 12, 'bonus' : 39800, 'bonus2' : 77, 'bonus3' : 0 },
+				'15' : { 'cost' : 14, 'bonus' : 177000, 'bonus2' : 95, 'bonus3' : 0 },
+				'16' : { 'cost' : 16, 'bonus' : 931000, 'bonus2' : 115, 'bonus3' : 0 },
+				'17' : { 'cost' : 19, 'bonus' : 6230000, 'bonus2' : 142, 'bonus3' : 0 },
+				'18' : { 'cost' : 22, 'bonus' : 52600000, 'bonus2' : 173, 'bonus3' : 0 },
+				'19' : { 'cost' : 25, 'bonus' : 559000000, 'bonus2' : 211, 'bonus3' : 0 },
+				'20' : { 'cost' : 28, 'bonus' : 7420000000, 'bonus2' : 255, 'bonus3' : 0 },
+				'21' : { 'cost' : 33, 'bonus' : 142000000000, 'bonus2' : 310, 'bonus3' : 0 },
+				'22' : { 'cost' : 38, 'bonus' : 3870000000000, 'bonus2' : 376, 'bonus3' : 0 },
+				'23' : { 'cost' : 43, 'bonus' : 149000000000000, 'bonus2' : 454, 'bonus3' : 0 },
+				'24' : { 'cost' : 50, 'bonus' : 9320000000000000, 'bonus2' : 550, 'bonus3' : 0 },
+				'25' : { 'cost' : 57, 'bonus' : 932000000000000000, 'bonus2' : 664, 'bonus3' : 0 }
 			},
 			'expos' : {
-					'b1' : { 'reduct' : 'fs' }
+				'b1' : { 'reduct' : 'fs' },
+				'b2' : { 'reduct' : 'fs' }
 			}
 		},
 		'lbu' : {
 		  'active' : 1,
-			'sort' : 7,
 			'name' : 'Lightning Burst',
 			'nickname' : 'R3_3',
 			'branch' : 'red',
@@ -2110,25 +2093,24 @@ var skills = {
 				'13' : { 'cost' : 11, 'bonus' : 6920, 'bonus2' : 26, 'bonus3' : 0 },
 				'14' : { 'cost' : 12, 'bonus' : 25700, 'bonus2' : 28, 'bonus3' : 0 },
 				'15' : { 'cost' : 14, 'bonus' : 113000, 'bonus2' : 30, 'bonus3' : 0 },
-				'16' : { 'cost' : 16, 'bonus' : 595000, 'bonus2' : 32, 'bonus3' : 0 },
-				'17' : { 'cost' : 19, 'bonus' : 4010000, 'bonus2' : 34, 'bonus3' : 0 },
-				'18' : { 'cost' : 22, 'bonus' : 34400000, 'bonus2' : 36, 'bonus3' : 0 },
-				'19' : { 'cost' : 25, 'bonus' : 375000000, 'bonus2' : 38, 'bonus3' : 0 },
-				'20' : { 'cost' : 28, 'bonus' : 5150000000, 'bonus2' : 40, 'bonus3' : 0 },
-				'21' : { 'cost' : 33, 'bonus' : 104000000000, 'bonus2' : 42, 'bonus3' : 0 },
-				'22' : { 'cost' : 38, 'bonus' : 30400000000000, 'bonus2' : 44, 'bonus3' : 0 },
-				'23' : { 'cost' : 43, 'bonus' : 128000000000000, 'bonus2' : 46, 'bonus3' : 0 },
-				'24' : { 'cost' : 50, 'bonus' : 8990000000000000, 'bonus2' : 48, 'bonus3' : 0 },
-				'25' : { 'cost' : 57, 'bonus' : 1040000000000000000, 'bonus2' : 50, 'bonus3' : 0 }
+				'16' : { 'cost' : 16, 'bonus' : 595000, 'bonus2' : 33, 'bonus3' : 0 },
+				'17' : { 'cost' : 19, 'bonus' : 4010000, 'bonus2' : 36, 'bonus3' : 0 },
+				'18' : { 'cost' : 22, 'bonus' : 34400000, 'bonus2' : 39, 'bonus3' : 0 },
+				'19' : { 'cost' : 25, 'bonus' : 375000000, 'bonus2' : 42, 'bonus3' : 0 },
+				'20' : { 'cost' : 28, 'bonus' : 5150000000, 'bonus2' : 45, 'bonus3' : 0 },
+				'21' : { 'cost' : 33, 'bonus' : 104000000000, 'bonus2' : 48, 'bonus3' : 0 },
+				'22' : { 'cost' : 38, 'bonus' : 30400000000000, 'bonus2' : 51, 'bonus3' : 0 },
+				'23' : { 'cost' : 43, 'bonus' : 128000000000000, 'bonus2' : 54, 'bonus3' : 0 },
+				'24' : { 'cost' : 50, 'bonus' : 8990000000000000, 'bonus2' : 57, 'bonus3' : 0 },
+				'25' : { 'cost' : 57, 'bonus' : 1040000000000000000, 'bonus2' : 60, 'bonus3' : 0 }
 			},
 			'expos' : {
-					'b1' : { 'reduct' : 'pet' },
-					'b2' : { 'reduct' : 'pet' }
+				'b1' : { 'reduct' : 'pet' },
+				'b2' : { 'reduct' : 'pet' }
 			}
 		},
 		'bf' : {
 		  'active' : 1,
-			'sort' : 8,
 			'name' : 'Barbaric Fury',
 			'nickname' : 'R4_1',
 			'branch' : 'red',
@@ -2159,13 +2141,12 @@ var skills = {
 				'15' : { 'cost' : 131, 'bonus' : 321000000000000000000000000, 'bonus2' : 30, 'bonus3' : 0 }
 			},
 			'expos' : {
-					'b1' : { 'reduct' : 'tap' },
-					'b2' : { 'reduct' : 'tap' }
+				'b1' : { 'reduct' : 'tap' },
+				'b2' : { 'reduct' : 'tap' }
 			}
 		},
 		'fz' : {
 		  'active' : 1,
-			'sort' : 9,
 			'name' : 'Flash Zip',
 			'nickname' : 'R4_3',
 			'branch' : 'red',
@@ -2196,14 +2177,13 @@ var skills = {
 				'15' : { 'cost' : 131, 'bonus' : 1150000000000000000000000000, 'bonus2' : .525, 'bonus3' : 30 }
 			},
 			'expos' : {
-					'b1' : { 'reduct' : 'pet' },
-					'b2' : { 'sum' : 'pet_skill_phom' },
-					'b3' : { 'reduct' : 'pet' }
+				'b1' : { 'reduct' : 'pet' },
+				'b2' : { 'sum' : 'pet_skill_phom' },
+				'b3' : { 'reduct' : 'pet' }
 			}
 		},
 		'mc' : {
 		  'active' : 1,
-			'sort' : 10,
 			'name' : 'Master Commander',
 			'nickname' : 'Y1',
 			'branch' : 'yellow',
@@ -2244,12 +2224,11 @@ var skills = {
 				'25' : { 'cost' : 50, 'bonus' : 1190000000000000, 'bonus2' : 0, 'bonus3' : 0 }
 			},
 			'expos' : {
-					'b1' : { 'reduct' : 'hero' }
+				'b1' : { 'reduct' : 'hero' }
 			}
 		},
 		'sow' : {
 		  'active' : 1,
-			'sort' : 11,
 			'name' : 'Spoils of War',
 			'nickname' : 'Y2_1',
 			'branch' : 'yellow',
@@ -2290,23 +2269,21 @@ var skills = {
 				'25' : { 'cost' : 50, 'bonus' : 2920000000000000000, 'bonus2' : .25, 'bonus3' : 0 }
 			},
 			'expos' : {
-					'b1' : { 'gold' : [
-						'coc',
-						'fairy',
-						'phom',
-						'partial_inactive',
-						'all'
-					] },
-					'b2' : { 'gold' : [
-						'coc',
-						'phom',
-						'all'
-					] }
+				'b1' : { 'gold' : [
+					'coc',
+					'fairy',
+					'partial_inactive',
+					'all'
+				] },
+				'b2' : { 'gold' : [
+					'coc',
+					'fairy',
+					'all'
+				] }
 			}
 		},
 		'hm' : {
 		  'active' : 1,
-			'sort' : 12,
 			'name' : 'Heroic Might',
 			'nickname' : 'Y2_2',
 			'branch' : 'yellow',
@@ -2340,20 +2317,19 @@ var skills = {
 				'18' : { 'cost' : 19, 'bonus' : 4060000, 'bonus2' : 18, 'bonus3' : 0 },
 				'19' : { 'cost' : 22, 'bonus' : 32100000, 'bonus2' : 19, 'bonus3' : 0 },
 				'20' : { 'cost' : 25, 'bonus' : 318000000, 'bonus2' : 20, 'bonus3' : 0 },
-				'21' : { 'cost' : 28, 'bonus' : 3920000000, 'bonus2' : 21, 'bonus3' : 0 },
-				'22' : { 'cost' : 33, 'bonus' : 69000000000, 'bonus2' : 22, 'bonus3' : 0 },
-				'23' : { 'cost' : 38, 'bonus' : 1720000000000, 'bonus2' : 23, 'bonus3' : 0 },
-				'24' : { 'cost' : 43, 'bonus' : 60700000000000, 'bonus2' : 24, 'bonus3' : 0 },
-				'25' : { 'cost' : 50, 'bonus' : 3430000000000000, 'bonus2' : 25, 'bonus3' : 0 }
+				'21' : { 'cost' : 28, 'bonus' : 3920000000, 'bonus2' : 22, 'bonus3' : 0 },
+				'22' : { 'cost' : 33, 'bonus' : 69000000000, 'bonus2' : 24, 'bonus3' : 0 },
+				'23' : { 'cost' : 38, 'bonus' : 1720000000000, 'bonus2' : 26, 'bonus3' : 0 },
+				'24' : { 'cost' : 43, 'bonus' : 60700000000000, 'bonus2' : 28, 'bonus3' : 0 },
+				'25' : { 'cost' : 50, 'bonus' : 3430000000000000, 'bonus2' : 30, 'bonus3' : 0 }
 			},
 			'expos' : {
-					'b1' : { 'flat' : 'dmg' },
-					'b2' : { 'flat' : 'none' }
+				'b1' : { 'reduct' : 'wc' },
+				'b2' : { 'reduct' : 'hero' }
 			}
 		},
 		'aas' : {
 		  'active' : 1,
-			'sort' : 13,
 			'name' : 'Aerial Assault',
 			'nickname' : 'Y2_3',
 			'branch' : 'yellow',
@@ -2394,13 +2370,12 @@ var skills = {
 				'25' : { 'cost' : 50, 'bonus' : 1300000000000000, 'bonus2' : 35, 'bonus3' : 0 }
 			},
 			'expos' : {
-					'b1' : { 'reduct' : 'cs' },
-					'b2' : { 'reduct' : 'cs' }
+				'b1' : { 'reduct' : 'cs' },
+				'b2' : { 'reduct' : 'cs' }
 			}
 		},
 		'ti' : {
 		  'active' : 1,
-			'sort' : 14,
 			'name' : 'Tactical Insight',
 			'nickname' : 'Y3_1',
 			'branch' : 'yellow',
@@ -2441,13 +2416,58 @@ var skills = {
 				'25' : { 'cost' : 57, 'bonus' : .293, 'bonus2' : .802, 'bonus3' : 0 }
 			},
 			'expos' : {
-					'b1' : { 'reduct' : 'hero' },
-					'b2' : { 'reduct' : 'hero' }
+				'b1' : { 'reduct' : 'hero' },
+				'b2' : { 'reduct' : 'hero' }
+			}
+		},
+		'sl' : {
+		  'active' : 1,
+			'name' : 'Searing Light',
+			'nickname' : 'Y3_2',
+			'branch' : 'yellow',
+			'bonus' : ' Inspired Damage Amplify',
+			'bonus2' : 's War Cry Duration',
+			'bonus3' : -1,
+			'tier' : 3,
+			'prereq' : 'sow',
+			'max' : 25,
+			'type' : 'pct_pos',
+			'type2' : 'add_skill',
+			'type3' : -1,
+			'levels' : {
+				'1' : { 'cost' : 2, 'bonus' : .0075, 'bonus2' : 1, 'bonus3' : 0 },
+				'2' : { 'cost' : 2, 'bonus' : .00951, 'bonus2' : 2, 'bonus3' : 0 },
+				'3' : { 'cost' : 3, 'bonus' : .0135, 'bonus2' : 4, 'bonus3' : 0 },
+				'4' : { 'cost' : 3, 'bonus' : .0192, 'bonus2' : 7, 'bonus3' : 0 },
+				'5' : { 'cost' : 3, 'bonus' : .0272, 'bonus2' : 9, 'bonus3' : 0 },
+				'6' : { 'cost' : 4, 'bonus' : .0432, 'bonus2' : 12, 'bonus3' : 0 },
+				'7' : { 'cost' : 5, 'bonus' : .0763, 'bonus2' : 16,	'bonus3' : 0 },
+				'8' : { 'cost' : 5, 'bonus' : .135, 'bonus2' : 21, 'bonus3' : 0 },
+				'9' : {	'cost' : 6, 'bonus' : .265, 'bonus2' : 26, 'bonus3' : 0 },
+				'10' : { 'cost' : 7, 'bonus' : .576, 'bonus2' : 33, 'bonus3' : 0 },
+				'11' : { 'cost' : 8, 'bonus' : 1.39, 'bonus2' : 41, 'bonus3' : 0 },
+				'12' : { 'cost' : 9, 'bonus' : 3.68, 'bonus2' : 51, 'bonus3' : 0 },
+				'13' : { 'cost' : 11, 'bonus' : 11.9, 'bonus2' : 63, 'bonus3' : 0 },
+				'14' : { 'cost' : 12, 'bonus' : 42, 'bonus2' : 77, 'bonus3' : 0 },
+				'15' : { 'cost' : 14, 'bonus' : 179, 'bonus2' : 95, 'bonus3' : 0 },
+				'16' : { 'cost' : 16, 'bonus' : 911, 'bonus2' : 115, 'bonus3' : 0 },
+				'17' : { 'cost' : 19, 'bonus' : 6030, 'bonus2' : 142, 'bonus3' : 0 },
+				'18' : { 'cost' : 22, 'bonus' : 51500, 'bonus2' : 173, 'bonus3' : 0 },
+				'19' : { 'cost' : 25, 'bonus' : 563000, 'bonus2' : 211, 'bonus3' : 0 },
+				'20' : { 'cost' : 28, 'bonus' : 7850000, 'bonus2' : 255, 'bonus3' : 0 },
+				'21' : { 'cost' : 33, 'bonus' : 163000000, 'bonus2' : 310, 'bonus3' : 0 },
+				'22' : { 'cost' : 38, 'bonus' : 4960000000, 'bonus2' : 376, 'bonus3' : 0 },
+				'23' : { 'cost' : 43, 'bonus' : 221000000000, 'bonus2' : 454, 'bonus3' : 0 },
+				'24' : { 'cost' : 50, 'bonus' : 16700000000000, 'bonus2' : 550, 'bonus3' : 0 },
+				'25' : { 'cost' : 57, 'bonus' : 2110000000000000, 'bonus2' : 664, 'bonus3' : 0 }
+			},
+			'expos' : {
+				'b1' : { 'reduct' : 'hero' },
+				'b2' : { 'reduct' : 'hero' }
 			}
 		},
 		'coo' : {
 		  'active' : 1,
-			'sort' : 15,
 			'name' : 'Coordinated Offensive',
 			'nickname' : 'Y3_3',
 			'branch' : 'yellow',
@@ -2488,13 +2508,12 @@ var skills = {
 				'25' : { 'cost' : 57, 'bonus' : 1960000000000000000, 'bonus2' : -20, 'bonus3' : 0 }
 			},
 			'expos' : {
-					'b1' : { 'reduct' : 'hero' },
-					'b2' : { 'reduct' : 'hero' }
+				'b1' : { 'reduct' : 'hero' },
+				'b2' : { 'reduct' : 'hero' }
 			}
 		},
 		'aaw' : {
 		  'active' : 1,
-			'sort' : 16,
 			'name' : 'Astral Awakening',
 			'nickname' : 'Y4_1',
 			'branch' : 'yellow',
@@ -2525,13 +2544,12 @@ var skills = {
 				'15' : { 'cost' : 131, 'bonus' : 256000, 'bonus2' : 0, 'bonus3' : 5 }
 			},
 			'expos' : {
-					'b1' : { 'reduct' : 'hero' },
-					'b3' : { 'reduct' : 'hero' }
+				'b1' : { 'reduct' : 'hero' },
+				'b3' : { 'reduct' : 'hero' }
 			}
 		},
 		'as' : {
 		  'active' : 1,
-			'sort' : 16,
 			'name' : 'Anchoring Shot',
 			'nickname' : 'Y4_3',
 			'branch' : 'yellow',
@@ -2562,13 +2580,12 @@ var skills = {
 				'15' : { 'cost' : 131, 'bonus' : 113000000000000000000000000000, 'bonus2' : 2.2, 'bonus3' : 0 }
 			},
 			'expos' : {
-					'b1' : { 'sum' : 'ash' },
-					'b2' : { 'sum' : 'ash' }
+				'b1' : { 'sum' : 'ash' },
+				'b2' : { 'sum' : 'ash' }
 			}
 		},
 		'lbr' : {
 			'active' : 1,
-			'sort' : 17,
 			'name' : 'Limit Break',
 			'nickname' : 'B1',
 			'branch' : 'blue',
@@ -2609,13 +2626,12 @@ var skills = {
 				'25' : { 'cost' : 50, 'bonus' : 2815, 'bonus2' : 19.864, 'bonus3' : 0 }
 			},
 			'expos' : {
-					'b1' : { 'reduct' : 'hs' },
-					'b2' : { 'reduct' : 'hs' }
+				'b1' : { 'reduct' : 'hs' },
+				'b2' : { 'reduct' : 'hs' }
 			}
 		},
 		'mu' : {
 			'active' : 1,
-			'sort' : 18,
 			'name' : 'Midas Ultimate',
 			'nickname' : 'B2_1',
 			'branch' : 'blue',
@@ -2656,16 +2672,15 @@ var skills = {
 				'25' : { 'cost' : 50, 'bonus' : 864000000000000000, 'bonus2' : 119000000, 'bonus3' : 0 }
 			},
 			'expos' : {
-					'b1' : { 'flat' : 'gold_phom' },
-					'b2' : { 'gold' : [
-						'fairy',
-						'all'
-					] }
+				'b1' : { 'flat' : 'hom' },
+				'b2' : { 'gold' : [
+					'fairy',
+					'all'
+				] }
 			}
 		},
 		'ar' : {
 			'active' : 1,
-			'sort' : 19,
 			'name' : 'Angelic Radiance',
 			'nickname' : 'B2_2',
 			'branch' : 'blue',
@@ -2706,13 +2721,12 @@ var skills = {
 				'25' : { 'cost' : 50, 'bonus' : 143000000000000000, 'bonus2' : 70, 'bonus3' : 0 }
 			},
 			'expos' : {
-					'b1' : { 'reduct' : 'hs' },
-					'b2' : { 'reduct' : 'hs' }
+				'b1' : { 'reduct' : 'hs' },
+				'b2' : { 'reduct' : 'hs' }
 			}
 		},
 		'pv' : {
 			'active' : 1,
-			'sort' : 20,
 			'name' : 'Phantom Vengeance',
 			'nickname' : 'B2_3',
 			'branch' : 'blue',
@@ -2753,13 +2767,12 @@ var skills = {
 				'25' : { 'cost' : 50, 'bonus' : 6810000000000000, 'bonus2' : 6.02, 'bonus3' : 0 }
 			},
 			'expos' : {
-					'b1' : { 'reduct' : 'sc' },
-					'b2' : { 'reduct' : 'sc' }
+				'b1' : { 'reduct' : 'sc' },
+				'b2' : { 'reduct' : 'sc' }
 			}
 		},
 		'fc' : {
 		  'active' : 1,
-			'sort' : 21,
 			'name' : 'Fairy Charm',
 			'nickname' : 'B3_1',
 			'branch' : 'blue',
@@ -2785,13 +2798,12 @@ var skills = {
 				'10' : { 'cost' : 7, 'bonus' : 2.75, 'bonus2' : -60, 'bonus3' : 0 }
 			},
 			'expos' : {
-					'b1' : { 'sum' : 'skill_fairy' },
-					'b2' : { 'sum' : 'skill_fairy' }
+				'b1' : { 'sum' : 'skill_fairy' },
+				'b2' : { 'sum' : 'skill_fairy' }
 			}
 		},
 		'ms' : {
 		  'active' : 1,
-			'sort' : 22,
 			'name' : 'Mana Siphon',
 			'nickname' : 'B3_2',
 			'branch' : 'blue',
@@ -2832,13 +2844,12 @@ var skills = {
 				'25' : { 'cost' : 57, 'bonus' : .0584, 'bonus2' : 0, 'bonus3' : .005 }
 			},
 			'expos' : {
-					'b1' : { 'sum' : 'skill_tap' },
-					'b3' : { 'sum' : 'skill_tap' }
+				'b1' : { 'sum' : 'skill_tap' },
+				'b3' : { 'sum' : 'skill_tap' }
 			}
 		},
 		'ed' : {
 		  'active' : 1,
-			'sort' : 23,
 			'name' : 'Eternal Darkness',
 			'nickname' : 'B3_3',
 			'branch' : 'blue',
@@ -2853,39 +2864,38 @@ var skills = {
 			'type3' : -1,
 			'levels' : {
 				'1' : { 'cost' : 2, 'bonus' : 2, 'bonus2' : 0, 'bonus3' : 0 },
-				'2' : { 'cost' : 2, 'bonus' : 4.5, 'bonus2' : 1, 'bonus3' : 0 },
-				'3' : { 'cost' : 3, 'bonus' : 8.9, 'bonus2' : 1, 'bonus3' : 0 },
-				'4' : { 'cost' : 3, 'bonus' : 13.3, 'bonus2' : 2, 'bonus3' : 0 },
-				'5' : { 'cost' : 3, 'bonus' : 17.7, 'bonus2' : 3, 'bonus3' : 0 },
-				'6' : { 'cost' : 4, 'bonus' : 24.1, 'bonus2' : 4, 'bonus3' : 0 },
-				'7' : { 'cost' : 5, 'bonus' : 32.8, 'bonus2' : 5, 'bonus3' : 0 },
-				'8' : { 'cost' : 5, 'bonus' : 41.5, 'bonus2' : 6, 'bonus3' : 0 },
-				'9' : {	'cost' : 6, 'bonus' : 52.6, 'bonus2' : 7, 'bonus3' : 0 },
-				'10' : { 'cost' : 7, 'bonus' : 66.2, 'bonus2' : 8, 'bonus3' : 0 },
-				'11' : { 'cost' : 8, 'bonus' : 82.5, 'bonus2' : 10, 'bonus3' : 0 },
-				'12' : { 'cost' : 9, 'bonus' : 101.7, 'bonus2' : 12, 'bonus3' : 0 },
-				'13' : { 'cost' : 11, 'bonus' : 126.7, 'bonus2' : 14, 'bonus3' : 0 },
-				'14' : { 'cost' : 12, 'bonus' : 154.9, 'bonus2' : 16, 'bonus3' : 0 },
-				'15' : { 'cost' : 14, 'bonus' : 189.5, 'bonus2' : 18, 'bonus3' : 0 },
-				'16' : { 'cost' : 16, 'bonus' : 231, 'bonus2' : 20, 'bonus3' : 0 },
-				'17' : { 'cost' : 19, 'bonus' : 283.1, 'bonus2' : 23, 'bonus3' : 0 },
-				'18' : { 'cost' : 22, 'bonus' : 346.7, 'bonus2' : 26, 'bonus3' : 0 },
-				'19' : { 'cost' : 25, 'bonus' : 422.2, 'bonus2' : 29, 'bonus3' : 0 },
-				'20' : { 'cost' : 28, 'bonus' : 510, 'bonus2' : 32, 'bonus3' : 0 },
-				'21' : { 'cost' : 33, 'bonus' : 619.6, 'bonus2' : 35, 'bonus3' : 0 },
-				'22' : { 'cost' : 38, 'bonus' : 752, 'bonus2' : 38, 'bonus3' : 0 },
-				'23' : { 'cost' : 43, 'bonus' : 908.4, 'bonus2' : 42, 'bonus3' : 0 },
-				'24' : { 'cost' : 50, 'bonus' : 1099.8, 'bonus2' : 46, 'bonus3' : 0 },
-				'25' : { 'cost' : 57, 'bonus' : 1328.1, 'bonus2' : 50, 'bonus3' : 0 }
+				'2' : { 'cost' : 2, 'bonus' : 5, 'bonus2' : 1, 'bonus3' : 0 },
+				'3' : { 'cost' : 3, 'bonus' : 9, 'bonus2' : 2, 'bonus3' : 0 },
+				'4' : { 'cost' : 3, 'bonus' : 13, 'bonus2' : 3, 'bonus3' : 0 },
+				'5' : { 'cost' : 3, 'bonus' : 18, 'bonus2' : 4, 'bonus3' : 0 },
+				'6' : { 'cost' : 4, 'bonus' : 24, 'bonus2' : 6, 'bonus3' : 0 },
+				'7' : { 'cost' : 5, 'bonus' : 33, 'bonus2' : 8, 'bonus3' : 0 },
+				'8' : { 'cost' : 5, 'bonus' : 41, 'bonus2' : 10, 'bonus3' : 0 },
+				'9' : {	'cost' : 6, 'bonus' : 53, 'bonus2' : 12, 'bonus3' : 0 },
+				'10' : { 'cost' : 7, 'bonus' : 66, 'bonus2' : 14, 'bonus3' : 0 },
+				'11' : { 'cost' : 8, 'bonus' : 83, 'bonus2' : 16, 'bonus3' : 0 },
+				'12' : { 'cost' : 9, 'bonus' : 102, 'bonus2' : 18, 'bonus3' : 0 },
+				'13' : { 'cost' : 11, 'bonus' : 127, 'bonus2' : 20, 'bonus3' : 0 },
+				'14' : { 'cost' : 12, 'bonus' : 155, 'bonus2' : 23, 'bonus3' : 0 },
+				'15' : { 'cost' : 14, 'bonus' : 190, 'bonus2' : 26, 'bonus3' : 0 },
+				'16' : { 'cost' : 16, 'bonus' : 231, 'bonus2' : 29, 'bonus3' : 0 },
+				'17' : { 'cost' : 19, 'bonus' : 283, 'bonus2' : 33, 'bonus3' : 0 },
+				'18' : { 'cost' : 22, 'bonus' : 347, 'bonus2' : 38, 'bonus3' : 0 },
+				'19' : { 'cost' : 25, 'bonus' : 422, 'bonus2' : 44, 'bonus3' : 0 },
+				'20' : { 'cost' : 28, 'bonus' : 510, 'bonus2' : 51, 'bonus3' : 0 },
+				'21' : { 'cost' : 33, 'bonus' : 620, 'bonus2' : 59, 'bonus3' : 0 },
+				'22' : { 'cost' : 38, 'bonus' : 752, 'bonus2' : 68, 'bonus3' : 0 },
+				'23' : { 'cost' : 43, 'bonus' : 908, 'bonus2' : 78, 'bonus3' : 0 },
+				'24' : { 'cost' : 50, 'bonus' : 1100, 'bonus2' : 89, 'bonus3' : 0 },
+				'25' : { 'cost' : 57, 'bonus' : 1330, 'bonus2' : 101, 'bonus3' : 0 }
 			},
 			'expos' : {
-					'b1' : { 'reduct' : 'sc' },
-					'b2' : { 'reduct' : 'sc' }
+				'b1' : { 'reduct' : 'sc' },
+				'b2' : { 'reduct' : 'sc' }
 			}
 		},
 		'mm' : {
 		  'active' : 1,
-			'sort' : 24,
 			'name' : 'Manni Mana',
 			'nickname' : 'B4_1',
 			'branch' : 'blue',
@@ -2916,13 +2926,12 @@ var skills = {
 				'15' : { 'cost' : 131, 'bonus' : 278, 'bonus2' : 0, 'bonus3' : .02 }
 			},
 			'expos' : {
-					'b1' : { 'sum' : 'skill_mana' },
-					'b3' : { 'sum' : 'skill_mana' }
+				'b1' : { 'sum' : 'skill_mana' },
+				'b3' : { 'sum' : 'skill_mana' }
 			}
 		},
 		'ls' : {
 		  'active' : 1,
-			'sort' : 25,
 			'name' : 'Lightning Strike',
 			'nickname' : 'B4_2',
 			'branch' : 'blue',
@@ -2953,14 +2962,13 @@ var skills = {
 				'15' : { 'cost' : 131, 'bonus' : .915, 'bonus2' : .98, 'bonus3' : .02 }
 			},
 			'expos' : {
-					'b1' : { 'reduct' : 'tap_ls' },
-					'b2' : { 'reduct' : 'tap_ls' },
-					'b3' : { 'reduct' : 'tap_ls' }
+				'b1' : { 'reduct' : 'tap_ls' },
+				'b2' : { 'reduct' : 'tap_ls' },
+				'b3' : { 'reduct' : 'tap_ls' }
 			}
 		},
 		'ds' : {
 		  'active' : 1,
-			'sort' : 26,
 			'name' : 'Dimensional Shift',
 			'nickname' : 'B4_3',
 			'branch' : 'blue',
@@ -2991,13 +2999,12 @@ var skills = {
 				'15' : { 'cost' : 131, 'bonus' : 53900000, 'bonus2' : .65, 'bonus3' : 0 }
 			},
 			'expos' : {
-					'b1' : { 'sum' : 'skill' },
-					'b2' : { 'sum' : 'skill' }
+				'b1' : { 'sum' : 'skill' },
+				'b2' : { 'sum' : 'skill' }
 			}
 		},
 		'mt' : {
 			'active' : 1,
-			'sort' : 28,
 			'name' : 'Master Thief',
 			'nickname' : 'G1',
 			'branch' : 'green',
@@ -3038,15 +3045,14 @@ var skills = {
 				'25' : { 'cost' : 50, 'bonus' : 26300000000000000, 'bonus2' : 125000000, 'bonus3' : 0 }
 			},
 			'expos' : {
-					'b1' : { 'flat' : 'gold' },
-					'b2' : { 'gold' : [
-						'inactive'
-					] }
+				'b1' : { 'flat' : 'gold' },
+				'b2' : { 'gold' : [
+					'inactive'
+				] }
 			}
 		},
 		'an' : {
 			'active' : 1,
-			'sort' : 28,
 			'name' : 'Assassinate',
 			'nickname' : 'G2_1',
 			'branch' : 'green',
@@ -3061,24 +3067,24 @@ var skills = {
 			'type3' : -1,
 			'levels' : {
 				'1' : { 'cost' : 1, 'bonus' : 1.6, 'bonus2' : 2, 'bonus3' : 0 },
-				'2' : { 'cost' : 2, 'bonus' : 2.52, 'bonus2' : 4.5, 'bonus3' : 0 },
-				'3' : { 'cost' : 2, 'bonus' : 3.97, 'bonus2' : 8.9, 'bonus3' : 0	},
-				'4' : { 'cost' : 3, 'bonus' : 7.11, 'bonus2' : 13.3, 'bonus3' : 0 },
-				'5' : { 'cost' : 3, 'bonus' : 12.8, 'bonus2' : 17.7, 'bonus3' : 0 },
-				'6' : { 'cost' : 3, 'bonus' : 22.9, 'bonus2' : 24.1, 'bonus3' : 0 },
-				'7' : { 'cost' : 4, 'bonus' : 46.6, 'bonus2' : 32.8, 'bonus3' : 0 },
-				'8' : { 'cost' : 5, 'bonus' : 107, 'bonus2' : 41.5, 'bonus3' : 0 },
-				'9' : {	'cost' : 5, 'bonus' : 248, 'bonus2' : 52.6, 'bonus3' : 0 },
-				'10' : { 'cost' : 6, 'bonus' : 644, 'bonus2' : 66.2, 'bonus3' : 0 },
-				'11' : { 'cost' : 7, 'bonus' : 1890, 'bonus2' : 82.5, 'bonus3' : 0 },
-				'12' : { 'cost' : 8, 'bonus' : 6210, 'bonus2' : 101.7, 'bonus3' : 0 },
-				'13' : { 'cost' : 9, 'bonus' : 22900, 'bonus2' : 126.7, 'bonus3' : 0 },
-				'14' : { 'cost' : 11, 'bonus' : 106000, 'bonus2' : 154.9, 'bonus3' : 0 },
-				'15' : { 'cost' : 12, 'bonus' : 546000, 'bonus2' : 189.5, 'bonus3' : 0 },
+				'2' : { 'cost' : 2, 'bonus' : 2.52, 'bonus2' : 5, 'bonus3' : 0 },
+				'3' : { 'cost' : 2, 'bonus' : 3.97, 'bonus2' : 9, 'bonus3' : 0	},
+				'4' : { 'cost' : 3, 'bonus' : 7.11, 'bonus2' : 13, 'bonus3' : 0 },
+				'5' : { 'cost' : 3, 'bonus' : 12.8, 'bonus2' : 18, 'bonus3' : 0 },
+				'6' : { 'cost' : 3, 'bonus' : 22.9, 'bonus2' : 24, 'bonus3' : 0 },
+				'7' : { 'cost' : 4, 'bonus' : 46.6, 'bonus2' : 33, 'bonus3' : 0 },
+				'8' : { 'cost' : 5, 'bonus' : 107, 'bonus2' : 41, 'bonus3' : 0 },
+				'9' : {	'cost' : 5, 'bonus' : 248, 'bonus2' : 53, 'bonus3' : 0 },
+				'10' : { 'cost' : 6, 'bonus' : 644, 'bonus2' : 66, 'bonus3' : 0 },
+				'11' : { 'cost' : 7, 'bonus' : 1890, 'bonus2' : 83, 'bonus3' : 0 },
+				'12' : { 'cost' : 8, 'bonus' : 6210, 'bonus2' : 102, 'bonus3' : 0 },
+				'13' : { 'cost' : 9, 'bonus' : 22900, 'bonus2' : 127, 'bonus3' : 0 },
+				'14' : { 'cost' : 11, 'bonus' : 106000, 'bonus2' : 155, 'bonus3' : 0 },
+				'15' : { 'cost' : 12, 'bonus' : 546000, 'bonus2' : 190, 'bonus3' : 0 },
 				'16' : { 'cost' : 14, 'bonus' : 3480000, 'bonus2' : 231, 'bonus3' : 0 },
-				'17' : { 'cost' : 16, 'bonus' : 27400000, 'bonus2' : 283.1, 'bonus3' : 0 },
-				'18' : { 'cost' : 19, 'bonus' : 293000000, 'bonus2' : 346.7, 'bonus3' : 0 },
-				'19' : { 'cost' : 22, 'bonus' : 4230000000, 'bonus2' : 422.2, 'bonus3' : 0 },
+				'17' : { 'cost' : 16, 'bonus' : 27400000, 'bonus2' : 283, 'bonus3' : 0 },
+				'18' : { 'cost' : 19, 'bonus' : 293000000, 'bonus2' : 347, 'bonus3' : 0 },
+				'19' : { 'cost' : 22, 'bonus' : 4230000000, 'bonus2' : 422, 'bonus3' : 0 },
 				'20' : { 'cost' : 25, 'bonus' : 81500000000, 'bonus2' : 510, 'bonus3' : 0 },
 				'21' : { 'cost' : 28, 'bonus' : 2100000000000, 'bonus2' : 620, 'bonus3' : 0 },
 				'22' : { 'cost' : 33, 'bonus' : 86000000000000, 'bonus2' : 752, 'bonus3' : 0 },
@@ -3087,13 +3093,12 @@ var skills = {
 				'25' : { 'cost' : 50, 'bonus' : 110000000000000000000, 'bonus2' : 1330, 'bonus3' : 0 }
 			},
 			'expos' : {
-					'b1' : { 'reduct' : 'ds' },
-					'b2' : { 'flat' : 'none' }
+				'b1' : { 'reduct' : 'ds' },
+				'b2' : { 'reduct' : 'ds' }
 			}
 		},
 		'sm' : {
 			'active' : 1,
-			'sort' : 29,
 			'name' : 'Silent March',
 			'nickname' : 'G2_2',
 			'branch' : 'green',
@@ -3119,14 +3124,13 @@ var skills = {
 				'10' : { 'cost' : 6, 'bonus' : 4360, 'bonus2' : .9, 'bonus3' : .99 }
 			},
 			'expos' : {
-					'b1' : { 'flat' : 'inactive' },
-					'b2' : { 'flat' : 'inactive' },
-					'b3' : { 'flat' : 'inactive' }
+				'b1' : { 'flat' : 'inactive' },
+				'b2' : { 'flat' : 'inactive' },
+				'b3' : { 'flat' : 'inactive' }
 			}
 		},
 		'ab' : {
 			'active' : 1,
-			'sort' : 30,
 			'name' : 'Ambush',
 			'nickname' : 'G2_3',
 			'branch' : 'green',
@@ -3152,13 +3156,12 @@ var skills = {
 				'10' : { 'cost' : 6, 'bonus' : 20, 'bonus2' : .3, 'bonus3' : 0 }
 			},
 			'expos' : {
-					'b1' : { 'flat' : 'inactive_phom' },
-					'b2' : { 'flat' : 'inactive_phom' }
+				'b1' : { 'flat' : 'inactive_phom' },
+				'b2' : { 'flat' : 'inactive_phom' }
 			}
 		},
 		'tv' : {
 			'active' : 1,
-			'sort' : 31,
 			'name' : 'Twilight\'s Veil',
 			'nickname' : 'G3_1',
 			'branch' : 'green',
@@ -3184,13 +3187,12 @@ var skills = {
 				'10' : { 'cost' : 7, 'bonus' : 75000, 'bonus2' : 50, 'bonus3' : 0 }
 			},
 			'expos' : {
-					'b1' : { 'flat' : 'inactive_pet' },
-					'b2' : { 'reduct' : 'ds_pet' }
+				'b1' : { 'flat' : 'inactive_pet' },
+				'b2' : { 'reduct' : 'ds_pet' }
 			}
 		},
 		'gs' : {
 			'active' : 1,
-			'sort' : 32,
 			'name' : 'Ghost Ship',
 			'nickname' : 'G3_2',
 			'branch' : 'green',
@@ -3216,13 +3218,12 @@ var skills = {
 				'10' : { 'cost' : 7, 'bonus' : 75000, 'bonus2' : 50, 'bonus3' : 0 }
 			},
 			'expos' : {
-					'b1' : { 'flat' : 'inactive_ship' },
-					'b2' : { 'reduct' : 'ds_ship' }
+				'b1' : { 'flat' : 'inactive_ship' },
+				'b2' : { 'reduct' : 'ds_ship' }
 			}
 		},
 		'sa' : {
 			'active' : 1,
-			'sort' : 33,
 			'name' : 'Shadow Assassin',
 			'nickname' : 'G3_3',
 			'branch' : 'green',
@@ -3248,8 +3249,8 @@ var skills = {
 				'10' : { 'cost' : 7, 'bonus' : 75000, 'bonus2' : 50, 'bonus3' : 0 }
 			},
 			'expos' : {
-					'b1' : { 'flat' : 'inactive_clone' },
-					'b2' : { 'reduct' : 'ds_clone' }
+				'b1' : { 'flat' : 'inactive_clone' },
+				'b2' : { 'reduct' : 'ds_clone' }
 			}
 		}
 	}
