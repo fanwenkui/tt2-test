@@ -1781,6 +1781,10 @@ if (storageAvailable('localStorage')) {
 	$('#hero').val(window.localStorage.getItem('hero'));
 	$('#gold').val(window.localStorage.getItem('gold'));
 	$('#active').val(window.localStorage.getItem('active'));
+	$('#multispawn').val(window.localStorage.getItem('multispawn'));
+	$('#multispawn_decimal').val(window.localStorage.getItem('multispawn_decimal'));
+	$('#all_prob').val(window.localStorage.getItem('all_prob'));
+	$('#all_prob_decimal').val(window.localStorage.getItem('all_prob_decimal'));
 	$('#relic_factor').val(window.localStorage.getItem('relic_factor'));
 	var ocd = window.localStorage.getItem('ocd');
 	if('pct' != ocd.substring(0,3)) {
@@ -1814,6 +1818,10 @@ function storeData() {
 	window.localStorage.setItem('hero', $('#hero').val());
 	window.localStorage.setItem('gold', $('#gold').val());
 	window.localStorage.setItem('active', $('#active').val());
+	window.localStorage.setItem('multispawn', $('#multispawn').val());
+	window.localStorage.setItem('multispawn_decimal', $('#multispawn_decimal').val());
+	window.localStorage.setItem('all_prob', $('#all_prob').val());
+	window.localStorage.setItem('all_prob_decimal', $('#all_prob_decimal').val());
 	window.localStorage.setItem('relic_factor', $('#relic_factor').val());
 	window.localStorage.setItem('ocd', $('#ocd').val());
 	window.localStorage.setItem('dark', ($('#wolf').prop('checked') == true ? 1 : 0));
@@ -1834,6 +1842,10 @@ function exportData() {
 	ex += $('#hero').val() + '=';
 	ex += $('#gold').val() + '=';
 	ex += $('#active').val() + '=';
+	ex += $('#multispawn').val() + '=';
+	ex += $('#multispawn_decimal').val() + '=';
+	ex += $('#all_prob').val() + '=';
+	ex += $('#all_prob_decimal').val() + '=';
 	ex += ($('#wolf').prop('checked') == true ? 1 : 0) + '=';
 	ex += ($('#wet').prop('checked') == true ? 1 : 0) + '=';
 	ex += $('#relic_factor').val() + '=';
@@ -1868,7 +1880,11 @@ function importData() {
 	$('#hero').val(im[1]);
 	$('#gold').val(im[2]);
 	$('#active').val(im[3]);
-	if(im[4] == "1") {
+	$('#multispawn').val(im[4]);
+	$('#multispawn_decimal').val(im[5]);
+	$('#all_prob').val(im[6]);
+	$('#all_prob_decimal').val(im[7]);
+	if(im[8] == "1") {
 		$('#wolf').prop('checked', true);
 		$('#lamb').prop('checked', false);
 	} else {
@@ -1876,7 +1892,7 @@ function importData() {
 		$('#lamb').prop('checked', true);
 	}
 	toggleDark();
-	if(im[5] == "1") {
+	if(im[9] == "1") {
 		$('#wet').prop('checked', true);
 		$('#dry').prop('checked', false);
 	} else {
@@ -1884,21 +1900,21 @@ function importData() {
 		$('#dry').prop('checked', true);
 	}
 	toggleSplash(false);
-	$('#relic_factor').val(im[6]);
-	var ocd = im[7];
+	$('#relic_factor').val(im[10]);
+	var ocd = im[11];
 	if('pct' != ocd.substring(0,3)) {
 		if(1000 < parseInt(ocd)) {
 			ocd = 1000;
 		}
 	}
 	$('#ocd').val(ocd.toString());
-	var ima = im[8].split('|');
+	var ima = im[12].split('|');
 	$.each(ima, function(k,v) {
 		var imaa = v.split('_');
 		artifacts.data[imaa[0]].active = parseInt(imaa[1]);
 		artifacts.data[imaa[0]].level = parseInt(imaa[2]);
 	});
-	var ims = im[9].split('|');
+	var ims = im[13].split('|');
 	$.each(ims, function(k,v) {
 		var imss = v.split('_');
 		skills.data[imss[0]].active = parseInt(imss[1]);

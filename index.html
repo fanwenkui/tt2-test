@@ -38,7 +38,7 @@
 				    <a class="nav-link" id="dal-tab" data-toggle="tab" href="#dal" role="tab" aria-controls="dal" aria-selected="false">Selfie</a>
 				  </li>
 				</ul>
-				<h1 class="h4">TT2 Optimizer <span class="badge badge-secondary">2.9.6</span></h1>
+				<h1 class="h4">TT2 Optimizer <span class="badge badge-secondary">2.10.1</span></h1>
 			</div>
 			<div class="tab-content" id="tabContent">
 			  <div class="tab-pane fade show active" id="style" role="tabpanel" aria-labelledby="style-tab">
@@ -108,7 +108,7 @@
 									<option value="boss">Boss</option>
 									<option value="coc">Chesterson</option>
 									<option value="fairy">Fairies</option>
-									<option value="phom">Heart of Midas</option>
+									<option value="phom">Heart of Midas (pHoM)</option>
 								</select>
 							</div>
 							<div class="form-group col-12 col-md-6 col-lg-4">
@@ -117,6 +117,24 @@
 									<option value="online">Online</option>
 									<option value="offline">Offline</option>
 								</select>
+							</div>
+							<div class="form-group col-12 col-md-6 col-lg-4">
+								<label for="multispawn">Multispawn chance from Equipment</label>
+								<div class="input-group">
+									<input type="tel" id="multispawn" class="form-control" placeholder="0" aria-label="whole numbers for multispawn" onchange="adjustWeights();">
+									<span class="input-group-text px-1 rounded-0">.</span>
+									<input type="tel" id="multispawn_decimal" class="form-control" placeholder="00" aria-label="decimals for multispawn" onchange="adjustWeights();">
+									<span class="input-group-text px-5 rounded-0">%</span>
+								</div>
+							</div>
+							<div class="form-group col-12 col-md-6 col-lg-4">
+								<label for="all_prob">All probability chance from Equipment</label>
+								<div class="input-group">
+									<input type="tel" id="all_prob" class="form-control" placeholder="0" aria-label="whole numbers for all probability" onchange="adjustWeights();">
+									<span class="input-group-text px-1 rounded-0">.</span>
+									<input type="tel" id="all_prob_decimal" class="form-control" placeholder="00" aria-label="decimals for all probability" onchange="adjustWeights();">
+									<span class="input-group-text px-5 rounded-0">%</span>
+								</div>
 							</div>
 							<div class="form-check col-12 col-md-6 col-lg-4 mb-4">
 								<div class="mb-2">Choose a Theme</div>
@@ -363,7 +381,7 @@
 									<div class="col-4 yellowskill text-dark" id="Y2_1"></div><div class="col-4 yellowskill text-dark" id="Y2_2"></div><div class="col-4 yellowskill text-dark" id="Y2_3"></div>
 								</div>
 								<div class="row">
-									<div class="col-4 yellowskill text-dark" id="Y3_1"></div><div class="col-4"></div><div class="col-4 yellowskill text-dark" id="Y3_3"></div>
+									<div class="col-4 yellowskill text-dark" id="Y3_1"></div><div class="col-4 yellowskill text-dark" id="Y3_2"></div><div class="col-4 yellowskill text-dark" id="Y3_3"></div>
 								</div>
 								<div class="row">
 									<div class="col-4 yellowskill text-dark" id="Y4_1"></div><div class="col-4"></div><div class="col-4 yellowskill text-dark" id="Y4_3"></div>
