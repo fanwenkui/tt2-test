@@ -2932,7 +2932,7 @@ var skills = {
 		},
 		'ls' : {
 		  'active' : 1,
-			'sort' : 25,
+			'name' : '闪电打击',
 			'nickname' : 'B4_2',
 			'branch' : 'blue',
 			'bonus' : ' 泰坦减少健康',
