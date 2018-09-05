@@ -157,6 +157,11 @@ function calculateWeight(k,expo) {
 				results.color = 'info';
 				break;
 
+		  case 'fundamental':
+				results.rating = reducts.tap[build] + reducts.hero[build];
+				results.color = determineColor(results.rating, true);
+				break;
+
 			case 'pet_gold':
 				results.rating += pets_gold * reducts.gold;
 				results.color = 'warning';
@@ -186,7 +191,7 @@ function calculateWeight(k,expo) {
 
 			case 'tree_blue':
 				results.rating += reducts.hs[build];
-				results.rating += reducts.gold * ('phom' == gold || 'fairy' == gold ? .6 : 1);
+				results.rating += reducts.gold * ('fairy' == gold ? .6 : 1);
 				results.rating += reducts.sc[build];
 				results.color = determineColor(results.rating, true);
 				break;
@@ -203,7 +208,7 @@ function calculateWeight(k,expo) {
 			case 'skill':
 				results.rating += reducts.hs[build];
 				results.rating += reducts.ds[build];
-				results.rating += reducts.gold * ('phom' == gold || 'fairy' == gold ? .6 : 1);
+				results.rating += reducts.gold * ('fairy' == gold ? .6 : 1);
 				results.rating += reducts.fs[build];
 				results.rating += reducts.wc[build];
 				results.rating += reducts.sc[build];
@@ -213,7 +218,7 @@ function calculateWeight(k,expo) {
 			case 'skill_tap':
 				results.rating += reducts.hs[build];
 				results.rating += reducts.ds[build];
-				results.rating += reducts.gold * ('phom' == gold || 'fairy' == gold ? .6 : 1);
+				results.rating += reducts.gold * ('fairy' == gold ? .6 : 1);
 				results.rating += reducts.fs[build];
 				results.rating += reducts.wc[build];
 				results.rating += reducts.sc[build];
@@ -226,7 +231,7 @@ function calculateWeight(k,expo) {
 			case 'skill_fairy':
 				results.rating += reducts.hs[build];
 				results.rating += reducts.ds[build];
-				results.rating += reducts.gold * ('phom' == gold || 'fairy' == gold ? .6 : 1);
+				results.rating += reducts.gold * ('fairy' == gold ? .6 : 1);
 				results.rating += reducts.fs[build];
 				results.rating += reducts.wc[build];
 				results.rating += reducts.sc[build];
@@ -241,7 +246,7 @@ function calculateWeight(k,expo) {
 			case 'skill_mana':
 				results.rating += reducts.hs[build];
 				results.rating += reducts.ds[build];
-				results.rating += reducts.gold * ('phom' == gold || 'fairy' == gold ? .6 : 1);
+				results.rating += reducts.gold * ('fairy' == gold ? .6 : 1);
 				results.rating += reducts.fs[build];
 				results.rating += reducts.wc[build];
 				results.rating += reducts.sc[build];
@@ -269,6 +274,20 @@ function calculateWeight(k,expo) {
 				results.color = 'info';
 				break;
 
+/*
+			case 'sl':
+				var wcdur = 30;
+				wcdur += (artifacts.data.a.effect * artifacts.data.a.level);
+				wcdur *= (0 < skills.data.ds.level ? 1 + skills.data.ds.levels[skills.data.ds.level].bonus2 : 1);
+				var inspired = (0 < skills.data.hm.level ? skills.data.hm.levels[skills.data.hm.level].bonus2 : 0);
+				var speed = .5 * 12; // from WC active skill
+				var attacks = wcdur * inspired * speed;
+				var sl = (0 < skills.data.sl.level ? 1 + skills.data.sl.levels[skills.data.sl.level].bonus1 : 1);
+				results.rating = Math.min(1, Math.pow(inspired * speed * attacks * sl, reducts.hero[build]));
+				results.color = determineColor(results.rating, false);
+				break;
+*/
+
 			case 'ash':
 				if('cs' != build) {
 					results.rating = 1;
@@ -295,14 +314,28 @@ function calculateWeight(k,expo) {
 				results.color = 'warning';
 				break;
 
+			case 'hom':
+				results.rating = reducts.gold * ('fairy' == gold ? .6 : 1);
+				results.color = 'warning';
+				break;
+
+			case 'gold_spawn':
+				results.rating = reducts.gold;
+				var multispawn = .01;
+				multispawn += (0 < skills.data.ab.level ? skills.data.ab.levels[skills.data.ab.level].bonus2 : skills.data.ab.levels['1'].bonus2);
+				multispawn += (0 < artifacts.data.eotk.level ? artifacts.data.eotk.effect * artifacts.data.eotk.level : artifacts.data.eotk.effect * 1);
+				var multispawn_equip = new Decimal(('' == $('#multispawn').val() ? 0 : $('#multispawn').val()) + '.' + ('' == $('#multispawn_decimal').val() ? 0 : $('#multispawn_decimal').val()));
+				multispawn += multispawn_equip.toNumber() / 100;
+				var all_prob_equip = new Decimal(('' == $('#all_prob').val() ? 0 : $('#all_prob').val()) + '.' + ('' == $('#all_prob_decimal').val() ? 0 : $('#all_prob_decimal').val()));
+				all_prob_equip = all_prob_equip.toNumber() / 100;
+				multispawn *= (0 == all_prob_equip ? all_prob_equip : 1);
+				multispawn *= 1 + (artifacts.data.lfoa.effect * artifacts.data.lfoa.level);
+				results.rating *= multispawn;
+				break;
+
 			case 'none':
 				results.rating = 0;
 				results.color = 'danger';
-				break;
-
-			case 'gold_phom':
-				results.rating = reducts.gold * ('phom' == gold || 'fairy' == gold ? .6 : 1);
-				results.color = 'warning';
 				break;
 
 			case 'inactive_phom':
@@ -389,6 +422,9 @@ function calculateWeight(k,expo) {
 			results.rating = reducts[expo.reduct][build];
 		}
 		results.color = determineColor(results.rating, true);
+		if('warning' == results.color && 'ss' == k) {
+			results.color = 'secondary';
+		}
 	} else if(undefined != expo.hero_type) {
 		if(-1 == hero_type.indexOf(expo.hero_type)) {
 			results.rating = 0;
