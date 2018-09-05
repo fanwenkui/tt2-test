@@ -988,7 +988,7 @@ function generateUpgrades() {
 
 function renderSuggestions(data) {
 	if(winner_n != '') {
-		$('#new_artifact').empty().append('<em>NOTE: You would be better off saving up for a new artifact (' + artifacts.data[winner_n].name + ').</em>');
+		$('#new_artifact').empty().append('<em>提示：您最好省下圣物以开启新神器（最佳：' + artifacts.data[winner_n].name + '）</em>');
 	}
 	winner_e = '';
 	winner_e10 = '';
@@ -1052,7 +1052,7 @@ function renderSuggestions(data) {
 
 function renderPctSuggestions(data) {
 	if(winner_n != '') {
-		$('#new_artifact').empty().append('<em>NOTE: You would be better off saving up for a new artifact (' + artifacts.data[winner_n].name + ').</em>');
+		$('#new_artifact').empty().append('<em>提示：您最好省下圣物以开启新神器（最佳：' + artifacts.data[winner_n].name + '）</em>');
 	}
 	winner_e = '';
 	winner_e10 = '';
