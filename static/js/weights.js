@@ -328,7 +328,7 @@ function calculateWeight(k,expo) {
 				multispawn += multispawn_equip.toNumber() / 100;
 				var all_prob_equip = new Decimal(('' == $('#all_prob').val() ? 0 : $('#all_prob').val()) + '.' + ('' == $('#all_prob_decimal').val() ? 0 : $('#all_prob_decimal').val()));
 				all_prob_equip = all_prob_equip.toNumber() / 100;
-				multispawn *= (0 == all_prob_equip ? all_prob_equip : 1);
+				multispawn *= (0 != all_prob_equip ? all_prob_equip : 1);
 				multispawn *= 1 + (artifacts.data.lfoa.effect * artifacts.data.lfoa.level);
 				results.rating *= multispawn;
 				break;
