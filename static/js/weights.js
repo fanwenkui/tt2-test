@@ -331,6 +331,7 @@ function calculateWeight(k,expo) {
 				multispawn *= (0 != all_prob_equip ? all_prob_equip : 1);
 				multispawn *= 1 + (artifacts.data.lfoa.effect * artifacts.data.lfoa.level);
 				results.rating *= multispawn;
+				results.color = 'warning';
 				break;
 
 			case 'none':
