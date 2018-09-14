@@ -14,7 +14,7 @@ var reducts = {
 		'tap' : 1,
 		'pet' : 1,
 		'sc' : 3/5,
-		'hs' : 1,
+		'hs' : 4/5,
 		'cs' : 1
 	},
 	'sword' : {
