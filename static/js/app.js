@@ -1842,10 +1842,10 @@ function exportData() {
 	ex += $('#hero').val() + '=';
 	ex += $('#gold').val() + '=';
 	ex += $('#active').val() + '=';
-	ex += $('#multispawn').val() + '=';
-	ex += $('#multispawn_decimal').val() + '=';
-	ex += $('#all_prob').val() + '=';
-	ex += $('#all_prob_decimal').val() + '=';
+	ex += ($('#multispawn').val() == '' ? 0 : $('#multispawn').val()) + '=';
+	ex += ($('#multispawn_decimal').val() == '' ? 0 : $('#multispawn_decimal').val()) + '=';
+	ex += ($('#all_prob').val() == '' ? 0 : $('#all_prob').val()) + '=';
+	ex += ($('#all_prob_decimal').val() == '' ? 0 : $('#all_prob_decimal').val()) + '=';
 	ex += ($('#wolf').prop('checked') == true ? 1 : 0) + '=';
 	ex += ($('#wet').prop('checked') == true ? 1 : 0) + '=';
 	ex += $('#relic_factor').val() + '=';
