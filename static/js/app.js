@@ -86,6 +86,16 @@ function toggleSplash(reweight) {
 	}
 }
 
+function toggleRounding() {
+    if ($('#ron').prop('checked') == true) {
+        $('#btnRon').removeClass('btn-dark text-secondary').addClass('btn-info');
+        $('#btnRoff').removeClass('btn-info').addClass('btn-dark text-secondary');
+    } else {
+        $('#btnRoff').removeClass('btn-dark text-secondary').addClass('btn-info');
+        $('#btnRon').removeClass('btn-info').addClass('btn-dark text-secondary');
+    }
+}
+
 function generateArtifacts() {
 	$('#accept2').hide();
 	$('#artifacts').empty();
@@ -511,19 +521,28 @@ function determineArtifactCost(v, step) {
   return(cost);
 }
 
-function dowsingRod(v, unit, relics) {
-	var count = 0;
-	while(0 < relics && 0 != cost) {
-		obfuscate++;
-		var cost = calculateArtifactEfficiencyCost(v, unit);
-		relics -= cost;
-		if(0 < relics) {
-			count++;
-			v.level += unit;
-		}
-	}
-	return(count);
-}
+function dowsingRod (v, unit, relics, lvlDiff = 0) {
+    var count = 0;
+    var cost = calculateArtifactEfficiencyCost(v, unit);
+    if (relics < cost) {
+        return (count);
+    }
+    obfuscate++;
+    cost = calculateArtifactEfficiencyCost(v, unit - lvlDiff);
+    relics -= cost;
+    count++;
+    v.level += unit - lvlDiff;
+    while (0 < relics && (0 != cost || count === 1)) {
+        obfuscate++;
+        cost = calculateArtifactEfficiencyCost(v, unit);
+        relics -= cost;
+        if (0 < relics) {
+            count++;
+            v.level += unit;
+        }
+    }
+    return (count * unit - lvlDiff);
+};
 
 function processPct(k, v, relics, totalAD, tattoo) {
 	var current_ad = v.level * v.ad;
@@ -534,7 +553,8 @@ function processPct(k, v, relics, totalAD, tattoo) {
 	var dowse = 0;
 	var running_dowse = 0;
 	var orig_level = v.level;
-	var fresh = false;
+    var fresh = false;
+    var rounding = $('#ron').prop('checked') == true;
 	if(1 == v.active) {
 		if(0 == v.level) {
 			fresh = true;
@@ -542,142 +562,23 @@ function processPct(k, v, relics, totalAD, tattoo) {
 			var next_artifact = countArtifacts(artifacts.data) + 1;
 			total_cost = artifact_costs[next_artifact];
 		}
-		if(-1 == v.max) {
-			dowse = dowsingRod(v, 10000000000000000, relics) * 10000000000000000;
-			v.level = orig_level;
-			running_dowse += dowse;
-			cost = calculateArtifactEfficiencyCost(v, dowse);
-			total_cost += cost;
-			relics -= cost;
-			v.level += dowse;
-			orig_level = v.level;
-			dowse = dowsingRod(v, 1000000000000000, relics) * 1000000000000000;
-			v.level = orig_level;
-			running_dowse += dowse;
-			cost = calculateArtifactEfficiencyCost(v, dowse);
-			total_cost += cost;
-			relics -= cost;
-			v.level += dowse;
-			orig_level = v.level;
-			dowse = dowsingRod(v, 100000000000000, relics) * 100000000000000;
-			v.level = orig_level;
-			running_dowse += dowse;
-			cost = calculateArtifactEfficiencyCost(v, dowse);
-			total_cost += cost;
-			relics -= cost;
-			v.level += dowse;
-			orig_level = v.level;
-			dowse = dowsingRod(v, 10000000000000, relics) * 10000000000000;
-			v.level = orig_level;
-			running_dowse += dowse;
-			cost = calculateArtifactEfficiencyCost(v, dowse);
-			total_cost += cost;
-      relics -= cost;
-			v.level += dowse;
-			orig_level = v.level;
-			dowse = dowsingRod(v, 1000000000000, relics) * 1000000000000;
-			v.level = orig_level;
-			running_dowse += dowse;
-			cost = calculateArtifactEfficiencyCost(v, dowse);
-			total_cost += cost;
-      relics -= cost;
-			v.level += dowse;
-			orig_level = v.level;
-			dowse = dowsingRod(v, 100000000000, relics) * 100000000000;
-			v.level = orig_level;
-			running_dowse += dowse;
-			cost = calculateArtifactEfficiencyCost(v, dowse);
-			total_cost += cost;
-      relics -= cost;
-			v.level += dowse;
-			orig_level = v.level;
-			dowse = dowsingRod(v, 10000000000, relics) * 10000000000;
-			v.level = orig_level;
-			running_dowse += dowse;
-			cost = calculateArtifactEfficiencyCost(v, dowse);
-			total_cost += cost;
-      relics -= cost;
-			v.level += dowse;
-			orig_level = v.level;
-			dowse = dowsingRod(v, 1000000000, relics) * 1000000000;
-			v.level = orig_level;
-			running_dowse += dowse;
-			cost = calculateArtifactEfficiencyCost(v, dowse);
-			total_cost += cost;
-      relics -= cost;
-			v.level += dowse;
-			orig_level = v.level;
-			dowse = dowsingRod(v, 100000000, relics) * 100000000;
-			v.level = orig_level;
-			running_dowse += dowse;
-			cost = calculateArtifactEfficiencyCost(v, dowse);
-			total_cost += cost;
-      relics -= cost;
-			v.level += dowse;
-			orig_level = v.level;
-			dowse = dowsingRod(v, 10000000, relics) * 10000000;
-			v.level = orig_level;
-			running_dowse += dowse;
-			cost = calculateArtifactEfficiencyCost(v, dowse);
-			total_cost += cost;
-      relics -= cost;
-			v.level += dowse;
-			orig_level = v.level;
-			dowse = dowsingRod(v, 1000000, relics) * 1000000;
-			v.level = orig_level;
-			running_dowse += dowse;
-			cost = calculateArtifactEfficiencyCost(v, dowse);
-			total_cost += cost;
-      relics -= cost;
-			v.level += dowse;
-			orig_level = v.level;
-			dowse = dowsingRod(v, 100000, relics) * 100000;
-			v.level = orig_level;
-			running_dowse += dowse;
-			cost = calculateArtifactEfficiencyCost(v, dowse);
-			total_cost += cost;
-      relics -= cost;
-			v.level += dowse;
-			orig_level = v.level;
-			dowse = dowsingRod(v, 10000, relics) * 10000;
-			v.level = orig_level;
-			running_dowse += dowse;
-			cost = calculateArtifactEfficiencyCost(v, dowse);
-			total_cost += cost;
-      relics -= cost;
-			v.level += dowse;
-			orig_level = v.level;
-			dowse = dowsingRod(v, 1000, relics) * 1000;
-			v.level = orig_level;
-			running_dowse += dowse;
-			cost = calculateArtifactEfficiencyCost(v, dowse);
-			total_cost += cost;
-      relics -= cost;
-			v.level += dowse;
-			orig_level = v.level;
-			dowse = dowsingRod(v, 100, relics) * 100;
-			v.level = orig_level;
-			running_dowse += dowse;
-			cost = calculateArtifactEfficiencyCost(v, dowse);
-			total_cost += cost;
-      relics -= cost;
-			v.level += dowse;
-			orig_level = v.level;
-			dowse = dowsingRod(v, 10, relics) * 10;
-			v.level = orig_level;
-			running_dowse += dowse;
-			cost = calculateArtifactEfficiencyCost(v, dowse);
-			total_cost += cost;
-      relics -= cost;
-			v.level += dowse;
-			orig_level = v.level;
-			dowse = dowsingRod(v, 1, relics) * 1;
-			v.level = orig_level;
-			running_dowse += dowse;
-			cost = calculateArtifactEfficiencyCost(v, dowse);
-			total_cost += cost;
-      relics -= cost;
-			v.level += dowse;
+        if (-1 == v.max) {
+            var lvledUnit = 10000000000000000;
+            var lvledLvl = v.level;
+            while (lvledUnit > 0.1 && (!rounding || dowse === 0)) {
+		        if (lvledLvl > lvledUnit) {
+		            lvledLvl %= lvledUnit;
+		        }
+		        dowse = dowsingRod(v, lvledUnit, relics, lvledLvl);
+		        v.level = orig_level;
+		        running_dowse += dowse;
+		        cost = calculateArtifactEfficiencyCost(v, dowse);
+		        total_cost += cost;
+		        relics -= cost;
+		        v.level += dowse;
+		        orig_level = v.level;
+		        lvledUnit /= 10;
+		    }
 			if(true == tattoo && false == fresh) {
 				u_relics -= total_cost;
 				upgrades.steps.push({
@@ -1868,9 +1769,17 @@ if (storageAvailable('localStorage')) {
 	} else {
 		$('#wet').prop('checked', false);
 		$('#dry').prop('checked', true);
-	}
+    }
+    if (window.localStorage.getItem('rounding') == "1") {
+        $('#ron').prop('checked', true);
+        $('#roff').prop('checked', false);
+    } else {
+        $('#ron').prop('checked', false);
+        $('#roff').prop('checked', true);
+    }
 	toggleDark();
-	toggleSplash(false);
+    toggleSplash(false);
+    toggleRounding();
 }
 
 function storeData() {
@@ -1887,7 +1796,8 @@ function storeData() {
 	window.localStorage.setItem('relic_factor', $('#relic_factor').val());
 	window.localStorage.setItem('ocd', $('#ocd').val());
 	window.localStorage.setItem('dark', ($('#wolf').prop('checked') == true ? 1 : 0));
-	window.localStorage.setItem('splash', ($('#wet').prop('checked') == true ? 1 : 0));
+    window.localStorage.setItem('splash', ($('#wet').prop('checked') == true ? 1 : 0));
+    window.localStorage.setItem('rounding', ($('#ron').prop('checked') == true ? 1 : 0));
 }
 
 $('input[type="tel"]').on('focus', function(){
@@ -1909,7 +1819,8 @@ function exportData() {
 	ex += ($('#all_prob').val() == '' ? 0 : $('#all_prob').val()) + '=';
 	ex += ($('#all_prob_decimal').val() == '' ? 0 : $('#all_prob_decimal').val()) + '=';
 	ex += ($('#wolf').prop('checked') == true ? 1 : 0) + '=';
-	ex += ($('#wet').prop('checked') == true ? 1 : 0) + '=';
+    ex += ($('#wet').prop('checked') == true ? 1 : 0) + '=';
+    ex += ($('#ron').prop('checked') == true ? 1 : 0) + '=';
 	ex += $('#relic_factor').val() + '=';
 	ex += $('#ocd').val() + '=';
 	$.each(artifacts.data,function(k,v) {
@@ -1961,22 +1872,30 @@ function importData() {
 		$('#wet').prop('checked', false);
 		$('#dry').prop('checked', true);
 	}
-	toggleSplash(false);
-	$('#relic_factor').val(im[10]);
-	var ocd = im[11];
+    toggleSplash(false);
+    if (im[10] == "1") {
+        $('#ron').prop('checked', true);
+        $('#roff').prop('checked', false);
+    } else {
+        $('#ron').prop('checked', false);
+        $('#roff').prop('checked', true);
+    }
+    toggleRounding();
+	$('#relic_factor').val(im[11]);
+	var ocd = im[12];
 	if('pct' != ocd.substring(0,3)) {
 		if(1000 < parseInt(ocd)) {
 			ocd = 1000;
 		}
 	}
 	$('#ocd').val(ocd.toString());
-	var ima = im[12].split('|');
+	var ima = im[13].split('|');
 	$.each(ima, function(k,v) {
 		var imaa = v.split('_');
 		artifacts.data[imaa[0]].active = parseInt(imaa[1]);
 		artifacts.data[imaa[0]].level = parseInt(imaa[2]);
 	});
-	var ims = im[13].split('|');
+	var ims = im[14].split('|');
 	$.each(ims, function(k,v) {
 		var imss = v.split('_');
 		skills.data[imss[0]].active = parseInt(imss[1]);
