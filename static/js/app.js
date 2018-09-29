@@ -2,11 +2,6 @@ var winner_e = '';
 var winner_e10 = '';
 var winner_e100 = '';
 var winner_e1000 = '';
-/*
-var winner_e10000 = '';
-var winner_e100000 = '';
-var winner_e1000000 = '';
-*/
 var winner_n = '';
 var winner_s1 = '';
 var winner_s2 = '';
@@ -17,11 +12,6 @@ var winner_value = 0;
 var winner_value10 = 0;
 var winner_value100 = 0;
 var winner_value1000 = 0;
-/*
-var winner_value10000 = 0;
-var winner_value100000 = 0;
-var winner_value1000000 = 0;
-*/
 var winner_svalue = 0;
 var obfuscate = 0;
 var white_rabbit = 0;
@@ -446,17 +436,6 @@ function determineArtifactStepWinner(step) {
     case 1000:
       temp_winner = winner_e1000;
       break;
-/*
-    case 10000:
-      temp_winner = winner_e10000;
-      break;
-    case 100000:
-      temp_winner = winner_e100000;
-      break;
-    case 1000000:
-      temp_winner = winner_e1000000;
-      break;
-*/
   }
   return(temp_winner);
 }
@@ -476,17 +455,6 @@ function determineArtifactStep(v, step) {
     case 1000:
       interval = v.efficiency1000_int;
       break;
-/*
-    case 10000:
-      interval = v.efficiency10000_int;
-      break;
-    case 100000:
-      interval = v.efficiency100000_int;
-      break;
-    case 1000000:
-      interval = v.efficiency1000000_int;
-      break;
-*/
   }
   return(interval);
 }
@@ -506,42 +474,31 @@ function determineArtifactCost(v, step) {
     case 1000:
       cost = v.efficiency1000_cost;
       break;
-/*
-    case 10000:
-      cost = v.efficiency10000_cost;
-      break;
-    case 100000:
-      cost = v.efficiency100000_cost;
-      break;
-    case 1000000:
-      cost = v.efficiency1000000_cost;
-      break;
-*/
   }
   return(cost);
 }
 
-function dowsingRod (v, unit, relics, lvlDiff = 0) {
-    var count = 0;
-    var cost = calculateArtifactEfficiencyCost(v, unit);
-    if (relics < cost) {
-        return (count);
-    }
+function dowsingRod(v, unit, relics, lvlDiff = 0) {
+  var count = 0;
+  var cost = calculateArtifactEfficiencyCost(v, unit);
+  if (relics < cost) {
+      return (count);
+  }
+  obfuscate++;
+  cost = calculateArtifactEfficiencyCost(v, unit - lvlDiff);
+  relics -= cost;
+  count++;
+  v.level += unit - lvlDiff;
+  while (0 < relics && (0 != cost || count === 1)) {
     obfuscate++;
-    cost = calculateArtifactEfficiencyCost(v, unit - lvlDiff);
+    cost = calculateArtifactEfficiencyCost(v, unit);
     relics -= cost;
-    count++;
-    v.level += unit - lvlDiff;
-    while (0 < relics && (0 != cost || count === 1)) {
-        obfuscate++;
-        cost = calculateArtifactEfficiencyCost(v, unit);
-        relics -= cost;
-        if (0 < relics) {
-            count++;
-            v.level += unit;
-        }
+    if (0 < relics) {
+      count++;
+      v.level += unit;
     }
-    return (count * unit - lvlDiff);
+  }
+  return (count * unit - lvlDiff);
 };
 
 function processPct(k, v, relics, totalAD, tattoo) {
@@ -553,8 +510,8 @@ function processPct(k, v, relics, totalAD, tattoo) {
 	var dowse = 0;
 	var running_dowse = 0;
 	var orig_level = v.level;
-    var fresh = false;
-    var rounding = $('#ron').prop('checked') == true;
+  var fresh = false;
+  var rounding = $('#ron').prop('checked') == true;
 	if(1 == v.active) {
 		if(0 == v.level) {
 			fresh = true;
@@ -562,30 +519,30 @@ function processPct(k, v, relics, totalAD, tattoo) {
 			var next_artifact = countArtifacts(artifacts.data) + 1;
 			total_cost = artifact_costs[next_artifact];
 		}
-        if (-1 == v.max) {
-            var lvledUnit = 10000000000000000;
-            var lvledLvl = v.level;
-            while (lvledUnit > 0.1 && (!rounding || dowse === 0)) {
-		        if (lvledLvl > lvledUnit) {
-		            lvledLvl %= lvledUnit;
-		        }
-		        dowse = dowsingRod(v, lvledUnit, relics, lvledLvl);
-		        v.level = orig_level;
-		        running_dowse += dowse;
-		        cost = calculateArtifactEfficiencyCost(v, dowse);
-		        total_cost += cost;
-		        relics -= cost;
-		        v.level += dowse;
-		        orig_level = v.level;
-		        lvledUnit /= 10;
+    if (-1 == v.max) {
+      var lvledUnit = 1000000000000000;
+      var lvledLvl = v.level;
+      while (lvledUnit > 0.1 && (!rounding || dowse === 0)) {
+		    if (lvledLvl > lvledUnit) {
+	        lvledLvl %= lvledUnit;
 		    }
+		    dowse = dowsingRod(v, lvledUnit, relics, lvledLvl);
+		    v.level = orig_level;
+		    running_dowse += dowse;
+		    cost = calculateArtifactEfficiencyCost(v, dowse);
+		    total_cost += cost;
+		    relics -= cost;
+		    v.level += dowse;
+		    orig_level = v.level;
+		    lvledUnit /= 10;
+		  }
 			if(true == tattoo && false == fresh) {
 				u_relics -= total_cost;
 				upgrades.steps.push({
 					'k' : k,
 					'levels' : running_dowse,
 					'cost' : total_cost
-				})
+				});
 				return(running_dowse);
 			} else if(0 < running_dowse) {
 				return(calculateArtifactEfficiency(v, total_cost, running_dowse, current_ad, current_effect, totalAD));
@@ -616,8 +573,6 @@ function processPct(k, v, relics, totalAD, tattoo) {
 				}
 			}
 		}
-	} else {
-
 	}
 	return(-1);
 }
@@ -630,11 +585,9 @@ function optimizePct() {
 	var temp_new_value = 0;
   var relics_pct = Math.floor(u_relics * (u_step/100));
   $.each(u_temp_artifacts.data, function(k,v) {
-console.log(k,v);
 		obfuscate++;
     var orig_level = v.level;
 		temp_value = processPct(k, v, relics_pct, u_temp_artifacts.totalAD, false);
-console.log('processed');
     v.level = orig_level;
     if(temp_value > winnerPct_value) {
 			if(0 == v.level) {
@@ -648,14 +601,12 @@ console.log('processed');
 			}
     }
   });
-console.log('loopdone');
 	if('' != winnerPct) {
 		var orig_level = u_temp_artifacts.data[winnerPct].level;
 		var dowse = processPct(winnerPct, u_temp_artifacts.data[winnerPct], relics_pct, u_temp_artifacts.totalAD, true);
 		u_temp_artifacts.data[winnerPct].level = orig_level;
 		u_temp_artifacts.data[winnerPct].level += dowse;
 		u_temp_artifacts.totalAD = calculateTotalAD(u_temp_artifacts.data, false);
-		console.log('win');
 	}
 	if('' != winnerPct && u_relics >= u_threshhold) {
 		var progress = (1 - (u_relics > 0 ? u_relics / (u_orelics - u_threshhold) : 0 / u_orelics)) * 100;
@@ -663,13 +614,11 @@ console.log('loopdone');
 		$('#progress').prop('aria-valuenow', progress);
 		buffer = u_obuffer;
 		window.setTimeout(optimizePct, 1);
-		console.log('timeoutset');
 	} else {
 		var progress = 100;
 		$('#progress').width(progress + '%');
 		$('#progress').prop('aria-valuenow', progress);
 		$('#progress').removeClass('progress-bar-striped progress-bar-animated');
-		console.log('render');
 		renderPctSuggestions(u_temp_artifacts);
 	}
 }

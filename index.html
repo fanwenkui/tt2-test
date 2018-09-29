@@ -158,20 +158,21 @@
 								  </label>
 								</div>
 							</div>
-						    <div class="form-check col-12 col-md-6 col-lg-4 mb-4">
-                                <div class="mb-2">(%) Rounding On?</div>
-						        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-						            <label id="btnRoff" class="btn btn-info">
-						                <input type="radio" name="rounding" id="roff" autocomplete="off" checked onchange="toggleRounding();"> Rounding Off
-						            </label>
-						            <label id="btnRon" class="btn btn-dark">
-						                <input type="radio" name="rounding" id="ron" autocomplete="off" onchange="toggleRounding();"> Rounding On
-						            </label>
-						        </div>
-						    </div>
+					    <div class="form-check col-12 col-md-6 col-lg-4 mb-4">
+                  <div class="mb-2">% Rounding On?*</div>
+					        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+				            <label id="btnRoff" class="btn btn-info">
+			                <input type="radio" name="rounding" id="roff" autocomplete="off" checked onchange="toggleRounding();"> Rounding Off
+				            </label>
+				            <label id="btnRon" class="btn btn-dark">
+			                <input type="radio" name="rounding" id="ron" autocomplete="off" onchange="toggleRounding();"> Rounding On
+				            </label>
+					        </div>
+									<p class="small">* It is assumed that rounding is on for non-% based recommendations</p>
+					    </div>
 						</div>
 					</form>
-					<button type="button" class="btn btn-secondary mb-4" onclick="exportData()">Export Data</button>
+ 					<button type="button" class="btn btn-secondary mb-4" onclick="exportData()">Export Data</button>
           <button type="button" class="btn btn-secondary mb-4" onclick="startImport()">Import Data</button>
           <div id="export_wrap">
             <div class="mb-2">Copy and paste the following exported data into another instance of the optimizer.</div>
@@ -310,6 +311,15 @@
 									<option value="e49">e49</option>
 									<option value="e50">e50</option>
 									<option value="e51">e51/am</option>
+									<option value="e52">e52</option>
+									<option value="e53">e53</option>
+									<option value="e54">e54/an</option>
+									<option value="e55">e55</option>
+									<option value="e56">e56</option>
+									<option value="e57">e57/ao</option>
+									<option value="e58">e58</option>
+									<option value="e59">e59</option>
+									<option value="e60">e60/ap</option>
 								</select>
 							</div>
 	            <label class="ml-4"><small>(Whole numbers on the left, decimals on the right.)</small></label>
@@ -322,19 +332,13 @@
 						            <option value="10">10</option>
 						            <option value="100">100</option>
 						            <option value="1000">1K</option>
-						            <!--
-						            <option value="10000">10K</option>
-						            <option value="100000">100K</option>
-						            <option value="1000000">1M</option>
-						            -->
 						            <option value="pct1">1%</option>
 						            <option value="pct5">5%</option>
 						            <option value="pct25">25%</option>
 						            <option value="pct100">MAX</option>
 						        </select>
 						    </div>
-							<label class="ml-4"><small>Note, because the bonus effects and the cost of artifacts don't scale linearly, when you change your increments you might get different results. This is because 1 set of 1000 might not be the same as 10 sets of 100, when you evaluate each individual set. After a few prestiges this will start to balance out and you'll see the same types of results you saw before switching up your increments.<br /><br />
-                Also, note that if you use the % options they ONLY work with in-game rounding option turned <strong>OFF</strong> at this time and I definitely only recommend using the 5% or 25% options; 1% is too crazy in terms of number of upgrades offered. In addition, with %-based recommendations the numbers will always be a little off because you can't know your exact relic count (e.g, 1.36e17 relics in game could be as low as 1.355e17 or as high as 1.364e17) but it should be pretty darn close and because it will sometimes be over and sometimes under it will mostly wash out, not to mention the fact that you should still get the general shape of distribution that is most optimized. Don't sweat it.</small></label>
+							<label class="ml-4"><small>Note, because the bonus effects and the cost of artifacts don't scale linearly, when you change your increments you might get different results. This is because 1 set of 1000 might not be the same as 10 sets of 100, when you evaluate each individual set. After a few prestiges this will start to balance out and you'll see the same types of results you saw before switching up your increments.</small></label>
 				  	</form>
 						<button id="generateRelicUpdates" type="button" class="btn btn-primary mb-4" onclick="generateUpgrades()">Generate Upgrades</button>
 					</div>
