@@ -1638,9 +1638,9 @@ var artifacts = {
 		},
 		'tmg' : {
 			'active' : 1,
-			'name' : 'The Magnifier',
+			'name' : '放大',
 			'nickname' : 'TMG',
-			'bonus' : ' Artifact Damage Bonuses',
+			'bonus' : ' 神器伤害加成',
 			'max' : 40,
 			'effect' : .225,
 			'gmax' : 0,
@@ -1656,9 +1656,9 @@ var artifacts = {
 		},
 		'ttof' : {
 			'active' : 1,
-			'name' : 'The Treasure of Fergus',
+			'name' : ' 泰的宝藏',
 			'nickname' : 'TToF',
-			'bonus' : ' Artifact Gold Bonuses',
+			'bonus' : ' 神器金 奖金',
 			'max' : 40,
 			'effect' : .225,
 			'gmax' : 0,

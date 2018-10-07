@@ -723,7 +723,7 @@ function generateUpgrades() {
 
 function renderSuggestions(data) {
 	if(winner_n != '') {
-		$('#new_artifact').empty().append('<em>提示：您最好省下圣物以开启新神器（最佳：' + artifacts.data[winner_n].name + '）</em>');
+		$('#new_artifact').empty().append('<em>提示：未拥有的神器里这个对你影响最大（' + artifacts.data[winner_n].name + '）</em>');
 	}
 	winner_e = '';
 	winner_e10 = '';
@@ -787,7 +787,7 @@ function renderSuggestions(data) {
 
 function renderPctSuggestions(data) {
 	if(winner_n != '') {
-		$('#new_artifact').empty().append('<em>提示：您最好省下圣物以开启新神器（最佳：' + artifacts.data[winner_n].name + '）</em>');
+		$('#new_artifact').empty().append('<em>提示：未拥有的神器里这个对你影响最大（' + artifacts.data[winner_n].name + '）</em>');
 	}
 	winner_e = '';
 	winner_e10 = '';
