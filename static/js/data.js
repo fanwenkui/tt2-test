@@ -1636,6 +1636,42 @@ var artifacts = {
 				'reduct' : 'tap'
 			}
 		},
+		'tmg' : {
+			'active' : 1,
+			'name' : 'The Magnifier',
+			'nickname' : 'TMG',
+			'bonus' : ' Artifact Damage Bonuses',
+			'max' : 40,
+			'effect' : .225,
+			'gmax' : 0,
+			'grate' : 0,
+			'gexpo' : 1,
+			'ad' : 3,
+			'ccoef' : 2,
+			'cexpo' : 3,
+			'type' : 'multiply',
+			'expo' : {
+				'flat' : 'dmg'
+			}
+		},
+		'ttof' : {
+			'active' : 1,
+			'name' : 'The Treasure of Fergus',
+			'nickname' : 'TToF',
+			'bonus' : ' Artifact Gold Bonuses',
+			'max' : 40,
+			'effect' : .225,
+			'gmax' : 0,
+			'grate' : 0,
+			'gexpo' : 1,
+			'ad' : 3,
+			'ccoef' : 2,
+			'cexpo' : 3,
+			'type' : 'multiply',
+			'expo' : {
+				'flat' : 'gold'
+			}
+		},
 		'as2' : {
 			'active' : 1,
 			'name' : 'Aram Spear',
@@ -1758,13 +1794,10 @@ var artifact_costs = {
 	'79' : 3740000000000000000000000000,
 	'80' : 55000000000000000000000000000,
 	'81' : 812000000000000000000000000000,
-	'82' : -1
+	'82' : 12000000000000000000000000000000,
+	'83' : 178000000000000000000000000000000,
+	'84' : -1
 };
-
-// x = 1.4067499999999975
-// x += 0.00395
-// a = 66
-// a * Math.pow(x, a++)
 
 var tiers = {
 	'1' : 0,
