@@ -38,7 +38,7 @@
 				    <a class="nav-link" id="dal-tab" data-toggle="tab" href="#dal" role="tab" aria-controls="dal" aria-selected="false">截图模式</a>
 				  </li>
 				</ul>
-				<h1 class="h4">TT2 优化器（汉化版 by RiggZh） <span class="badge badge-secondary">2.10.1</span></h1>
+				<h1 class="h4">TT2 优化器（汉化版 by RiggZh） <span class="badge badge-secondary">2.10.3</span></h1>
 			</div>
 			<div class="tab-content" id="tabContent">
 			  <div class="tab-pane fade show active" id="style" role="tabpanel" aria-labelledby="style-tab">
@@ -159,9 +159,21 @@
 								  </label>
 								</div>
 							</div>
+					    <div class="form-check col-12 col-md-6 col-lg-4 mb-4">
+                  <div class="mb-2">% Rounding On?*</div>
+					        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+				            <label id="btnRoff" class="btn btn-info">
+			                <input type="radio" name="rounding" id="roff" autocomplete="off" checked onchange="toggleRounding();"> Rounding Off
+				            </label>
+				            <label id="btnRon" class="btn btn-dark">
+			                <input type="radio" name="rounding" id="ron" autocomplete="off" onchange="toggleRounding();"> Rounding On
+				            </label>
+					        </div>
+									<p class="small">* It is assumed that rounding is on for non-% based recommendations</p>
+					    </div>
 						</div>
 					</form>
-					<button type="button" class="btn btn-secondary mb-4" onclick="exportData()">导出</button>
+ 					<button type="button" class="btn btn-secondary mb-4" onclick="exportData()">导出</button>
           <button type="button" class="btn btn-secondary mb-4" onclick="startImport()">导入</button>
           <div id="export_wrap">
             <div class="mb-2">将以下导出的数据复制以在其他地方导入</div>
@@ -256,11 +268,11 @@
 								<span class="input-group-text px-1 rounded-0">.</span>
 								<input type="tel" id="relics_decimal" class="form-control" placeholder="00" aria-label="decimals for relics">
 								<select id="relic_factor">
-									<option value="_"> </option>
-									<option value="K">K</option>
-									<option value="M">M</option>
-									<option value="B">B</option>
-									<option value="T">T</option>
+									<option value="e0"> </option>
+									<option value="e3">K</option>
+									<option value="e6">M</option>
+									<option value="e9">B</option>
+									<option value="e12">T</option>
 									<option value="e13">e13</option>
 									<option value="e14">e14</option>
 									<option value="e15">e15/aa</option>
@@ -300,30 +312,34 @@
 									<option value="e49">e49</option>
 									<option value="e50">e50</option>
 									<option value="e51">e51/am</option>
+									<option value="e52">e52</option>
+									<option value="e53">e53</option>
+									<option value="e54">e54/an</option>
+									<option value="e55">e55</option>
+									<option value="e56">e56</option>
+									<option value="e57">e57/ao</option>
+									<option value="e58">e58</option>
+									<option value="e59">e59</option>
+									<option value="e60">e60/ap</option>
 								</select>
 							</div>
 	            <label class="ml-4"><small>（整数在左，小数在右）</small></label>
 						</form>
 						<form class="mb-4">
-							<div class="input-group col-12 col-md-6 col-xl-4">
-								<span class="input-group-text">购买</span>
-								<select id="ocd">
-									<option value="1">1</option>
-									<option value="10">10</option>
-									<option value="100">100</option>
-									<option value="1000">1K</option>
-<!--
-									<option value="10000">10K</option>
-									<option value="100000">100K</option>
-                  <option value="1000000">1M</option>
--->
-                  <option value="pct1">1%</option>
-                  <option value="pct5">5%</option>
-                  <option value="pct25">25%</option>
-								</select>
-							</div>
-							<label class="ml-4"><small>请注意，因为神器效果和神器花费不是线性增长，所以当你改变购买指数时可能会有不同的结果。这是因为，1次升级1000可能不等于10次升级。在几次升级后，会趋近于平衡，您会看到近似的结果<br /><br />
-                此外，请注意，如果您使用%选项，则需要<strong>关闭游戏中的四舍五入选项</strong>，推荐使用5%或者25%而不是1%。以%选项得到的结果总会和实际有些许偏离，因为无法确认具体的圣物数量（1.36e17可以表示从1.355e17到1.364e17），但这也是十分接近了。请不要感到困惑，因为它时低时高，所以您依然能得到最优的结果</small></label>
+						    <div class="input-group col-12 col-md-6 col-xl-4">
+						        <span class="input-group-text">购买</span>
+						        <select id="ocd">
+						            <option value="1">1</option>
+						            <option value="10">10</option>
+						            <option value="100">100</option>
+						            <option value="1000">1000</option>
+						            <option value="pct1">1%</option>
+						            <option value="pct5">5%</option>
+						            <option value="pct25">25%</option>
+						            <option value="pct100">MAX</option>
+						        </select>
+						    </div>
+							<label class="ml-4"><small>请注意，因为神器效果和神器花费不是线性增长，所以当你改变购买指数时可能会有不同的结果。这是因为，1次升级1000可能不等于10次升级100。在几次升级后，会趋近于平衡，您会看到改变购买指数后相同的结果</small></label>
 				  	</form>
 						<button id="generateRelicUpdates" type="button" class="btn btn-primary mb-4" onclick="generateUpgrades()">生成升级方案</button>
 					</div>
