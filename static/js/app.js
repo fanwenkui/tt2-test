@@ -335,9 +335,9 @@ function regenerateSkills() {
 		}
 		$('#skill' + k).val(v.level);
 		$('#' + v.nickname).text(v.level);
-		var value = (v.bonus_font ? v.bonus_font : '');
+		var value = '';
 		if(0 < v.level && undefined != v.current_effect) {
-			value += displayEffect(v.current_effect, v.type);
+			value = displayEffect(v.current_effect, v.type);
 		}
 		value += v.bonus;
 		$('#skill' + k + 'effect').empty().append(value);
@@ -703,7 +703,7 @@ function generateUpgrades() {
 		if(v.level > 0) { litmus = true; }
 	});
 	if(false == litmus) {
-		$('#suggestions').empty().append('<p>您应该至少拥有1件神器以接收优化建议方案</p>');
+		$('#suggestions').empty().append('<p>您必须至少启用一个神器才能接收优化建议方案。</p>');
 		return
 	}
 	if(u_relics > 0) {
@@ -742,7 +742,7 @@ function renderSuggestions(data) {
 	});
 	if(false == litmus) {
 		$('#pudding').empty();
-		$('#suggestions').empty().append('<p>目前没有任何对于您的升级建议，请您在拥有更多的圣物时重试，或降低您的购买倍数选项</p>');
+		$('#suggestions').empty().append('<p>您无法承担进行下一次最佳升级的圣物消耗。 请在拥有更多圣物或尝试降低购买指数以及关闭四舍五入后来重新查看结果。</p>');
 		$('#accept').empty().append('<button type="button" class="btn btn-danger" onclick="rejectSuggestions();">取消</button>');
 		relics = 0;
 		return;
@@ -802,7 +802,7 @@ function renderPctSuggestions(data) {
 	var suggestions = '<ol>';
 	if(0 == upgrades.steps.length) {
 		$('#pudding').empty();
-		$('#suggestions').empty().append('<p>目前没有任何对于您的升级建议，请您在拥有更多的圣物时重试，或降低您的购买倍数选项</p>');
+		$('#suggestions').empty().append('<p>您无法承担进行下一次最佳升级的圣物消耗。 请在拥有更多圣物或尝试降低购买指数以及关闭四舍五入后来重新查看结果。</p>');
 		$('#accept').empty().append('<button type="button" class="btn btn-danger" onclick="rejectSuggestions();">取消</button>');
 		u_relics = 0;
 		return;
