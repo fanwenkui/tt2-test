@@ -119,7 +119,7 @@ var reducts = {
 		'pet' : 0,
 		'sc' : 1,
 		'hs' : 0,
-		'cs' : 0
+		'cs' : .5
 	},
 	'splash' : {
 		'hero' : 0,
@@ -1489,7 +1489,7 @@ var artifacts = {
 			'cexpo' : 2.5,
 			'type' : 'pct',
 			'expo' : {
-				'flat' : 'inactive_phom'
+				'flat' : 'inactive'
 			}
 		},
 		'boh' : {
@@ -3189,8 +3189,8 @@ var skills = {
 				'10' : { 'cost' : 6, 'bonus' : 20, 'bonus2' : .3, 'bonus3' : 0 }
 			},
 			'expos' : {
-				'b1' : { 'flat' : 'inactive_phom' },
-				'b2' : { 'flat' : 'inactive_phom' }
+				'b1' : { 'flat' : 'inactive' },
+				'b2' : { 'flat' : 'inactive' }
 			}
 		},
 		'tv' : {
