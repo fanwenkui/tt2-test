@@ -737,7 +737,7 @@ function renderSuggestions(data) {
 	});
 	if(false == litmus) {
 		$('#pudding').empty();
-		$('#suggestions').empty().append('<p>您无法承担进行下一次最佳升级的圣物消耗。 请在拥有更多圣物或尝试降低购买指数以及关闭四舍五入后来重新查看结果。</p>');
+		$('#suggestions').empty().append('<p>您无法承担进行下一次升级的圣物消耗。 请积攒圣物或尝试降低购买指数或关闭四舍五入。</p>');
 		$('#accept').empty().append('<button type="button" class="btn btn-danger" onclick="rejectSuggestions();">取消</button>');
 		relics = 0;
 		return;
@@ -792,7 +792,7 @@ function renderPctSuggestions(data) {
 	var suggestions = '<ol>';
 	if(0 == upgrades.steps.length) {
 		$('#pudding').empty();
-		$('#suggestions').empty().append('<p>您无法承担进行下一次最佳升级的圣物消耗。 请在拥有更多圣物或尝试降低购买指数以及关闭四舍五入后来重新查看结果。</p>');
+		$('#suggestions').empty().append('<p>您无法承担进行下一次升级的圣物消耗。 请积攒圣物或尝试降低购买指数或关闭四舍五入。</p>');
 		$('#accept').empty().append('<button type="button" class="btn btn-danger" onclick="rejectSuggestions();">取消</button>');
 		u_relics = 0;
 		return;
