@@ -349,10 +349,7 @@ var artifacts = {
 			'cexpo' : 1.8,
 			'type' : 'multiply',
 			'expo' : {
-				'gold' : [
-					'phom',
-					'all'
-				]
+				'flat' : 'hom'
 			}
 		},
 		'coe2' : {
@@ -1428,7 +1425,8 @@ var artifacts = {
 					'coc',
 					'fairy',
 					'all',
-					'active'
+					'active',
+					'inactive'
 				]
 			}
 		},
