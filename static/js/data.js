@@ -1428,7 +1428,7 @@ var artifacts = {
 					'coc',
 					'fairy',
 					'all',
-					'active'
+					'inactive'
 				]
 			}
 		},
