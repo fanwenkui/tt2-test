@@ -215,6 +215,22 @@ function calculateWeight(k,expo) {
 				results.color = 'info';
 				break;
 
+			case 'skill_dmg':
+				results.rating += (0 < reducts.hs[build] ? reducts.hs[build] : 0);
+				results.rating += (0 < reducts.ds[build] ? reducts.ds[build] : (0 < artifacts.data.gok.level ? 1 : 0));
+				results.rating += (0 < reducts.fs[build] ? reducts.fs[build] : (0 < artifacts.data.os.level ? 1 : 0));
+				results.rating += (0 < reducts.wc[build] ? reducts.wc[build] : (0 < artifacts.data.tac.level ? 1 : 0));
+				results.rating += (0 < reducts.sc[build] ? reducts.sc[build] : (0 < artifacts.data.ho.level ? 1 : 0));
+				results.rating += 1;
+				results.rating = Math.min(4, results.rating);
+				results.color = 'info';
+				break;
+
+			case 'artifacts':
+				results.rating += countArtifacts(artifacts.data);
+				results.color = 'info';
+				break;
+
 			case 'skill_tap':
 				results.rating += reducts.hs[build];
 				results.rating += reducts.ds[build];
