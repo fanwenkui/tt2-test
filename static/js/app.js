@@ -1280,7 +1280,70 @@ function displayPct(value) {
 }
 
 function displayTruncated(value) {
-	if(value > 999999999999999999999999999999) {
+	if(value > 999999999999999999999999999999999999999999999999999) {
+		value = (value / 1000000000000000000000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
+		value += 'e51/am';
+	} else if(value > 99999999999999999999999999999999999999999999999999) {
+		value = (value / 100000000000000000000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
+		value += 'e50';
+	} else if(value > 9999999999999999999999999999999999999999999999999) {
+		value = (value / 10000000000000000000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
+		value += 'e49';
+	} else if(value > 999999999999999999999999999999999999999999999999) {
+		value = (value / 1000000000000000000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
+		value += 'e48/al';
+	} else if(value > 99999999999999999999999999999999999999999999999) {
+		value = (value / 100000000000000000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
+		value += 'e47';
+	} else if(value > 9999999999999999999999999999999999999999999999) {
+		value = (value / 10000000000000000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
+		value += 'e46';
+	} else if(value > 999999999999999999999999999999999999999999999) {
+		value = (value / 1000000000000000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
+		value += 'e45/ak';
+	} else if(value > 99999999999999999999999999999999999999999999) {
+		value = (value / 100000000000000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
+		value += 'e44';
+	} else if(value > 9999999999999999999999999999999999999999999) {
+		value = (value / 10000000000000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
+		value += 'e43';
+	} else if(value > 999999999999999999999999999999999999999999) {
+		value = (value / 1000000000000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
+		value += 'e42/aj';
+	} else if(value > 99999999999999999999999999999999999999999) {
+		value = (value / 100000000000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
+		value += 'e41';
+	} else if(value > 9999999999999999999999999999999999999999) {
+		value = (value / 10000000000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
+		value += 'e40';
+	} else if(value > 999999999999999999999999999999999999999) {
+		value = (value / 1000000000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
+		value += 'e39/ai';
+	} else if(value > 99999999999999999999999999999999999999) {
+		value = (value / 100000000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
+		value += 'e38';
+	} else if(value > 9999999999999999999999999999999999999) {
+		value = (value / 10000000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
+		value += 'e37';
+	} else if(value > 999999999999999999999999999999999999) {
+		value = (value / 1000000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
+		value += 'e36/ah';
+	} else if(value > 99999999999999999999999999999999999) {
+		value = (value / 100000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
+		value += 'e35';
+	} else if(value > 9999999999999999999999999999999999) {
+		value = (value / 10000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
+		value += 'e34';
+	} else if(value > 999999999999999999999999999999999) {
+		value = (value / 1000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
+		value += 'e33/ag';
+	} else if(value > 99999999999999999999999999999999) {
+		value = (value / 100000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
+		value += 'e32';
+	} else if(value > 9999999999999999999999999999999) {
+		value = (value / 10000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
+		value += 'e31';
+	} else if(value > 999999999999999999999999999999) {
 		value = (value / 1000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
 		value += 'e30/af';
 	} else if(value > 99999999999999999999999999999) {
@@ -1462,10 +1525,14 @@ if (storageAvailable('localStorage')) {
 	$('#all_prob_decimal').val(window.localStorage.getItem('all_prob_decimal'));
 	$('#relic_factor').val(window.localStorage.getItem('relic_factor'));
 	var ocd = window.localStorage.getItem('ocd');
-	if('pct' != ocd.substring(0,3)) {
-		if(1000 < parseInt(ocd)) {
-			ocd = 1000;
+	if(ocd) {
+		if('pct' != ocd.substring(0,3)) {
+			if(1000 < parseInt(ocd)) {
+				ocd = 1000;
+			}
 		}
+	} else {
+		ocd = 1;
 	}
 	$('#ocd').val(ocd.toString());
 	if(window.localStorage.getItem('dark') == "1") {
