@@ -1285,6 +1285,37 @@ function displayPct(value) {
 function displayTruncated(value) {
 	value = value.toExponential(2);
 	value = value.replace(/\+/, '');
+	switch(value.substring(value.length-2)) {
+		case 'e0':
+		case 'e1':
+		case 'e2':
+			value = value.replace(/e[0-9]/, '');
+			break;
+		case 'e3':
+		case 'e4':
+		case 'e5':
+			value = value.replace(/e[0-9]/, 'K');
+			break;
+		case 'e6':
+		case 'e7':
+		case 'e8':
+			value = value.replace(/e[0-9]/, 'M');
+			break;
+		case 'e9':
+			value = value.replace(/e[0-9]/, 'B');
+			break;
+	}
+	switch(value.substring(value.length-3)) {
+		case 'e10':
+		case 'e11':
+			value = value.replace(/e1[0-9]/, 'B');
+			break;
+		case 'e12':
+		case 'e13':
+		case 'e14':
+			value = value.replace(/e1[0-9]/, 'T');
+			break;
+	}
 	return(value);
 }
 
