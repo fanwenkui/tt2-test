@@ -1299,7 +1299,7 @@ function displayTruncated(value) {
 		} else if(value > 999) {
 			value = (value / 1000).toFixed(2).replace(/\.?0+$/, '');
 			value += 'K';
-		} else if isNaN(value) {
+		} else if(isNaN(value)) {
 			value = value.toFixed(2).replace(/\.?0+$/, '');
 		}
 	}
