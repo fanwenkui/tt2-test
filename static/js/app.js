@@ -709,7 +709,7 @@ function generateUpgrades() {
 	if(u_relics > 0) {
     if('pct' == $('#ocd').val().substring(0,3)) {
       u_step = parseInt($('#ocd').val().substring(3));
-			u_threshhold = Math.floor(u_relics * u_step/100);
+			u_threshhold = Math.floor(u_relics * u_step/100/2);
 			upgrades.steps = [];
 			window.setTimeout(optimizePct, 1);
     } else {
@@ -1311,7 +1311,6 @@ function displayEffect(value, type) {
 		case 'multiply':
 			return 'x' + displayTruncated(value);
 			break;
-
 		case 'add':
 			if(false != value) {
 				value = value -1
@@ -1322,7 +1321,6 @@ function displayEffect(value, type) {
 				return displayTruncated(value);
 			}
 			break;
-
 		case 'add_skill':
 			if(value > 0) {
 				return '+' + displayTruncated(value);
@@ -1330,11 +1328,9 @@ function displayEffect(value, type) {
 				return displayTruncated(value);
 			}
 			break;
-
 		case 'multiply_pct':
 			return 'x' + displayPct(value);
 			break;
-
 		case 'pct':
 			value = value -1
 			if(value > 0) {
@@ -1343,7 +1339,6 @@ function displayEffect(value, type) {
 				return displayPct(value);
 			}
 			break;
-
 		case 'pct_pos':
 			if(value > 0) {
 				return '+' + displayPct(value);
@@ -1351,7 +1346,6 @@ function displayEffect(value, type) {
 				return displayPct(value);
 			}
 			break;
-
 	}
 }
 
