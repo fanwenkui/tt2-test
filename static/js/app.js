@@ -504,6 +504,20 @@ function dowsingRod(v, unit, relics, lvlDiff = 0) {
 function processPct(k, v, relics, totalAD, tattoo) {
 	var current_ad = v.level * v.ad;
 	var current_effect = 1 + v.effect * Math.pow(v.level, Math.pow((1 + (v.cexpo - 1) * Math.min(v.grate * v.level, v.gmax)), v.gexpo));
+	switch(v.dime) {
+		case 0:
+			break;
+		case 1:
+			if(0 < artifacts.data.tmg.level) {
+				current_effect *= 10;
+			}
+			break;
+		case 2:
+			if(0 < artifacts.data.ttof.level) {
+				current_effect *= 10;
+			}
+			break;
+	}
   var levels = 0;
   var cost = 0;
   var total_cost = 0;
@@ -520,7 +534,7 @@ function processPct(k, v, relics, totalAD, tattoo) {
 			total_cost = artifact_costs[next_artifact];
 		}
     if (-1 == v.max) {
-      var lvledUnit = 1000000000000000;
+      var lvledUnit = 1000000000000000000000000000000000000000000000000000000000;
       var lvledLvl = v.level;
       while (lvledUnit > 0.1 && (!rounding || dowse === 0)) {
 		    if (lvledLvl > lvledUnit) {
@@ -801,6 +815,7 @@ function renderPctSuggestions(data) {
 		suggestions += '<li>';
 			suggestions += '<span class="d-inline d-sm-none">' + artifacts.data[v.k].nickname + '</span>';
 			suggestions += '<span class="d-none d-sm-inline">' + artifacts.data[v.k].name + '</span>';
+			suggestions += '<sup class="text-secondary">[' + artifacts.data[v.k].sort_order + ']</sup>';
 			suggestions += '<span class="badge badge-' + artifacts.data[v.k].color + ' ml-3">+' + displayTruncated(v.levels) + '</span> ';
 			suggestions += '<small>' + displayTruncated(v.cost) + ' relics</small>';
 		suggestions += '</li>';
@@ -938,6 +953,20 @@ function skillEff(k, v) {
 function oldEff(data, k, v) {
 	var current_ad = v.level * v.ad;
 	var current_effect = 1 + v.effect * Math.pow(v.level, Math.pow((1 + (v.cexpo - 1) * Math.min(v.grate * v.level, v.gmax)), v.gexpo));
+	switch(v.dime) {
+		case 0:
+			break;
+		case 1:
+			if(0 < artifacts.data.tmg.level) {
+				current_effect *= 10;
+			}
+			break;
+		case 2:
+			if(0 < artifacts.data.ttof.level) {
+				current_effect *= 10;
+			}
+			break;
+	}
 	data.data[k].current_ad = current_ad;
 	data.data[k].current_effect = current_effect;
 	if(v.max == -1 || v.max > v.level) {
@@ -984,6 +1013,20 @@ function calculateArtifactEfficiencyCost(v, levels) {
 function calculateArtifactEfficiency(v, cost, lvlChange, current_ad, current_effect, totalAD) {
     obfuscate++;
 		var next_effect = 1 + v.effect * Math.pow(v.level + lvlChange, Math.pow((1 + (v.cexpo - 1) * Math.min(v.grate * (v.level + lvlChange), v.gmax)), v.gexpo));
+		switch(v.dime) {
+			case 0:
+				break;
+			case 1:
+				if(0 < artifacts.data.tmg.level) {
+					next_effect *= 10;
+				}
+				break;
+			case 2:
+				if(0 < artifacts.data.ttof.level) {
+					next_effect *= 10;
+				}
+				break;
+		}
 		var effect_diff = Math.abs(next_effect)/Math.abs(current_effect);
 		var effect_eff = Math.pow(effect_diff, v.rating);
 		var ad_change = (((v.level + lvlChange) * v.ad) - current_ad);
@@ -1017,9 +1060,6 @@ function calculateTotalAD(data, update) {
 		obfuscate++;
 		total += v.level * v.ad;
 	});
-	if(0 < data.tmg.level) {
-		total *= data.tmg.current_effect;
-	}
 	if(true == update) {
 		$('#adsanity').text(displayPct(total * ("" != artifacts.data.hsw.current_effect ? artifacts.data.hsw.current_effect : 1)));
 	}
