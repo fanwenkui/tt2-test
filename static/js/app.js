@@ -504,6 +504,20 @@ function dowsingRod(v, unit, relics, lvlDiff = 0) {
 function processPct(k, v, relics, totalAD, tattoo) {
 	var current_ad = v.level * v.ad;
 	var current_effect = 1 + v.effect * Math.pow(v.level, Math.pow((1 + (v.cexpo - 1) * Math.min(v.grate * v.level, v.gmax)), v.gexpo));
+	switch(v.dime) {
+		case 0:
+			break;
+		case 1:
+			if(0 < artifacts.data.tmg.level) {
+				current_effect *= 10;
+			}
+			break;
+		case 2:
+			if(0 < artifacts.data.ttof.level) {
+				current_effect *= 10;
+			}
+			break;
+	}
   var levels = 0;
   var cost = 0;
   var total_cost = 0;
@@ -520,7 +534,7 @@ function processPct(k, v, relics, totalAD, tattoo) {
 			total_cost = artifact_costs[next_artifact];
 		}
     if (-1 == v.max) {
-      var lvledUnit = 1000000000000000;
+      var lvledUnit = 1000000000000000000000000000000000000000000000000000000000;
       var lvledLvl = v.level;
       while (lvledUnit > 0.1 && (!rounding || dowse === 0)) {
 		    if (lvledLvl > lvledUnit) {
@@ -709,7 +723,7 @@ function generateUpgrades() {
 	if(u_relics > 0) {
     if('pct' == $('#ocd').val().substring(0,3)) {
       u_step = parseInt($('#ocd').val().substring(3));
-			u_threshhold = Math.floor(u_relics * u_step/100);
+			u_threshhold = Math.floor(u_relics * u_step/100/2);
 			upgrades.steps = [];
 			window.setTimeout(optimizePct, 1);
     } else {
@@ -801,6 +815,7 @@ function renderPctSuggestions(data) {
 		suggestions += '<li>';
 			suggestions += '<span class="d-inline d-sm-none">' + artifacts.data[v.k].name + '</span>';
 			suggestions += '<span class="d-none d-sm-inline">' + artifacts.data[v.k].name + '</span>';
+			suggestions += '<sup class="text-secondary">[' + artifacts.data[v.k].sort_order + ']</sup>';
 			suggestions += '<span class="badge badge-' + artifacts.data[v.k].color + ' ml-3">+' + displayTruncated(v.levels) + '</span> ';
 			suggestions += '<small>花费 ' + displayTruncated(v.cost) + ' 圣物</small>';
 		suggestions += '</li>';
@@ -938,6 +953,20 @@ function skillEff(k, v) {
 function oldEff(data, k, v) {
 	var current_ad = v.level * v.ad;
 	var current_effect = 1 + v.effect * Math.pow(v.level, Math.pow((1 + (v.cexpo - 1) * Math.min(v.grate * v.level, v.gmax)), v.gexpo));
+	switch(v.dime) {
+		case 0:
+			break;
+		case 1:
+			if(0 < artifacts.data.tmg.level) {
+				current_effect *= 10;
+			}
+			break;
+		case 2:
+			if(0 < artifacts.data.ttof.level) {
+				current_effect *= 10;
+			}
+			break;
+	}
 	data.data[k].current_ad = current_ad;
 	data.data[k].current_effect = current_effect;
 	if(v.max == -1 || v.max > v.level) {
@@ -984,6 +1013,20 @@ function calculateArtifactEfficiencyCost(v, levels) {
 function calculateArtifactEfficiency(v, cost, lvlChange, current_ad, current_effect, totalAD) {
     obfuscate++;
 		var next_effect = 1 + v.effect * Math.pow(v.level + lvlChange, Math.pow((1 + (v.cexpo - 1) * Math.min(v.grate * (v.level + lvlChange), v.gmax)), v.gexpo));
+		switch(v.dime) {
+			case 0:
+				break;
+			case 1:
+				if(0 < artifacts.data.tmg.level) {
+					next_effect *= 10;
+				}
+				break;
+			case 2:
+				if(0 < artifacts.data.ttof.level) {
+					next_effect *= 10;
+				}
+				break;
+		}
 		var effect_diff = Math.abs(next_effect)/Math.abs(current_effect);
 		var effect_eff = Math.pow(effect_diff, v.rating);
 		var ad_change = (((v.level + lvlChange) * v.ad) - current_ad);
@@ -1017,9 +1060,6 @@ function calculateTotalAD(data, update) {
 		obfuscate++;
 		total += v.level * v.ad;
 	});
-	if(0 < data.tmg.level) {
-		total *= data.tmg.current_effect;
-	}
 	if(true == update) {
 		$('#adsanity').text(displayPct(total * ("" != artifacts.data.hsw.current_effect ? artifacts.data.hsw.current_effect : 1)));
 	}
@@ -1283,137 +1323,25 @@ function displayPct(value) {
 }
 
 function displayTruncated(value) {
-	if(value > 999999999999999999999999999999999999999999999999999) {
-		value = (value / 1000000000000000000000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e51/am';
-	} else if(value > 99999999999999999999999999999999999999999999999999) {
-		value = (value / 100000000000000000000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e50';
-	} else if(value > 9999999999999999999999999999999999999999999999999) {
-		value = (value / 10000000000000000000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e49';
-	} else if(value > 999999999999999999999999999999999999999999999999) {
-		value = (value / 1000000000000000000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e48/al';
-	} else if(value > 99999999999999999999999999999999999999999999999) {
-		value = (value / 100000000000000000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e47';
-	} else if(value > 9999999999999999999999999999999999999999999999) {
-		value = (value / 10000000000000000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e46';
-	} else if(value > 999999999999999999999999999999999999999999999) {
-		value = (value / 1000000000000000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e45/ak';
-	} else if(value > 99999999999999999999999999999999999999999999) {
-		value = (value / 100000000000000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e44';
-	} else if(value > 9999999999999999999999999999999999999999999) {
-		value = (value / 10000000000000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e43';
-	} else if(value > 999999999999999999999999999999999999999999) {
-		value = (value / 1000000000000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e42/aj';
-	} else if(value > 99999999999999999999999999999999999999999) {
-		value = (value / 100000000000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e41';
-	} else if(value > 9999999999999999999999999999999999999999) {
-		value = (value / 10000000000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e40';
-	} else if(value > 999999999999999999999999999999999999999) {
-		value = (value / 1000000000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e39/ai';
-	} else if(value > 99999999999999999999999999999999999999) {
-		value = (value / 100000000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e38';
-	} else if(value > 9999999999999999999999999999999999999) {
-		value = (value / 10000000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e37';
-	} else if(value > 999999999999999999999999999999999999) {
-		value = (value / 1000000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e36/ah';
-	} else if(value > 99999999999999999999999999999999999) {
-		value = (value / 100000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e35';
-	} else if(value > 9999999999999999999999999999999999) {
-		value = (value / 10000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e34';
-	} else if(value > 999999999999999999999999999999999) {
-		value = (value / 1000000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e33/ag';
-	} else if(value > 99999999999999999999999999999999) {
-		value = (value / 100000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e32';
-	} else if(value > 9999999999999999999999999999999) {
-		value = (value / 10000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e31';
-	} else if(value > 999999999999999999999999999999) {
-		value = (value / 1000000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e30/af';
-	} else if(value > 99999999999999999999999999999) {
-		value = (value / 100000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e29';
-	} else if(value > 9999999999999999999999999999) {
-		value = (value / 10000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e28';
-	} else if(value > 999999999999999999999999999) {
-		value = (value / 1000000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e27/ae';
-	} else if(value > 99999999999999999999999999) {
-		value = (value / 100000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e26';
-	} else if(value > 9999999999999999999999999) {
-		value = (value / 10000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e25';
-	} else if(value > 999999999999999999999999) {
-		value = (value / 1000000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e24/ad';
-	} else if(value > 99999999999999999999999) {
-		value = (value / 100000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e23';
-	} else if(value > 9999999999999999999999) {
-		value = (value / 10000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e22';
-	} else if(value > 999999999999999999999) {
-		value = (value / 1000000000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e21/ac';
-	} else if(value > 99999999999999999999) {
-		value = (value / 100000000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e20';
-	} else if(value > 9999999999999999999) {
-		value = (value / 10000000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e19';
-	} else if(value > 999999999999999999) {
-		value = (value / 1000000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e18/ab';
-	} else if(value > 99999999999999999) {
-		value = (value / 100000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e17';
-	} else if(value > 9999999999999999) {
-		value = (value / 10000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e16';
-	} else if(value > 999999999999999) {
-		value = (value / 1000000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e15/aa';
-	} else if(value > 99999999999999) {
-		value = (value / 100000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e14';
-	} else if(value > 9999999999999) {
-		value = (value / 10000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'e13';
-	} else if(value > 999999999999) {
-		value = (value / 1000000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'T';
-	} else if(value > 999999999) {
-		value = (value / 1000000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'B';
-	} else if(value > 999999) {
-		value = (value / 1000000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'M';
-	} else if(value > 999) {
-		value = (value / 1000).toFixed(2).replace(/\.?0+$/, '');
-		value += 'K';
+	if(value > 999999999999999) {
+		value = value.toExponential(2);
+		value = value.replace(/\+/, '');
 	} else {
-		value = (value * 1).toFixed(2).replace(/\.?0+$/, '');
+		if(value > 999999999999) {
+			value = (value / 1000000000000).toFixed(2).replace(/\.?0+$/, '');
+			value += 'T';
+		} else if(value > 999999999) {
+			value = (value / 1000000000).toFixed(2).replace(/\.?0+$/, '');
+			value += 'B';
+		} else if(value > 999999) {
+			value = (value / 1000000).toFixed(2).replace(/\.?0+$/, '');
+			value += 'M';
+		} else if(value > 999) {
+			value = (value / 1000).toFixed(2).replace(/\.?0+$/, '');
+			value += 'K';
+		} else if(isNaN(value)) {
+			value = value.toFixed(2).replace(/\.?0+$/, '');
+		}
 	}
 	return(value);
 }
@@ -1423,7 +1351,6 @@ function displayEffect(value, type) {
 		case 'multiply':
 			return 'x' + displayTruncated(value);
 			break;
-
 		case 'add':
 			if(false != value) {
 				value = value -1
@@ -1434,7 +1361,6 @@ function displayEffect(value, type) {
 				return displayTruncated(value);
 			}
 			break;
-
 		case 'add_skill':
 			if(value > 0) {
 				return '+' + displayTruncated(value);
@@ -1442,11 +1368,9 @@ function displayEffect(value, type) {
 				return displayTruncated(value);
 			}
 			break;
-
 		case 'multiply_pct':
 			return 'x' + displayPct(value);
 			break;
-
 		case 'pct':
 			value = value -1
 			if(value > 0) {
@@ -1455,7 +1379,6 @@ function displayEffect(value, type) {
 				return displayPct(value);
 			}
 			break;
-
 		case 'pct_pos':
 			if(value > 0) {
 				return '+' + displayPct(value);
@@ -1463,7 +1386,6 @@ function displayEffect(value, type) {
 				return displayPct(value);
 			}
 			break;
-
 	}
 }
 

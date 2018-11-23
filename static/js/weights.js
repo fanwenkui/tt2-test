@@ -101,7 +101,7 @@ function adjustWeights(full) {
 	}
 	$.each(artifacts.data, function(k,v) {
 		var results = calculateWeight(k,v.expo);
-		artifacts.data[k].rating = results.rating;
+		artifacts.data[k].rating = (0 == results.rating && 0 < artifacts.data.twd.level && 0 == v.level ? .25 : results.rating);;
 		artifacts.data[k].color = results.color;
 	});
 	adjustBoS();
