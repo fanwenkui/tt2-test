@@ -44,12 +44,14 @@ function getURLParameter(sParam) {
 
 function toggleDark() {
 	$('body').removeClass('bg-dark text-light');
+	$('.input-group-text').removeClass('bg-dark text-light');
 	$('.sticky-top').removeClass('bg-dark');
 	$('.card').removeClass('bg-dark');
 	$('.nav-link').removeClass('text-light');
 	$('table').removeClass('table-dark');
 	if($('#wolf').prop('checked') == true) {
 		$('body').addClass('bg-dark text-light');
+		$('.input-group-text').addClass('bg-dark text-light');
 		$('.sticky-top').addClass('bg-dark');
 		$('.card').addClass('bg-dark');
 		$('.nav-link').addClass('text-light');
