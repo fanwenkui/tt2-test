@@ -710,6 +710,9 @@ function generateUpgrades() {
 	u_relics = u_relics.mul(buffer).toNumber();
 	u_orelics = u_relics;
 	u_obuffer = buffer;
+	u_threshhold = new Decimal(('' == $('#spend').val() ? 95 : $('#spend').val()) + '.' + ('' == $('#spend_decimal').val() ? 0 : $('#spend_decimal').val()));
+	u_threshhold = 1 - u_threshhold.div(100).toNumber();
+	u_threshhold *= u_relics;
 	upgrades = {};
 	u_temp_artifacts = $.extend(true, {}, artifacts);
 	var litmus = false;
@@ -723,7 +726,6 @@ function generateUpgrades() {
 	if(u_relics > 0) {
     if('pct' == $('#ocd').val().substring(0,3)) {
       u_step = parseInt($('#ocd').val().substring(3));
-			u_threshhold = Math.floor(u_relics * u_step/100/(25 == u_step ? 2 : 1));
 			upgrades.steps = [];
 			window.setTimeout(optimizePct, 1);
     } else {
@@ -1449,6 +1451,8 @@ if (storageAvailable('localStorage')) {
 	$('#all_prob').val(window.localStorage.getItem('all_prob'));
 	$('#all_prob_decimal').val(window.localStorage.getItem('all_prob_decimal'));
 	$('#relic_factor').val(window.localStorage.getItem('relic_factor'));
+	$('#spend').val(window.localStorage.getItem('spend'));
+	$('#spend_decimal').val(window.localStorage.getItem('spend_decimal'));
 	var ocd = window.localStorage.getItem('ocd');
 	if(ocd) {
 		if('pct' != ocd.substring(0,3)) {
@@ -1481,7 +1485,7 @@ if (storageAvailable('localStorage')) {
         $('#ron').prop('checked', false);
         $('#roff').prop('checked', true);
     }
-	toggleDark();
+		toggleDark();
     toggleSplash(false);
     toggleRounding();
 }
@@ -1498,10 +1502,12 @@ function storeData() {
 	window.localStorage.setItem('all_prob', $('#all_prob').val());
 	window.localStorage.setItem('all_prob_decimal', $('#all_prob_decimal').val());
 	window.localStorage.setItem('relic_factor', $('#relic_factor').val());
+	window.localStorage.setItem('spend', $('#spend').val());
+	window.localStorage.setItem('spend_decimal', $('#spend_decimal').val());
 	window.localStorage.setItem('ocd', $('#ocd').val());
 	window.localStorage.setItem('dark', ($('#wolf').prop('checked') == true ? 1 : 0));
-    window.localStorage.setItem('splash', ($('#wet').prop('checked') == true ? 1 : 0));
-    window.localStorage.setItem('rounding', ($('#ron').prop('checked') == true ? 1 : 0));
+  window.localStorage.setItem('splash', ($('#wet').prop('checked') == true ? 1 : 0));
+  window.localStorage.setItem('rounding', ($('#ron').prop('checked') == true ? 1 : 0));
 }
 
 $('input[type="tel"]').on('focus', function(){
@@ -1522,6 +1528,8 @@ function exportData() {
 	ex += ($('#multispawn_decimal').val() == '' ? 0 : $('#multispawn_decimal').val()) + '=';
 	ex += ($('#all_prob').val() == '' ? 0 : $('#all_prob').val()) + '=';
 	ex += ($('#all_prob_decimal').val() == '' ? 0 : $('#all_prob_decimal').val()) + '=';
+	ex += ($('#spend').val() == '' ? 75 : $('#spend').val()) + '=';
+	ex += ($('#spend_decimal').val() == '' ? 0 : $('#spend_decimal').val()) + '=';
 	ex += ($('#wolf').prop('checked') == true ? 1 : 0) + '=';
     ex += ($('#wet').prop('checked') == true ? 1 : 0) + '=';
     ex += ($('#ron').prop('checked') == true ? 1 : 0) + '=';
@@ -1561,7 +1569,9 @@ function importData() {
 	$('#multispawn_decimal').val(im[5]);
 	$('#all_prob').val(im[6]);
 	$('#all_prob_decimal').val(im[7]);
-	if(im[8] == "1") {
+	$('#spend').val(im[8]);
+	$('#spend_decimal').val(im[9]);
+	if(im[10] == "1") {
 		$('#wolf').prop('checked', true);
 		$('#lamb').prop('checked', false);
 	} else {
@@ -1569,7 +1579,7 @@ function importData() {
 		$('#lamb').prop('checked', true);
 	}
 	toggleDark();
-	if(im[9] == "1") {
+	if(im[11] == "1") {
 		$('#wet').prop('checked', true);
 		$('#dry').prop('checked', false);
 	} else {
@@ -1577,7 +1587,7 @@ function importData() {
 		$('#dry').prop('checked', true);
 	}
     toggleSplash(false);
-    if (im[10] == "1") {
+    if (im[12] == "1") {
         $('#ron').prop('checked', true);
         $('#roff').prop('checked', false);
     } else {
@@ -1585,21 +1595,21 @@ function importData() {
         $('#roff').prop('checked', true);
     }
     toggleRounding();
-	$('#relic_factor').val(im[11]);
-	var ocd = im[12];
+	$('#relic_factor').val(im[13]);
+	var ocd = im[14];
 	if('pct' != ocd.substring(0,3)) {
 		if(1000 < parseInt(ocd)) {
 			ocd = 1000;
 		}
 	}
 	$('#ocd').val(ocd.toString());
-	var ima = im[13].split('|');
+	var ima = im[15].split('|');
 	$.each(ima, function(k,v) {
 		var imaa = v.split('_');
 		artifacts.data[imaa[0]].active = parseInt(imaa[1]);
 		artifacts.data[imaa[0]].level = parseInt(imaa[2]);
 	});
-	var ims = im[14].split('|');
+	var ims = im[16].split('|');
 	$.each(ims, function(k,v) {
 		var imss = v.split('_');
 		skills.data[imss[0]].active = parseInt(imss[1]);
