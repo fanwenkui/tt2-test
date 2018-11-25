@@ -723,7 +723,7 @@ function generateUpgrades() {
 	if(u_relics > 0) {
     if('pct' == $('#ocd').val().substring(0,3)) {
       u_step = parseInt($('#ocd').val().substring(3));
-			u_threshhold = Math.floor(u_relics * u_step/100/2);
+			u_threshhold = Math.floor(u_relics * u_step/100/(25 == u_step ? 2 : 1));
 			upgrades.steps = [];
 			window.setTimeout(optimizePct, 1);
     } else {
