@@ -540,7 +540,7 @@ function processPct(k, v, relics, totalAD, tattoo) {
       var lvledLvl = v.level;
       while (lvledUnit > 0.1 && (!rounding || dowse === 0)) {
 		    if (lvledLvl > lvledUnit) {
-	        lvledLvl %= lvledUnit;
+	        lvledLvl = lvledUnit - (lvledLvl % lvledUnit);
 		    }
 		    dowse = dowsingRod(v, lvledUnit, relics, lvledLvl);
 		    v.level = orig_level;
