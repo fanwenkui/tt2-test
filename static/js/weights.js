@@ -162,6 +162,46 @@ function calculateWeight(k,expo) {
 				results.color = determineColor(results.rating, true);
 				break;
 
+			case 'sword_melee':
+				results.rating = reducts.sword[build];
+				if(-1 != hero_type.indexOf('melee')) {
+					results.rating += reducts.hero[build];
+				}
+				results.color = determineColor(results.rating, true);
+				break;
+
+			case 'helmet_flying':
+				results.rating = reducts.helmet[build];
+				if(-1 != hero_type.indexOf('flying')) {
+					results.rating += reducts.hero[build];
+				}
+				results.color = determineColor(results.rating, true);
+				break;
+
+			case 'gold_ground':
+				results.rating = reducts.gold;
+				if(-1 != hero_type.indexOf('ground')) {
+					results.rating += reducts.hero[build];
+				}
+				results.color = determineColor(results.rating, true);
+				break;
+
+			case 'dmg_spell':
+				results.rating = 1;
+				if(-1 != hero_type.indexOf('spell')) {
+					results.rating += reducts.hero[build];
+				}
+				results.color = determineColor(results.rating, true);
+				break;
+
+			case 'companion_ranged':
+				results.rating = reducts.companion[build];
+				if(-1 != hero_type.indexOf('ranged')) {
+					results.rating += reducts.hero[build];
+				}
+				results.color = determineColor(results.rating, true);
+				break;
+
 			case 'pet_gold':
 				results.rating += pets_gold * reducts.gold;
 				results.color = 'warning';
