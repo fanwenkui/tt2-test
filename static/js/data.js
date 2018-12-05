@@ -1039,6 +1039,101 @@ var artifacts = {
 				'reduct' : 'companion'
 			}
 		},
+		'sv' : {
+			'active' : 1,
+			'name' : 'Spearit\'s Vigil',
+			'nickname' : 'SV',
+			'bonus' : ' Duelist Boost',
+			'dime' : 0,
+			'max' : -1,
+			'effect' : .02,
+			'gmax' : .24,
+			'grate' : .00010,
+			'gexpo' : .5,
+			'ad' : .5,
+			'ccoef' : .7,
+			'cexpo' : 2.2,
+			'type' : 'multiply',
+			'expo' : {
+				'sum' : 'sword_melee'
+			}
+		},
+		'sotr' : {
+			'active' : 1,
+			'name' : 'Sword of the Royals',
+			'nickname' : 'SotR',
+			'bonus' : ' Aviator Boost',
+			'dime' : 0,
+			'max' : -1,
+			'effect' : .02,
+			'gmax' : .24,
+			'grate' : .00010,
+			'gexpo' : .5,
+			'ad' : .5,
+			'ccoef' : .7,
+			'cexpo' : 2.2,
+			'type' : 'multiply',
+			'expo' : {
+				'sum' : 'helmet_flying'
+			}
+		},
+		'tcp' : {
+			'active' : 1,
+			'name' : 'The Cobalt Plate',
+			'nickname' : 'TCP',
+			'bonus' : ' Gladiator Boost',
+			'dime' : 0,
+			'max' : -1,
+			'effect' : .02,
+			'gmax' : .24,
+			'grate' : .00010,
+			'gexpo' : .5,
+			'ad' : .5,
+			'ccoef' : .7,
+			'cexpo' : 2.2,
+			'type' : 'multiply',
+			'expo' : {
+				'sum' : 'gold_ground'
+			}
+		},
+		'soj' : {
+			'active' : 1,
+			'name' : 'Sigils of Judgement',
+			'nickname' : 'SoJ',
+			'bonus' : ' Mystic Boost',
+			'dime' : 0,
+			'max' : -1,
+			'effect' : .02,
+			'gmax' : .24,
+			'grate' : .00010,
+			'gexpo' : .5,
+			'ad' : .5,
+			'ccoef' : .7,
+			'cexpo' : 2.2,
+			'type' : 'multiply',
+			'expo' : {
+				'sum' : 'dmg_spell'
+			}
+		},
+		'fotk' : {
+			'active' : 1,
+			'name' : 'Foliage of the Keeper',
+			'nickname' : 'FotK',
+			'bonus' : ' Marksman Boost',
+			'dime' : 0,
+			'max' : -1,
+			'effect' : .02,
+			'gmax' : .24,
+			'grate' : .00010,
+			'gexpo' : .5,
+			'ad' : .5,
+			'ccoef' : .7,
+			'cexpo' : 2.2,
+			'type' : 'multiply',
+			'expo' : {
+				'sum' : 'companion_ranged'
+			}
+		},
 		'ig' : {
 			'active' : 1,
 			'name' : '入侵者的海姆达尔之角',
@@ -1924,7 +2019,12 @@ var artifact_costs = {
 	'83' : 178000000000000000000000000000000,
 	'84' : 2690000000000000000000000000000000,
 	'85' : 40400000000000000000000000000000000,
-	'86' : -1
+	'86' : 611000000000000000000000000000000000,
+	'87' : 9270000000000000000000000000000000000,
+	'88' : 141000000000000000000000000000000000000,
+	'89' : 2170000000000000000000000000000000000000,
+	'90' : 33300000000000000000000000000000000000000,
+	'91' : -1
 };
 
 var tiers = {
