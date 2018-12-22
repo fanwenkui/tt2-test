@@ -33,14 +33,6 @@ var reducts = {
 		'hs' : 1,
 		'cs' : 0
 	},
-	'tap_ls' : {
-		'hero' : 0,
-		'tap' : 1,
-		'pet' : 1,
-		'sc' : 1,
-		'hs' : 0,
-		'cs' : 0
-	},
 	'hero' : {
 		'hero' : 1,
 		'tap' : 1/2,
@@ -173,9 +165,9 @@ var reducts = {
 
 var artifacts = {
 	'totalAD' : 0,
-  'data' : {
-	  'bos' : {
-		  'active' : 1,
+	'data' : {
+		'bos' : {
+			'active' : 1,
 			'name' : '暗影之书',
 			'nickname' : 'BoS',
 			'bonus' : ' 遗物倍增',
@@ -380,7 +372,10 @@ var artifacts = {
 			'cexpo' : 1.8,
 			'type' : 'multiply',
 			'expo' : {
-				'flat' : 'gold_spawn'
+				'gold' : [
+					'coc',
+					'all'
+				]
 			}
 		},
 		'tbc' : {
@@ -1042,7 +1037,7 @@ var artifacts = {
 		'sv' : {
 			'active' : 1,
 			'name' : 'Spearit的 哨',
-			'nickname' : 'SV',
+			'nickname' : 'SotR',
 			'bonus' : ' 决斗升压',
 			'dime' : 0,
 			'max' : -1,
@@ -1061,7 +1056,7 @@ var artifacts = {
 		'sotr' : {
 			'active' : 1,
 			'name' : '皇家队之剑',
-			'nickname' : 'SotR',
+			'nickname' : 'SV',
 			'bonus' : ' 飞行员升压',
 			'dime' : 0,
 			'max' : -1,
@@ -2042,9 +2037,9 @@ var skills = {
 		'blue' : 0,
 		'green' : 0
 	},
-  'data' : {
-	  'kv' : {
-		  'active' : 1,
+	'data' : {
+		'kv' : {
+			'active' : 1,
 			'name' : '骑士之勇',
 			'nickname' : 'R1',
 			'branch' : 'red',
@@ -2089,7 +2084,7 @@ var skills = {
 			}
 		},
 		'cho' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : '骑士勋章',
 			'nickname' : 'R2_1',
 			'branch' : 'red',
@@ -2134,7 +2129,7 @@ var skills = {
 			}
 		},
 		'pe' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : '宠物进化',
 			'nickname' : 'R2_2',
 			'branch' : 'red',
@@ -2180,7 +2175,7 @@ var skills = {
 			}
 		},
 		'phom' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : '米达斯之心',
 			'branch' : 'red',
 			'nickname' : 'R2_3',
@@ -2222,18 +2217,18 @@ var skills = {
 			},
 			'expos' : {
 				'b1' : { 'gold' : [
-					'boss',
-					'phom',
-					'all',
-				] },
+						'boss',
+						'phom',
+						'all',
+					] },
 				'b2' : { 'gold' : [
-					'phom',
-					'all',
-				] }
+						'phom',
+						'all',
+					] }
 			}
 		},
 		'cs' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : '劈砍',
 			'nickname' : 'R3_1',
 			'branch' : 'red',
@@ -2279,7 +2274,7 @@ var skills = {
 			}
 		},
 		'si' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : '召唤地狱火',
 			'nickname' : 'R3_2',
 			'branch' : 'red',
@@ -2325,7 +2320,7 @@ var skills = {
 			}
 		},
 		'lbu' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : '闪电爆发',
 			'nickname' : 'R3_3',
 			'branch' : 'red',
@@ -2372,7 +2367,7 @@ var skills = {
 			}
 		},
 		'bf' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : '野蛮之怒',
 			'nickname' : 'R4_1',
 			'branch' : 'red',
@@ -2408,7 +2403,7 @@ var skills = {
 			}
 		},
 		'fz' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : '闪电穿梭',
 			'nickname' : 'R4_3',
 			'branch' : 'red',
@@ -2445,7 +2440,7 @@ var skills = {
 			}
 		},
 		'mc' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : '指挥官',
 			'nickname' : 'Y1',
 			'branch' : 'yellow',
@@ -2490,7 +2485,7 @@ var skills = {
 			}
 		},
 		'sow' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : '战利品',
 			'nickname' : 'Y2_1',
 			'branch' : 'yellow',
@@ -2532,20 +2527,20 @@ var skills = {
 			},
 			'expos' : {
 				'b1' : { 'gold' : [
-					'coc',
-					'fairy',
-					'partial_inactive',
-					'all'
-				] },
+						'coc',
+						'fairy',
+						'partial_inactive',
+						'all'
+					] },
 				'b2' : { 'gold' : [
-					'coc',
-					'fairy',
-					'all'
-				] }
+						'coc',
+						'fairy',
+						'all'
+					] }
 			}
 		},
 		'hm' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : '英雄王者',
 			'nickname' : 'Y2_2',
 			'branch' : 'yellow',
@@ -2591,7 +2586,7 @@ var skills = {
 			}
 		},
 		'aas' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : '空袭',
 			'nickname' : 'Y2_3',
 			'branch' : 'yellow',
@@ -2637,7 +2632,7 @@ var skills = {
 			}
 		},
 		'ti' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : '战略洞悉',
 			'nickname' : 'Y3_1',
 			'branch' : 'yellow',
@@ -2683,7 +2678,7 @@ var skills = {
 			}
 		},
 		'sl' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : '灼热之光',
 			'nickname' : 'Y3_2',
 			'branch' : 'yellow',
@@ -2729,7 +2724,7 @@ var skills = {
 			}
 		},
 		'coo' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : '协同进攻',
 			'nickname' : 'Y3_3',
 			'branch' : 'yellow',
@@ -2775,7 +2770,7 @@ var skills = {
 			}
 		},
 		'aaw' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : '灵魂觉醒',
 			'nickname' : 'Y4_1',
 			'branch' : 'yellow',
@@ -2811,7 +2806,7 @@ var skills = {
 			}
 		},
 		'as' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : '锚定射击',
 			'nickname' : 'Y4_3',
 			'branch' : 'yellow',
@@ -2937,9 +2932,9 @@ var skills = {
 			'expos' : {
 				'b1' : { 'flat' : 'hom' },
 				'b2' : { 'gold' : [
-					'fairy',
-					'all'
-				] }
+						'fairy',
+						'all'
+					] }
 			}
 		},
 		'ar' : {
@@ -3035,7 +3030,7 @@ var skills = {
 			}
 		},
 		'fc' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : '仙女魔力',
 			'nickname' : 'B3_1',
 			'branch' : 'blue',
@@ -3066,7 +3061,7 @@ var skills = {
 			}
 		},
 		'ms' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : '法力虹吸',
 			'nickname' : 'B3_2',
 			'branch' : 'blue',
@@ -3112,7 +3107,7 @@ var skills = {
 			}
 		},
 		'ed' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : '永恒黑暗',
 			'nickname' : 'B3_3',
 			'branch' : 'blue',
@@ -3158,7 +3153,7 @@ var skills = {
 			}
 		},
 		'mm' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : '曼尼马纳',
 			'nickname' : 'B4_1',
 			'branch' : 'blue',
@@ -3194,7 +3189,7 @@ var skills = {
 			}
 		},
 		'ls' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : '闪电打击',
 			'nickname' : 'B4_2',
 			'branch' : 'blue',
@@ -3225,13 +3220,13 @@ var skills = {
 				'15' : { 'cost' : 131, 'bonus' : .915, 'bonus2' : .98, 'bonus3' : .02 }
 			},
 			'expos' : {
-				'b1' : { 'reduct' : 'tap_ls' },
-				'b2' : { 'reduct' : 'tap_ls' },
-				'b3' : { 'reduct' : 'tap_ls' }
+				'b1' : { 'flat' : 'dmg' },
+				'b2' : { 'flat' : 'dmg' },
+				'b3' : { 'flat' : 'dmg' }
 			}
 		},
 		'ds' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : '相位转移',
 			'nickname' : 'B4_3',
 			'branch' : 'blue',
@@ -3310,8 +3305,8 @@ var skills = {
 			'expos' : {
 				'b1' : { 'flat' : 'gold' },
 				'b2' : { 'gold' : [
-					'inactive'
-				] }
+						'inactive'
+					] }
 			}
 		},
 		'an' : {
@@ -3419,8 +3414,8 @@ var skills = {
 				'10' : { 'cost' : 6, 'bonus' : 20, 'bonus2' : .3, 'bonus3' : 0 }
 			},
 			'expos' : {
-				'b1' : { 'flat' : 'inactive' },
-				'b2' : { 'flat' : 'inactive' }
+				'b1' : { 'flat' : 'inactive_coc' },
+				'b2' : { 'flat' : 'inactive_coc' }
 			}
 		},
 		'tv' : {
