@@ -1,489 +1,451 @@
 ﻿<!doctype html>
 <html lang="en">
-	<head>
-		<!-- Required meta tags -->
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="css/bootstrap.min.css" />
-		<link rel="stylesheet" href="css/app.css" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/app.css" />
 
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-		<script>
-		  (adsbygoogle = window.adsbygoogle || []).push({
-		    google_ad_client: "ca-pub-8453254126408456",
-		    enable_page_level_ads: true
-		  });
-		</script>
-		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?theme=grey&tracking=1&thirdparty=1&always=1&scrolling=1&remember=30"></script>
-	</head>
-	<body>
-		<div class="container-fluid">
-			<div class="sticky-top border-bottom border-secondary">
-				<ul class="nav nav-pills" id="navTab" role="tablist">
-				  <li class="nav-item">
-				    <a class="nav-link active" id="style-tab" data-toggle="tab" href="#style" role="tab" aria-controls="style" aria-selected="true">Options</a>
-				  </li>
-				  <li class="nav-item">
-				    <a class="nav-link" id="artifacts-tab" data-toggle="tab" href="#artifactab" role="tab" aria-controls="artifactab" aria-selected="false">Input</a>
-				  </li>
-				  <li class="nav-item">
-				    <a class="nav-link" id="reccs-tab" data-toggle="tab" href="#reccs" role="tab" aria-controls="reccs" aria-selected="false">Relics</a>
-				  </li>
-					<li class="nav-item">
-				    <a class="nav-link" id="sp-tab" data-toggle="tab" href="#sp" role="tab" aria-controls="sp" aria-selected="false">SP</a>
-				  </li>
-					<li class="nav-item d-none">
-				    <a class="nav-link" id="dal-tab" data-toggle="tab" href="#dal" role="tab" aria-controls="dal" aria-selected="false">Selfie</a>
-				  </li>
-				</ul>
-				<h1 class="h4">TT2 Optimizer <span class="badge badge-secondary">2.12.0</span></h1>
-			</div>
-			<div class="tab-content" id="tabContent">
-			  <div class="tab-pane fade show active" id="style" role="tabpanel" aria-labelledby="style-tab">
-					<p>This tool is intended to help you determine how to best spend your relics and SP to maximize your potential based on your playstyle. On the Artifact side, it should help prioritize your best damage increasing artifacts while not completely ignoring your remaining artifacts for small AD boosts. On the SP side it should help identify the skills with the biggest boost for your build.</p>
-					<p>During your first visit, fill out information about your build in the Options tab and then work your way across the tabs to fill in information about your current artifact and skill levels. Lastly, on the Relics tab you'll put in your available relics and receive recommendations and similarly on the SP tab you'll be able to receive recommendations on how to best spend your SP.</p>
-					<p>Uncheck any artifacts you want to ignore, but leave any artifacts you don't have yet checked with a level of 0. It will also recommend when you should get a new artifact instead of upgrading your existing ones.</p>
-          <p>OK! Now, you're ready to answer the following questions to improve the optimization recommendations to best suit your play style.</p>
-					<form>
-						<div class="form-row mb-4">
-							<div class="form-group col-12 col-md-6 col-lg-4">
-								<label for="build">Which build do you use?</label>
-								<select class="form-control" id="build" onchange="adjustWeights();">
-									<option value="hero">Hero</option>
-									<option value="tap">Tap</option>
-									<option value="pet">Pet</option>
-									<option value="hs">Heavenly Strike</option>
-									<option value="sc">Shadow Clone</option>
-									<option value="cs">Clan Ship</option>
-								</select>
-							</div>
-							<div class="form-group col-12 col-md-6 col-lg-4">
-								<label for="hero">Which is your strongest hero?</label>
-								<select class="form-control" id="hero" onchange="adjustWeights();">
-									<option value="maya">Maya Muerta the Watcher</option>
-									<option value="zato">Zato the Blind Staff Master</option>
-									<option value="sophia">Sophia, Champion of Swords</option>
-									<option value="lance">Lance, Knight of Cobalt Steel</option>
-									<option value="pingo">Pingo of the Tori</option>
-									<option value="rosabella">Rosabella Bonnie Archer</option>
-									<option value="gulbrand">Gulbrand the Destroyer</option>
-									<option value="davey">Captain Davey Cannon</option>
-									<option value="rhys">Rhys Mage of Order Evetga</option>
-									<option value="kronus">Kronus, Bringer of Judgement</option>
-									<option value="cosette">Cosette, Jewel of House Sabre</option>
-									<option value="kiki">Kiki the Dragon Rider</option>
-									<option value="maddie">Maddie, Shadow Thief</option>
-									<option value="beany">Beany Sprout the 1st</option>
-									<option value="sawyer">Sawyer the Wild Gunslinger</option>
-									<option value="ursa">Lil' Ursa</option>
-									<option value="saje">Saje the Garden Keeper</option>
-									<option value="wally">Wally Wat the Magician</option>
-									<option value="jayce">Jayce the Ruthless Cutter</option>
-									<option value="pharaoh">The Great Pharaoh</option>
-									<option value="boomoh">Boomoh Doctor</option>
-									<option value="dex">Dex-1000</option>
-									<option value="cass">The Great Madame Cass</option>
-									<option value="lala">Lala Quickshot</option>
-									<option value="aya">Aya the Lightning Violet</option>
-									<option value="lucy">Lady Lucy the Night Caster</option>
-									<option value="jazz">Jazz Rockerfellow</option>
-									<option value="maple">Maple the Autumn Guardian</option>
-									<option value="kin">Kin the Puffy Beast</option>
-									<option value="titania">Princess Titania of Fay</option>
-									<option value="miki">Miki the Graceful Dancer</option>
-									<option value="mina">Mina the Priestess of Light</option>
-									<option value="yzafa">Yzafa the Fearsome Bandit</option>
-									<option value="zolom">Zolom Blaster, Space Hunter</option>
-									<option value="finn">Finn the Funny Guard</option>
-									<option value="nohni">Nohni the Spearit</option>
-									<option value="damon">Damon of the Darkness</option>
-								</select>
-							</div>
-							<div class="form-group col-12 col-md-6 col-lg-4">
-								<label for="gold">What's your primary source of gold?</label>
-								<select class="form-control" id="gold" onchange="adjustWeights();">
-									<option value="all">All</option>
-									<option value="boss">Boss</option>
-									<option value="coc">Chesterson</option>
-									<option value="fairy">Fairies</option>
-									<option value="phom">Heart of Midas (pHoM)</option>
-								</select>
-							</div>
-							<div class="form-group col-12 col-md-6 col-lg-4">
-								<label for="active">Do you primarily play ...</label>
-								<select class="form-control" id="active" onchange="adjustWeights();">
-									<option value="online">Online</option>
-									<option value="offline">Offline</option>
-								</select>
-							</div>
-							<div class="form-group col-12 col-md-6 col-lg-4">
-								<label for="multispawn">Multispawn chance from Equipment</label>
-								<div class="input-group">
-									<input type="tel" id="multispawn" class="form-control" placeholder="0" aria-label="whole numbers for multispawn" onchange="adjustWeights();">
-									<span class="input-group-text px-1 rounded-0">.</span>
-									<input type="tel" id="multispawn_decimal" class="form-control" placeholder="00" aria-label="decimals for multispawn" onchange="adjustWeights();">
-									<span class="input-group-text px-5 rounded-0">%</span>
-								</div>
-							</div>
-							<div class="form-group col-12 col-md-6 col-lg-4">
-								<label for="all_prob">All probability chance from Equipment</label>
-								<div class="input-group">
-									<input type="tel" id="all_prob" class="form-control" placeholder="0" aria-label="whole numbers for all probability" onchange="adjustWeights();">
-									<span class="input-group-text px-1 rounded-0">.</span>
-									<input type="tel" id="all_prob_decimal" class="form-control" placeholder="00" aria-label="decimals for all probability" onchange="adjustWeights();">
-									<span class="input-group-text px-5 rounded-0">%</span>
-								</div>
-							</div>
-							<div class="form-check col-12 col-md-6 col-lg-4 mb-4">
-								<div class="mb-2">Choose a Theme</div>
-								<div class="btn-group btn-group-toggle" data-toggle="buttons">
-								  <label id="btnlamb" class="btn btn-info active">
-								    <input type="radio" name="theme" id="lamb" autocomplete="off" checked onchange="toggleDark();"> Pure Lamb
-								  </label>
-								  <label id="btnwolf" class="btn btn-dark">
-								    <input type="radio" name="theme" id="wolf" autocomplete="off" onchange="toggleDark();"> Dark Wolf
-								  </label>
-								</div>
-							</div>
-							<div class="form-check col-12 col-md-6 col-lg-4 mb-4">
-								<div class="mb-2">Boost Splash Damage?</div>
-								<div class="btn-group btn-group-toggle" data-toggle="buttons">
-								  <label id="btndry" class="btn btn-dark">
-								    <input type="radio" name="splash" id="dry" autocomplete="off" checked onchange="toggleSplash();"> No Thanks
-								  </label>
-								  <label id="btnwet" class="btn btn-info">
-								    <input type="radio" name="splash" id="wet" autocomplete="off" onchange="toggleSplash();"> Yes, Please!
-								  </label>
-								</div>
-							</div>
-					    <div class="form-check col-12 col-md-6 col-lg-4 mb-4">
-                  <div class="mb-2">% Rounding On?*</div>
-					        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-				            <label id="btnRoff" class="btn btn-info">
-			                <input type="radio" name="rounding" id="roff" autocomplete="off" checked onchange="toggleRounding();"> Rounding Off
-				            </label>
-				            <label id="btnRon" class="btn btn-dark">
-			                <input type="radio" name="rounding" id="ron" autocomplete="off" onchange="toggleRounding();"> Rounding On
-				            </label>
-					        </div>
-									<p class="small">* It is assumed that rounding is on for non-% based recommendations</p>
-					    </div>
-						</div>
-					</form>
- 					<button type="button" class="btn btn-secondary mb-4" onclick="exportData()">Export Data</button>
-          <button type="button" class="btn btn-secondary mb-4" onclick="startImport()">Import Data</button>
-          <div id="export_wrap">
-            <div class="mb-2">Copy and paste the following exported data into another instance of the optimizer.</div>
-            <code class="mb-5" id="export"></code>
-						<div class="mt-5 mb-5">&#x00A0;</div>
-          </div>
-          <div id="import_wrap">
-            <div class="mb-2">Paste in the exported data you got from another instance of the optimizer. NOTE: THERE IS NO UNDOING THIS.</div>
-            <div class="form-group col-12">
-                <textarea class="form-control mb-2" id="import" rows="10"></textarea>
-                <button type="button" class="btn btn-info mb-4" onclick="importData()">Start Import</button>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-8453254126408456",
+            enable_page_level_ads: true
+        });
+    </script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?theme=grey&tracking=1&thirdparty=1&always=1&scrolling=1&remember=30"></script>
+</head>
+<body class="bg-dark text-light">
+<div class="container-fluid">
+    <div class="sticky-top border-bottom border-secondary bg-dark">
+        <ul class="nav nav-pills" id="navTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link text-light active" id="style-tab" data-toggle="tab" href="#style" role="tab" aria-controls="style" aria-selected="true">Options</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" id="artifacts-tab" data-toggle="tab" href="#artifactab" role="tab" aria-controls="artifactab" aria-selected="false">Input</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" id="reccs-tab" data-toggle="tab" href="#reccs" role="tab" aria-controls="reccs" aria-selected="false">Relics</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" id="sp-tab" data-toggle="tab" href="#sp" role="tab" aria-controls="sp" aria-selected="false">SP</a>
+            </li>
+            <li class="nav-item d-none">
+                <a class="nav-link text-light" id="dal-tab" data-toggle="tab" href="#dal" role="tab" aria-controls="dal" aria-selected="false">Selfie</a>
+            </li>
+        </ul>
+        <h1 class="h4">TT2 Optimizer <span class="badge badge-secondary">2.12.1</span></h1>
+    </div>
+    <div class="tab-content" id="tabContent">
+        <div class="tab-pane fade show active" id="style" role="tabpanel" aria-labelledby="style-tab">
+            <p>This tool is intended to help you determine how to best spend your relics and SP to maximize your potential based on your playstyle. On the Artifact side, it should help prioritize your best damage increasing artifacts while not completely ignoring your remaining artifacts for small AD boosts. On the SP side it should help identify the skills with the biggest boost for your build.</p>
+            <p>During your first visit, fill out information about your build in the Options tab and then work your way across the tabs to fill in information about your current artifact and skill levels. Lastly, on the Relics tab you'll put in your available relics and receive recommendations and similarly on the SP tab you'll be able to receive recommendations on how to best spend your SP.</p>
+            <p>OK! Now, you're ready to answer the following questions to improve the optimization recommendations to best suit your play style.</p>
+            <form>
+                <div class="form-row mb-4">
+                    <div class="form-group col-12 col-md-6 col-lg-4">
+                        <label for="build">Which build do you use?</label>
+                        <select class="form-control" id="build" onchange="adjustWeights();">
+                            <option value="hero">Hero</option>
+                            <option value="tap">Tap</option>
+                            <option value="pet">Pet</option>
+                            <option value="hs">Heavenly Strike</option>
+                            <option value="sc">Shadow Clone</option>
+                            <option value="cs">Clan Ship</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-12 col-md-6 col-lg-4">
+                        <label for="hero">Which is your strongest hero?</label>
+                        <select class="form-control" id="hero" onchange="adjustWeights();">
+                            <option value="maya">Maya Muerta the Watcher</option>
+                            <option value="zato">Zato the Blind Staff Master</option>
+                            <option value="sophia">Sophia, Champion of Swords</option>
+                            <option value="lance">Lance, Knight of Cobalt Steel</option>
+                            <option value="pingo">Pingo of the Tori</option>
+                            <option value="rosabella">Rosabella Bonnie Archer</option>
+                            <option value="gulbrand">Gulbrand the Destroyer</option>
+                            <option value="davey">Captain Davey Cannon</option>
+                            <option value="rhys">Rhys Mage of Order Evetga</option>
+                            <option value="kronus">Kronus, Bringer of Judgement</option>
+                            <option value="cosette">Cosette, Jewel of House Sabre</option>
+                            <option value="kiki">Kiki the Dragon Rider</option>
+                            <option value="maddie">Maddie, Shadow Thief</option>
+                            <option value="beany">Beany Sprout the 1st</option>
+                            <option value="sawyer">Sawyer the Wild Gunslinger</option>
+                            <option value="ursa">Lil' Ursa</option>
+                            <option value="saje">Saje the Garden Keeper</option>
+                            <option value="wally">Wally Wat the Magician</option>
+                            <option value="jayce">Jayce the Ruthless Cutter</option>
+                            <option value="pharaoh">The Great Pharaoh</option>
+                            <option value="boomoh">Boomoh Doctor</option>
+                            <option value="dex">Dex-1000</option>
+                            <option value="cass">The Great Madame Cass</option>
+                            <option value="lala">Lala Quickshot</option>
+                            <option value="aya">Aya the Lightning Violet</option>
+                            <option value="lucy">Lady Lucy the Night Caster</option>
+                            <option value="jazz">Jazz Rockerfellow</option>
+                            <option value="maple">Maple the Autumn Guardian</option>
+                            <option value="kin">Kin the Puffy Beast</option>
+                            <option value="titania">Princess Titania of Fay</option>
+                            <option value="miki">Miki the Graceful Dancer</option>
+                            <option value="mina">Mina the Priestess of Light</option>
+                            <option value="yzafa">Yzafa the Fearsome Bandit</option>
+                            <option value="zolom">Zolom Blaster, Space Hunter</option>
+                            <option value="finn">Finn the Funny Guard</option>
+                            <option value="nohni">Nohni the Spearit</option>
+                            <option value="damon">Damon of the Darkness</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-12 col-md-6 col-lg-4">
+                        <label for="gold">What's your primary source of gold?</label>
+                        <select class="form-control" id="gold" onchange="adjustWeights();">
+                            <option value="all">All</option>
+                            <option value="boss">Boss</option>
+                            <option value="coc">Chesterson</option>
+                            <option value="fairy">Fairies</option>
+                            <option value="phom">Heart of Midas (pHoM)</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-12 col-md-6 col-lg-4">
+                        <label for="active">Do you primarily play ...</label>
+                        <select class="form-control" id="active" onchange="adjustWeights();">
+                            <option value="online">Online</option>
+                            <option value="offline">Offline</option>
+                        </select>
+                    </div>
+                    <div class="form-check col-12 col-md-6 col-lg-4 mb-4">
+                        <div class="mb-2">Boost Splash Damage?</div>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label id="btndry" class="btn btn-dark">
+                                <input type="radio" name="splash" id="dry" autocomplete="off" checked onchange="toggleSplash();"> No Thanks
+                            </label>
+                            <label id="btnwet" class="btn btn-info">
+                                <input type="radio" name="splash" id="wet" autocomplete="off" onchange="toggleSplash();"> Yes, Please!
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <button type="button" class="btn btn-secondary mb-4" onclick="exportData()">Export Data</button>
+            <button type="button" class="btn btn-secondary mb-4" onclick="startImport()">Import Data*</button>
+            <p class="small">* NOTE: if you are using third-party exporters (e.g., Android apps that report to export the data in my format), that is not a supported integration. Particularly after patches this can cause trouble with those external services as the data structure changes and they might not be up-to-date with my current format. You would need to report that to the provider of the export as it is not related to this service at all. Sorry for any interruptions this might cause.</p>
+            <div id="export_wrap">
+                <div class="mb-2">Copy and paste the following exported data into another instance of the optimizer.</div>
+                <code class="mb-5" id="export"></code>
+                <div class="mt-5 mb-5">&#x00A0;</div>
             </div>
-          </div>
-				</div>
-			  <div class="tab-pane fade" id="artifactab" role="tabpanel" aria-labelledby="artifacts-tab">
-					<p>Enter your artifact & skill data below to receive recommendations on the Relics & SP tabs.</p>
-					<h5>Artifacts</h5>
-					<p>Fill out the current level of your artifacts. If you want to ignore an artifact uncheck it. If you don't have it yet, set it to 0 and it will let you know when you should save up and roll the dice on a new artifact.</p>
-					<p>If this is your first time using the tool, turn off auto-recalculations until you finish entering your artifact levels to prevent the tool from becoming bogged down with recalculating constantly as you enter numbers. This is especially important if you have extremely large artifact levels.</p>
-					<div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
-					  <label id="btnrecalcon" class="btn btn-primary active">
-					    <input type="radio" name="recalc" id="recalc_on" autocomplete="off" checked onchange="updateRecalc();"> Auto Recalc. ON
-					  </label>
-					  <label id="btnrecalcoff" class="btn btn-secondary">
-					    <input type="radio" name="recalc" id="recalc_off" autocomplete="off" onchange="updateRecalc();"> Auto Recalc. OFF
-					  </label>
-					</div>
-					<p>AD Sanity Check: <span id="adsanity">0%</span></p>
-					<button type="button" class="btn btn-primary mb-3" onclick="checkAllArtifacts();">Check All Artifacts</button>
-					<button type="button" class="btn btn-secondary mb-3" onclick="dalViewArtifact(1);">Take a Selfie of your Artifacts</button>
-					<div class="col-12 col-md-8 col-lg-6">
-						<div class="row mb-2 ml-2">
-							Legend:
-							<span class="badge badge-pill badge-info ml-2">All</span>
-							<span class="badge badge-pill badge-success ml-2">Build</span>
-							<span class="badge badge-pill badge-secondary ml-2">Partial</span>
-							<span class="badge badge-pill badge-warning ml-2">Gold</span>
-							<span class="badge badge-pill badge-danger ml-2">AD</span>
-						</div>
-						<table class="table table-striped table-sm">
-							<thead>
-								<tr>
-									<th scope="col"></th>
-									<th scope="col">Artifact</th>
-									<th scope="col">Level</th>
-									<th scope="col">Expo</th>
-									<th scope="col">Info</th>
-								</tr>
-							</thead>
-							<tbody id="artifacts">
-							</tbody>
-						</table>
-					</div>
-					<h5>Skills</h5>
-					<p>Fill out the current level of your skills. If you want to ignore a skill uncheck it. If you don't have any points in it yet, set it to 0.</p>
-					<button type="button" class="btn btn-primary mb-3" onclick="checkAllSkills();">Check All Skills</button>
-					<button type="button" class="btn btn-danger mb-3" onclick="resetSkills();">Reset All Skills</button>
-					<div class="col-12 col-md-8 col-lg-6">
-						<div class="row mb-2 ml-2">
-							Legend:
-							<span class="badge badge-pill badge-success ml-2">Build</span>
-							<span class="badge badge-pill badge-secondary ml-2">Partial</span>
-							<span class="badge badge-pill badge-warning ml-2">Gold</span>
-							<span class="badge badge-pill badge-danger ml-2">Prereq</span>
-						</div>
-						<table class="table table-striped table-sm">
-							<thead>
-								<tr>
-									<th scope="col"></th>
-									<th scope="col">Skill</th>
-									<th scope="col">Level</th>
-									<th scope="col">Expo</th>
-									<th scope="col">Info</th>
-								</tr>
-							</thead>
-							<tbody id="skills">
-							</tbody>
-						</table>
-					</div>
-				</div>
-			  <div class="tab-pane fade" id="dal" role="tabpanel" aria-labelledby="dal-tab">
-          <div class="row mb-4" id="daltifacts">
-          </div>
-					<button type="button" class="btn btn-secondary mb-3" onclick="dalViewArtifact(0);">Exit Selfie Mode</button>
-				</div>
-			  <div class="tab-pane fade" id="reccs" role="tabpanel" aria-labelledby="reccs-tab">
-					<div id="relicreccs">
-						<p>Enter the total number of relics you're willing to spend.</p>
-						<form class="mb-4">
-							<div class="input-group col-12 col-md-6 col-xl-4">
-								<input type="tel" id="relics" class="form-control" placeholder="0" aria-label="whole numbers for relics">
-								<span class="input-group-text px-1 rounded-0">.</span>
-								<input type="tel" id="relics_decimal" class="form-control" placeholder="00" aria-label="decimals for relics">
-								<select id="relic_factor">
-									<option value="e0"> </option>
-									<option value="e3">K</option>
-									<option value="e6">M</option>
-									<option value="e9">B</option>
-									<option value="e12">T</option>
-									<option value="e13">e13</option>
-									<option value="e14">e14</option>
-									<option value="e15">e15/aa</option>
-									<option value="e16">e16</option>
-									<option value="e17">e17</option>
-									<option value="e18">e18/ab</option>
-									<option value="e19">e19</option>
-									<option value="e20">e20</option>
-									<option value="e21">e21/ac</option>
-									<option value="e22">e22</option>
-									<option value="e23">e23</option>
-									<option value="e24">e24/ad</option>
-									<option value="e25">e25</option>
-									<option value="e26">e26</option>
-									<option value="e27">e27/ae</option>
-									<option value="e28">e28</option>
-									<option value="e29">e29</option>
-									<option value="e30">e30/af</option>
-									<option value="e31">e31</option>
-									<option value="e32">e32</option>
-									<option value="e33">e33/ag</option>
-									<option value="e34">e34</option>
-									<option value="e35">e35</option>
-									<option value="e36">e36/ah</option>
-									<option value="e37">e37</option>
-									<option value="e38">e38</option>
-									<option value="e39">e39/ai</option>
-									<option value="e40">e40</option>
-									<option value="e41">e41</option>
-									<option value="e42">e42/aj</option>
-									<option value="e43">e43</option>
-									<option value="e44">e44</option>
-									<option value="e45">e45/ak</option>
-									<option value="e46">e46</option>
-									<option value="e47">e47</option>
-									<option value="e48">e48/al</option>
-									<option value="e49">e49</option>
-									<option value="e50">e50</option>
-									<option value="e51">e51/am</option>
-									<option value="e52">e52</option>
-									<option value="e53">e53</option>
-									<option value="e54">e54/an</option>
-									<option value="e55">e55</option>
-									<option value="e56">e56</option>
-									<option value="e57">e57/ao</option>
-									<option value="e58">e58</option>
-									<option value="e59">e59</option>
-									<option value="e60">e60/ap</option>
-									<option value="e61">e61</option>
-									<option value="e62">e62</option>
-									<option value="e63">e63/aq</option>
-									<option value="e64">e64</option>
-									<option value="e65">e65</option>
-									<option value="e66">e66/ar</option>
-									<option value="e67">e67</option>
-									<option value="e68">e68</option>
-									<option value="e69">e69/as</option>
-									<option value="e70">e70</option>
-									<option value="e71">e71</option>
-									<option value="e72">e72/at</option>
-									<option value="e73">e73</option>
-									<option value="e74">e74</option>
-									<option value="e75">e75/au</option>
-									<option value="e76">e76</option>
-									<option value="e77">e77</option>
-									<option value="e78">e78/av</option>
-									<option value="e79">e79</option>
-									<option value="e80">e80</option>
-									<option value="e81">e81/aw</option>
-								</select>
-							</div>
-	            <label class="ml-4"><small>(Whole numbers on the left, decimals on the right.)</small></label>
-						</form>
-						<form class="mb-4">
-						    <div class="input-group col-12 col-md-6 col-xl-4 mb-2">
-						        <span class="input-group-text">Use Increments* of </span>
-						        <select id="ocd">
-						            <option value="1">1</option>
-						            <option value="10">10</option>
-						            <option value="100">100</option>
-						            <option value="1000">1000</option>
-						            <option value="pct1">1%</option>
-						            <option value="pct5">5%</option>
-						            <option value="pct25">25%</option>
-						            <option value="pct100">MAX</option>
-						        </select>
-						    </div>
-								<div class="input-group col-12 col-md-6 col-xl-4 mb-2">
-						        <span class="input-group-text">Spend </span>
-										<input type="tel" id="spend" class="form-control" placeholder="0" aria-label="whole numbers for relic spend">
-										<span class="input-group-text px-1 rounded-0">.</span>
-										<input type="tel" id="spend_decimal" class="form-control" placeholder="00" aria-label="decimals for relic spend">
-										<span class="input-group-text">% of avail. relics**</span>
-						    </div>
-							<label class="ml-4"><small>*Note, because the bonus effects and the cost of artifacts don't scale linearly, when you change your increments you might get different results. This is because 1 set of 1000 might not be the same as 10 sets of 100, when you evaluate each individual set. After a few prestiges this will start to balance out and you'll see the same types of results you saw before switching up your increments.</small></label>
-							<label class="ml-4"><small>**Note, this only applies to %-based recommendations.</small></label>
-				  	</form>
-						<button id="generateRelicUpdates" type="button" class="btn btn-primary mb-4" onclick="generateUpgrades()">Generate Upgrades</button>
-					</div>
-					<div id="relicsuggs">
-						<div class="row mb-2 ml-2">
-							Legend:
-							<span class="badge badge-pill badge-info ml-2">All</span>
-							<span class="badge badge-pill badge-success ml-2">Build</span>
-							<span class="badge badge-pill badge-secondary ml-2">Partial</span>
-							<span class="badge badge-pill badge-warning ml-2">Gold</span>
-							<span class="badge badge-pill badge-danger ml-2">AD</span>
-						</div>
-						<div class="col-12 col-md-8 col-lg-6 mb-4">
-							<div class="progress mb-3 border border-dark" id="progressBar">
-								<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%" id="progress"></div>
-							</div>
-							<div id="pudding" class="mb-4"></div>
-							<div id="suggestions"></div>
-							<p id="accept2">If you purchase all these upgrades, hit the Complete button to update the Artifact Status table and clear the results.</p>
-							<div id="accept"></div>
-							<p id="new_artifact" class="ml-2"></p>
-						</div>
-					</div>
-				</div>
-				<div class="tab-pane fade" id="sp" role="tabpanel" aria-labelledby="sp-tab">
-					<p>The following are your next best options for how to spend your SP ranked in order of effectiveness. If you choose to take one of the recommendations, press the button and it will recalculate your next top recommendations. This allows you to decide if you want to save up for your #1 recommendation or take a less effective (but likely cheaper) recommendation.</p>
-					<div class="row mb-2 ml-2">
-						Legend:
-						<span class="badge badge-pill badge-success ml-2">Build</span>
-						<span class="badge badge-pill badge-secondary ml-2">Partial</span>
-						<span class="badge badge-pill badge-warning ml-2">Gold</span>
-						<span class="badge badge-pill badge-danger ml-2">Prereq</span>
-					</div>
-					<div id="nextskill"></div>
-					<div class="container">
-						<div class="row">
-							<div class="col-6 col-md-3 col-lg-2 skillselfie">
-								<div class="row">
-									<div class="col-4" id="totalSP"></div><div class="col-4 redskill text-light" id="R1"></div><div class="col-4" id="totalSPred"></div>
-								</div>
-								<div class="row">
-									<div class="col-4 redskill text-light" id="R2_1"></div><div class="col-4 redskill text-light" id="R2_2"></div><div class="col-4 redskill text-light" id="R2_3"></div>
-								</div>
-								<div class="row">
-									<div class="col-4 redskill text-light" id="R3_1"></div><div class="col-4 redskill text-light" id="R3_2"></div><div class="col-4 redskill text-light" id="R3_3"></div>
-								</div>
-								<div class="row">
-									<div class="col-4 redskill text-light" id="R4_1"></div><div class="col-4"></div><div class="col-4 redskill text-light" id="R4_3"></div>
-								</div>
-							</div>
-							<div class="col-6 col-md-3 col-lg-2 skillselfie">
-								<div class="row">
-									<div class="col-4"></div><div class="col-4 yellowskill text-dark" id="Y1"></div><div class="col-4" id="totalSPyellow"></div>
-								</div>
-								<div class="row">
-									<div class="col-4 yellowskill text-dark" id="Y2_1"></div><div class="col-4 yellowskill text-dark" id="Y2_2"></div><div class="col-4 yellowskill text-dark" id="Y2_3"></div>
-								</div>
-								<div class="row">
-									<div class="col-4 yellowskill text-dark" id="Y3_1"></div><div class="col-4 yellowskill text-dark" id="Y3_2"></div><div class="col-4 yellowskill text-dark" id="Y3_3"></div>
-								</div>
-								<div class="row">
-									<div class="col-4 yellowskill text-dark" id="Y4_1"></div><div class="col-4"></div><div class="col-4 yellowskill text-dark" id="Y4_3"></div>
-								</div>
-							</div>
-							<div class="col-6 col-md-3 col-lg-2 skillselfie">
-								<div class="row">
-									<div class="col-4"></div><div class="col-4 blueskill text-light" id="B1"></div><div class="col-4" id="totalSPblue"></div>
-								</div>
-								<div class="row">
-									<div class="col-4 blueskill text-light" id="B2_1"></div><div class="col-4 blueskill text-light" id="B2_2"></div><div class="col-4 blueskill text-light" id="B2_3"></div>
-								</div>
-								<div class="row">
-									<div class="col-4 blueskill text-light" id="B3_1"></div><div class="col-4 blueskill text-light" id="B3_2"></div><div class="col-4 blueskill text-light" id="B3_3"></div>
-								</div>
-								<div class="row">
-									<div class="col-4 blueskill text-light" id="B4_1"></div><div class="col-4 blueskill text-light" id="B4_2"></div><div class="col-4 blueskill text-light" id="B4_3"></div>
-								</div>
-							</div>
-							<div class="col-6 col-md-3 col-lg-2 skillselfie">
-								<div class="row">
-									<div class="col-4"></div><div class="col-4 greenskill text-dark" id="G1"></div><div class="col-4" id="totalSPgreen"></div>
-								</div>
-								<div class="row">
-									<div class="col-4 greenskill text-dark" id="G2_1"></div><div class="col-4 greenskill text-dark" id="G2_2"></div><div class="col-4 greenskill text-dark" id="G2_3"></div>
-								</div>
-								<div class="row">
-									<div class="col-4 greenskill text-dark" id="G3_1"></div><div class="col-4 greenskill text-dark" id="G3_2"></div><div class="col-4 greenskill text-dark" id="G3_3"></div>
-								</div>
-								<div class="row">
-									<div class="col-4"></div><div class="col-4"></div><div class="col-4"></div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<button type="button" class="btn btn-danger mt-3 mb-3 mr-2" onclick="undoSkill();">Undo Last Skill*</button>
-					<button type="button" class="btn btn-danger mt-3 mb-3" onclick="resetSkills();">Reset All Skills</button>
-					<p class="small">* Only works if you haven't refreshed since applying the skill. Also, it's not a freaking savant, it can only go back 1 skill.</p>
-				</div>
-			</div>
-		</div>
+            <div id="import_wrap">
+                <div class="mb-2">Paste in the exported data you got from another instance of the optimizer. NOTE: THERE IS NO UNDOING THIS.</div>
+                <div class="form-group col-12">
+                    <textarea class="form-control mb-2" id="import" rows="10"></textarea>
+                    <button type="button" class="btn btn-info mb-4" onclick="importData()">Start Import</button>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="artifactab" role="tabpanel" aria-labelledby="artifacts-tab">
+            <p>Enter your artifact & skill data below to receive recommendations on the Relics & SP tabs.</p>
+            <h5>Artifacts</h5>
+            <p>Fill out the current level of your artifacts. If you want to ignore an artifact uncheck it. If you don't have it yet, set it to 0 and it will let you know when you should save up and roll the dice on a new artifact.</p>
+            <p>If this is your first time using the tool, turn off auto-recalculations until you finish entering your artifact levels to prevent the tool from becoming bogged down with recalculating constantly as you enter numbers. This is especially important if you have extremely large artifact levels.</p>
+            <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
+                <label id="btnrecalcon" class="btn btn-primary active">
+                    <input type="radio" name="recalc" id="recalc_on" autocomplete="off" checked onchange="updateRecalc();"> Auto Recalc. ON
+                </label>
+                <label id="btnrecalcoff" class="btn btn-secondary">
+                    <input type="radio" name="recalc" id="recalc_off" autocomplete="off" onchange="updateRecalc();"> Auto Recalc. OFF
+                </label>
+            </div>
+            <p>AD Sanity Check: <span id="adsanity">0%</span></p>
+            <button type="button" class="btn btn-primary mb-3" onclick="checkAllArtifacts();">Check All Artifacts</button>
+            <button type="button" class="btn btn-secondary mb-3" onclick="dalViewArtifact(1);">Take a Selfie of your Artifacts</button>
+            <div class="col-12 col-md-8 col-lg-6">
+                <div class="row mb-2 ml-2">
+                    Legend:
+                    <span class="badge badge-pill badge-info ml-2">All</span>
+                    <span class="badge badge-pill badge-success ml-2">Build</span>
+                    <span class="badge badge-pill badge-secondary ml-2">Partial</span>
+                    <span class="badge badge-pill badge-warning ml-2">Gold</span>
+                    <span class="badge badge-pill badge-danger ml-2">AD</span>
+                </div>
+                <table class="table table-striped table-sm table-dark">
+                    <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Artifact</th>
+                        <th scope="col">Level</th>
+                        <th scope="col">Expo</th>
+                        <th scope="col">Info</th>
+                    </tr>
+                    </thead>
+                    <tbody id="artifacts">
+                    </tbody>
+                </table>
+            </div>
+            <h5>Skills</h5>
+            <p>Fill out the current level of your skills. If you want to ignore a skill uncheck it. If you don't have any points in it yet, set it to 0.</p>
+            <button type="button" class="btn btn-primary mb-3" onclick="checkAllSkills();">Check All Skills</button>
+            <button type="button" class="btn btn-danger mb-3" onclick="resetSkills();">Reset All Skills</button>
+            <div class="col-12 col-md-8 col-lg-6">
+                <div class="row mb-2 ml-2">
+                    Legend:
+                    <span class="badge badge-pill badge-success ml-2">Build</span>
+                    <span class="badge badge-pill badge-secondary ml-2">Partial</span>
+                    <span class="badge badge-pill badge-warning ml-2">Gold</span>
+                    <span class="badge badge-pill badge-danger ml-2">Prereq</span>
+                </div>
+                <table class="table table-striped table-sm table-dark">
+                    <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Skill</th>
+                        <th scope="col">Level</th>
+                        <th scope="col">Expo</th>
+                        <th scope="col">Info</th>
+                    </tr>
+                    </thead>
+                    <tbody id="skills">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="dal" role="tabpanel" aria-labelledby="dal-tab">
+            <div class="row mb-4" id="daltifacts">
+            </div>
+            <button type="button" class="btn btn-secondary mb-3" onclick="dalViewArtifact(0);">Exit Selfie Mode</button>
+        </div>
+        <div class="tab-pane fade" id="reccs" role="tabpanel" aria-labelledby="reccs-tab">
+            <div id="relicreccs">
+                <p>Enter the total number of relics you're willing to spend.<br />
+                    <small>NOTE: This relic optimizer requires that you have rounding turned <strong>ON</strong> in-game.</small></p>
+                <form class="mb-4">
+                    <div class="input-group col-12 col-md-6 col-xl-4">
+                        <input type="tel" id="relics" class="form-control" placeholder="#" aria-label="whole numbers for relics">
+                        <span class="input-group-text bg-dark text-light px-1 rounded-0">.</span>
+                        <input type="tel" id="relics_decimal" class="form-control" placeholder="##" aria-label="decimals for relics">
+                        <select id="relic_factor">
+                            <option value="e0"> </option>
+                            <option value="e3">K</option>
+                            <option value="e6">M</option>
+                            <option value="e9">B</option>
+                            <option value="e12">T</option>
+                            <option value="e13">e13</option>
+                            <option value="e14">e14</option>
+                            <option value="e15">e15/aa</option>
+                            <option value="e16">e16</option>
+                            <option value="e17">e17</option>
+                            <option value="e18">e18/ab</option>
+                            <option value="e19">e19</option>
+                            <option value="e20">e20</option>
+                            <option value="e21">e21/ac</option>
+                            <option value="e22">e22</option>
+                            <option value="e23">e23</option>
+                            <option value="e24">e24/ad</option>
+                            <option value="e25">e25</option>
+                            <option value="e26">e26</option>
+                            <option value="e27">e27/ae</option>
+                            <option value="e28">e28</option>
+                            <option value="e29">e29</option>
+                            <option value="e30">e30/af</option>
+                            <option value="e31">e31</option>
+                            <option value="e32">e32</option>
+                            <option value="e33">e33/ag</option>
+                            <option value="e34">e34</option>
+                            <option value="e35">e35</option>
+                            <option value="e36">e36/ah</option>
+                            <option value="e37">e37</option>
+                            <option value="e38">e38</option>
+                            <option value="e39">e39/ai</option>
+                            <option value="e40">e40</option>
+                            <option value="e41">e41</option>
+                            <option value="e42">e42/aj</option>
+                            <option value="e43">e43</option>
+                            <option value="e44">e44</option>
+                            <option value="e45">e45/ak</option>
+                            <option value="e46">e46</option>
+                            <option value="e47">e47</option>
+                            <option value="e48">e48/al</option>
+                            <option value="e49">e49</option>
+                            <option value="e50">e50</option>
+                            <option value="e51">e51/am</option>
+                            <option value="e52">e52</option>
+                            <option value="e53">e53</option>
+                            <option value="e54">e54/an</option>
+                            <option value="e55">e55</option>
+                            <option value="e56">e56</option>
+                            <option value="e57">e57/ao</option>
+                            <option value="e58">e58</option>
+                            <option value="e59">e59</option>
+                            <option value="e60">e60/ap</option>
+                            <option value="e61">e61</option>
+                            <option value="e62">e62</option>
+                            <option value="e63">e63/aq</option>
+                            <option value="e64">e64</option>
+                            <option value="e65">e65</option>
+                            <option value="e66">e66/ar</option>
+                            <option value="e67">e67</option>
+                            <option value="e68">e68</option>
+                            <option value="e69">e69/as</option>
+                            <option value="e70">e70</option>
+                            <option value="e71">e71</option>
+                            <option value="e72">e72/at</option>
+                            <option value="e73">e73</option>
+                            <option value="e74">e74</option>
+                            <option value="e75">e75/au</option>
+                            <option value="e76">e76</option>
+                            <option value="e77">e77</option>
+                            <option value="e78">e78/av</option>
+                            <option value="e79">e79</option>
+                            <option value="e80">e80</option>
+                            <option value="e81">e81/aw</option>
+                        </select>
+                    </div>
+                    <label class="ml-4"><small>(Whole numbers on the left, decimals on the right.)</small></label>
+                </form>
+                <form class="mb-4">
+                    <div class="input-group col-12 col-md-6 col-xl-4 mb-2">
+                        <span class="input-group-text bg-dark text-light">Use Increments* of </span>
+                        <select id="ocd">
+                            <option value="1">1</option>
+                            <option value="10">10</option>
+                            <option value="100">100</option>
+                            <option value="1000">1000</option>
+                            <option value="pct1">1%</option>
+                            <option value="pct5">5%</option>
+                            <option value="pct25">25%</option>
+                            <option value="pct100">MAX</option>
+                        </select>
+                    </div>
+                    <div class="input-group col-12 col-md-6 col-xl-4 mb-2">
+                        <span class="input-group-text bg-dark text-light">Spend </span>
+                        <input type="tel" id="spend" class="form-control" placeholder="#" aria-label="whole numbers for relic spend">
+                        <span class="input-group-text bg-dark text-light px-1 rounded-0">.</span>
+                        <input type="tel" id="spend_decimal" class="form-control" placeholder="##" aria-label="decimals for relic spend">
+                        <span class="input-group-text bg-dark text-light">% of avail. relics**</span>
+                    </div>
+                </form>
+                <button id="generateRelicUpdates" type="button" class="btn btn-primary mb-4" onclick="generateUpgrades()">Generate Upgrades</button>
+                <label class="ml-4"><small><strong>NOTE: Make sure you turn on rounding in game.</strong><br />
+                    If you've been using this without rounding, after turning on rounding in game, do a quick reivew of the values in the "Input" tab against in-game values and correct anything that is out of sync. On rare occasions it might be slightly off. Just take the upgrade in game at whatever it says and then true up the Input tab after. I'm continuing to try and figure out why this happens, even though it is quite rare.</small></label>
+                <label class="ml-4"><small>*Note, because the bonus effects and the cost of artifacts don't scale linearly, when you change your increments you might get different results. This is because 1 set of 1000 might not be the same as 10 sets of 100, when you evaluate each individual set. After a few prestiges this will start to balance out and you'll see the same types of results you saw before switching up your increments.</small></label>
+                <label class="ml-4"><small>**Note, this only applies to %-based recommendations.</small></label>
+            </div>
+            <div id="relicsuggs">
+                <div class="row mb-2 ml-2">
+                    Legend:
+                    <span class="badge badge-pill badge-info ml-2">All</span>
+                    <span class="badge badge-pill badge-success ml-2">Build</span>
+                    <span class="badge badge-pill badge-secondary ml-2">Partial</span>
+                    <span class="badge badge-pill badge-warning ml-2">Gold</span>
+                    <span class="badge badge-pill badge-danger ml-2">AD</span>
+                </div>
+                <div class="col-12 col-md-8 col-lg-6 mb-4">
+                    <div class="progress mb-3 border border-dark" id="progressBar">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%" id="progress"></div>
+                    </div>
+                    <div id="pudding" class="mb-4"></div>
+                    <div id="suggestions"></div>
+                    <p id="accept2">If you purchase all these upgrades, hit the Complete button to update the Artifact Status table and clear the results.</p>
+                    <div id="accept"></div>
+                    <p id="new_artifact" class="ml-2"></p>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="sp" role="tabpanel" aria-labelledby="sp-tab">
+            <p>The following are your next best options for how to spend your SP ranked in order of effectiveness. If you choose to take one of the recommendations, press the button and it will recalculate your next top recommendations. This allows you to decide if you want to save up for your #1 recommendation or take a less effective (but likely cheaper) recommendation.</p>
+            <div class="row mb-2 ml-2">
+                Legend:
+                <span class="badge badge-pill badge-success ml-2">Build</span>
+                <span class="badge badge-pill badge-secondary ml-2">Partial</span>
+                <span class="badge badge-pill badge-warning ml-2">Gold</span>
+                <span class="badge badge-pill badge-danger ml-2">Prereq</span>
+            </div>
+            <div id="nextskill"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-6 col-md-3 col-lg-2 skillselfie">
+                        <div class="row">
+                            <div class="col-4" id="totalSP"></div><div class="col-4 redskill text-light" id="R1"></div><div class="col-4" id="totalSPred"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 redskill text-light" id="R2_1"></div><div class="col-4 redskill text-light" id="R2_2"></div><div class="col-4 redskill text-light" id="R2_3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 redskill text-light" id="R3_1"></div><div class="col-4 redskill text-light" id="R3_2"></div><div class="col-4 redskill text-light" id="R3_3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 redskill text-light" id="R4_1"></div><div class="col-4"></div><div class="col-4 redskill text-light" id="R4_3"></div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3 col-lg-2 skillselfie">
+                        <div class="row">
+                            <div class="col-4"></div><div class="col-4 yellowskill text-dark" id="Y1"></div><div class="col-4" id="totalSPyellow"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 yellowskill text-dark" id="Y2_1"></div><div class="col-4 yellowskill text-dark" id="Y2_2"></div><div class="col-4 yellowskill text-dark" id="Y2_3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 yellowskill text-dark" id="Y3_1"></div><div class="col-4 yellowskill text-dark" id="Y3_2"></div><div class="col-4 yellowskill text-dark" id="Y3_3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 yellowskill text-dark" id="Y4_1"></div><div class="col-4"></div><div class="col-4 yellowskill text-dark" id="Y4_3"></div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3 col-lg-2 skillselfie">
+                        <div class="row">
+                            <div class="col-4"></div><div class="col-4 blueskill text-light" id="B1"></div><div class="col-4" id="totalSPblue"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 blueskill text-light" id="B2_1"></div><div class="col-4 blueskill text-light" id="B2_2"></div><div class="col-4 blueskill text-light" id="B2_3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 blueskill text-light" id="B3_1"></div><div class="col-4 blueskill text-light" id="B3_2"></div><div class="col-4 blueskill text-light" id="B3_3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 blueskill text-light" id="B4_1"></div><div class="col-4 blueskill text-light" id="B4_2"></div><div class="col-4 blueskill text-light" id="B4_3"></div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3 col-lg-2 skillselfie">
+                        <div class="row">
+                            <div class="col-4"></div><div class="col-4 greenskill text-dark" id="G1"></div><div class="col-4" id="totalSPgreen"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 greenskill text-dark" id="G2_1"></div><div class="col-4 greenskill text-dark" id="G2_2"></div><div class="col-4 greenskill text-dark" id="G2_3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 greenskill text-dark" id="G3_1"></div><div class="col-4 greenskill text-dark" id="G3_2"></div><div class="col-4 greenskill text-dark" id="G3_3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4"></div><div class="col-4"></div><div class="col-4"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-danger mt-3 mb-3 mr-2" onclick="undoSkill();">Undo Last Skill*</button>
+            <button type="button" class="btn btn-danger mt-3 mb-3" onclick="resetSkills();">Reset All Skills</button>
+            <p class="small">* Only works if you haven't refreshed since applying the skill. Also, it's not a freaking savant, it can only go back 1 skill.</p>
+        </div>
+    </div>
+</div>
 
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77025911-2"></script>
-		<script>
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
-			gtag('config', 'UA-77025911-2');
-		</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77025911-2"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-77025911-2');
+</script>
 
-		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-		<script src="js/jquery-3.2.1.slim.min.js"></script>
-		<script src="js/bootstrap.bundle.min.js"></script>
-		<script src="js/decimal.min.js"></script>
-		<script src="js/data.js"></script>
-		<script src="js/weights.js"></script>
-		<script src="js/app.js"></script>
-	</body>
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="js/jquery-3.2.1.slim.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/decimal.min.js"></script>
+<script src="js/data.js"></script>
+<script src="js/weights.js"></script>
+<script src="js/app.js"></script>
+</body>
 </html>

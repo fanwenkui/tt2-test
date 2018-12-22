@@ -87,7 +87,7 @@ function adjustWeights(full) {
 		case 'maple':
 		case 'nohni':
 			hero_type = 'melee_flying';
-		break;
+			break;
 
 		case 'kin':
 		case 'zolom':
@@ -157,7 +157,7 @@ function calculateWeight(k,expo) {
 				results.color = 'info';
 				break;
 
-		  case 'fundamental':
+			case 'fundamental':
 				results.rating = reducts.tap[build] + reducts.hero[build];
 				results.color = determineColor(results.rating, true);
 				break;
@@ -316,7 +316,7 @@ function calculateWeight(k,expo) {
 				results.rating += (0 < reducts.fs[build] ? reducts.gold : (0 < artifacts.data.os.level ? reducts.gold : 0));
 				results.rating += (0 < reducts.wc[build] ? reducts.gold : (0 < artifacts.data.tac.level ? reducts.gold : 0));
 				results.rating += (0 < reducts.sc[build] ? reducts.gold : (0 < artifacts.data.ho.level ? reducts.gold : 0));
-        results.rating = (3 * reducts.gold < results.rating ? 3 * reducts.gold : results.rating);
+				results.rating = (3 * reducts.gold < results.rating ? 3 * reducts.gold : results.rating);
 				results.rating += reducts.gold;
 				results.color = 'warning';
 				break;
@@ -330,19 +330,19 @@ function calculateWeight(k,expo) {
 				results.color = 'info';
 				break;
 
-/*
-			case 'sl':
-				var wcdur = 30;
-				wcdur += (artifacts.data.a.effect * artifacts.data.a.level);
-				wcdur *= (0 < skills.data.ds.level ? 1 + skills.data.ds.levels[skills.data.ds.level].bonus2 : 1);
-				var inspired = (0 < skills.data.hm.level ? skills.data.hm.levels[skills.data.hm.level].bonus2 : 0);
-				var speed = .5 * 12; // from WC active skill
-				var attacks = wcdur * inspired * speed;
-				var sl = (0 < skills.data.sl.level ? 1 + skills.data.sl.levels[skills.data.sl.level].bonus1 : 1);
-				results.rating = Math.min(1, Math.pow(inspired * speed * attacks * sl, reducts.hero[build]));
-				results.color = determineColor(results.rating, false);
-				break;
-*/
+			/*
+                        case 'sl':
+                            var wcdur = 30;
+                            wcdur += (artifacts.data.a.effect * artifacts.data.a.level);
+                            wcdur *= (0 < skills.data.ds.level ? 1 + skills.data.ds.levels[skills.data.ds.level].bonus2 : 1);
+                            var inspired = (0 < skills.data.hm.level ? skills.data.hm.levels[skills.data.hm.level].bonus2 : 0);
+                            var speed = .5 * 12; // from WC active skill
+                            var attacks = wcdur * inspired * speed;
+                            var sl = (0 < skills.data.sl.level ? 1 + skills.data.sl.levels[skills.data.sl.level].bonus1 : 1);
+                            results.rating = Math.min(1, Math.pow(inspired * speed * attacks * sl, reducts.hero[build]));
+                            results.color = determineColor(results.rating, false);
+                            break;
+            */
 
 			case 'ash':
 				if('cs' != build) {
@@ -358,7 +358,7 @@ function calculateWeight(k,expo) {
 					var csper = wcdur / 4.5;
 					var cmdmg = ((1 / 240) * (0 < skills.data.aas.level ? skills.data.aas.levels[skills.data.aas.level].bonus : 1)) * 6;
 					var cmdmgadj = cmdmg * (0 < skills.data.as.level ? skills.data.as.levels[skills.data.as.level].bonus2 : 1);
-					results.rating = Math.min(1, (coper / csper) + cmdmgadj);
+					results.rating = Math.min(.5, (coper / csper) + cmdmgadj);
 				}
 				results.color = determineColor(results.rating, false);
 				break;
@@ -375,19 +375,14 @@ function calculateWeight(k,expo) {
 				results.color = 'warning';
 				break;
 
-			case 'gold_spawn':
-				results.rating = reducts.gold;
-				var multispawn = .01;
-				multispawn += (0 < skills.data.ab.level ? skills.data.ab.levels[skills.data.ab.level].bonus2 : skills.data.ab.levels['1'].bonus2);
-				multispawn += (0 < artifacts.data.eotk.level ? artifacts.data.eotk.effect * artifacts.data.eotk.level : artifacts.data.eotk.effect * 1);
-				var multispawn_equip = new Decimal(('' == $('#multispawn').val() ? 0 : $('#multispawn').val()) + '.' + ('' == $('#multispawn_decimal').val() ? 0 : $('#multispawn_decimal').val()));
-				multispawn += multispawn_equip.toNumber() / 100;
-				var all_prob_equip = new Decimal(('' == $('#all_prob').val() ? 0 : $('#all_prob').val()) + '.' + ('' == $('#all_prob_decimal').val() ? 0 : $('#all_prob_decimal').val()));
-				all_prob_equip = all_prob_equip.toNumber() / 100;
-				multispawn *= (0 != all_prob_equip ? all_prob_equip : 1);
-				multispawn *= 1 + (artifacts.data.lfoa.effect * artifacts.data.lfoa.level);
-				results.rating *= multispawn;
-				results.color = 'warning';
+			case 'inactive_coc':
+				if(0 == active) {
+					results.rating = 1;
+					results.color = 'success';
+				} else if('coc' == gold || 'all' == gold) {
+					results.rating = reducts.gold;
+					results.color = 'warning';
+				}
 				break;
 
 			case 'none':

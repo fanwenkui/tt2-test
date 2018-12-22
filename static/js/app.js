@@ -3,6 +3,7 @@ var winner_e10 = '';
 var winner_e100 = '';
 var winner_e1000 = '';
 var winner_n = '';
+var winner_n_e = '';
 var winner_s1 = '';
 var winner_s2 = '';
 var winner_s3 = '';
@@ -33,36 +34,13 @@ function updateRecalc() {
 
 function getURLParameter(sParam) {
 	var sPageURL = window.location.search.substring(1);
-  var sURLVariables = sPageURL.split('&');
-  for(var i = 0; i < sURLVariables.length; i++) {
-    var sParameterName = sURLVariables[i].split('=');
-    if (sParameterName[0] == sParam) {
-      return sParameterName[1];
-    }
-  }
-}
-
-function toggleDark() {
-	$('body').removeClass('bg-dark text-light');
-	$('.input-group-text').removeClass('bg-dark text-light');
-	$('.sticky-top').removeClass('bg-dark');
-	$('.card').removeClass('bg-dark');
-	$('.nav-link').removeClass('text-light');
-	$('table').removeClass('table-dark');
-	if($('#wolf').prop('checked') == true) {
-		$('body').addClass('bg-dark text-light');
-		$('.input-group-text').addClass('bg-dark text-light');
-		$('.sticky-top').addClass('bg-dark');
-		$('.card').addClass('bg-dark');
-		$('.nav-link').addClass('text-light');
-		$('table').addClass('table-dark');
-		$('#btnwolf').removeClass('btn-dark text-secondary').addClass('btn-danger');
-		$('#btnlamb').removeClass('btn-info').addClass('btn-light text-secondary');
-	} else {
-		$('#btnlamb').removeClass('btn-light text-secondary').addClass('btn-info');
-		$('#btnwolf').removeClass('btn-danger').addClass('btn-dark text-secondary');
+	var sURLVariables = sPageURL.split('&');
+	for(var i = 0; i < sURLVariables.length; i++) {
+		var sParameterName = sURLVariables[i].split('=');
+		if (sParameterName[0] == sParam) {
+			return sParameterName[1];
+		}
 	}
-	storeData();
 }
 
 function toggleSplash(reweight) {
@@ -78,16 +56,6 @@ function toggleSplash(reweight) {
 	}
 }
 
-function toggleRounding() {
-    if ($('#ron').prop('checked') == true) {
-        $('#btnRon').removeClass('btn-dark text-secondary').addClass('btn-info');
-        $('#btnRoff').removeClass('btn-info').addClass('btn-dark text-secondary');
-    } else {
-        $('#btnRoff').removeClass('btn-dark text-secondary').addClass('btn-info');
-        $('#btnRon').removeClass('btn-info').addClass('btn-dark text-secondary');
-    }
-}
-
 function generateArtifacts() {
 	$('#accept2').hide();
 	$('#artifacts').empty();
@@ -97,54 +65,54 @@ function generateArtifacts() {
 			v.level = 0;
 		}
 		var row = '<tr class="' + (1 == v.active ? '' : 'text-dark bg-secondary') + '" id="'+ k + 'row">';
-			row += '<td>';
-				row += '<input type="checkbox" aria-label="Checkbox to designate active status for ' + v.name + '" id="' + k + 'active"' + (v.active == 1 ? ' checked="checked"' : '') + ' onchange="updateActive(\'' + k + '\');" tabindex="-1">';
-			row += '</td>';
-			row += '<td>';
-				row += '<label for="' + k + 'active" id="basic-addon' + k + '">';
-					row += '<span class="d-block d-sm-none">' + v.nickname + '</span>';
-					row += '<span class="d-none d-sm-block">' + v.name + '</span>';
-				row += '</label>';
-			row += '</td>';
-			row += '<td>';
-				row += '<input id="' + k + '" value="' + v.level + '" type="tel" class="form-control artlvl" placeholder="0" aria-label="Level of ' + v.name + '" aria-describedby="basic-addon' + k + '"onchange="updateArtifact(\'' + k + '\')">';
-			row += '</td>';
-			row += '<td>';
-				row += '<span class="badge" id="' + k + 'expo"></span>';
-			row += '</td>';
-			row += '<td>';
-				row += '<button class="badge badge-secondary" type="button" data-toggle="collapse" data-target="#' + k + 'info" aria-expanded="false" aria-controls="' + k + 'info" tabindex="-1">&#x00A0;i&#x00A0;</button>';
-			row += '</td>';
+		row += '<td>';
+		row += '<input type="checkbox" aria-label="Checkbox to designate active status for ' + v.name + '" id="' + k + 'active"' + (v.active == 1 ? ' checked="checked"' : '') + ' onchange="updateActive(\'' + k + '\');" tabindex="-1">';
+		row += '</td>';
+		row += '<td>';
+		row += '<label for="' + k + 'active" id="basic-addon' + k + '">';
+		row += '<span class="d-block d-sm-none">' + v.nickname + '</span>';
+		row += '<span class="d-none d-sm-block">' + v.name + '</span>';
+		row += '</label>';
+		row += '</td>';
+		row += '<td>';
+		row += '<input id="' + k + '" value="' + (999999999999999 < v.level ? displayTruncated(v.level) : avoidSci(v.level)) + '" type="number" class="form-control artlvl" placeholder="0" aria-label="Level of ' + v.name + '" aria-describedby="basic-addon' + k + '"onchange="updateArtifact(\'' + k + '\')">';
+		row += '</td>';
+		row += '<td>';
+		row += '<span class="badge" id="' + k + 'expo"></span>';
+		row += '</td>';
+		row += '<td>';
+		row += '<button class="badge badge-secondary" type="button" data-toggle="collapse" data-target="#' + k + 'info" aria-expanded="false" aria-controls="' + k + 'info" tabindex="-1">&#x00A0;i&#x00A0;</button>';
+		row += '</td>';
 		row += '</tr>';
 		row += '<tr class="collapse" id="' + k + 'info">';
-			row += '<td colspan="5">';
-				row += '<dl class="row">';
-					row += '<dt class="col-3 col-sm-6 text-right">Name</dt>';
-					row += '<dd class="col-9 col-sm-6">' + v.name + '</dd>';
-					row += '<dt class="col-3 col-sm-6 text-right">Effect</dt>';
-					row += '<dd class="col-9 col-sm-6" id="' + k + 'effect"></dd>';
-					row += '<dt class="col-3 col-sm-6 text-right">';
-						row += '<span class="d-block d-sm-none">AD</span>';
-						row += '<span class="d-none d-sm-block">Artifact Damage</span>';
-					row += '</dt>';
-					row += '<dd class="col-9 col-sm-6" id="' + k + 'ad"></dd>';
-					row += '<dt class="col-3 col-sm-6 text-right">';
-						row += '<span class="d-block d-sm-none">Cost</span>';
-						row += '<span class="d-none d-sm-block">Cost to Upgrade</span>';
-					row += '</dt>';
-					row += '<dd class="col-9 col-sm-6" id="' + k + 'cost"></dd>';
-					row += '<dt class="col-3 col-sm-6 text-right">';
-						row += '<span class="d-block d-sm-none">Effc.</span>';
-						row += '<span class="d-none d-sm-block">Efficiency</span>';
-					row += '</dt>';
-					row += '<dd class="col-9 col-sm-6" id="' + k + 'eff"></dd>';
-				row += '</dl>';
-			row += '</td>';
+		row += '<td colspan="5">';
+		row += '<dl class="row">';
+		row += '<dt class="col-3 col-sm-6 text-right">Name</dt>';
+		row += '<dd class="col-9 col-sm-6">' + v.name + '</dd>';
+		row += '<dt class="col-3 col-sm-6 text-right">Effect</dt>';
+		row += '<dd class="col-9 col-sm-6" id="' + k + 'effect"></dd>';
+		row += '<dt class="col-3 col-sm-6 text-right">';
+		row += '<span class="d-block d-sm-none">AD</span>';
+		row += '<span class="d-none d-sm-block">Artifact Damage</span>';
+		row += '</dt>';
+		row += '<dd class="col-9 col-sm-6" id="' + k + 'ad"></dd>';
+		row += '<dt class="col-3 col-sm-6 text-right">';
+		row += '<span class="d-block d-sm-none">Cost</span>';
+		row += '<span class="d-none d-sm-block">Cost to Upgrade</span>';
+		row += '</dt>';
+		row += '<dd class="col-9 col-sm-6" id="' + k + 'cost"></dd>';
+		row += '<dt class="col-3 col-sm-6 text-right">';
+		row += '<span class="d-block d-sm-none">Effc.</span>';
+		row += '<span class="d-none d-sm-block">Efficiency</span>';
+		row += '</dt>';
+		row += '<dd class="col-9 col-sm-6" id="' + k + 'eff"></dd>';
+		row += '</dl>';
+		row += '</td>';
 		row += '</tr>';
 		$('#artifacts').append(row);
-    var div = '<div class="col-3 col-sm-2 col-lg-1 border text-center">';
-    div += '<strong>' + v.nickname + '</strong><br><span id="' + k + 'dalt">' + displayTruncated(v.level) + '</span>';
-    div += '</div>'
+		var div = '<div class="col-3 col-sm-2 col-lg-1 border text-center">';
+		div += '<strong>' + v.nickname + '</strong><br><span id="' + k + 'dalt">' + displayTruncated(v.level) + '</span>';
+		div += '</div>'
 		$('#daltifacts').append(div);
 	});
 }
@@ -176,48 +144,48 @@ function generateSkills() {
 			v.level = 0;
 		}
 		var row = '<tr class="' + (1 == v.active ? '' : 'text-dark bg-secondary') + '" id="skill'+ k + 'row">';
-			row += '<td>';
-				row += '<input type="checkbox" aria-label="Checkbox to designate active status for ' + v.name + '" id="skill' + k + 'active"' + (v.active == 1 ? ' checked="checked"' : '') + ' onchange="updateActiveSkill(\'' + k + '\');" tabindex="-1">';
-			row += '</td>';
-			row += '<td>';
-				row += '<label for="skill' + k + 'active" id="basic-addonskill' + k + '">';
-					row += '<span class="d-block d-sm-none ' + determineTextColor(v.branch) + '">' + v.nickname + '</span>';
-					row += '<span class="d-none d-sm-block ' + determineTextColor(v.branch) + '">' + v.name + '</span>';
-				row += '</label>';
-			row += '</td>';
-			row += '<td>';
-				row += '<input id="skill' + k + '" value="' + v.level + '" type="tel" class="form-control artlvl" placeholder="0" aria-label="Level of ' + v.name + '" aria-describedby="basic-addonskill' + k + '"onchange="updateSkill(\'' + k + '\')">';
-			row += '</td>';
-			row += '<td>';
-				row += '<span class="badge" id="skill' + k + 'expo"></span>';
-			row += '</td>';
-			row += '<td>';
-				row += '<button class="badge badge-secondary" type="button" data-toggle="collapse" data-target="#skill' + k + 'info" aria-expanded="false" aria-controls="skill' + k + 'info" tabindex="-1">&#x00A0;i&#x00A0;</button>';
-			row += '</td>';
+		row += '<td>';
+		row += '<input type="checkbox" aria-label="Checkbox to designate active status for ' + v.name + '" id="skill' + k + 'active"' + (v.active == 1 ? ' checked="checked"' : '') + ' onchange="updateActiveSkill(\'' + k + '\');" tabindex="-1">';
+		row += '</td>';
+		row += '<td>';
+		row += '<label for="skill' + k + 'active" id="basic-addonskill' + k + '">';
+		row += '<span class="d-block d-sm-none ' + determineTextColor(v.branch) + '">' + v.nickname + '</span>';
+		row += '<span class="d-none d-sm-block ' + determineTextColor(v.branch) + '">' + v.name + '</span>';
+		row += '</label>';
+		row += '</td>';
+		row += '<td>';
+		row += '<input id="skill' + k + '" value="' + v.level + '" type="tel" class="form-control artlvl" placeholder="0" aria-label="Level of ' + v.name + '" aria-describedby="basic-addonskill' + k + '"onchange="updateSkill(\'' + k + '\')">';
+		row += '</td>';
+		row += '<td>';
+		row += '<span class="badge" id="skill' + k + 'expo"></span>';
+		row += '</td>';
+		row += '<td>';
+		row += '<button class="badge badge-secondary" type="button" data-toggle="collapse" data-target="#skill' + k + 'info" aria-expanded="false" aria-controls="skill' + k + 'info" tabindex="-1">&#x00A0;i&#x00A0;</button>';
+		row += '</td>';
 		row += '</tr>';
 		row += '<tr class="collapse" id="skill' + k + 'info">';
-			row += '<td colspan="5">';
-				row += '<dl class="row">';
-					row += '<dt class="col-3 col-sm-6 text-right">Name</dt>';
-					row += '<dd class="col-9 col-sm-6">' + v.name + '</dd>';
-					row += '<dt class="col-3 col-sm-6 text-right">Effect</dt>';
-					row += '<dd class="col-9 col-sm-6" id="skill' + k + 'effect"></dd>';
-					row += '<dt class="col-3 col-sm-6 text-right">Effect2</dt>';
-					row += '<dd class="col-9 col-sm-6" id="skill' + k + 'effect2"></dd>';
-					row += '<dt class="col-3 col-sm-6 text-right">Effect3</dt>';
-					row += '<dd class="col-9 col-sm-6" id="skill' + k + 'effect3"></dd>';
-					row += '<dt class="col-3 col-sm-6 text-right">';
-						row += '<span class="d-block d-sm-none">Cost</span>';
-						row += '<span class="d-none d-sm-block">Cost to Upgrade</span>';
-					row += '</dt>';
-					row += '<dd class="col-9 col-sm-6" id="skill' + k + 'cost"></dd>';
-					row += '<dt class="col-3 col-sm-6 text-right">';
-						row += '<span class="d-block d-sm-none">Effc.</span>';
-						row += '<span class="d-none d-sm-block">Efficiency</span>';
-					row += '</dt>';
-					row += '<dd class="col-9 col-sm-6" id="skill' + k + 'eff"></dd>';
-				row += '</dl>';
-			row += '</td>';
+		row += '<td colspan="5">';
+		row += '<dl class="row">';
+		row += '<dt class="col-3 col-sm-6 text-right">Name</dt>';
+		row += '<dd class="col-9 col-sm-6">' + v.name + '</dd>';
+		row += '<dt class="col-3 col-sm-6 text-right">Effect</dt>';
+		row += '<dd class="col-9 col-sm-6" id="skill' + k + 'effect"></dd>';
+		row += '<dt class="col-3 col-sm-6 text-right">Effect2</dt>';
+		row += '<dd class="col-9 col-sm-6" id="skill' + k + 'effect2"></dd>';
+		row += '<dt class="col-3 col-sm-6 text-right">Effect3</dt>';
+		row += '<dd class="col-9 col-sm-6" id="skill' + k + 'effect3"></dd>';
+		row += '<dt class="col-3 col-sm-6 text-right">';
+		row += '<span class="d-block d-sm-none">Cost</span>';
+		row += '<span class="d-none d-sm-block">Cost to Upgrade</span>';
+		row += '</dt>';
+		row += '<dd class="col-9 col-sm-6" id="skill' + k + 'cost"></dd>';
+		row += '<dt class="col-3 col-sm-6 text-right">';
+		row += '<span class="d-block d-sm-none">Effc.</span>';
+		row += '<span class="d-none d-sm-block">Efficiency</span>';
+		row += '</dt>';
+		row += '<dd class="col-9 col-sm-6" id="skill' + k + 'eff"></dd>';
+		row += '</dl>';
+		row += '</td>';
 		row += '</tr>';
 		$('#skills').append(row);
 	});
@@ -286,11 +254,11 @@ function resetSkills() {
 }
 
 function dalViewArtifact(litmus) {
-  if(litmus) {
-    $('#dal-tab').tab('show');
-  } else {
-    $('#artifacts-tab').tab('show');
-  }
+	if(litmus) {
+		$('#dal-tab').tab('show');
+	} else {
+		$('#artifacts-tab').tab('show');
+	}
 }
 
 function regenerateArtifacts() {
@@ -298,7 +266,7 @@ function regenerateArtifacts() {
 		if(isNaN(v.level)) {
 			v.level = 0;
 		}
-		$('#' + k).val(v.level);
+		$('#' + k).val((999999999999999 < v.level ? displayTruncated(v.level) : avoidSci(v.level)));
 		$('#' + k + 'dalt').text(displayTruncated(v.level));
 		var value = '';
 		if(0 < v.level && undefined != v.current_effect) {
@@ -381,7 +349,7 @@ function regenerateSkills() {
 }
 
 function updateArtifact(k) {
-	artifacts.data[k].level = parseInt($('#' + k).val());
+	artifacts.data[k].level = parseFloat($('#' + k).val());
 	artifacts.totalAD = calculateTotalAD(artifacts.data, true);
 	if(true == recalc_litmus) {
 		adjustWeights(true);
@@ -424,83 +392,83 @@ function determineAverage(data) {
 }
 
 function determineArtifactStepWinner(step) {
-  var temp_winner = '';
-  switch(step) {
-    case 1:
-      temp_winner = winner_e;
-      break;
-    case 10:
-      temp_winner = winner_e10;
-      break;
-    case 100:
-      temp_winner = winner_e100;
-      break;
-    case 1000:
-      temp_winner = winner_e1000;
-      break;
-  }
-  return(temp_winner);
+	var temp_winner = '';
+	switch(step) {
+		case 1:
+			temp_winner = winner_e;
+			break;
+		case 10:
+			temp_winner = winner_e10;
+			break;
+		case 100:
+			temp_winner = winner_e100;
+			break;
+		case 1000:
+			temp_winner = winner_e1000;
+			break;
+	}
+	return(temp_winner);
 }
 
 function determineArtifactStep(v, step) {
-  var interval = 0;
-  switch(step) {
-    case 1:
-      interval = 1;
-      break;
-    case 10:
-      interval = v.efficiency10_int;
-      break;
-    case 100:
-      interval = v.efficiency100_int;
-      break;
-    case 1000:
-      interval = v.efficiency1000_int;
-      break;
-  }
-  return(interval);
+	var interval = 0;
+	switch(step) {
+		case 1:
+			interval = 1;
+			break;
+		case 10:
+			interval = v.efficiency10_int;
+			break;
+		case 100:
+			interval = v.efficiency100_int;
+			break;
+		case 1000:
+			interval = v.efficiency1000_int;
+			break;
+	}
+	return(interval);
 }
 
 function determineArtifactCost(v, step) {
-  var cost = 0;
-  switch(step) {
-    case 1:
-      cost = v.cost;
-      break;
-    case 10:
-      cost = v.efficiency10_cost;
-      break;
-    case 100:
-      cost = v.efficiency100_cost;
-      break;
-    case 1000:
-      cost = v.efficiency1000_cost;
-      break;
-  }
-  return(cost);
+	var cost = 0;
+	switch(step) {
+		case 1:
+			cost = v.cost;
+			break;
+		case 10:
+			cost = v.efficiency10_cost;
+			break;
+		case 100:
+			cost = v.efficiency100_cost;
+			break;
+		case 1000:
+			cost = v.efficiency1000_cost;
+			break;
+	}
+	return(cost);
 }
 
 function dowsingRod(v, unit, relics, lvlDiff = 0) {
-  var count = 0;
-  var cost = calculateArtifactEfficiencyCost(v, unit);
-  if (relics < cost) {
-      return (count);
-  }
-  obfuscate++;
-  cost = calculateArtifactEfficiencyCost(v, unit - lvlDiff);
-  relics -= cost;
-  count++;
-  v.level += unit - lvlDiff;
-  while (0 < relics && (0 != cost || count === 1)) {
-    obfuscate++;
-    cost = calculateArtifactEfficiencyCost(v, unit);
-    relics -= cost;
-    if (0 < relics) {
-      count++;
-      v.level += unit;
-    }
-  }
-  return (count * unit - lvlDiff);
+	var count = 0;
+	var cost = calculateArtifactEfficiencyCost(v, unit);
+	if (relics < cost) {
+		return (count);
+	}
+	obfuscate++;
+	cost = calculateArtifactEfficiencyCost(v, unit - lvlDiff);
+	relics -= cost;
+	count++;
+	v.level += unit - lvlDiff;
+	while (0 < relics && (0 != cost || count === 1)) {
+		obfuscate++;
+		cost = calculateArtifactEfficiencyCost(v, unit);
+		relics -= cost;
+		if (0 < relics) {
+			count++;
+			v.level += unit;
+		}
+	}
+	return (count * unit - lvlDiff);
 };
 
 function processPct(k, v, relics, totalAD, tattoo) {
@@ -520,14 +488,13 @@ function processPct(k, v, relics, totalAD, tattoo) {
 			}
 			break;
 	}
-  var levels = 0;
-  var cost = 0;
-  var total_cost = 0;
+	var levels = 0;
+	var cost = 0;
+	var total_cost = 0;
 	var dowse = 0;
 	var running_dowse = 0;
 	var orig_level = v.level;
-  var fresh = false;
-  var rounding = $('#ron').prop('checked') == true;
+	var fresh = false;
 	if(1 == v.active) {
 		if(0 == v.level) {
 			fresh = true;
@@ -535,29 +502,30 @@ function processPct(k, v, relics, totalAD, tattoo) {
 			var next_artifact = countArtifacts(artifacts.data) + 1;
 			total_cost = artifact_costs[next_artifact];
 		}
-    if (-1 == v.max) {
-      var lvledUnit = 1000000000000000000000000000000000000000000000000000000000;
-      var lvledLvl = v.level;
-      while (lvledUnit > 0.1 && (!rounding || dowse === 0)) {
-		    if (lvledLvl > lvledUnit) {
-	        	lvledLvl %= lvledUnit;
-		    }
-		    dowse = dowsingRod(v, lvledUnit, relics, lvledLvl);
-		    v.level = orig_level;
-		    running_dowse += dowse;
-		    cost = calculateArtifactEfficiencyCost(v, dowse);
-		    total_cost += cost;
-		    relics -= cost;
-		    v.level += dowse;
-		    orig_level = v.level;
-		    lvledUnit /= 10;
-		  }
+		if (-1 == v.max) {
+			var lvledUnit = 1000000000000000000000000000000000000000000000000000000000;
+			var lvledLvl = v.level;
+			while (lvledUnit > 0.1 && dowse === 0) {
+				if (lvledLvl > lvledUnit) {
+					lvledLvl %= lvledUnit;
+				}
+				dowse = dowsingRod(v, lvledUnit, relics, lvledLvl);
+				v.level = orig_level;
+				running_dowse += dowse;
+				cost = calculateArtifactEfficiencyCost(v, dowse);
+				total_cost += cost;
+				relics -= cost;
+				v.level += dowse;
+				orig_level = v.level;
+				lvledUnit /= 10;
+			}
 			if(true == tattoo && false == fresh) {
 				u_relics -= total_cost;
 				upgrades.steps.push({
 					'k' : k,
 					'levels' : running_dowse,
-					'cost' : total_cost
+					'cost' : total_cost,
+					'remaining' : u_relics
 				});
 				return(running_dowse);
 			} else if(0 < running_dowse) {
@@ -576,7 +544,8 @@ function processPct(k, v, relics, totalAD, tattoo) {
 						upgrades.steps.push({
 							'k' : k,
 							'levels' : levels,
-							'cost' : cost
+							'cost' : cost,
+							'remaining' : u_relics
 						})
 						return(levels);
 					} else if(0 < levels) {
@@ -595,28 +564,29 @@ function processPct(k, v, relics, totalAD, tattoo) {
 
 function optimizePct() {
 	obfuscate++;
-  var winnerPct = '';
-  var winnerPct_value = 0;
-  var temp_value = 0;
+	var winnerPct = '';
+	var winnerPct_value = 0;
+	var temp_value = 0;
 	var temp_new_value = 0;
-  var relics_pct = Math.floor(u_relics * (u_step/100));
-  $.each(u_temp_artifacts.data, function(k,v) {
+	var relics_pct = Math.floor(u_relics * (u_step/100));
+	$.each(u_temp_artifacts.data, function(k,v) {
 		obfuscate++;
-    var orig_level = v.level;
+		var orig_level = v.level;
 		temp_value = processPct(k, v, relics_pct, u_temp_artifacts.totalAD, false);
-    v.level = orig_level;
-    if(temp_value > winnerPct_value) {
+		v.level = orig_level;
+		if(temp_value > winnerPct_value) {
 			if(0 == v.level) {
-				if(temp_value > temp_new_value) {
+				if(temp_value > temp_new_value && ('' == winner_n_e || winner_n_e < v.rating)) {
 					winner_n = k;
+					winner_n_e = v.rating;
 					temp_new_value = temp_value;
 				}
 			} else {
 				winnerPct = k;
-	      winnerPct_value = temp_value;
+				winnerPct_value = temp_value;
 			}
-    }
-  });
+		}
+	});
 	if('' != winnerPct) {
 		var orig_level = u_temp_artifacts.data[winnerPct].level;
 		var dowse = processPct(winnerPct, u_temp_artifacts.data[winnerPct], relics_pct, u_temp_artifacts.totalAD, true);
@@ -640,9 +610,9 @@ function optimizePct() {
 }
 
 function optimize() {
-  var temp_winner = determineArtifactStepWinner(u_step);
-  var temp_step = determineArtifactStep(u_temp_artifacts.data[temp_winner], u_step);
-  var temp_cost = determineArtifactCost(u_temp_artifacts.data[temp_winner], u_step);
+	var temp_winner = determineArtifactStepWinner(u_step);
+	var temp_step = determineArtifactStep(u_temp_artifacts.data[temp_winner], u_step);
+	var temp_cost = determineArtifactCost(u_temp_artifacts.data[temp_winner], u_step);
 	while(buffer-- > 0 && u_relics >= temp_cost) {
 		obfuscate++;
 		if(undefined == upgrades[temp_winner]) {
@@ -658,11 +628,11 @@ function optimize() {
 		}
 		u_temp_artifacts.data[temp_winner].level += temp_step;
 		u_temp_artifacts = calculate(u_temp_artifacts, temp_winner, false, false);
-    temp_winner = determineArtifactStepWinner(u_step);
-    temp_step = determineArtifactStep(u_temp_artifacts.data[temp_winner], u_step);
-    temp_cost= determineArtifactCost(u_temp_artifacts.data[temp_winner], u_step);
+		temp_winner = determineArtifactStepWinner(u_step);
+		temp_step = determineArtifactStep(u_temp_artifacts.data[temp_winner], u_step);
+		temp_cost= determineArtifactCost(u_temp_artifacts.data[temp_winner], u_step);
 	}
- 	if(u_relics >= temp_cost) {
+	if(u_relics >= temp_cost) {
 		var progress = (1 - (u_relics > 0 ? u_relics / u_orelics : 0 / u_orelics)) * 100;
 		$('#progress').width(progress + '%');
 		$('#progress').prop('aria-valuenow', progress);
@@ -726,14 +696,14 @@ function generateUpgrades() {
 		return
 	}
 	if(u_relics > 0) {
-    if('pct' == $('#ocd').val().substring(0,3)) {
-      u_step = parseInt($('#ocd').val().substring(3));
+		if('pct' == $('#ocd').val().substring(0,3)) {
+			u_step = parseInt($('#ocd').val().substring(3));
 			upgrades.steps = [];
 			window.setTimeout(optimizePct, 1);
-    } else {
-      u_step = parseInt($('#ocd').val());
+		} else {
+			u_step = parseInt($('#ocd').val());
 			window.setTimeout(optimize, 1);
-    }
+		}
 	} else {
 		renderSuggestions(u_temp_artifacts);
 	}
@@ -748,6 +718,7 @@ function renderSuggestions(data) {
 	winner_e100 = '';
 	winner_e1000 = '';
 	winner_n = '';
+	winner_n_e = '';
 	var suggestions = '';
 	var litmus = false;
 	$.each(upgrades, function(k,v) {
@@ -762,30 +733,30 @@ function renderSuggestions(data) {
 	}
 	$.each(artifacts.data, function(k,v) {
 		if(k in upgrades) {
-			suggestions += '<div class="card border border-secondary ' + ($('#wolf').prop('checked') == true ? 'bg-dark' : '') + '">';
-				suggestions += '<div class="card-header d-flex justify-content-between align-items-center" id="' + k + 'deetsh">';
-					suggestions += '<span>';
-						suggestions += '<span class="d-inline d-sm-none">' + v.nickname + '</span>';
-						suggestions += '<span class="d-none d-sm-inline">' + v.name + '</span>';
-						suggestions += ' <small>' + displayTruncated(v.level) + '&#x00A0;=>&#x00A0;' + displayTruncated(data.data[k].level) + '</small>';
-						suggestions += '<span class="badge badge-' + v.color + ' ml-3">+' + upgrades[k] + '</span><br />';
-						suggestions += '<small>' + displayTruncated(data.data[k].upgradeCost) + ' relics</small>';
-					suggestions += '</span>';
-					suggestions += '<button class="badge badge-secondary" type="button" data-toggle="collapse" data-target="#' + k + 'deets" aria-expanded="false" aria-controls="' + k + 'deets">&#x00A0;i&#x00A0;</button>';
-				suggestions += '</div>';
-				suggestions += '<div class="collapse" id="' + k + 'deets" aria-labelledby="' + k + 'deetsh" data-parent="#suggestions">';
-					suggestions += '<div class="card-body">';
-						suggestions += '<dl class="row">';
-							suggestions += '<dt class="col-3 col-sm-6 text-right">Effect</dt>';
-							suggestions += '<dd class="col-9 col-sm-6">' + displayEffect(v.current_effect, v.type) + ' => ' + displayEffect(data.data[k].current_effect, artifacts.data[k].type) + '</dd>';
-							suggestions += '<dt class="col-3 col-sm-6 text-right">';
-								suggestions += '<span class="d-block d-sm-none">AD</span>';
-								suggestions += '<span class="d-none d-sm-block">Artifact Damage</span>';
-							suggestions += '</dt>';
-							suggestions += '<dd class="col-9 col-sm-6">' + displayPct(v.current_ad) + ' => ' + displayPct(data.data[k].current_ad) + '</dd>';
-						suggestions += '</dl>';
-					suggestions += '</div>';
-				suggestions += '</div>';
+			suggestions += '<div class="card bg-dark border border-secondary ' + ($('#wolf').prop('checked') == true ? 'bg-dark' : '') + '">';
+			suggestions += '<div class="card-header d-flex justify-content-between align-items-center" id="' + k + 'deetsh">';
+			suggestions += '<span>';
+			suggestions += '<span class="d-inline d-sm-none">' + v.nickname + '</span>';
+			suggestions += '<span class="d-none d-sm-inline">' + v.name + '</span>';
+			suggestions += ' <small>' + displayTruncated(v.level) + '&#x00A0;=>&#x00A0;' + displayTruncated(data.data[k].level) + '</small>';
+			suggestions += '<span class="badge badge-' + v.color + ' ml-3">+' + upgrades[k] + '</span><br />';
+			suggestions += '<small>' + displayTruncated(data.data[k].upgradeCost) + ' relics</small>';
+			suggestions += '</span>';
+			suggestions += '<button class="badge badge-secondary" type="button" data-toggle="collapse" data-target="#' + k + 'deets" aria-expanded="false" aria-controls="' + k + 'deets">&#x00A0;i&#x00A0;</button>';
+			suggestions += '</div>';
+			suggestions += '<div class="collapse" id="' + k + 'deets" aria-labelledby="' + k + 'deetsh" data-parent="#suggestions">';
+			suggestions += '<div class="card-body">';
+			suggestions += '<dl class="row">';
+			suggestions += '<dt class="col-3 col-sm-6 text-right">Effect</dt>';
+			suggestions += '<dd class="col-9 col-sm-6">' + displayEffect(v.current_effect, v.type) + ' => ' + displayEffect(data.data[k].current_effect, artifacts.data[k].type) + '</dd>';
+			suggestions += '<dt class="col-3 col-sm-6 text-right">';
+			suggestions += '<span class="d-block d-sm-none">AD</span>';
+			suggestions += '<span class="d-none d-sm-block">Artifact Damage</span>';
+			suggestions += '</dt>';
+			suggestions += '<dd class="col-9 col-sm-6">' + displayPct(v.current_ad) + ' => ' + displayPct(data.data[k].current_ad) + '</dd>';
+			suggestions += '</dl>';
+			suggestions += '</div>';
+			suggestions += '</div>';
 			suggestions += '</div>';
 
 		}
@@ -807,6 +778,7 @@ function renderPctSuggestions(data) {
 	winner_e100 = '';
 	winner_e1000 = '';
 	winner_n = '';
+	winner_n_e = '';
 	var suggestions = '<ol>';
 	if(0 == upgrades.steps.length) {
 		$('#pudding').empty();
@@ -816,12 +788,11 @@ function renderPctSuggestions(data) {
 		return;
 	}
 	$.each(upgrades.steps, function(k,v) {
-		suggestions += '<li>';
-			suggestions += '<span class="d-inline d-sm-none">' + artifacts.data[v.k].nickname + '</span>';
-			suggestions += '<span class="d-none d-sm-inline">' + artifacts.data[v.k].name + '</span>';
-			suggestions += '<sup class="text-secondary">[' + artifacts.data[v.k].sort_order + ']</sup>';
-			suggestions += '<span class="badge badge-' + artifacts.data[v.k].color + ' ml-3">+' + displayTruncated(v.levels) + '</span> ';
-			suggestions += '<small>' + displayTruncated(v.cost) + ' relics</small>';
+		suggestions += '<li class="mb-2">';
+		suggestions += '<span>' + artifacts.data[v.k].name + '</span>';
+		suggestions += '<sup class="text-secondary">[' + artifacts.data[v.k].sort_order + ']</sup>';
+		suggestions += '<span class="badge badge-' + artifacts.data[v.k].color + ' ml-3">+' + displayTruncated(v.levels) + '</span><br />';
+		suggestions += '<small>Cost: ' + displayTruncated(v.cost) + ' // Remaining: ' + displayTruncated(v.remaining) + '</small>';
 		suggestions += '</li>';
 	});
 	suggestions += '</ol>';
@@ -974,69 +945,69 @@ function oldEff(data, k, v) {
 	data.data[k].current_ad = current_ad;
 	data.data[k].current_effect = current_effect;
 	if(v.max == -1 || v.max > v.level) {
-    var cost = Math.pow(v.level + 1, v.cexpo) * v.ccoef;
+		var cost = Math.pow(v.level + 1, v.cexpo) * v.ccoef;
 		data.data[k].cost = cost;
 		data.data[k].displayCost = displayTruncated(cost);
 		data.data[k].efficiency = calculateArtifactEfficiency(v, cost, 1, current_ad, current_effect, data.totalAD);
-    var int10 = calculateArtifactEfficiencyInterval(v, 10);
-    var cost10 = calculateArtifactEfficiencyCost(v, int10);
-    data.data[k].efficiency10_int = int10;
-    data.data[k].efficiency10_cost = cost10;
-    data.data[k].efficiency10 = calculateArtifactEfficiency(v, cost10, int10, current_ad, current_effect, data.totalAD);
-    var int100 = calculateArtifactEfficiencyInterval(v, 100);
-    var cost100 = calculateArtifactEfficiencyCost(v, int100);
-    data.data[k].efficiency100_int = int100;
-    data.data[k].efficiency100_cost = cost100;
-    data.data[k].efficiency100 = calculateArtifactEfficiency(v, cost100, int100, current_ad, current_effect, data.totalAD);
-    var int1000 = calculateArtifactEfficiencyInterval(v, 1000);
-    var cost1000 = calculateArtifactEfficiencyCost(v, int1000);
-    data.data[k].efficiency1000_int = int1000;
-    data.data[k].efficiency1000_cost = cost1000;
-    data.data[k].efficiency1000 = calculateArtifactEfficiency(v, cost1000, int1000, current_ad, current_effect, data.totalAD);
+		var int10 = calculateArtifactEfficiencyInterval(v, 10);
+		var cost10 = calculateArtifactEfficiencyCost(v, int10);
+		data.data[k].efficiency10_int = int10;
+		data.data[k].efficiency10_cost = cost10;
+		data.data[k].efficiency10 = calculateArtifactEfficiency(v, cost10, int10, current_ad, current_effect, data.totalAD);
+		var int100 = calculateArtifactEfficiencyInterval(v, 100);
+		var cost100 = calculateArtifactEfficiencyCost(v, int100);
+		data.data[k].efficiency100_int = int100;
+		data.data[k].efficiency100_cost = cost100;
+		data.data[k].efficiency100 = calculateArtifactEfficiency(v, cost100, int100, current_ad, current_effect, data.totalAD);
+		var int1000 = calculateArtifactEfficiencyInterval(v, 1000);
+		var cost1000 = calculateArtifactEfficiencyCost(v, int1000);
+		data.data[k].efficiency1000_int = int1000;
+		data.data[k].efficiency1000_cost = cost1000;
+		data.data[k].efficiency1000 = calculateArtifactEfficiency(v, cost1000, int1000, current_ad, current_effect, data.totalAD);
 	}
 	return(data);
 }
 
 function calculateArtifactEfficiencyInterval(v, levels) {
-    var squad = (v.level + levels) % levels;
-    if(0 != squad) {
-      levels = levels - squad;
-    }
-    if(0 < v.max && v.level + levels > v.max) {
-      levels = v.max - v.level;
-    }
-    return(levels);
+	var squad = (v.level + levels) % levels;
+	if(0 != squad) {
+		levels = levels - squad;
+	}
+	if(0 < v.max && v.level + levels > v.max) {
+		levels = v.max - v.level;
+	}
+	return(levels);
 }
 
 function calculateArtifactEfficiencyCost(v, levels) {
-  obfuscate++;
-  var cost = (v.ccoef/(v.cexpo+1)) * Math.pow(v.level + levels, v.cexpo + 1) - (v.ccoef/(v.cexpo+1)) * Math.pow(v.level, v.cexpo + 1);
-  return(cost);
+	obfuscate++;
+	var cost = (v.ccoef/(v.cexpo+1)) * Math.pow(v.level + levels, v.cexpo + 1) - (v.ccoef/(v.cexpo+1)) * Math.pow(v.level, v.cexpo + 1);
+	return(cost);
 }
 
 function calculateArtifactEfficiency(v, cost, lvlChange, current_ad, current_effect, totalAD) {
-    obfuscate++;
-		var next_effect = 1 + v.effect * Math.pow(v.level + lvlChange, Math.pow((1 + (v.cexpo - 1) * Math.min(v.grate * (v.level + lvlChange), v.gmax)), v.gexpo));
-		switch(v.dime) {
-			case 0:
-				break;
-			case 1:
-				if(0 < artifacts.data.tmg.level) {
-					next_effect *= 10;
-				}
-				break;
-			case 2:
-				if(0 < artifacts.data.ttof.level) {
-					next_effect *= 10;
-				}
-				break;
-		}
-		var effect_diff = Math.abs(next_effect)/Math.abs(current_effect);
-		var effect_eff = Math.pow(effect_diff, v.rating);
-		var ad_change = (((v.level + lvlChange) * v.ad) - current_ad);
-		var ad_eff = 1 + (ad_change/totalAD);
- 		var eff = Math.abs(((effect_eff * ad_eff) - 1)/cost);
-    return(eff);
+	obfuscate++;
+	var next_effect = 1 + v.effect * Math.pow(v.level + lvlChange, Math.pow((1 + (v.cexpo - 1) * Math.min(v.grate * (v.level + lvlChange), v.gmax)), v.gexpo));
+	switch(v.dime) {
+		case 0:
+			break;
+		case 1:
+			if(0 < artifacts.data.tmg.level) {
+				next_effect *= 10;
+			}
+			break;
+		case 2:
+			if(0 < artifacts.data.ttof.level) {
+				next_effect *= 10;
+			}
+			break;
+	}
+	var effect_diff = Math.abs(next_effect)/Math.abs(current_effect);
+	var effect_eff = Math.pow(effect_diff, v.rating);
+	var ad_change = (((v.level + lvlChange) * v.ad) - current_ad);
+	var ad_eff = 1 + (ad_change/totalAD);
+	var eff = Math.abs(((effect_eff * ad_eff) - 1)/cost);
+	return(eff);
 }
 
 function newEff(data, k, v, avglvl, cost, remainingArtifacts) {
@@ -1100,7 +1071,7 @@ function calculateSkillTotals() {
 }
 
 function calculate(data, k, regenerate, pinch) {
-  obfuscate += 1;
+	obfuscate += 1;
 	var next_artifact = countArtifacts(artifacts.data) + 1;
 	var next_artifact_cost = artifact_costs[next_artifact];
 	var average_level = determineAverage(artifacts.data);
@@ -1118,18 +1089,19 @@ function calculate(data, k, regenerate, pinch) {
 		data.data[k].current_ad = '';
 		data.data[k].current_effect = '';
 	}
-  determineArtifactWinner(data, regenerate, next_artifact_cost, pinch);
+	determineArtifactWinner(data, regenerate, next_artifact_cost, pinch);
 	data.totalAD = calculateTotalAD(data.data, regenerate);
 	return(data);
 }
 
 function determineArtifactWinner(data, regenerate, next_artifact_cost, pinch) {
-	winner_e = ''
-	winner_e10 = ''
-	winner_e100 = ''
-	winner_e1000 = ''
-	var temp_winner_n = ''
-	var temp_winner_value = 0
+	winner_e = '';
+	winner_e10 = '';
+	winner_e100 = '';
+	winner_e1000 = '';
+	var temp_winner_n = '';
+	var temp_winner_n_e = '';
+	var temp_winner_value = 0;
 	winner_value = 0;
 	winner_value10 = 0;
 	winner_value100 = 0;
@@ -1141,8 +1113,9 @@ function determineArtifactWinner(data, regenerate, next_artifact_cost, pinch) {
 				winner_e = k;
 				winner_value = v.efficiency;
 			} else if(v.level == 0 && next_artifact_cost != -1 && v.active == 1 && true === pinch) {
-				if(data.data[k].efficiency > temp_winner_value) {
+				if(data.data[k].efficiency > temp_winner_value && ('' == temp_winner_n_e || temp_winner_n_e < data.data[k].rating)) {
 					temp_winner_n = k;
+					temp_winner_n_e = data.data[k].rating;
 					temp_winner_value = data.data[k].efficiency;
 				}
 			}
@@ -1299,6 +1272,7 @@ function undoSkill() {
 function calculateAll(data, regenerate) {
 	winner_e = '';
 	var temp_winner_n = '';
+	var temp_winner_n_e = '';
 	var temp_winner_value = 0;
 	winner_value = 0;
 	var next_artifact = countArtifacts(artifacts.data) + 1;
@@ -1316,7 +1290,7 @@ function calculateAll(data, regenerate) {
 			data.data[k].current_effect = '';
 		}
 	});
-  determineArtifactWinner(data, regenerate, next_artifact_cost, true);
+	determineArtifactWinner(data, regenerate, next_artifact_cost, true);
 	data.totalAD = calculateTotalAD(data.data, regenerate);
 	return(data)
 }
@@ -1396,24 +1370,24 @@ function displayEffect(value, type) {
 function storageAvailable(type) {
 	try {
 		var storage = window[type],
-		x = '__storage_test__';
+			x = '__storage_test__';
 		storage.setItem(x, x);
 		storage.removeItem(x);
 		return true;
 	}
 	catch(e) {
 		return e instanceof DOMException && (
-		// everything except Firefox
-		e.code === 22 ||
-		// Firefox
-		e.code === 1014 ||
-		// test name field too, because code might not be present
-		// everything except Firefox
-		e.name === 'QuotaExceededError' ||
-		// Firefox
-		e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
-		// acknowledge QuotaExceededError only if there's something already stored
-		storage.length !== 0;
+				// everything except Firefox
+			e.code === 22 ||
+			// Firefox
+			e.code === 1014 ||
+			// test name field too, because code might not be present
+			// everything except Firefox
+			e.name === 'QuotaExceededError' ||
+			// Firefox
+			e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+			// acknowledge QuotaExceededError only if there's something already stored
+			storage.length !== 0;
 	}
 }
 
@@ -1448,10 +1422,6 @@ if (storageAvailable('localStorage')) {
 	$('#hero').val(window.localStorage.getItem('hero'));
 	$('#gold').val(window.localStorage.getItem('gold'));
 	$('#active').val(window.localStorage.getItem('active'));
-	$('#multispawn').val(window.localStorage.getItem('multispawn'));
-	$('#multispawn_decimal').val(window.localStorage.getItem('multispawn_decimal'));
-	$('#all_prob').val(window.localStorage.getItem('all_prob'));
-	$('#all_prob_decimal').val(window.localStorage.getItem('all_prob_decimal'));
 	$('#relic_factor').val(window.localStorage.getItem('relic_factor'));
 	$('#spend').val(window.localStorage.getItem('spend'));
 	$('#spend_decimal').val(window.localStorage.getItem('spend_decimal'));
@@ -1466,30 +1436,14 @@ if (storageAvailable('localStorage')) {
 		ocd = 1;
 	}
 	$('#ocd').val(ocd.toString());
-	if(window.localStorage.getItem('dark') == "1") {
-		$('#wolf').prop('checked', true);
-		$('#lamb').prop('checked', false);
-	} else {
-		$('#wolf').prop('checked', false);
-		$('#lamb').prop('checked', true);
-	}
 	if(window.localStorage.getItem('splash') == "1") {
 		$('#wet').prop('checked', true);
 		$('#dry').prop('checked', false);
 	} else {
 		$('#wet').prop('checked', false);
 		$('#dry').prop('checked', true);
-    }
-    if (window.localStorage.getItem('rounding') == "1") {
-        $('#ron').prop('checked', true);
-        $('#roff').prop('checked', false);
-    } else {
-        $('#ron').prop('checked', false);
-        $('#roff').prop('checked', true);
-    }
-		toggleDark();
-    toggleSplash(false);
-    toggleRounding();
+	}
+	toggleSplash(false);
 }
 
 function storeData() {
@@ -1499,24 +1453,41 @@ function storeData() {
 	window.localStorage.setItem('hero', $('#hero').val());
 	window.localStorage.setItem('gold', $('#gold').val());
 	window.localStorage.setItem('active', $('#active').val());
-	window.localStorage.setItem('multispawn', $('#multispawn').val());
-	window.localStorage.setItem('multispawn_decimal', $('#multispawn_decimal').val());
-	window.localStorage.setItem('all_prob', $('#all_prob').val());
-	window.localStorage.setItem('all_prob_decimal', $('#all_prob_decimal').val());
 	window.localStorage.setItem('relic_factor', $('#relic_factor').val());
 	window.localStorage.setItem('spend', $('#spend').val());
 	window.localStorage.setItem('spend_decimal', $('#spend_decimal').val());
 	window.localStorage.setItem('ocd', $('#ocd').val());
-	window.localStorage.setItem('dark', ($('#wolf').prop('checked') == true ? 1 : 0));
-  window.localStorage.setItem('splash', ($('#wet').prop('checked') == true ? 1 : 0));
-  window.localStorage.setItem('rounding', ($('#ron').prop('checked') == true ? 1 : 0));
+	window.localStorage.setItem('splash', ($('#wet').prop('checked') == true ? 1 : 0));
 }
 
 $('input[type="tel"]').on('focus', function(){
-  $(this).data('fontSize', $(this).css('font-size')).css('font-size', '16px');
+	$(this).data('fontSize', $(this).css('font-size')).css('font-size', '16px');
 }).on('blur', function(){
-  $(this).css('font-size', $(this).data('fontSize'));
+	$(this).css('font-size', $(this).data('fontSize'));
 });
+$('input[type="number"]').on('focus', function(){
+	$(this).data('fontSize', $(this).css('font-size')).css('font-size', '16px');
+}).on('blur', function(){
+	$(this).css('font-size', $(this).data('fontSize'));
+});
+
+function avoidSci(x) {
+	if (Math.abs(x) < 1.0) {
+		var e = parseInt(x.toString().split('e-')[1]);
+		if (e) {
+			x *= Math.pow(10,e-1);
+			x = '0.' + (new Array(e)).join('0') + x.toString().substring(2);
+		}
+	} else {
+		var e = parseInt(x.toString().split('+')[1]);
+		if (e > 20) {
+			e -= 20;
+			x /= Math.pow(10,e);
+			x += (new Array(e+1)).join('0');
+		}
+	}
+	return x;
+}
 
 function exportData() {
 	$('#export_wrap').hide();
@@ -1526,21 +1497,15 @@ function exportData() {
 	ex += $('#hero').val() + '=';
 	ex += $('#gold').val() + '=';
 	ex += $('#active').val() + '=';
-	ex += ($('#multispawn').val() == '' ? 0 : $('#multispawn').val()) + '=';
-	ex += ($('#multispawn_decimal').val() == '' ? 0 : $('#multispawn_decimal').val()) + '=';
-	ex += ($('#all_prob').val() == '' ? 0 : $('#all_prob').val()) + '=';
-	ex += ($('#all_prob_decimal').val() == '' ? 0 : $('#all_prob_decimal').val()) + '=';
 	ex += ($('#spend').val() == '' ? 75 : $('#spend').val()) + '=';
 	ex += ($('#spend_decimal').val() == '' ? 0 : $('#spend_decimal').val()) + '=';
-	ex += ($('#wolf').prop('checked') == true ? 1 : 0) + '=';
-    ex += ($('#wet').prop('checked') == true ? 1 : 0) + '=';
-    ex += ($('#ron').prop('checked') == true ? 1 : 0) + '=';
+	ex += ($('#wet').prop('checked') == true ? 1 : 0) + '=';
 	ex += $('#relic_factor').val() + '=';
 	ex += $('#ocd').val() + '=';
 	$.each(artifacts.data,function(k,v) {
 		ex += k + '_';
 		ex += v.active + '_';
-		ex += v.level + '|';
+		ex += (999999999999999 < v.level ? displayTruncated(v.level) : avoidSci(v.level)) + '|';
 	});
 	ex = ex.slice(0, -1);
 	ex += '=';
@@ -1567,51 +1532,31 @@ function importData() {
 	$('#hero').val(im[1]);
 	$('#gold').val(im[2]);
 	$('#active').val(im[3]);
-	$('#multispawn').val(im[4]);
-	$('#multispawn_decimal').val(im[5]);
-	$('#all_prob').val(im[6]);
-	$('#all_prob_decimal').val(im[7]);
-	$('#spend').val(im[8]);
-	$('#spend_decimal').val(im[9]);
-	if(im[10] == "1") {
-		$('#wolf').prop('checked', true);
-		$('#lamb').prop('checked', false);
-	} else {
-		$('#wolf').prop('checked', false);
-		$('#lamb').prop('checked', true);
-	}
-	toggleDark();
-	if(im[11] == "1") {
+	$('#spend').val(im[4]);
+	$('#spend_decimal').val(im[5]);
+	if(im[6] == "1") {
 		$('#wet').prop('checked', true);
 		$('#dry').prop('checked', false);
 	} else {
 		$('#wet').prop('checked', false);
 		$('#dry').prop('checked', true);
 	}
-    toggleSplash(false);
-    if (im[12] == "1") {
-        $('#ron').prop('checked', true);
-        $('#roff').prop('checked', false);
-    } else {
-        $('#ron').prop('checked', false);
-        $('#roff').prop('checked', true);
-    }
-    toggleRounding();
-	$('#relic_factor').val(im[13]);
-	var ocd = im[14];
+	toggleSplash(false);
+	$('#relic_factor').val(im[7]);
+	var ocd = im[8];
 	if('pct' != ocd.substring(0,3)) {
 		if(1000 < parseInt(ocd)) {
 			ocd = 1000;
 		}
 	}
 	$('#ocd').val(ocd.toString());
-	var ima = im[15].split('|');
+	var ima = im[9].split('|');
 	$.each(ima, function(k,v) {
 		var imaa = v.split('_');
 		artifacts.data[imaa[0]].active = parseInt(imaa[1]);
-		artifacts.data[imaa[0]].level = parseInt(imaa[2]);
+		artifacts.data[imaa[0]].level = parseFloat(imaa[2]);
 	});
-	var ims = im[16].split('|');
+	var ims = im[10].split('|');
 	$.each(ims, function(k,v) {
 		var imss = v.split('_');
 		skills.data[imss[0]].active = parseInt(imss[1]);

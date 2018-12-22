@@ -33,14 +33,6 @@ var reducts = {
 		'hs' : 1,
 		'cs' : 0
 	},
-	'tap_ls' : {
-		'hero' : 0,
-		'tap' : 1,
-		'pet' : 1,
-		'sc' : 1,
-		'hs' : 0,
-		'cs' : 0
-	},
 	'hero' : {
 		'hero' : 1,
 		'tap' : 1/2,
@@ -173,9 +165,9 @@ var reducts = {
 
 var artifacts = {
 	'totalAD' : 0,
-  'data' : {
-	  'bos' : {
-		  'active' : 1,
+	'data' : {
+		'bos' : {
+			'active' : 1,
 			'name' : 'Book of Shadows',
 			'nickname' : 'BoS',
 			'bonus' : ' Prestige Relic',
@@ -380,7 +372,10 @@ var artifacts = {
 			'cexpo' : 1.8,
 			'type' : 'multiply',
 			'expo' : {
-				'flat' : 'gold_spawn'
+				'gold' : [
+					'coc',
+					'all'
+				]
 			}
 		},
 		'tbc' : {
@@ -1041,8 +1036,8 @@ var artifacts = {
 		},
 		'sv' : {
 			'active' : 1,
-			'name' : 'Spearit\'s Vigil',
-			'nickname' : 'SV',
+			'name' : 'Sword of the Royals',
+			'nickname' : 'SotR',
 			'bonus' : ' Duelist Boost',
 			'dime' : 0,
 			'max' : -1,
@@ -1060,8 +1055,8 @@ var artifacts = {
 		},
 		'sotr' : {
 			'active' : 1,
-			'name' : 'Sword of the Royals',
-			'nickname' : 'SotR',
+			'name' : 'Spearit\'s Vigil',
+			'nickname' : 'SV',
 			'bonus' : ' Aviator Boost',
 			'dime' : 0,
 			'max' : -1,
@@ -2042,9 +2037,9 @@ var skills = {
 		'blue' : 0,
 		'green' : 0
 	},
-  'data' : {
-	  'kv' : {
-		  'active' : 1,
+	'data' : {
+		'kv' : {
+			'active' : 1,
 			'name' : 'Knight\'s Valor',
 			'nickname' : 'R1',
 			'branch' : 'red',
@@ -2089,7 +2084,7 @@ var skills = {
 			}
 		},
 		'cho' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : 'Chivalric Order',
 			'nickname' : 'R2_1',
 			'branch' : 'red',
@@ -2134,7 +2129,7 @@ var skills = {
 			}
 		},
 		'pe' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : 'Pet Evolution',
 			'nickname' : 'R2_2',
 			'branch' : 'red',
@@ -2180,7 +2175,7 @@ var skills = {
 			}
 		},
 		'phom' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : 'Heart of Midas',
 			'branch' : 'red',
 			'nickname' : 'R2_3',
@@ -2222,18 +2217,18 @@ var skills = {
 			},
 			'expos' : {
 				'b1' : { 'gold' : [
-					'boss',
-					'phom',
-					'all',
-				] },
+						'boss',
+						'phom',
+						'all',
+					] },
 				'b2' : { 'gold' : [
-					'phom',
-					'all',
-				] }
+						'phom',
+						'all',
+					] }
 			}
 		},
 		'cs' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : 'Cleaving Strike',
 			'nickname' : 'R3_1',
 			'branch' : 'red',
@@ -2279,7 +2274,7 @@ var skills = {
 			}
 		},
 		'si' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : 'Summon Inferno',
 			'nickname' : 'R3_2',
 			'branch' : 'red',
@@ -2325,7 +2320,7 @@ var skills = {
 			}
 		},
 		'lbu' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : 'Lightning Burst',
 			'nickname' : 'R3_3',
 			'branch' : 'red',
@@ -2372,7 +2367,7 @@ var skills = {
 			}
 		},
 		'bf' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : 'Barbaric Fury',
 			'nickname' : 'R4_1',
 			'branch' : 'red',
@@ -2408,7 +2403,7 @@ var skills = {
 			}
 		},
 		'fz' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : 'Flash Zip',
 			'nickname' : 'R4_3',
 			'branch' : 'red',
@@ -2445,7 +2440,7 @@ var skills = {
 			}
 		},
 		'mc' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : 'Master Commander',
 			'nickname' : 'Y1',
 			'branch' : 'yellow',
@@ -2490,7 +2485,7 @@ var skills = {
 			}
 		},
 		'sow' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : 'Spoils of War',
 			'nickname' : 'Y2_1',
 			'branch' : 'yellow',
@@ -2532,20 +2527,20 @@ var skills = {
 			},
 			'expos' : {
 				'b1' : { 'gold' : [
-					'coc',
-					'fairy',
-					'partial_inactive',
-					'all'
-				] },
+						'coc',
+						'fairy',
+						'partial_inactive',
+						'all'
+					] },
 				'b2' : { 'gold' : [
-					'coc',
-					'fairy',
-					'all'
-				] }
+						'coc',
+						'fairy',
+						'all'
+					] }
 			}
 		},
 		'hm' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : 'Heroic Might',
 			'nickname' : 'Y2_2',
 			'branch' : 'yellow',
@@ -2591,7 +2586,7 @@ var skills = {
 			}
 		},
 		'aas' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : 'Aerial Assault',
 			'nickname' : 'Y2_3',
 			'branch' : 'yellow',
@@ -2637,7 +2632,7 @@ var skills = {
 			}
 		},
 		'ti' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : 'Tactical Insight',
 			'nickname' : 'Y3_1',
 			'branch' : 'yellow',
@@ -2683,7 +2678,7 @@ var skills = {
 			}
 		},
 		'sl' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : 'Searing Light',
 			'nickname' : 'Y3_2',
 			'branch' : 'yellow',
@@ -2729,7 +2724,7 @@ var skills = {
 			}
 		},
 		'coo' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : 'Coordinated Offensive',
 			'nickname' : 'Y3_3',
 			'branch' : 'yellow',
@@ -2775,7 +2770,7 @@ var skills = {
 			}
 		},
 		'aaw' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : 'Astral Awakening',
 			'nickname' : 'Y4_1',
 			'branch' : 'yellow',
@@ -2811,7 +2806,7 @@ var skills = {
 			}
 		},
 		'as' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : 'Anchoring Shot',
 			'nickname' : 'Y4_3',
 			'branch' : 'yellow',
@@ -2937,9 +2932,9 @@ var skills = {
 			'expos' : {
 				'b1' : { 'flat' : 'hom' },
 				'b2' : { 'gold' : [
-					'fairy',
-					'all'
-				] }
+						'fairy',
+						'all'
+					] }
 			}
 		},
 		'ar' : {
@@ -3035,7 +3030,7 @@ var skills = {
 			}
 		},
 		'fc' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : 'Fairy Charm',
 			'nickname' : 'B3_1',
 			'branch' : 'blue',
@@ -3066,7 +3061,7 @@ var skills = {
 			}
 		},
 		'ms' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : 'Mana Siphon',
 			'nickname' : 'B3_2',
 			'branch' : 'blue',
@@ -3112,7 +3107,7 @@ var skills = {
 			}
 		},
 		'ed' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : 'Eternal Darkness',
 			'nickname' : 'B3_3',
 			'branch' : 'blue',
@@ -3158,7 +3153,7 @@ var skills = {
 			}
 		},
 		'mm' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : 'Manni Mana',
 			'nickname' : 'B4_1',
 			'branch' : 'blue',
@@ -3194,7 +3189,7 @@ var skills = {
 			}
 		},
 		'ls' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : 'Lightning Strike',
 			'nickname' : 'B4_2',
 			'branch' : 'blue',
@@ -3225,13 +3220,13 @@ var skills = {
 				'15' : { 'cost' : 131, 'bonus' : .915, 'bonus2' : .98, 'bonus3' : .02 }
 			},
 			'expos' : {
-				'b1' : { 'reduct' : 'tap_ls' },
-				'b2' : { 'reduct' : 'tap_ls' },
-				'b3' : { 'reduct' : 'tap_ls' }
+				'b1' : { 'flat' : 'dmg' },
+				'b2' : { 'flat' : 'dmg' },
+				'b3' : { 'flat' : 'dmg' }
 			}
 		},
 		'ds' : {
-		  'active' : 1,
+			'active' : 1,
 			'name' : 'Dimensional Shift',
 			'nickname' : 'B4_3',
 			'branch' : 'blue',
@@ -3310,8 +3305,8 @@ var skills = {
 			'expos' : {
 				'b1' : { 'flat' : 'gold' },
 				'b2' : { 'gold' : [
-					'inactive'
-				] }
+						'inactive'
+					] }
 			}
 		},
 		'an' : {
@@ -3419,8 +3414,8 @@ var skills = {
 				'10' : { 'cost' : 6, 'bonus' : 20, 'bonus2' : .3, 'bonus3' : 0 }
 			},
 			'expos' : {
-				'b1' : { 'flat' : 'inactive' },
-				'b2' : { 'flat' : 'inactive' }
+				'b1' : { 'flat' : 'inactive_coc' },
+				'b2' : { 'flat' : 'inactive_coc' }
 			}
 		},
 		'tv' : {
