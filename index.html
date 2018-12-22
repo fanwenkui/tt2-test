@@ -48,12 +48,7 @@
     </div>
     <div class="tab-content" id="tabContent">
         <div class="tab-pane fade show active" id="style" role="tabpanel" aria-labelledby="style-tab">
-            <p>如有翻译问题可通过<a href="https://github.com/riggzh/tt2-artifacts/issues"> GitHub </a>提交 Issues。</p>
-            <p>↓↓↓以下为作者原说明↓↓↓ <a href="https://tt2-optimizer.herokuapp.com/">点击此处跳转英文原版</a> 感谢原作者 tsukinoooo</p>
-            <p>此工具旨在帮助您确定根据你的游戏风格最大化圣物和技能点所带来的提升。在神器方面，它应该能在帮助您在提高神器伤害的同时确定优先神器升级顺序。在技能方面，它应该能帮助您确定最优技能书。如果您发现任何错误或者建议,
-                请随时通过 reddit与我联系， /u/tsukinoooo</p>
-            <p>第一次访问，请在本选项卡填写您的游戏风格，然后在“输入”选项卡填写您当前的神器等级和技能，在“圣物”选项卡填写您预期花费的圣物数量来计算升级方案，在“技能”选项卡接收加点的建议</p>
-            <p>现在请您根据您的游戏风格回答以下问题</p>
+            <p><a href="https://tt2-optimizer.herokuapp.com/">点击此处跳转英文原版</a></p>
             <form>
                 <div class="form-row mb-4">
                     <div class="form-group col-12 col-md-6 col-lg-4">
@@ -143,11 +138,6 @@
             </form>
             <button type="button" class="btn btn-secondary mb-4" onclick="exportData()">Export Data</button>
             <button type="button" class="btn btn-secondary mb-4" onclick="startImport()">Import Data*</button>
-            <p class="small">* NOTE: if you are using third-party exporters (e.g., Android apps that report to export
-                the data in my format), that is not a supported integration. Particularly after patches this can cause
-                trouble with those external services as the data structure changes and they might not be up-to-date with
-                my current format. You would need to report that to the provider of the export as it is not related to
-                this service at all. Sorry for any interruptions this might cause.</p>
             <div id="export_wrap">
                 <div class="mb-2">将以下导出的数据复制以在其他地方导入</div>
                 <code class="mb-5" id="export"></code>
@@ -237,9 +227,7 @@
         <div class="tab-pane fade" id="reccs" role="tabpanel" aria-labelledby="reccs-tab">
             <div id="relicreccs">
                 <p>请输入预计花费的圣物数量： <br/>
-                    <small>NOTE: This relic optimizer requires that you have rounding turned <strong>ON</strong>
-                        in-game.
-                    </small>
+                    <small>强制四舍五入</small>
                 </p>
                 <form class="mb-4">
                     <div class="input-group col-12 col-md-6 col-xl-4">
@@ -356,23 +344,6 @@
                 <button id="generateRelicUpdates" type="button" class="btn btn-primary mb-4"
                         onclick="generateUpgrades()">Generate Upgrades
                 </button>
-                <label class="ml-4">
-                    <small><strong>NOTE: Make sure you turn on rounding in game.</strong><br/>
-                        If you've been using this without rounding, after turning on rounding in game, do a quick reivew
-                        of the values in the "Input" tab against in-game values and correct anything that is out of
-                        sync. On rare occasions it might be slightly off. Just take the upgrade in game at whatever it
-                        says and then true up the Input tab after. I'm continuing to try and figure out why this
-                        happens, even though it is quite rare.
-                    </small>
-                </label>
-                <label class="ml-4">
-                    <small>*Note, because the bonus effects and the cost of artifacts don't scale linearly, when you
-                        change your increments you might get different results. This is because 1 set of 1000 might not
-                        be the same as 10 sets of 100, when you evaluate each individual set. After a few prestiges this
-                        will start to balance out and you'll see the same types of results you saw before switching up
-                        your increments.
-                    </small>
-                </label>
                 <label class="ml-4">
                     <small>**Note, this only applies to %-based recommendations.</small>
                 </label>
