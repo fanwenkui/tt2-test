@@ -1036,7 +1036,7 @@ var artifacts = {
         },
         'sv': {
             'active': 1,
-            'name': 'Spearit的 哨',
+            'name': '皇家队之剑',
             'nickname': 'SotR',
             'bonus': ' 决斗升压',
             'dime': 0,
@@ -1055,7 +1055,7 @@ var artifacts = {
         },
         'sotr': {
             'active': 1,
-            'name': '皇家队之剑',
+            'name': 'Spearit的 哨',
             'nickname': 'SV',
             'bonus': ' 飞行员升压',
             'dime': 0,
