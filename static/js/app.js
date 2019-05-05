@@ -1406,18 +1406,18 @@ if (storageAvailable('localStorage')) {
         });
     }
     artifacts.totalAD = calculateTotalAD(artifacts.data, true);
-    var localSkills = JSON.parse(window.localStorage.getItem('skills'));
-    if (null != localSkills && 'undefined' == typeof localSkills.data) {
-        localSkills.data = jQuery.extend(true, {}, localSkills);
-    }
-    if (null != localSkills && 'undefined' != typeof localSkills.data) {
-        $.each(localSkills.data, function (k, v) {
-            if (undefined != skills.data[k]) {
-                skills.data[k].level = (v.max < v.level ? v.max : v.level);
-                skills.data[k].active = v.active;
-            }
-        });
-    }
+    // var localSkills = JSON.parse(window.localStorage.getItem('skills'));
+    // if (null != localSkills && 'undefined' == typeof localSkills.data) {
+    //     localSkills.data = jQuery.extend(true, {}, localSkills);
+    // }
+    // if (null != localSkills && 'undefined' != typeof localSkills.data) {
+    //     $.each(localSkills.data, function (k, v) {
+    //         if (undefined != skills.data[k]) {
+    //             skills.data[k].level = (v.max < v.level ? v.max : v.level);
+    //             skills.data[k].active = v.active;
+    //         }
+    //     });
+    // }
     calculateSkillTotals();
     $('#build').val(window.localStorage.getItem('build'));
     $('#hero').val(window.localStorage.getItem('hero'));
@@ -1509,13 +1509,13 @@ function exportData() {
         ex += (999999999999999 < v.level ? displayTruncated(v.level) : avoidSci(v.level)) + '|';
     });
     ex = ex.slice(0, -1);
-    ex += '=';
-    $.each(skills.data, function (k, v) {
-        ex += k + '_';
-        ex += v.active + '_';
-        ex += v.level + '|';
-    });
-    ex = ex.slice(0, -1);
+    // ex += '=';
+    // $.each(skills.data, function (k, v) {
+    //     ex += k + '_';
+    //     ex += v.active + '_';
+    //     ex += v.level + '|';
+    // });
+    // ex = ex.slice(0, -1);
     $('#export').empty().text(ex);
     $('#export_wrap').show();
 }
@@ -1557,16 +1557,17 @@ function importData() {
         artifacts.data[imaa[0]].active = parseInt(imaa[1]);
         artifacts.data[imaa[0]].level = parseFloat(imaa[2]);
     });
-    var ims = im[10].split('|');
-    $.each(ims, function (k, v) {
-        var imss = v.split('_');
-        skills.data[imss[0]].active = parseInt(imss[1]);
-        skills.data[imss[0]].level = parseInt(imss[2]);
-    });
+    //拆解技能
+    // var ims = im[10].split('|');
+    // $.each(ims, function (k, v) {
+    //     var imss = v.split('_');
+    //     skills.data[imss[0]].active = parseInt(imss[1]);
+    //     skills.data[imss[0]].level = parseInt(imss[2]);
+    // });
     $('#export_wrap').hide();
     $('#import_wrap').hide();
     generateArtifacts();
-    generateSkills();
+    //generateSkills();
     adjustWeights(true);
 }
 
