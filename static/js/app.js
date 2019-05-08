@@ -929,7 +929,8 @@ function skillEff(k, v) {
 
 function oldEff(data, k, v) {
     var current_ad = v.level * v.ad;
-    var current_effect = 1 + v.effect * Math.pow(v.level, Math.pow((1 + (v.cexpo - 1) * Math.min(v.grate * v.level, v.gmax)), v.gexpo));
+    // var current_effect = 1 + v.effect * Math.pow(v.level, Math.pow((1 + (v.cexpo - 1) * Math.min(v.grate * v.level, v.gmax)), v.gexpo));
+    var current_effect = 1 + v.effect * Math.pow(v.level, v.gexpo);
     switch (v.dime) {
         case 0:
             break;
@@ -947,7 +948,7 @@ function oldEff(data, k, v) {
     data.data[k].current_ad = current_ad;
     data.data[k].current_effect = current_effect;
     if (v.max == -1 || v.max > v.level) {
-        var cost = Math.pow(v.level + 1, v.cexpo) * v.ccoef;
+        var cost = Math.pow(v.level + 0.5, v.cexpo + 1)/(v.cexpo + 1) * v.ccoef;
         data.data[k].cost = cost;
         data.data[k].displayCost = displayTruncated(cost);
         data.data[k].efficiency = calculateArtifactEfficiency(v, cost, 1, current_ad, current_effect, data.totalAD);
@@ -1406,18 +1407,18 @@ if (storageAvailable('localStorage')) {
         });
     }
     artifacts.totalAD = calculateTotalAD(artifacts.data, true);
-    // var localSkills = JSON.parse(window.localStorage.getItem('skills'));
-    // if (null != localSkills && 'undefined' == typeof localSkills.data) {
-    //     localSkills.data = jQuery.extend(true, {}, localSkills);
-    // }
-    // if (null != localSkills && 'undefined' != typeof localSkills.data) {
-    //     $.each(localSkills.data, function (k, v) {
-    //         if (undefined != skills.data[k]) {
-    //             skills.data[k].level = (v.max < v.level ? v.max : v.level);
-    //             skills.data[k].active = v.active;
-    //         }
-    //     });
-    // }
+    var localSkills = JSON.parse(window.localStorage.getItem('skills'));
+    if (null != localSkills && 'undefined' == typeof localSkills.data) {
+        localSkills.data = jQuery.extend(true, {}, localSkills);
+    }
+    if (null != localSkills && 'undefined' != typeof localSkills.data) {
+        $.each(localSkills.data, function (k, v) {
+            if (undefined != skills.data[k]) {
+                skills.data[k].level = (v.max < v.level ? v.max : v.level);
+                skills.data[k].active = v.active;
+            }
+        });
+    }
     calculateSkillTotals();
     $('#build').val(window.localStorage.getItem('build'));
     $('#hero').val(window.localStorage.getItem('hero'));
@@ -1567,7 +1568,7 @@ function importData() {
     $('#export_wrap').hide();
     $('#import_wrap').hide();
     generateArtifacts();
-    //generateSkills();
+    generateSkills();
     adjustWeights(true);
 }
 
