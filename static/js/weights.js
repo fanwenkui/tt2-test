@@ -407,13 +407,8 @@ function calculateWeight(k, expo) {
                 break;
 
             case 'hsk':
-                if (0 < artifacts.data.hs2.level) {
-                    results.rating = 1;
-                    results.color = 'info';
-                } else {
-                    results.rating = 0.5;
-                    results.color = 'secondary';
-                }
+                results.rating = 0;
+                results.color = 'danger';
                 break;
 
             case 'active':
