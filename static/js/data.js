@@ -185,6 +185,25 @@ var artifacts = {
                 'sum_sort': 46
             }
         },
+        'cc': {
+            'active': 1,
+            'name': '签账卡',
+            'nickname': 'CC',
+            'bonus': ' 金占总卡水平',
+            'dime': 2,
+            'max': -1,
+            'effect': .02,
+            'gmax': .18,
+            'grate': .0001,
+            'gexpo': 1.35,
+            'ad': .2,
+            'ccoef': .6,
+            'cexpo': 1.8,
+            'type': 'add',
+            'expo': {
+                'flat': 'gold'
+            }
+        },
         'sov': {
             'active': 1,
             'name': '瓦如恩之石',
@@ -401,6 +420,25 @@ var artifacts = {
                 ]
             }
         },
+        'es': {
+            'active': 1,
+            'name': '积累堆',
+            'nickname': 'ES',
+            'bonus': ' 每总卡损坏水平',
+            'dime': 1,
+            'max': -1,
+            'effect': .02,
+            'gmax': .24,
+            'grate': .0001,
+            'gexpo': 1.5,
+            'ad': .2,
+            'ccoef': .6,
+            'cexpo': 2.2,
+            'type': 'add',
+            'expo': {
+                'flat': 'dmg'
+            }
+        },
         'fots': {
             'active': 1,
             'name': '独奏长笛',
@@ -410,7 +448,7 @@ var artifacts = {
             'max': -1,
             'effect': .01,
             'gmax': .24,
-            'grate': .00010,
+            'grate': .0001,
             'gexpo': 1.135,
             'ad': .2,
             'ccoef': .6,
@@ -1820,6 +1858,44 @@ var artifacts = {
             'ccoef': .5,
             'cexpo': 3,
             'type': 'multiply',
+            'expo': {
+                'reduct': 'hero'
+            }
+        },
+        'qos': {
+            'active': 1,
+            'name': '滚动的鹅毛笔',
+            'nickname': 'QOS',
+            'bonus': ' 英雄滚动升压',
+            'dime': 0,
+            'max': 50,
+            'effect': .001,
+            'gmax': 0,
+            'grate': 0,
+            'gexpo': 1,
+            'ad': .8,
+            'ccoef': .5,
+            'cexpo': 3,
+            'type': 'add',
+            'expo': {
+                'reduct': 'hero'
+            }
+        },
+        'oks': {
+            'active': 1,
+            'name': '老国王的邮票',
+            'nickname': 'OKS',
+            'bonus': ' 英雄滚动设置的放大',
+            'dime': 0,
+            'max': 50,
+            'effect': .001,
+            'gmax': 0,
+            'grate': 0,
+            'gexpo': 1,
+            'ad': .8,
+            'ccoef': .5,
+            'cexpo': 3,
+            'type': 'add',
             'expo': {
                 'reduct': 'hero'
             }
