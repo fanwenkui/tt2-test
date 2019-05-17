@@ -1,3 +1,149 @@
+let vm=new Vue({
+    el:'#tabContent',
+    data:{
+        bookSet:{
+            stage:0,
+            mythic:0,
+            crafting:0
+        },
+        edSet:{
+            stage:0,
+            intimidate:0,//威吓
+            impact:0,//神秘冲击
+            arcane:0,//讨价还价
+            platinum:1//白金
+        },
+        log:{
+            '2019.05.17':'1.新增红书等级推荐功能(修改了算法,推荐等级降低了，较为合理)<br/>\
+                          2.新增永恒黑暗等级计算功能<br/>\
+                          3.优化了代码架构,后面新增功能时会更及时了<br/>\
+                          (ps：如果有什么好用的功能想让我加上去，可以在QQ群：608172528 @月檬或者私聊我)',
+            '2019.05.14':'1.更新四个新神器数据<br/>',
+            '2019.05.09':'1.更新了神器伤害加成数据<br/>\
+                        2.更新了神器加成系数(影响神器升级优先度)<br/>\
+                        3.修正了部分计算公式<br/>\
+                        4.金币系数统一为0.75<br/>\
+                        5.迪朗达尔之剑现在改为0优先度(之前和冥界头骨一样)<br/>\
+                        6.去掉了技能加点优化功能，因为感觉不智能，我也没有时间去修复得更智能<br/>\
+                        （ps：白天要上班，更新不够及时，望见谅）'
+        },
+        vision:'3.1.1'
+    },
+    created:function(){
+        if(window.localStorage.getItem('bookSet')){
+            this.bookSet=JSON.parse(window.localStorage.getItem('bookSet'));
+        }
+        if(window.localStorage.getItem('edSet')){
+            this.edSet=JSON.parse(window.localStorage.getItem('edSet'));
+        }
+    },
+    computed:{
+        bookLevel:function () {
+            let stage=this.bookSet.stage;
+            let mythic=this.bookSet.mythic;
+            let crafting=this.bookSet.crafting,result={relics:0,low:0,normal:0,high:0,veryHigh:0,superHigh:0};
+
+            //计算基础圣物
+            let relics=3*Math.pow(1.21,Math.pow(stage,0.48))+1.5*(stage-110)+Math.pow(1.002,Math.pow(stage,Math.min(1.005*(Math.pow(stage,1.1)*0.0000005+1),1.0154985)));
+            if(relics<0){
+                return result;
+            }
+
+            //计算倍率
+            let multiple=Math.pow(1.5*Math.pow(1.02,Math.max(crafting-1,0)),mythic);
+
+            let a=0,b=1,c=1,times=0,totalRelics=relics*multiple;
+            while(times<250){
+                a=a+totalRelics*c;
+                b=Math.pow(a/0.2,1/3.5);
+                c=1+0.05*Math.pow(b,1.087);
+                times++;
+                switch (times) {
+                    case 12:result.low=this.formatNum(b);break;
+                    case 25:result.normal=this.formatNum(b);break;
+                    case 55:result.high=this.formatNum(b);break;
+                    case 120:result.veryHigh=this.formatNum(b);break;
+                    case 250:result.superHigh=this.formatNum(b);break;
+                }
+            }
+
+            result.relics=this.formatNum(relics);
+            window.localStorage.setItem('bookSet',JSON.stringify(this.bookSet));
+            return result;
+        },
+        edLevel:function () {
+            let edSnap=this.edSnap;
+            let stage=Math.floor(this.edSet.stage/500)*500;
+            let ori_titan=8+stage/250;
+            let act_titan=ori_titan-(1*this.edSet.intimidate+1*this.edSet.arcane);
+            let snap_titan=Math.floor(act_titan/2);
+            let max_snap=edSnap[25];
+
+            let half_need=0;
+            let max_need=0;
+
+            for(let k in edSnap){
+                k=parseInt(k);
+                let num=edSnap[k]+1;
+                if(num<snap_titan){
+                    half_need=Math.min(k+1,25);
+                }
+                if(num<act_titan){
+                    max_need=Math.min(k+1,25);
+                }
+            }
+            window.localStorage.setItem('edSet',JSON.stringify(this.edSet));
+            return {
+                oriTitan:ori_titan,
+                actTitan:act_titan,
+                snapTitan:snap_titan,
+                maxSnap:max_snap,
+                halfNeed:half_need,
+                maxNeed:max_need
+            };
+        },
+        edSnap:function(){
+            return {
+                1:this.actSnap(0),
+                2:this.actSnap(1),
+                3:this.actSnap(2),
+                4:this.actSnap(3),
+                5:this.actSnap(4),
+                6:this.actSnap(6),
+                7:this.actSnap(8),
+                8:this.actSnap(10),
+                9:this.actSnap(12),
+                10:this.actSnap(14),
+                11:this.actSnap(16),
+                12:this.actSnap(18),
+                13:this.actSnap(20),
+                14:this.actSnap(23),
+                15:this.actSnap(26),
+                16:this.actSnap(29),
+                17:this.actSnap(33),
+                18:this.actSnap(38),
+                19:this.actSnap(44),
+                20:this.actSnap(51),
+                21:this.actSnap(59),
+                22:this.actSnap(68),
+                23:this.actSnap(78),
+                24:this.actSnap(89),
+                25:this.actSnap(101)
+            }
+        }
+    },
+    methods:{
+        formatNum:function (num) {
+            let e=Math.floor(Math.log10(num));
+            let num_text= e>4 ? (num/Math.pow(10,e)).toFixed(2)+'e'+e : Math.floor(num);
+            return num_text;
+        },
+        actSnap:function (num) {
+            return Math.floor((num+1*this.edSet.impact+1*this.edSet.arcane)*this.edSet.platinum);
+        }
+    }
+});
+
 var winner_e = '';
 var winner_e10 = '';
 var winner_e100 = '';
@@ -1427,6 +1573,7 @@ if (storageAvailable('localStorage')) {
     $('#relic_factor').val(window.localStorage.getItem('relic_factor'));
     $('#spend').val(window.localStorage.getItem('spend'));
     $('#spend_decimal').val(window.localStorage.getItem('spend_decimal'));
+
     var ocd = window.localStorage.getItem('ocd');
     if (ocd) {
         if ('pct' != ocd.substring(0, 3)) {
@@ -1510,13 +1657,20 @@ function exportData() {
         ex += (999999999999999 < v.level ? displayTruncated(v.level) : avoidSci(v.level)) + '|';
     });
     ex = ex.slice(0, -1);
-    // ex += '=';
-    // $.each(skills.data, function (k, v) {
-    //     ex += k + '_';
-    //     ex += v.active + '_';
-    //     ex += v.level + '|';
-    // });
-    // ex = ex.slice(0, -1);
+
+    //预留兼容技能参数
+    ex += '=undefined=';
+
+    //拼接红书和黑暗永恒参数
+    ex += 'st_' + vm.bookSet.stage + '|';
+    ex += 'my_' + vm.bookSet.mythic + '|';
+    ex += 'cr_' + vm.bookSet.crafting + '|';
+    ex += 'sta_' + vm.edSet.stage + '|';
+    ex += 'in_' + vm.edSet.intimidate + '|';
+    ex += 'im_' + vm.edSet.impact + '|';
+    ex += 'ar_' + vm.edSet.arcane + '|';
+    ex += 'pl_' + vm.edSet.platinum;
+
     $('#export').empty().text(ex);
     $('#export_wrap').show();
 }
@@ -1559,12 +1713,35 @@ function importData() {
         artifacts.data[imaa[0]].level = parseFloat(imaa[2]);
     });
     //拆解技能
-    // var ims = im[10].split('|');
-    // $.each(ims, function (k, v) {
-    //     var imss = v.split('_');
-    //     skills.data[imss[0]].active = parseInt(imss[1]);
-    //     skills.data[imss[0]].level = parseInt(imss[2]);
-    // });
+    if(im.length>=11){
+        if(im[10]!='undefined'){
+            var ims = im[10].split('|');
+            $.each(ims, function (k, v) {
+                var imss = v.split('_');
+                skills.data[imss[0]].active = parseInt(imss[1]);
+                skills.data[imss[0]].level = parseInt(imss[2]);
+            });
+        }
+    }
+    //v3.1以后的新数据
+    if(im.length>11){
+        var imb = im[11].split('|');
+        var myMap = new Map();
+        $.each(imb, function (k, v) {
+            var temp = v.split('_');
+            myMap.set(temp[0],temp[1]);
+        })
+
+        vm.bookSet.stage=myMap.get('st');
+        vm.bookSet.mythic=myMap.get('my');
+        vm.bookSet.crafting=myMap.get('cr');
+        vm.edSet.stage=myMap.get('sta');
+        vm.edSet.intimidate=myMap.get('in');
+        vm.edSet.impact=myMap.get('im');
+        vm.edSet.arcane=myMap.get('ar');
+        vm.edSet.platinum=myMap.get('pl');
+    }
+
     $('#export_wrap').hide();
     $('#import_wrap').hide();
     generateArtifacts();
