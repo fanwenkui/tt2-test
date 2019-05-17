@@ -1,6 +1,6 @@
 
 <!doctype html>
-<html lang="zh">
+<html lang="zh" xmlns="http://www.w3.org/1999/html">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -10,18 +10,12 @@
     <link rel="stylesheet" href="static/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="static/css/app.css"/>
 
-    <!--<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>-->
-    <!--<script>-->
-    <!--(adsbygoogle = window.adsbygoogle || []).push({-->
-    <!--google_ad_client: "ca-pub-8453254126408456",-->
-    <!--enable_page_level_ads: true-->
-    <!--});-->
-    <!--</script>-->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script type="text/javascript"
             src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?theme=grey&tracking=1&thirdparty=1&always=1&scrolling=1&remember=30"></script>
 </head>
 <body class="bg-dark text-light">
-<div class="container-fluid">
+<div id="app" class="container-fluid">
     <div class="sticky-top border-bottom border-secondary bg-dark">
         <ul class="nav nav-pills" id="navTab" role="tablist">
             <li class="nav-item">
@@ -37,19 +31,22 @@
                    aria-controls="reccs" aria-selected="false">圣物</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-light" id="log-tab" data-toggle="tab" href="#log" role="tab" aria-controls="log"
-                   aria-selected="false">更新日志</a>
+                <a class="nav-link text-light" id="books-tab" data-toggle="tab" href="#books" role="tab" aria-controls="books"
+                   aria-selected="false">红书</a>
             </li>
-            <li class="nav-item d-none">
-                <a class="nav-link text-light" id="dal-tab" data-toggle="tab" href="#dal" role="tab" aria-controls="dal"
-                   aria-selected="false">截图模式</a>
+            <li class="nav-item">
+                <a class="nav-link text-light" id="dark-tab" data-toggle="tab" href="#dark" role="tab" aria-controls="dark"
+                   aria-selected="false">永恒黑暗</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" id="log-tab" data-toggle="tab" href="#log" role="tab" aria-controls="log"
+                   aria-selected="false">日志</a>
             </li>
         </ul>
-        <h1 class="h4">TT2 优化器（汉化版 by 月檬） <span class="badge badge-secondary">3.1.0</span></h1>
+        <h1 class="h4">TT2 优化器（by 月檬） <span class="badge badge-secondary">3.1.1</span></h1>
     </div>
     <div class="tab-content" id="tabContent">
         <div class="tab-pane fade show active" id="style" role="tabpanel" aria-labelledby="style-tab">
-            <!--<p><a href="https://tt2-optimizer.herokuapp.com/">点击此处跳转英文原版</a></p>-->
             <form>
                 <div class="form-row mb-4">
                     <div class="form-group col-12 col-md-6 col-lg-4">
@@ -135,8 +132,8 @@
                     </div>
                 </div>
             </form>
-            <button type="button" class="btn btn-secondary mb-4" onclick="exportData()">Export Data</button>
-            <button type="button" class="btn btn-secondary mb-4" onclick="startImport()">Import Data*</button>
+            <button type="button" class="btn btn-secondary mb-4" onclick="exportData()">导出数据</button>
+            <button type="button" class="btn btn-secondary mb-4" onclick="startImport()">导入数据</button>
             <div id="export_wrap">
                 <div class="mb-2">将以下导出的数据复制以在其他地方导入</div>
                 <code class="mb-5" id="export"></code>
@@ -343,32 +340,116 @@
                 </div>
             </div>
         </div>
+        <div class="tab-pane fade" id="books" role="tabpanel" aria-labelledby="books-tab">
+            <p><h1 class="h4">暗影之书等级推荐</h1>关卡数请填入平時蜕变关卡，非最高关卡</p>
+            <div class="form-row mb-4">
+                <div class="form-group col-12 col-md-6 col-lg-4">
+                    <label>蜕变关卡数</label>
+                    <input v-model.lazy.number.trim="bookSet.stage" type="number" class="form-control artlvl" placeholder="0">
+                </div>
+                <div class="form-group col-12 col-md-6 col-lg-4">
+                    <label for="hero">神话套数</label>
+                    <input v-model.lazy.number.trim="bookSet.mythic" type="number" class="form-control artlvl" placeholder="0">
+                </div>
+                <div class="form-group col-12 col-md-6 col-lg-4">
+                    <label for="hero">工艺等级(电源吕)</label>
+                    <input v-model.lazy.number.trim="bookSet.crafting" type="number" class="form-control artlvl" placeholder="0">
+                </div>
+            </div>
+            <table class="table table-striped table-sm table-dark">
+                <tbody>
+                    <tr>
+                        <th>基础圣物</th>
+                        <td>{{bookLevel.relics}}</td>
+                    </tr>
+                    <tr>
+                        <th>低标</th>
+                        <td>{{bookLevel.low}}</td>
+                    </tr>
+                    <tr>
+                        <th>均标</th>
+                        <td>{{bookLevel.normal}}</td>
+                    </tr>
+                    <tr>
+                        <th>高标</th>
+                        <td>{{bookLevel.high}}</td>
+                    </tr>
+                    <tr>
+                        <th>红书是我的命</th>
+                        <td>{{bookLevel.veryHigh}}</td>
+                    </tr>
+                    <tr>
+                        <th>我就是红书</th>
+                        <td>{{bookLevel.superHigh}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane fade" id="dark" role="tabpanel" aria-labelledby="dark-tab">
+            <p><h1 class="h4">永恒黑暗等级计算器</h1>需要有死灵神话套装</p>
+            <div class="form-row mb-4">
+                <div class="form-group col-12 col-md-6 col-lg-4">
+                    <label>极限关卡</label>
+                    <input v-model.lazy.number.trim="edSet.stage" type="number" class="form-control artlvl" placeholder="0">
+                </div>
+                <div class="form-group col-12 col-md-6 col-lg-4">
+                    <label for="hero">威吓等级</label>
+                    <input v-model.lazy.number.trim="edSet.intimidate" type="number" class="form-control artlvl" placeholder="0">
+                </div>
+                <div class="form-group col-12 col-md-6 col-lg-4">
+                    <label for="hero">神秘冲击等级</label>
+                    <input v-model.lazy.number.trim="edSet.impact" type="number" class="form-control artlvl" placeholder="0">
+                </div>
+                <div class="form-group col-12 col-md-6 col-lg-4">
+                    <label for="hero">讨价还价等级</label>
+                    <input v-model.lazy.number.trim="edSet.arcane" type="number" class="form-control artlvl" placeholder="0">
+                </div>
+                <div class="form-group col-12 col-md-6 col-lg-4">
+                    <label for="hero">周年白金加成</label>
+                    <input v-model.lazy.number.trim="edSet.platinum" type="number" class="form-control artlvl" placeholder="没有周年白金就填1">
+                </div>
+            </div>
+            <table class="table table-striped table-sm table-dark">
+                <tbody>
+                <tr>
+                    <th>触发炸弹后的需求(黑暗永恒等级)</th>
+                    <td>{{edLevel.snapTitan}}({{edLevel.halfNeed}})</td>
+                </tr>
+                <tr>
+                    <th>最大飞溅需求(黑暗永恒等级)</th>
+                    <td>{{edLevel.actTitan-1}}({{edLevel.maxNeed}})</td>
+                </tr>
+                <tr>
+                    <th>黑暗永恒25级飞溅数</th>
+                    <td>{{edLevel.maxSnap}}</td>
+                </tr>
+                <tr>
+                    <th>原始小怪数</th>
+                    <td>{{edLevel.oriTitan}}</td>
+                </tr>
+                <tr>
+                    <th>实际小怪数</th>
+                    <td>{{edLevel.actTitan}}</td>
+                </tr>
+                <tr>
+                    <th>触发炸弹怪后小怪数</th>
+                    <td>{{edLevel.snapTitan}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
         <div class="tab-pane fade" id="log" role="tabpanel" aria-labelledby="log-tab">
             <table class="table table-striped table-sm table-dark">
                 <thead>
                     <tr>
-                        <th>日期</th>
+                        <th style="min-width: 90px;">日期</th>
                         <th>内容</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>2019.5.14</td>
-                        <td>
-                            1.更新四个新神器数据<br/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2019.5.9</td>
-                        <td>
-                            1.更新了神器伤害加成数据<br/>
-                            2.更新了神器加成系数(影响神器升级优先度)<br/>
-                            3.修正了部分计算公式<br/>
-                            4.金币系数统一为0.75<br/>
-                            5.迪朗达尔之剑现在改为0优先度(之前和冥界头骨一样)<br/>
-                            6.去掉了技能加点优化功能，因为感觉不智能，我也没有时间去修复得更智能<br/>
-                            （ps：白天要上班，更新不够及时，望见谅）
-                        </td>
+                    <tr v-for="(value,key) in log">
+                        <td>{{key}}</td>
+                        <td v-html="value"></td>
                     </tr>
                 </tbody>
             </table>
